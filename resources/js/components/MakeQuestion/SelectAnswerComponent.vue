@@ -5,7 +5,7 @@
             <span class="form-check-label fs-5 mb-2 fw-bold">正解と解答方法</span>
             <span class="badge bg-danger" style="transform:translateY(-3px);">1つ以上必須</span>
         </label>
-        <div class="ms-3 d-flex gap-3 mb-3">
+        <div class="ms-3 d-flex flex-column flex-md-row gap-3 my-3">
 
 
             <div class="form-check">
@@ -99,7 +99,7 @@
                         >削除</a>
                     </div>
                 </div>
-                <button type="button" class="btn btn-light border" @click="addInput">選択肢の追加</button>
+                <button type="button" class="btn btn-light border" @click="addInput">+ 選択肢の追加</button>
 
 
             </div>
@@ -141,7 +141,7 @@
                         >削除</a>
                     </div>
                 </div>
-                <button type="button" class="btn btn-light border" @click="addInput">選択肢の追加</button>
+                <button type="button" class="btn btn-light border" @click="addInput">+ 選択肢の追加</button>
 
 
             </div>

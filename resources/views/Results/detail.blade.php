@@ -71,7 +71,8 @@
                                 <th scope="col" class="bg-light">#</th>
                                 <th scope="col" class="bg-light">問題文</th>
                                 <th scope="col">あなたの解答</th>
-                                <th scope="col" class="text-center" style="min-width:5rem;">添削結果</th>
+                                <th scope="col" class="d-none d-md-block"
+                                style="min-width:5rem;">添削結果</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -85,16 +86,30 @@
                                     <span class="d-none d-md-inline">{{ $questions[$num]->text }}</span>
                                 </td>
 
-                                <td class="" >{{ $answer->text }}</td>
+                                <td class="" >
+                                    {{ $answer->text }}
+
+                                    <div class="d-md-none">
+                                        @if ( $answer->is_correct )
+                                            <div class="text-info">
+                                                <i class="bi bi-record fs-5"></i><span>正　解</span>
+                                            </div>
+                                        @else
+                                            <div class="text-danger">
+                                                <i class="bi bi-x-lg fs-5"></i><span>不正解</span>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </td>
+
+
                                 @if ( $answer->is_correct )
-                                    <th class="text-center text-info">
-                                        <i class="bi bi-record fs-5"></i>
-                                        <span class="d-none d-sm-inline">正　解</span>
+                                    <th class="d-none d-md-block text-info">
+                                        <i class="bi bi-record fs-5"></i><span>正　解</span>
                                     </th>
                                 @else
-                                    <th class="text-center text-danger">
-                                        <i class="bi bi-x-lg fs-5"></i>
-                                        <span class="d-none d-sm-inline">不正解</span>
+                                    <th class="d-none d-md-block text-danger">
+                                        <i class="bi bi-x-lg fs-5"></i><span>不正解</span>
                                     </th>
                                 @endif
                             </tr>

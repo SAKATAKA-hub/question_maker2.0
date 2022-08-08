@@ -87,7 +87,7 @@ Route::middleware(['user_auth'])->group(function () {
 });//end middleware
 /*
 |--------------------------------------------------------------------------
-| 問題集を作る　処理　MakeQuestionController
+| 問題を作る　処理　MakeQuestionController
 |--------------------------------------------------------------------------
 */
 Route::middleware(['user_auth'])->group(function () {

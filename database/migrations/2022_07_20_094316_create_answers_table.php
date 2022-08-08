@@ -19,7 +19,7 @@ class CreateAnswersTable extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
-            $table->string('text',150)->comment('回答内容');
+            $table->string('text',150)->comment('回答内容')->nullable()->default(null);
             $table->boolean('is_correct')->comment('正解か否か')->default(0);
 
             $table->unsignedBigInteger('answer_group_id')->comment('回答グループID');

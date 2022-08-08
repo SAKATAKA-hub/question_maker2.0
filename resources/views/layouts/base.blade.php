@@ -32,7 +32,7 @@
 
         <!-- 見出しタイトル -->
         <section class="border-bottom">
-            <div class="container-1200 mb-0">
+            <div class="container-1200 mb-0 pt-5">
 
                 <h2 class="text-secondary fw-bold">@yield('title')</h2>
 

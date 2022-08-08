@@ -63,28 +63,60 @@
                         </div>
 
                         <!-- タイトル -->
-                        <a href="" class="fs-3" style="text-decoration:none;">{{ $question_group->title }}</a>
+                        <a href=""
+                        data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight{{ $key }}" aria-controls="offcanvasRight{{ $key }}"
+                        class="fs-3" style="text-decoration:none;">{{ $question_group->title }}</a>
 
 
                     </div>
-                    <!-- 操作ボタン -->
+                    <!-- メニューボタン -->
                     <div class="col-auto">
-                        <div class="dropdown">
-                            <button class="btn btn-link text-secondary" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-three-dots-vertical"></i>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href=""
-                                >詳細情報</a></li>
-                                <li><a class="dropdown-item" href=""
-                                >利用者成績一覧</a></li>
-                                <li><a class="dropdown-item" href="{{route('make_question_group.select_edit',$question_group)}}"
-                                >編集</a></li>
-                                <li><a class="dropdown-item" href="#"
-                                data-bs-toggle="modal" data-bs-target="#deleteQuestionGroupModal{{$key}}"
-                                >削除</a></li>
-                            </ul>
+                        <button class="btn btn-link text-secondary" type="button"
+                        data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight{{ $key }}" aria-controls="offcanvasRight{{ $key }}"
+                        ><i class="bi bi-three-dots-vertical"></i></button>
+
+
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight{{ $key }}" aria-labelledby="offcanvasRight{{ $key }}Label">
+                            <div class="offcanvas-header text-end">
+                                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body p-0">
+                                <div class="">
+                                    <!-- サムネ画像 -->
+                                    <div class="card-image" style="
+                                        background:url({{ asset('storage/'.$question_group->image_puth) }});
+                                        background-repeat  : no-repeat;
+                                        background-size    : cover;
+                                        background-position: center center;
+                                        height: 12rem;
+                                    "></div>
+                                    <div class="card-body">
+                                        <h5 class="comment-author">{{ $question_group->title }}</h5>
+                                        <span class="comment-date text-muted">7 日前</span>
+                                        <p class="card-text">
+                                            <span class="comment-reply">問題数：3問</span>
+                                            <span class="comment-reply">制限時間：60分</span>
+                                            <span class="comment-share">平均点：99.9点</span>
+                                        </p>
+                                        <p class="overflow-hidden" style="height: 3rem">
+                                            サンプルで作った問題です。
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="list-group">
+                                    <a class="list-group-item list-group-item-action text-secondary" href="{{ route('make_question_group.edit', $question_group->id ) }}"
+                                    >問題集情報の編集</a>
+                                    <a class="list-group-item list-group-item-action text-secondary" href="{{ route('make_question_group.select_edit', $question_group->id ) }}"
+                                    >問題の追加・編集</a>
+                                    <a class="list-group-item list-group-item-action text-secondary" href="{{ route('play_question', $question_group->id ) }}"
+                                    >プレイ</a>
+                                    <a class="list-group-item list-group-item-action text-secondary" href="#"
+                                    data-bs-toggle="modal" data-bs-target="#deleteQuestionGroupModal{{$key}}"
+                                    >削除</a>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
 

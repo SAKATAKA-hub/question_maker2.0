@@ -92,7 +92,6 @@ class PlayQuestionController extends Controller
     */
     public function scoring( \Illuminate\Http\Request $request )
     {
-
         // 問題集情報
         $question_group = \App\Models\QuestionGroup::find( $request->question_group_id );
         // 問題情報
@@ -123,8 +122,6 @@ class PlayQuestionController extends Controller
                 // 解答選択内容と答えが一致するかチェック
                 $input_answer_text = $request['answer_'.$q_num]; //選択した答え
                 switch ( $question->answer_type ) {
-
-
                     /* 解答選択肢が複数の時 */
                     case '2':
                         $question_answer_array = explode(' ',$question->answer); //テキストの答えを配列に変換

@@ -20,7 +20,12 @@ class FakeUserSeeder extends Seeder
             'password' => Hash::make('password'),
         ]);
         $user->save();
-
+        $user = new \App\Models\User([
+            'name' => 'Next Arrow',
+            'email' => 'nextarrow.line@gmail.com',
+            'password' => Hash::make('password'),
+        ]);
+        $user->save();
         $user = new \App\Models\User([
             'name' => 'gest user',
             'email' => 'contact@next-arrow.co.jp',

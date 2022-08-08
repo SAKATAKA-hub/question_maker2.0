@@ -47,6 +47,7 @@
 <section>
     <div class="container-1200 pt-5">
 
+
         @if ( empty($question_group) ){{-- 新規作成 --}}
         <form action="{{ route('make_question_group.store' ) }}"
         method="POST" enctype="multipart/form-data" onsubmit="stopOnbeforeunload()">
@@ -92,11 +93,44 @@
                             <label class="form-check-label fw-bold" for="exampleCheck2">非公開</label>
                         </div>
                     </div>
-                    <div class="ms-3 callout callout-success">
+                    {{-- <div class="ms-3 callout callout-success">
                         公開設定を『公開』に設定すると、他のユーザに問題を公開することができます。
-                    </div>
+                    </div> --}}
                 </div>
                 @endif
+
+
+                <div class="form-group mb-4">
+                    <label for="title_input" class="form-check-label fs-5 mb-2 fw-bold"
+                    >制限時間</label>
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <select name="time_limit[]" class="form-select " aria-label="Default select example">
+                                @for ($i = 0; $i < 24; $i++)
+                                <option value="{{ sprintf('%02d',$i) }}">{{ sprintf('%02d',$i) }}</option>
+                                @endfor
+                            </select>
+                            </select>
+                        </div>
+                        <div class="col-auto">時間</div>
+                        <div class="col-auto">
+                            <select name="time_limit[]" class="form-select" aria-label="Default select example">
+                                @for ($i = 0; $i < 60; $i++)
+                                <option value="{{ sprintf('%02d',$i) }}">{{ sprintf('%02d',$i) }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                        <div class="col-auto">分</div>
+                        <div class="col-auto">
+                            <select name="time_limit[]" class="form-select" aria-label="Default select example">
+                                @for ($i = 0; $i < 60; $i++)
+                                <option value="{{ sprintf('%02d',$i) }}">{{ sprintf('%02d',$i) }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                        <div class="col-auto">秒</div>
+                    </div>
+                </div>
 
 
                 <!-- 説明文 -->

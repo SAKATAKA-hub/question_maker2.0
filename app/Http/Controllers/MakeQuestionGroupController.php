@@ -31,7 +31,6 @@ class MakeQuestionGroupController extends Controller
 
 
 
-
     /**
      * 問題集の新規作成表示(create)
      * @return \Illuminate\View\View
@@ -74,11 +73,12 @@ class MakeQuestionGroupController extends Controller
 
         # 問題集基本情報の保存
         $question_group = new \App\Models\QuestionGroup([
-            'user_id' => $user->id,
-            'title' => $request->title,
-            'resume' => $request->resume,
-            'image' => $image_path,
-            'tags' => str_replace(' ','　',$request->tags),//タグの空文字を大文字に統一
+            'user_id'    => $user->id,
+            'title'      => $request->title,
+            'resume'     => $request->resume,
+            'time_limit' => implode(':',$request->time_limit),
+            'image'      => $image_path,
+            'tags'       => str_replace(' ','　',$request->tags),//タグの空文字を大文字に統一
         ]);
         $question_group->save();
 
@@ -136,6 +136,10 @@ class MakeQuestionGroupController extends Controller
         if( $request->is_public ){
             $input['published_at'] = \Carbon\Carbon::parse('now')->format('Y-m-d H:i:s');
         }
+
+
+        # 制限時間の登録
+        $input['time_limit'] = implode(':',$request->time_limit);
 
 
         # 画像のアップロード
