@@ -24,10 +24,6 @@
             margin-top: 0;
             min-height: 100vh;
         }
-        .card{
-            text-decoration:none;
-        }
-
         /* ＴＯＰ背景 */
         .top{
             position: relative;
@@ -48,6 +44,10 @@
             top:0; right:0;
             width: 100%; height:100%;
             background-color: rgba(255, 255, 255, 0.843);
+        }
+
+        /* ユーザー画像 */
+        .user-image{
         }
     </style>
 
@@ -70,7 +70,7 @@
             <div class="container-1200">
                 <div class="px-4 py-5 my-5 text-center">
                     <h5 class="fw-bold">\自由に作れる！オリジナル問題集/</h5>
-                    <h1 class="display-1 text-success fw-bold mb-4">mondai</h1>
+                    <h2 class="display-1 h-1 text-success fw-bold mb-4">mondai</h2>
                     <div class="col-lg-6 mx-auto">
                         <p class="lead mb-4">
                             このサイトはじぶんでオリジナルの<br class="d-md-none">
@@ -83,10 +83,10 @@
                             <!-- 検索フォーム -->
                             <form action="{{ route('questions_search_list') }}">
                                 <div  class="input-group overflow-hidden border shadow" style="border-radius:2rem;">
-                                    <input type="text" name="seach_keywords" class="form-control border-0 ps-3"
+                                    <input type="text" name="seach_keywords" class="form-control bg-white border-0 ps-3"
                                     value="@if ( isset($keywords) ){{  $keywords.' '  }}@endif" placeholder="キーワード" aria-label="SeachKeywords" aria-describedby="basic-addon1">
 
-                                    <span class="input-group-text border-0" id="basic-addon1">
+                                    <span class="input-group-text bg-white border-0" id="basic-addon1">
                                         <button type="submit" class="btn"><i class="bi bi-search"></i></button>
                                     </span>
                                 </div>
@@ -103,6 +103,8 @@
         {{-- <div class="container-1200 divider divider-dashed"></div><!---- Divider ----> --}}
         <section>
             <div class="container-1200">
+
+
                 <div class="row mx-3">
                     <div class="col-md-6 order-md-2" >
                         <img src="{{ asset('storage/site/image/22901978.jpg') }}" class="d-block w-100" alt="人気の問題集">
@@ -120,35 +122,91 @@
                         </div>
                     </div>
                 </div>
-                <div class="row my-5 mx-3">
+                <div class="row my-5">
+
                     @foreach ($question_groups as $i => $question_group)
 
-                        <div class="col-md-6 col-lg-4 p-3 pb-3">
-                            <a href="#" class="card border-0 text-dark"
+                        <div class="col-md-4 col-lg-3 p-3 pb-3">
+                            <div href="#" class="card border-0 text-dark" style="cursor:pointer;"
                             data-bs-toggle="modal" data-bs-target="#questionModal{{ $i+1 }}"
                             >
 
+
                                 <!-- サムネ画像 -->
-                                <div class="card-image" style="
+                                <div class="card-image border ratio ratio-4x3" style="
                                     background:url({{ asset('storage/'.$question_group->image_puth) }});
                                     background-repeat  : no-repeat;
                                     background-size    : cover;
                                     background-position: center center;
-                                    height: 16rem; border-radius: .5rem;
+                                    border-radius: .5rem;
                                 "></div>
+
+
                                 <div class="card-body">
                                     <h5 class="comment-author">{{ $question_group->title }}</h5>
-                                    <span class="comment-date text-muted">7 日前</span>
-                                    <p class="card-text">
-                                        <span class="comment-reply">問題数：3問</span>
-                                        <span class="comment-reply">制限時間：60分</span>
-                                        <span class="comment-share">平均点：99.9点</span>
-                                    </p>
-                                    <p class="overflow-hidden" style="height: 3rem">
-                                        サンプルで作った問題です。
-                                    </p>
+
+
+                                    <div class="row">
+                                        <!-- ユーザー情報 -->
+                                        <div class="col-auto">
+                                            <div class="d-flex align-items-center">
+                                                <div class="user-image border me-2" style="
+                                                    background:url({{ asset('storage/'.$question_group->user->image_puth) }});
+                                                    background-repeat  : no-repeat;
+                                                    background-size    : cover;
+                                                    background-position: center center;
+                                                    width:1rem; height:1rem; border-radius:50%;
+                                                "></div>
+                                                <span class="text-muted text-truncate m-0">
+                                                    {{$question_group->user->name}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- n日前 -->
+                                        <div class="col text-end">
+                                            <span class="text-muted">{{$question_group->befor_datetime_text}}</span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="text-muted">
+                                        <!--評価点 (評価無し=>非表示)-->
+                                        {{-- <div class="">
+                                            @for ($si = 1; $si <= 5; $si++)
+                                                {{ !$question_group->evaluation_points ? '' :
+                                                ( $question_group->evaluation_points >= $si ? '★' : '☆' ) }}
+                                            @endfor
+                                        </div> --}}
+
+                                        <div class="">
+                                            <!--問題数-->
+                                            <span class="me-2">
+                                                全{{$question_group->question_count}}問
+                                            </span>
+                                            <!--制限時間-->
+                                            <span class="me-2">
+                                                <i class="bi bi-stopwatch"></i>{{$question_group->time_limit_text}}
+                                            </span>
+                                            <!--平均点-->
+                                            <span class="me-2">
+                                                {{sprintf('平均%.1f点',$question_group->average_score)}}
+                                            </span>
+                                        </div>
+
+                                        <!--受検者数-->
+                                        <div class="">
+                                            <span>
+                                                <i class="bi bi-pencil-fill"></i>
+                                                受検者{{$question_group->accessed_count}}人
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+
                                 </div>
-                            </a>
+
+                            </div>
                         </div>
 
                         <!-- Modal -->
@@ -156,10 +214,32 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                    <h4 class="modal-title mb-0" id="questionModal{{ $i+1 }}Label">
-                                        {{ $question_group->title }}
-                                    </h4>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+
+                                        <div class="">
+                                            <h4 class="modal-title mb-0" id="questionModal{{ $i+1 }}Label">
+                                                {{ $question_group->title }}
+                                            </h4>
+
+                                            <!-- ユーザー情報 -->
+                                            <div class="col-auto">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="user-image border me-2" style="
+                                                        background:url({{ asset('storage/'.$question_group->user->image_puth) }});
+                                                        background-repeat  : no-repeat;
+                                                        background-size    : cover;
+                                                        background-position: center center;
+                                                        width:1rem; height:1rem; border-radius:50%;
+                                                    "></div>
+                                                    <span class="text-muted text-truncate m-0">
+                                                        {{$question_group->user->name}}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+
                                     </div>
                                     <div class="modal-body">
 
@@ -179,16 +259,7 @@
                                             <div class="">
                                                 公開日：{{\Carbon\Carbon::parse( $question_group->published_at )->format('Y年m月d日 H:i')}}
                                             </div>
-                                            <div class="media comment d-flex">
-                                                <div class="media-body">
-                                                    <div class="media-body-header">
-                                                        <span class="comment-date text-muted">7 日前</span>
-                                                        <span class="comment-reply">問題数：3問</span>
-                                                        <span class="comment-reply">制限時間：60分</span>
-                                                        <span class="comment-share">平均点：99.9点</span>
-                                                    </div>
-                                                </div>
-                                            </div>
+
                                             <!-- タグ -->
                                             @if ($question_group->tags)
                                             <div class="d-flex gap-1 align-items-center">
@@ -197,6 +268,40 @@
                                                 @endforeach
                                             </div>
                                             @endif
+
+
+                                            <div class="text-muted">
+                                                <!--評価点 (評価無し=>非表示)-->
+                                                <div class="">
+                                                    @for ($si = 1; $si <= 5; $si++)
+                                                        {{ !$question_group->evaluation_points ? '' :
+                                                        ( $question_group->evaluation_points >= $si ? '★' : '☆' ) }}
+                                                    @endfor
+                                                </div>
+                                                <!--受検者数-->
+                                                <div class="">
+                                                    <span>
+                                                        <i class="bi bi-pencil-fill"></i>
+                                                        受検者{{$question_group->accessed_count}}人
+                                                    </span>
+                                                </div>
+                                                <div class="">
+                                                    <!--問題数-->
+                                                    <span class="me-2">
+                                                        全{{$question_group->question_count}}問
+                                                    </span>
+                                                    <!--制限時間-->
+                                                    <span class="me-2">
+                                                        <i class="bi bi-stopwatch"></i>{{$question_group->time_limit_text}}
+                                                    </span>
+                                                    <!--平均点-->
+                                                    <span class="me-2">
+                                                        {{sprintf('平均%.1f点',$question_group->average_score)}}
+                                                    </span>
+
+                                                </div>
+                                            </div>
+
                                         </div>
 
 
@@ -215,12 +320,15 @@
                             </div>
                         </div>
 
-                    @endforeach
-                </div>
 
-                <!-- ページネーション -->
-                <div class="mb-5 d-flex justify-content-center">
-                    {{ $question_groups->links('vendor.pagination.bootstrap-4') }}
+
+                    @endforeach
+
+                    <!-- ページネーション -->
+                    <div class="mb-5 d-flex justify-content-center">
+                        {{ $question_groups->links('vendor.pagination.bootstrap-4') }}
+                    </div>
+
                 </div>
 
 
@@ -250,32 +358,86 @@
                 <div class="row my-5 mx-3">
                     @foreach ($question_groups as $i => $question_group)
 
-                        <div class="col-md-6 col-lg-4 p-3 pb-3">
-                            <a href="#" class="card border-0 text-dark"
+                        <div class="col-md-4 col-lg-3 p-3 pb-3">
+                            <div href="#" class="card border-0 text-dark" style="cursor:pointer;"
                             data-bs-toggle="modal" data-bs-target="#questionModal{{ $i+1 }}"
                             >
 
+
                                 <!-- サムネ画像 -->
-                                <div class="card-image" style="
+                                <div class="card-image  ratio ratio-4x3" style="
                                     background:url({{ asset('storage/'.$question_group->image_puth) }});
                                     background-repeat  : no-repeat;
                                     background-size    : cover;
                                     background-position: center center;
-                                    height: 16rem; border-radius: .5rem;
+                                    border-radius: .5rem;
                                 "></div>
+
+
                                 <div class="card-body">
                                     <h5 class="comment-author">{{ $question_group->title }}</h5>
-                                    <span class="comment-date text-muted">7 日前</span>
-                                    <p class="card-text">
-                                        <span class="comment-reply">問題数：3問</span>
-                                        <span class="comment-reply">制限時間：60分</span>
-                                        <span class="comment-share">平均点：99.9点</span>
-                                    </p>
-                                    <p class="overflow-hidden" style="height: 3rem">
-                                        サンプルで作った問題です。
-                                    </p>
+
+
+                                    <div class="row">
+                                        <!-- ユーザー情報 -->
+                                        <div class="col-auto">
+                                            <div class="d-flex align-items-center">
+                                                <div class="user-image border me-2" style="
+                                                    background:url({{ asset('storage/'.$question_group->user->image_puth) }});
+                                                    background-repeat  : no-repeat;
+                                                    background-size    : cover;
+                                                    background-position: center center;
+                                                    width:1rem; height:1rem; border-radius:50%;
+                                                "></div>
+                                                <span class="text-muted text-truncate m-0">
+                                                    {{$question_group->user->name}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- n日前 -->
+                                        <div class="col text-end">
+                                            <span class="text-muted">{{$question_group->befor_datetime_text}}</span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="text-muted">
+                                        <!--評価点 (評価無し=>非表示)-->
+                                        <div class="">
+                                            @for ($si = 1; $si <= 5; $si++)
+                                                {{ !$question_group->evaluation_points ? '' :
+                                                ( $question_group->evaluation_points >= $si ? '★' : '☆' ) }}
+                                            @endfor
+                                        </div>
+
+                                        <!--受検者数-->
+                                        <div class="">
+                                            <span>
+                                                <i class="bi bi-pencil-fill"></i>
+                                                受検者{{$question_group->accessed_count}}人
+                                            </span>
+                                        </div>
+                                        <div class="">
+                                            <!--問題数-->
+                                            <span class="me-2">
+                                                全{{$question_group->question_count}}問
+                                            </span>
+                                            <!--制限時間-->
+                                            <span class="me-2">
+                                                <i class="bi bi-stopwatch"></i>{{$question_group->time_limit_text}}
+                                            </span>
+                                            <!--平均点-->
+                                            <span class="me-2">
+                                                {{sprintf('平均%.1f点',$question_group->average_score)}}
+                                            </span>
+
+                                        </div>
+                                    </div>
+
+
                                 </div>
-                            </a href="#">
+
+                            </div>
                         </div>
 
                         <!-- Modal -->
@@ -283,10 +445,32 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                    <h4 class="modal-title mb-0" id="questionModal{{ $i+1 }}Label">
-                                        {{ $question_group->title }}
-                                    </h4>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+
+                                        <div class="">
+                                            <h4 class="modal-title mb-0" id="questionModal{{ $i+1 }}Label">
+                                                {{ $question_group->title }}
+                                            </h4>
+
+                                            <!-- ユーザー情報 -->
+                                            <div class="col-auto">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="user-image border me-2" style="
+                                                        background:url({{ asset('storage/'.$question_group->user->image_puth) }});
+                                                        background-repeat  : no-repeat;
+                                                        background-size    : cover;
+                                                        background-position: center center;
+                                                        width:1rem; height:1rem; border-radius:50%;
+                                                    "></div>
+                                                    <span class="text-muted text-truncate m-0">
+                                                        {{$question_group->user->name}}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+
                                     </div>
                                     <div class="modal-body">
 
@@ -306,16 +490,7 @@
                                             <div class="">
                                                 公開日：{{\Carbon\Carbon::parse( $question_group->published_at )->format('Y年m月d日 H:i')}}
                                             </div>
-                                            <div class="media comment d-flex">
-                                                <div class="media-body">
-                                                    <div class="media-body-header">
-                                                        <span class="comment-date text-muted">7 日前</span>
-                                                        <span class="comment-reply">問題数：3問</span>
-                                                        <span class="comment-reply">制限時間：60分</span>
-                                                        <span class="comment-share">平均点：99.9点</span>
-                                                    </div>
-                                                </div>
-                                            </div>
+
                                             <!-- タグ -->
                                             @if ($question_group->tags)
                                             <div class="d-flex gap-1 align-items-center">
@@ -324,6 +499,40 @@
                                                 @endforeach
                                             </div>
                                             @endif
+
+
+                                            <div class="text-muted">
+                                                <!--評価点 (評価無し=>非表示)-->
+                                                <div class="">
+                                                    @for ($si = 1; $si <= 5; $si++)
+                                                        {{ !$question_group->evaluation_points ? '' :
+                                                        ( $question_group->evaluation_points >= $si ? '★' : '☆' ) }}
+                                                    @endfor
+                                                </div>
+                                                <!--受検者数-->
+                                                <div class="">
+                                                    <span>
+                                                        <i class="bi bi-pencil-fill"></i>
+                                                        受検者{{$question_group->accessed_count}}人
+                                                    </span>
+                                                </div>
+                                                <div class="">
+                                                    <!--問題数-->
+                                                    <span class="me-2">
+                                                        全{{$question_group->question_count}}問
+                                                    </span>
+                                                    <!--制限時間-->
+                                                    <span class="me-2">
+                                                        <i class="bi bi-stopwatch"></i>{{$question_group->time_limit_text}}
+                                                    </span>
+                                                    <!--平均点-->
+                                                    <span class="me-2">
+                                                        {{sprintf('平均%.1f点',$question_group->average_score)}}
+                                                    </span>
+
+                                                </div>
+                                            </div>
+
                                         </div>
 
 
@@ -341,6 +550,8 @@
                                 </div>
                             </div>
                         </div>
+
+
 
                     @endforeach
                 </div>

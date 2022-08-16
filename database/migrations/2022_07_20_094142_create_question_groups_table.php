@@ -27,10 +27,8 @@ class CreateQuestionGroupsTable extends Migration
             $table->dateTime('published_at')->comment('公開日')->nullable()->default(null);
 
             $table->integer('accessed_count' )->comment('アクセス数')->default(0);
-            $table->integer('favorites_count')->comment('お気に入り数')->default(0);
+            $table->integer('evaluation_points')->comment('評価ポイント')->default(0);
             $table->integer('average_score'  )->comment('平均点')->default(0);
-            $table->integer('max_score'      )->comment('最高点')->default(0);
-            $table->string('average_elapsed_time',150  )->comment('平均解答時間')->nullable()->default(null);
 
 
             $table->unsignedBigInteger('user_id')->comment('問題作成者ID');

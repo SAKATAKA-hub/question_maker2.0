@@ -69,120 +69,56 @@ class FakeQuestinonSeeder extends Seeder
 
 
 
-        # 問題集の登録
-        $question_group = new \App\Models\QuestionGroup([
-            'user_id' => $user->id,
-            'title'   => 'テスト問題1',
-            'resume'  => 'この問題は、作業用のテスト問題です。',
-            'image'   => 'site/image/sample.jpg',
-            'tags'    => '仮登録問題　テスト　hoge',
-            'time_limit' => '00:01:00',
-            'published_at' => \Carbon\Carbon::parse()->format('Y-m-d H:i:s'),
-        ]);
-        $question_group->save();
-        foreach ($questions_data as $question_data)
-        {
-            # 問題情報の保存
-            $question = new \App\Models\Question([
-                'question_group_id' => $question_group->id,
-                'text'        => $question_data['text'],
-                'answer_type' => $question_data['answer_type'],
-                'order'       => $question_data['order'],
-                'image'       => $question_data['image'],
+        for ($i=0; $i < 12; $i++) {
+
+            # 問題集の登録
+            $question_group = new \App\Models\QuestionGroup([
+                'user_id' => $user->id,
+                'title'   => 'テスト問題'.$i,
+                'resume'  => 'この問題は、作業用のテスト問題です。',
+                'image'   => 'site/image/sample.jpg',
+                'tags'    => '仮登録問題　テスト　hoge',
+                'time_limit'       => '00:01:00',
+                'published_at'     => \Carbon\Carbon::parse("-".$i."week")->format('Y-m-d H:i:s'),
+                'accessed_count'   => ( $i%6 )*10,    //'アクセス数'
+                'evaluation_points'=> $i%6,           //'評価ポイント'
+                'average_score'    => ($i*13)%100,    //'平均点'
             ]);
-            $question->save();
-
-
-            # 問題の回答選択肢情報の保存
-            foreach ( $question_data['options'] as $option_data)
+            $question_group->save();
+            foreach ($questions_data as $question_data)
             {
-                $question_option = new \App\Models\QuestionOption([
-                    'question_id'    => $question->id,
-                    'answer_text'    => $option_data['answer_text'],
-                    'answer_boolean' => $option_data['answer_boolean'],
+                # 問題情報の保存
+                $question = new \App\Models\Question([
+                    'question_group_id' => $question_group->id,
+                    'text'        => $question_data['text'],
+                    'answer_type' => $question_data['answer_type'],
+                    'order'       => $question_data['order'],
+                    'image'       => $question_data['image'],
                 ]);
-                $question_option->save();
+                $question->save();
+
+
+                # 問題の回答選択肢情報の保存
+                foreach ( $question_data['options'] as $option_data)
+                {
+                    $question_option = new \App\Models\QuestionOption([
+                        'question_id'    => $question->id,
+                        'answer_text'    => $option_data['answer_text'],
+                        'answer_boolean' => $option_data['answer_boolean'],
+                    ]);
+                    $question_option->save();
+                }
             }
+
         }
 
 
-        # 問題集の登録
-        $question_group = new \App\Models\QuestionGroup([
-            'user_id' => $user->id,
-            'title'   => 'テスト問題2',
-            'resume'  => 'この問題は、作業用のテスト問題です。',
-            'image'   => 'site/image/sample.jpg',
-            'tags'    => '仮登録問題　テスト　hoge',
-            'time_limit' => '00:01:00',
-            'published_at' => \Carbon\Carbon::parse()->format('Y-m-d H:i:s'),
-        ]);
-        $question_group->save();
-        foreach ($questions_data as $question_data)
-        {
-            # 問題情報の保存
-            $question = new \App\Models\Question([
-                'question_group_id' => $question_group->id,
-                'text'        => $question_data['text'],
-                'answer_type' => $question_data['answer_type'],
-                'order'       => $question_data['order'],
-                'image'       => $question_data['image'],
-            ]);
-            $question->save();
-
-
-            # 問題の回答選択肢情報の保存
-            foreach ( $question_data['options'] as $option_data)
-            {
-                $question_option = new \App\Models\QuestionOption([
-                    'question_id'    => $question->id,
-                    'answer_text'    => $option_data['answer_text'],
-                    'answer_boolean' => $option_data['answer_boolean'],
-                ]);
-                $question_option->save();
-            }
-        }
-
-        # 問題集の登録
-        $question_group = new \App\Models\QuestionGroup([
-            'user_id' => $user->id,
-            'title'   => 'テスト問題3',
-            'resume'  => 'この問題は、作業用のテスト問題です。',
-            'image'   => 'site/image/sample.jpg',
-            'tags'    => '仮登録問題　テスト　hoge',
-            'time_limit' => '00:01:00',
-            'published_at' => \Carbon\Carbon::parse()->format('Y-m-d H:i:s'),
-        ]);
-        $question_group->save();
-        foreach ($questions_data as $question_data)
-        {
-            # 問題情報の保存
-            $question = new \App\Models\Question([
-                'question_group_id' => $question_group->id,
-                'text'        => $question_data['text'],
-                'answer_type' => $question_data['answer_type'],
-                'order'       => $question_data['order'],
-                'image'       => $question_data['image'],
-            ]);
-            $question->save();
-
-
-            # 問題の回答選択肢情報の保存
-            foreach ( $question_data['options'] as $option_data)
-            {
-                $question_option = new \App\Models\QuestionOption([
-                    'question_id'    => $question->id,
-                    'answer_text'    => $option_data['answer_text'],
-                    'answer_boolean' => $option_data['answer_boolean'],
-                ]);
-                $question_option->save();
-            }
-        }
 
 
         # 問題集の登録
         $question_group = new \App\Models\QuestionGroup([
             'user_id' => $user->id,
-            'title'   => 'テスト問題4 非公開',
+            'title'   => 'テスト問題 非公開',
             'resume'  => 'この問題は、作業用のテスト問題です。',
             'image'   => 'site/image/sample.jpg',
             'tags'    => '仮登録問題　テスト　hoge',

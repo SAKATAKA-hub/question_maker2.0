@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -43,4 +44,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+
+    /**
+     * 画像パス（画像無し対応） $user->image_puth
+     * @return String
+    */
+    public function getImagePuthAttribute(){
+
+        //画像無し時の画像パス
+        $no_image = 'site/image/user_no_image.png';
+
+        return Storage::exists( $this->image ) ? $this->image : $no_image;
+    }
+
 }

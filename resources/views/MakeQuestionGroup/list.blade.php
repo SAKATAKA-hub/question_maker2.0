@@ -92,15 +92,36 @@
                                     "></div>
                                     <div class="card-body">
                                         <h5 class="comment-author">{{ $question_group->title }}</h5>
-                                        <span class="comment-date text-muted">7 日前</span>
-                                        <p class="card-text">
-                                            <span class="comment-reply">問題数：3問</span>
-                                            <span class="comment-reply">制限時間：60分</span>
-                                            <span class="comment-share">平均点：99.9点</span>
-                                        </p>
-                                        <p class="overflow-hidden" style="height: 3rem">
-                                            サンプルで作った問題です。
-                                        </p>
+                                        @if ($question_group->published_at)
+                                        <div class="">
+                                            公開日時：{{\Carbon\Carbon::parse($question_group->published_at)->format('Y年m月d日 H時i分')}}
+                                        </div>
+                                        @else
+                                        <div class="">公開日時：未公開</div>
+                                        @endif
+                                        <div class="">
+                                            作成日時：{{\Carbon\Carbon::parse($question_group->created_at)->format('Y年m月d日 H時i分')}}
+                                        </div>
+                                        <div class="">
+                                            更新日時：{{\Carbon\Carbon::parse($question_group->updated_at)->format('Y年m月d日 H時i分')}}
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="">
+                                            問題数　：{{$question_group->question_count}}問
+                                        </div>
+                                        <div class="">
+                                            制限時間：{{$question_group->time_limit_text}}
+                                        </div>
+                                        <div class="">
+                                            平均点　：99.9点
+                                        </div>
+                                        <div class="">
+                                            挑戦者数：100人
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        {{$question_group->resume}}
                                     </div>
                                 </div>
                                 <div class="list-group">

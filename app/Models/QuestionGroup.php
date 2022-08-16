@@ -16,7 +16,9 @@ class QuestionGroup extends Model
     public $timestamps = true;
     protected $fillable = [
         'title','resume','image','tags','time_limit','published_at','user_id',
-        'accessed_count','favorites_count','average_score','max_score','average_elapsed_time',
+        'accessed_count',    //'アクセス数'
+        'evaluation_points', //'評価ポイント'
+        'average_score',     //'平均点'
     ];
 
 
@@ -28,9 +30,14 @@ class QuestionGroup extends Model
     # Questionテーブルとのリレーション ※カラムoderの番号順
     public function questions()
     {
-        return $this->hasMany(Question::class,'question_group_id')->orderBy('order','asc');
+        return $this->hasMany(Question::class)->orderBy('order','asc');
     }
 
+    # Userテーブルとのリレーション
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 
 
@@ -41,6 +48,7 @@ class QuestionGroup extends Model
     |
     |
     */
+
         /**
          * 画像パス（画像無し対応） $question_group->image_puth
          * @return String
@@ -51,6 +59,60 @@ class QuestionGroup extends Model
             $no_image = 'site/image/no_image.png';
 
             return Storage::exists( $this->image ) ? $this->image : $no_image;
+        }
+
+
+        /**
+         * 公開日のテキスト表示 $question_group->befor_datetime_text
+         * ○○日前（時間前）
+         * @return String
+        */
+        public function getBeforDatetimeTextAttribute(){
+
+            $now = new \Carbon\Carbon('now');
+            $datetime = new \Carbon\Carbon( $this->published_at );
+
+            $datetime_array = [
+                ['num'=>$datetime->diffInSeconds( $now ), 'text'=>'秒前',],
+                ['num'=>$datetime->diffInMinutes( $now ), 'text'=>'分前',],
+                ['num'=>$datetime->diffInHours( $now ),   'text'=>'時間前',],
+                ['num'=>$datetime->diffInDays( $now ),    'text'=>'日前',],
+                ['num'=>$datetime->diffInMonths( $now ),  'text'=>'ヶ月前',],
+                ['num'=>$datetime->diffInYears( $now ),   'text'=>'年前',],
+            ];
+
+            $text = '';
+            foreach ($datetime_array as $value) {
+                $text = $value['num'] ? $value['num'].$value['text'] : $text;
+            }
+
+            return $text;
+        }
+
+        /**
+         * 問題数 $question_group->question_count
+         * @return String
+        */
+        public function getQuestionCountAttribute(){
+            return $this->hasMany(Question::class)->count();
+        }
+
+
+        /**
+         * 制限時間のテキスト表記 $question_group->time_limit_text
+         * @return String
+        */
+        public function getTimeLimitTextAttribute(){
+
+            $array = explode(':',$this->time_limit);
+
+            $text = '';
+            $text .= ($array[0]!='00') ? sprintf('%d',$array[0]).'時間' : '';
+            $text .= ($array[1]!='00') ? sprintf('%d',$array[1]).'分' : '';
+            $text .= ($array[2]!='00') ? sprintf('%d',$array[2]).'秒' : '';
+            $text = ($text=='') ? 'なし' : $text;
+
+            return $text;
         }
 
         /**

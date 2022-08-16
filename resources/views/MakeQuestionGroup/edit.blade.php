@@ -47,6 +47,26 @@
 <section>
     <div class="container-1200 pt-5">
 
+        <form action="{{route('make_question_group.read_csv_create')}}"
+        method="POST" enctype="multipart/form-data" onsubmit="stopOnbeforeunload()">
+            @csrf
+
+            <h3>CSVファイルから問題集を作成</h3>
+            <div class="card mb-5 card-body shadow">
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">問題を登録したCSVファイルを読込んでください。</label>
+                    <input class="form-control" name="csv" type="file" id="formFile">
+                    <div class="form-text">
+                        <a href="" onclick="stopOnbeforeunload()">問題登録用CSVファイルのダウンロード</a>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-success" type="submit" style="padding:.4rem 1rem">CSV読み込み</button>
+                </div>
+            </div>
+        </form>
+
+
 
         @if ( empty($question_group) ){{-- 新規作成 --}}
         <form action="{{ route('make_question_group.store' ) }}"
@@ -60,7 +80,6 @@
             @method('PATCH')
 
         @endif
-
 
             <div class="card mb-5 card-body shadow">
 
@@ -181,6 +200,7 @@
                 </div>
 
             </div>
+
         </form>
 
     </div>

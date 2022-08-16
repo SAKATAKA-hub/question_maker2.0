@@ -84,6 +84,11 @@ Route::middleware(['user_auth'])->group(function () {
     ->name('make_question_group.destroy');
 
 
+    # CSVファイルから問題集の新規作成(read_csv_create)
+    Route::post('/make_question_group/read_csv_create', [Controllers\MakeQuestionGroupController::class, 'read_csv_create'])
+    ->name('make_question_group.read_csv_create');
+
+
 });//end middleware
 /*
 |--------------------------------------------------------------------------

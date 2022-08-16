@@ -134,7 +134,7 @@
                 <div class="col-md h-100 card">
                     <div class="card-body text-center">
                         <h6 class="mb-3">別の問題に挑戦する</h6>
-                        <a href="{{ route('questions_list') }}" class="btn rounded-pill btn-outline-success mx-auto"
+                        <a href="{{ route('questions_search_list') }}" class="btn rounded-pill btn-outline-success mx-auto"
                         >GO!</a>
                     </div>
                 </div>

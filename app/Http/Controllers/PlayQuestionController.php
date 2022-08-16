@@ -20,7 +20,7 @@ class PlayQuestionController extends Controller
         # ユーザーの問題集情報の取得
         $question_groups = \App\Models\QuestionGroup::
         orderBy('published_at','desc')->where('published_at', '<>', null)
-        ->paginate(18);
+        ->paginate(10);
 
         # ページの表示
         return view('PlayQuestion.questions_list', compact('question_groups'));
@@ -34,16 +34,26 @@ class PlayQuestionController extends Controller
     */
     public function questions_search_list( Request $request )
     {
+
+
         # キーワード
         $keywords = str_replace( '　',' ',$request->seach_keywords );
 
+        # 並び順（デフォルト=>公開新着順）
+        $order = isset($request->order) ?  explode(',',$request->order) : ['published_at','desc'];
+
+
         # ユーザーの問題集情報の取得
         $question_groups = \App\Models\QuestionGroup::search( $keywords )
-        ->orderBy('published_at','desc')->where('published_at', '<>', null)
-        ->paginate(18);
+        ->where('published_at', '<>', null) //非公開は除く
+        ->orderBy( $order[0], $order[1])
+        ->paginate(10);
+
+
+        $order = implode(',',$order);
 
         # ページの表示
-        return view('PlayQuestion.questions_list', compact('question_groups', 'keywords'));
+        return view('PlayQuestion.questions_search_list', compact('question_groups', 'keywords','order'));
 
     }
 
@@ -101,6 +111,7 @@ class PlayQuestionController extends Controller
 
         // 利用者（ログイン中でなければ、ゲストユーザーとして保存）
         $user = Auth::check() ? Auth::user() : $gest_user;
+
 
 
         # 解答グループのDB保存（ログイン中）
@@ -180,6 +191,32 @@ class PlayQuestionController extends Controller
             $answer_group->save();
 
         //
+
+
+        # 平均点の計算
+        $score_answer_groups =
+        \App\Models\AnswerGroup::where('question_group_id',$question_group->id)->get();
+        $question_group->score = round( $score_answer_groups->sum('score') / $score_answer_groups->count() ,1 );
+        $question_group->save();
+
+
+
+        # 受検者数の登録
+
+            //過去に同じユーザーが同じ問題を解いているか確認
+            $sameuser_answer_groups =
+            \App\Models\AnswerGroup::where('user_id',$user->id)
+            ->where('question_group_id',$question_group->id)->get();
+
+
+            //過去に同じユーザーが同じ問題を解いていなければ、受験者数を加算
+            if( !$sameuser_answer_groups->count() ){
+                $question_group->accessed_count ++ ;
+                $question_group->save();
+            }
+
+        //
+
 
 
 

@@ -132,8 +132,8 @@ class MakeQuestionGroupController extends Controller
 
 
         # 公開日の登録
-        $input['published_at'] = null;
-        if( $request->is_public ){
+        $input['published_at'] =  $question_group->published_at;
+        if( $request->is_public && empty(  $question_group->published_at ) ){
             $input['published_at'] = \Carbon\Carbon::parse('now')->format('Y-m-d H:i:s');
         }
 
@@ -209,6 +209,156 @@ class MakeQuestionGroupController extends Controller
         # 問題集の編集ヶ所選択ページへリダイレクト
         return redirect()->route('make_question_group.list')
         ->with('alert-danger','問題集の基本情報を削除しました。');
+    }
+
+
+    /**
+     * CSVファイルから問題集の新規作成(read_csv_create)
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\View\View
+    */
+    public function read_csv_create(Request $request)
+    {
+
+
+        # ユーザー情報
+        $user = Auth::user();
+
+        # 解答選択肢のタイプ
+        $answer_types = ['テキストで答えを入力する','ひとつの答えを選ぶ','複数の答えを選ぶ'];
+
+
+        #1.CSVファイルの保存
+            $dir = 'upload/csv/questions'; //保存先ディレクトリ
+            $csv_path =  $request->file( 'csv' )->store($dir);
+
+
+        #2.CSVファイルの読み込み=>配列に変換
+            $content = trim( Storage::get($csv_path) ); //ファイルの読み込み
+            $content = str_replace("\n",'',$content);   //CSVデータを連想配列に変換
+            $array1 = explode("\r",$content);
+            $array2 = [];
+            foreach ($array1 as $line) {
+                $array2[] = explode(',',$line);
+            }
+            storage::delete($csv_path );//CSVファイルの削除
+
+
+        #3.CSV配列を保存形式データに変換
+
+            //[1]問題集基本情報
+            $input_question_group = [
+                'user_id'    => $user->id,
+                'title'      => $array2[0][1],
+                'time_limit' => strlen($array2[1][1]) <= 8 ? '0'.$array2[1][1] : $array2[1][1],
+                'resume'     => $array2[2][1],
+                'tags'       => str_replace(' ','　',$array2[3][1]),//タグの空文字を大文字に統一
+            ];
+
+
+
+
+            //各問題データ
+
+                $array3 = array_slice( $array2, 5 );
+
+                $input_questions = [];
+                foreach ($array3 as $num => $line) {
+                    $input_question = $line;
+                    array_shift( $input_question );//問題の順番を削除
+                    $array4 = array_splice( $input_question, 3 );//選択礒情報の移動
+
+
+                    //[2]問題情報
+
+                        //解答選択肢タイプ番号
+                        $answer_type_num = array_search( $input_question[1], $answer_types );
+                        // 選択肢の正解数
+                        $correct_count = $answer_type_num==2 ? $input_question[2] : 1 ;
+
+
+                        $input_question = [
+                            'question_group_id' => null,
+                            'text'              => $input_question[0],
+                            'answer_type'       => $answer_type_num,
+                            'order'             => $num + 1,
+                            'options' => [],
+                        ];
+
+
+                    //[3]問題の選択肢情報
+
+                        # 空要素の削除
+                        $key = true;
+                        while ($key) {
+                            if( $key = array_search( '', $array4 )){ array_splice( $array4 ,$key ,1 ); }
+                        }
+
+                        # 選択礒情報
+                        $input_options = [];
+                        foreach ($array4 as $opt_num => $answer_text) {
+                            $input_option = [
+                                'question_id'    => null,
+                                'answer_text'    => $answer_text,
+                                'answer_boolean' => $opt_num < $correct_count ? 1 : 0,
+                            ];
+                            $input_options[] = $input_option;
+                        }
+
+
+                    // 問題情報に選択肢情報を保存
+                    $input_question['options'] = $input_options;
+                    $input_questions[] = $input_question;
+
+
+                }//end foreach
+            //
+
+
+        #4.入力内容のバリデーション
+        // ~
+
+
+        #5.問題集情報をＤＢへ保存
+
+
+            //[1]問題集基本情報の保存
+            $question_group = new \App\Models\QuestionGroup($input_question_group);
+            $question_group->save();
+
+
+            //[2]問題情報の保存
+            foreach ($input_questions as $input_question) {
+
+                $question = new \App\Models\Question([
+                    'question_group_id' => $question_group->id,
+                    'text'              => $input_question['text'],
+                    'answer_type'       => $input_question['answer_type'],
+                    'order'             => $input_question['order'],
+                ]);
+                $question->save();
+
+
+                //[3]問題の選択肢情報の保存
+                foreach ($input_question['options'] as $option) {
+                    $question_option = new \App\Models\QuestionOption([
+                        'question_id'    => $question->id,
+                        'answer_text'    => $option['answer_text'],
+                        'answer_boolean' => $option['answer_boolean'],
+                    ]);
+                    $question_option->save();
+                }
+                // dd($question_option);
+
+
+            }//end foreach 問題情報の保存
+
+
+
+
+        # 問題集の一覧表示ページへリダイレクト
+        return redirect()->route('make_question_group.list')
+        ->with('alert-success','CSVファイルから問題集を登録しました。');
     }
 
 }
