@@ -66,7 +66,7 @@ class PlayQuestionController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return JSON
     */
-    public function get_questions_api( \Illuminate\Http\Request $request )
+    public function get_questions_api( Request $request )
     {
         // 問題集情報
         $question_group = \App\Models\QuestionGroup::find( $request->question_group_id );
@@ -100,7 +100,7 @@ class PlayQuestionController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\View\View
     */
-    public function scoring( \Illuminate\Http\Request $request )
+    public function scoring( Request $request )
     {
         // 問題集情報
         $question_group = \App\Models\QuestionGroup::find( $request->question_group_id );

@@ -14,6 +14,8 @@ class QuestionGroupComment extends Model
     use HasFactory;
     public $timestamps = true;
     protected $fillable = [
-        'user_id','question_group_id','body','read',
+        'user_id','gest_name','gest_email',
+        'question_group_id','body','read',
     ];
+
 }

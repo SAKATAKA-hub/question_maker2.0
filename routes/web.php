@@ -158,6 +158,50 @@ Route::middleware(['user_auth'])->group(function () {
 
 /*
 |--------------------------------------------------------------------------
+| その他のサービス　ServiceController
+|--------------------------------------------------------------------------
+*/
+    # 問題集のキープ[お気に入り](keep_question_group/api)
+    Route::post('/keep_question_group/api', [Controllers\ServiceController::class, 'keep_question_group_api'])
+    ->name('keep_question_group.api');
+
+    # クリエーターユーザーのキープ[フォロー](keep_creator_user/api)
+    Route::post('/keep_creator_user/api', [Controllers\ServiceController::class, 'keep_creator_user_api'])
+    ->name('keep_creator_user.api');
+
+    # 問題集の評価(question_group_evaluation/api)
+    // ~
+
+
+    # 問題集へのコメント
+
+        # 問題集へのコメント[投稿](comment/post/api)
+        Route::post('/comment/post/api', [Controllers\ServiceController::class, 'comment_post_api'])
+        ->name('comment.post.api');
+        # 問題集へのコメント[一覧](comment/list/api)
+        # 問題集へのコメント[削除](comment/destroy/api)
+
+    # 規約違反問題集の通報
+
+        # 規約違反問題集の通報[投稿]  (violation_report/post/api)
+        Route::post('/violation_report/post/api', [Controllers\ServiceController::class, 'violation_report_post_api'])
+        ->name('violation_report.post.api');
+        # 規約違反問題集の通報[一覧]  (violation_report/list/api)
+        # 規約違反問題集の通報[対応済](violation_report/responsed/api)
+
+    # お問い合わせ
+
+        # お問い合わせ[投稿](contact/post/api)
+        Route::post('/contact/post/api', [Controllers\ServiceController::class, 'contact_post_api'])
+        ->name('contact.post.api');
+
+        # お問い合わせ[一覧](contact/list/api)
+        # お問い合わせ[削除](contact/destroy/api)
+
+    //
+
+/*
+|--------------------------------------------------------------------------
 | フッターメニュー (footer_menu)
 |--------------------------------------------------------------------------
 */
@@ -172,6 +216,7 @@ Route::middleware(['user_auth'])->group(function () {
     # お問い合わせ(contact)
     Route::get('/contact', function () { view('footer_menu.contact'); })
     ->name('footer_menu.contact');
+
 
     # よくある質問(q_and_a)
     Route::get('/q_and_a', function () { view('footer_menu.q_and_a'); })
@@ -276,6 +321,11 @@ Route::get('/test/timer', function(){ return view( 'test.timer' ); })
 # 問題の詳細
 Route::get('/test/question_detail', function(){ return view( 'test.question_detail' ); })
 ->name('test.question_detail');
+
+# その他サービスのテスト
+Route::get('/test/service_form', function(){ return view( 'test.service_form' ); })
+->name('test.service_form');
+
 
 // Route::get('test/{page}', function ($page) {
 //     return view('test.'.$page);

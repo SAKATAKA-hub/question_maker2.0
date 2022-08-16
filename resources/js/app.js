@@ -41,6 +41,13 @@ Vue.component('submit-button-component',  require('./components/Items/SubmitButt
 Vue.component('reset-pass-component', require('./components/UserAuth/ResetPassComponent.vue').default);
 Vue.component('register-component',   require('./components/UserAuth/RegisterComponent.vue').default);
 
+/* その他のサービス */
+Vue.component('keep-question-group-component', require('./components/Service/KeepQuestionGroupComponent.vue').default);
+Vue.component('keep-creator-user-component',   require('./components/Service/KeepCreatorUserComponent.vue').default);
+Vue.component('comment-component',             require('./components/Service/CommentComponent.vue').default);
+Vue.component('violation-report-component',    require('./components/Service/ViolationReportComponent.vue').default);
+Vue.component('contact-component',             require('./components/Service/ContactComponent.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

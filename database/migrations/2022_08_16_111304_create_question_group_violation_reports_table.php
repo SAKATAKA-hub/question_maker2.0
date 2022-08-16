@@ -19,10 +19,9 @@ class CreateQuestionGroupViolationReportsTable extends Migration
     {
         Schema::create('question_group_violation_reports', function (Blueprint $table) {
             $table->id();
-
-            $table->unsignedBigInteger('user_id')->comment('問題作成者ID');
-            $table->foreign('user_id')->references('id')->on('users') //存在しないidの登録は不可
-            ->onDelete('cascade');//主テーブルに関連する従テーブルのレコードを削除
+            $table->integer('user_id'      )->comment('ユーザーID'    );
+            $table->string('gest_name',150 )->comment('名前'          )->nullable()->default(null);
+            $table->string('gest_email',150)->comment('メールアドレス')->nullable()->default(null);
 
             $table->unsignedBigInteger('question_group_id')->comment('問題グループID');
             $table->foreign('question_group_id')->references('id')->on('question_groups') //存在しないidの登録は不可
