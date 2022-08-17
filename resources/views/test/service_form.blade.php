@@ -12,6 +12,7 @@
 
 <!----- meta ----->
 @section('meta')
+<meta name="csrf_token" content="{{ csrf_token() }}">
 @endsection
 
 
@@ -31,34 +32,23 @@
     <div class="container-1200 my-5">
 
         <div class="card card-body">
+
             <h5>問題集のお気に入り登録</h5>
-            <form action="{{route('keep_question_group.api')}}" method="POST">
-                @csrf
-                <input type="hidden" name="user_id" value="1">
-                <input type="hidden" name="question_group_id" value="1">
-                <input type="hidden" name="keep" value="0">
-
-                <button type="submit" class="btn btn-primary">お気に入り</button>
-            </form>
-            {{-- <example-component/> --}}
-            <keep-question-group-component></keep-question-group-component>
-
-
+            <!-- お気に入りボタン -->
+            <keep-question-group-component
+            user_id="1" question_group_id="1"
+            keep="{{ \App\Models\KeepQuestionGroup::where('user_id',1)->where('question_group_id',1)->first()->keep }}"
+            route="{{route('keep_question_group.api')}}"/>
 
         </div>
         <div class="card card-body">
+
             <h5>クリエーターユーザーのキープ[フォロー]</h5>
-            <form action="{{route('keep_creator_user.api')}}" method="POST">
-                @csrf
-                <input type="hidden" name="user_id" value="1">
-                <input type="hidden" name="creater_user_id" value="2">
-                <input type="hidden" name="keep" value="0">
-
-                <button type="submit" class="btn btn-primary">フォローする</button>
-            </form>
-            <keep-creator-user-component/>
-
-
+            <!-- フォローボタン -->
+            <keep-creator-user-component
+            user_id="1" creater_user_id="1"
+            keep="{{ \App\Models\KeepCreatorUser::where('user_id',1)->where('creater_user_id',1)->first()->keep }}"
+            route="{{route('keep_creator_user.api')}}"/>
 
         </div>
         <div class="card card-body">

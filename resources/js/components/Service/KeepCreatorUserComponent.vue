@@ -1,51 +1,77 @@
 <template>
     <div>
 
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{title}}{{prop1}}</div>
+        <form :action="route" v-show="test" method="POST">
+            <input v-for="(input, key) in inputs" :key="key"
+            type="text" :name="key" :value="input"
+            >
+            <button type="submit" class="btn btn-primary btn-sm">{{btn_text}}</button>
+        </form>
 
-                    <div class="card-body">{{body}}{{count}}</div>
-                    <div>
-                        <button @click="countUp">加算</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <button class="btn btn-sm"
+        :class="{'btn-success':inputs.keep, 'text-success fw-bold':!inputs.keep}"
+        @click="click" type="button">{{btn_text}}</button>
+
 
     </div>
 </template>
-
 <script>
     export default {
         data : function() {
             return{
 
+                test: false,
 
-                title : 'フォロー',
-                body : '本文ほげほげ',
-                count: 0,
+                btn_text: 'フォローする',
+
+                inputs:{
+                    _token: document.querySelector('[name="csrf_token"]').content,
+                    user_id: '',
+                    creater_user_id: '',
+                    keep: 1,// keepの状態が１のとき、送信内容は0（状態と送信内容は逆に登録）
+                },
 
 
             }
         },
         props: {
-            //最初に表示する画像のパス
-            prop1: { type: String, default: 'prop1', },
-            prop2: { type: String, default: 'prop2', },
+            route:           { type: String, default: '', },
+            user_id:         { type: String, default: '', },
+            creater_user_id: { type: String, default: '', },
+            keep:            { type: String, default: '1', },
 
         },
         mounted() {
 
-
-            console.log('Component mounted.')
-
+            this.inputs.user_id = this.user_id;
+            this.inputs.creater_user_id = this.creater_user_id;
+            this.inputs.keep = (this.keep==1) ? 0 : 1 ;// keepの状態が１のとき、送信内容は0（状態と送信内容は逆に登録）
+            this.btn_text    = !this.inputs.keep ?  'フォロー中' : 'フォローする';
 
         },
         methods:{
 
-            countUp : function(){ this.count++; }
-        }
+            click: function(){
+
+                // [ 非同期通信 ]
+                fetch( this.route, {
+                    method: 'POST',
+                    body: new URLSearchParams( this.inputs ),
+                })
+                .then(response => {
+                    if(!response.ok){ alert('データ送信エラーが発生しました。'); }
+                    // return response.json();
+                })
+                .then(json => {
+                    // 表示の切り替え
+                    this.inputs.keep = !this.inputs.keep ? 1 : 0 ;
+                    this.btn_text    = !this.inputs.keep ?  'フォロー中' : 'フォローする';
+
+                    // console.log( json );
+                })
+
+
+            },
+        },
     }
 </script>
