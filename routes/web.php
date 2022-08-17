@@ -143,6 +143,25 @@ Route::middleware(['user_auth'])->group(function () {
     ->name('results.detail');
     // ゲストユーザーの採点表示も行うため、'user_auth'ミドルウェアにかけない。
 
+/*
+|--------------------------------------------------------------------------
+| マイページ　処理　MyPageController
+|--------------------------------------------------------------------------
+*/
+    # 問題一覧(make_question_group/list)
+    # 成績一覧(results/list)
+
+
+    # いいね一覧(like_list)
+    Route::get('/mypage/like_list', function(){
+    return view('Mypage.like_list',['creater_user'=>\Illuminate\Support\Facades\Auth::user(),]); })
+    ->name('mypage.like_list');
+
+    # フォロアー[フォローしている人]一覧(follow_list)
+    # フォロー[フォローしてくれている人]一覧(follower_list)
+
+
+
 
 /*
 |--------------------------------------------------------------------------

@@ -150,12 +150,12 @@
                                         <!-- ユーザー情報 -->
                                         <div class="col-auto">
                                             <div class="d-flex align-items-center">
-                                                <div class="user-image border me-2" style="
+                                                <div class="user-image border ratio ratio-1x1 me-2" style="
                                                     background:url({{ asset('storage/'.$question_group->user->image_puth) }});
                                                     background-repeat  : no-repeat;
                                                     background-size    : cover;
                                                     background-position: center center;
-                                                    width:1rem; height:1rem; border-radius:50%;
+                                                    width:1rem; border-radius:50%;
                                                 "></div>
                                                 <span class="text-muted text-truncate m-0">
                                                     {{$question_group->user->name}}
