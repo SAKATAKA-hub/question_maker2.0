@@ -16,6 +16,7 @@ class Question extends Model
     public $timestamps = true;
     protected $fillable = [
         'text','answer_type','order','image','question_group_id',
+        'commentary_text','commentary_image',
     ];
 
 

@@ -19,6 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('email',    150)->unique();
             $table->string('password', 150);
             $table->string('image',    150)->nullable()->default(null);
+            $table->string('profile',  150)->nullable()->default(null);
+
 
             $table->string('reset_pass_code',150)->nullable()->default(null);
             $table->integer('error_count')->default(0);

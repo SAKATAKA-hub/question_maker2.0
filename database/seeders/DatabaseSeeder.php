@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call(FakeUserSeeder::class);        // フェイクユーザー
         $this->call(FakeQuestinonSeeder::class);   // フェイク問題
+        $this->call(ViolationReportTypesSeeder::class);   // 通報の種類
 
     }
 }

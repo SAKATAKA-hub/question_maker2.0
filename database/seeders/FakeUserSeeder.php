@@ -15,14 +15,14 @@ class FakeUserSeeder extends Seeder
     public function run()
     {
         $user = new \App\Models\User([
-            'name' => '山田　太郎',
-            'email' => 'aek1214@yahoo.co.jp',
+            'name' => 'Next Arrow',
+            'email' => 'nextarrow.line@gmail.com',
             'password' => Hash::make('password'),
         ]);
         $user->save();
         $user = new \App\Models\User([
-            'name' => 'Next Arrow',
-            'email' => 'nextarrow.line@gmail.com',
+            'name' => '山田　太郎',
+            'email' => 'aek1214@yahoo.co.jp',
             'password' => Hash::make('password'),
         ]);
         $user->save();
