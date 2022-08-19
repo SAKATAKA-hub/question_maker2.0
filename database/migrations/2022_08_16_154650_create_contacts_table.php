@@ -19,12 +19,13 @@ class CreateContactsTable extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id'      )->comment('ユーザーID'    );
+            $table->integer('user_id'      )->comment('ユーザーID'    )->nullable()->default(null);
             $table->string('gest_name',150 )->comment('名前'          )->nullable()->default(null);
             $table->string('gest_email',150)->comment('メールアドレス')->nullable()->default(null);
             $table->string('body',150      )->comment('本文');
-            $table->boolean('responded')->comment('対応済みか否か')->default(0);
+            $table->string('type_text',150 )->comment('お問い合わせの種類');
 
+            $table->boolean('responded')->comment('対応済みか否か')->default(0);
             $table->timestamps();
         });
     }

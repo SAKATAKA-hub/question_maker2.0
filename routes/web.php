@@ -132,7 +132,7 @@ Route::middleware(['user_auth'])->group(function () {
     Route::middleware(['user_auth'])->group(function () {
 
         # 成績一覧ページの表示(list)
-        Route::get('/results/list', [Controllers\ResultsController::class, 'list'])
+        Route::get('/mypage/results/list', [Controllers\ResultsController::class, 'list'])
         ->name('results.list');
 
     });//end middleware
@@ -148,33 +148,78 @@ Route::middleware(['user_auth'])->group(function () {
 | マイページ　処理　MyPageController
 |--------------------------------------------------------------------------
 */
-    # 問題一覧(make_question_group/list)
-    # 成績一覧(results/list)
+Route::middleware(['user_auth'])->group(function () {
 
+    # マイページ[問題一覧](mypage) //->name('make_question_group.list');
+    Route::get('/mypage',function(){ return redirect()->route('make_question_group.list'); })
+    ->name('mypage');
 
-    # いいね一覧(like_list)
-    Route::get('/mypage/like_list', function(){
-    return view('Mypage.like_list',['creater_user'=>\Illuminate\Support\Facades\Auth::user(),]); })
-    ->name('mypage.like_list');
+    # 問題集を作る //->name('make_question_group.create');
 
-    # フォロアー[フォローしている人]一覧(follow_list)
-    # フォロー[フォローしてくれている人]一覧(follower_list)
+    # いいねした問題集(like_list)
+    Route::get('/mypage/like_list',[Controllers\MyPageController::class, 'like_list'])
+    ->name('like_list');
 
+    # 受検成績 //->name('results.list');
 
+    # 未読コメント(unread_comment_list)
+    Route::get('/mypage/unread_comment_list',[Controllers\MyPageController::class, 'unread_comment_list'])
+    ->name('unread_comment_list');
 
+    # プロフィール・設定変更(settings) //->name('settings');
+
+    # ログアウト//->name('user_auth.logout');
+
+});//end middleware
+/*
+|--------------------------------------------------------------------------
+| クリエーターページ　処理　CreaterUserController
+|--------------------------------------------------------------------------
+*/
+    # 公開中問題集一覧[クリエーターページトップ](questin_group_list)
+    Route::get('/creater/questin_group_list/{creater_user_id}',[Controllers\CreaterUserController::class, 'questin_group_list'])
+    ->name('creater.questin_group_list');
+
+    # フォロワー一覧(follower_list)
+    Route::get('/creater/follower_list/{creater_user_id}',[Controllers\CreaterUserController::class, 'follower_list'])
+    ->name('creater.follower_list');
+
+    # フォロー中一覧(follow_creater_list)
+    Route::get('/creater/follow_creater_list/{creater_user_id}',[Controllers\CreaterUserController::class, 'follow_creater_list'])
+    ->name('creater.follow_creater_list');
+
+    # クリエーター検索(search_creater_list)
+    Route::post('/creater/search_creater_list',[Controllers\CreaterUserController::class, 'search_creater_list'])
+    ->name('creater.search_creater_list');
 
 /*
 |--------------------------------------------------------------------------
 | 各種設定　処理　SettingsController
 |--------------------------------------------------------------------------
 */
-    # 名前変更
-    # 画像変更
-    # パスワード変更
-    # 退会処理
+Route::middleware(['user_auth'])->group(function () {
+
+    # プロフィール・設定変更 表示(settings)
+    Route::get('/mypage/settings', [Controllers\SettingsController::class, 'settings'])
+    ->name('settings');
 
 
+    # プロフィールの変更(update_user_profile)
+    Route::post('/mypage/settings/update_user_profile', [Controllers\SettingsController::class,'update_user_profile'])
+    ->name('update_user_profile');
 
+
+    # メールアドレスの変更(update_user_email)
+    Route::post('/mypage/settings/update_user_email', [Controllers\SettingsController::class,'update_user_email'])
+    ->name('update_user_email');
+
+
+    # 退会前アンケートフォーム(withdrawal_form)
+    Route::get('/mypage/withdrawal_form', function(){ return view('user_auth.withdrawal_form'); })
+    ->name('withdrawal_form');
+
+
+});//end middleware
 /*
 |--------------------------------------------------------------------------
 | その他のサービス　ServiceController
@@ -299,8 +344,10 @@ Route::middleware(['user_auth'])->group(function () {
     //
 
     # 退会処理(destroy)
-    Route::get('/user_auth/destroy', function () { return view('user_auth.destroy'); })
+    Route::delete('/user_auth/destroy', [Controllers\UserAuthController::class, 'destroy'])
     ->name('user_auth.destroy');
+
+
 
 //
 

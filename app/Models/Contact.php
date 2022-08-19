@@ -14,6 +14,6 @@ class Contact extends Model
     use HasFactory;
     public $timestamps = true;
     protected $fillable = [
-        'user_id','gest_name','gest_email','body','responded',
+        'user_id','gest_name','gest_email','body','responded','type_text'
     ];
 }

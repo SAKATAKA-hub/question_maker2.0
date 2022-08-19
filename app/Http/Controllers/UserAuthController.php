@@ -29,7 +29,7 @@ class UserAuthController extends Controller
         {
 
             # 設定（ログイン後にリダイレクトするルーティング名）
-            $route_after_login = 'home';
+            $route_after_login = 'mypage';
 
 
             # [ アカウントとパスワードの照合チェック ] -------
@@ -311,5 +311,29 @@ class UserAuthController extends Controller
     public function destroy( Request $request)
     {
 
+        # ログアウトの処理
+        $user = Auth::user();
+        // Auth::logout(); //ユーザーセッションの削除
+        // $request->session()->invalidate(); //全セッションの削除
+        // $request->session()->regenerateToken(); //セッションの再作成(二重送信の防止)
+
+
+        # アンケートの入力
+        $contact = new \App\Models\Contact([
+            'gest_name'  => $user->name,
+            'gest_email' => $user->email,
+            'body'       => $request->body,
+            'type_text'  => '退会手続き',
+            'responded'  => 1,
+        ]);
+        $contact->save();
+
+
+        # ユーザー情報の削除
+        $user->delete();
+
+
+        # ログアウト完了ページへリダイレクト
+        return view('user_auth.completed_destroy');
     }
 }

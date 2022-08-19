@@ -113,7 +113,6 @@ class PlayQuestionController extends Controller
         $user = Auth::check() ? Auth::user() : $gest_user;
 
 
-
         # 解答グループのDB保存（ログイン中）
         $answer_group = new \App\Models\AnswerGroup([
             'score'             => 0,
@@ -196,7 +195,7 @@ class PlayQuestionController extends Controller
         # 平均点の計算
         $score_answer_groups =
         \App\Models\AnswerGroup::where('question_group_id',$question_group->id)->get();
-        $question_group->score = round( $score_answer_groups->sum('score') / $score_answer_groups->count() ,1 );
+        $question_group->average_score = round( $score_answer_groups->sum('score') / $score_answer_groups->count() ,1 );
         $question_group->save();
 
 

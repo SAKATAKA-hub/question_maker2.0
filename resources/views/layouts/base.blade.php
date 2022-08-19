@@ -31,17 +31,12 @@
     <main>
 
         <!-- 見出しタイトル -->
-        <section class="border-bottom">
-            <div class="container-1200 mb-0 pt-5">
+        <section class="border-bottom border-1">
+            <div class="container-1200 pb-0">
 
                 <h2 class="text-secondary fw-bold">@yield('title')</h2>
 
-            </div>
-        </section>
-
-        <!-- breadcrumb -->
-        <section>
-            <div class="mx-auto px-3" style="max-width:1200px;">
+                <!-- breadcrumb -->
                 <nav class="mb-0" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 bg-white">
                         <li class="breadcrumb-item"><a href="{{route('questions_list')}}" class="text-success">
@@ -52,7 +47,6 @@
                 </nav>
             </div>
         </section>
-
 
 
         <!-- contents -->

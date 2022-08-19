@@ -94,22 +94,22 @@ main{
 }
 @keyframes fadein-alert{
     0% {
-        transform: rotateX(60deg);
-        top: 5rem;
+        transform: rotateX(30deg);
+        top: 7rem;
         opacity: 0;
     }
     20% {
         transform: rotateX(0deg);
-        top: 10rem;
+        top: 6rem;
         opacity: 1;
     }
     80% {
-        top: 10rem;
+        top: 6rem;
         opacity: 1;
         z-index: 1;
     }
     100% {
-        top: 10rem;
+        top: 6rem;
         opacity: 0;
         z-index: -10;
     }

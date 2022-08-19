@@ -2,15 +2,15 @@
 
 
 <!----- title ----->
-@section('title', 'いいね一覧' )
+@section('title', 'いいねした問題集' )
 
 <!----- breadcrumb ----->
 @section('breadcrumb')
-<li class="breadcrumb-item"><a href="" class="text-success">
+<li class="breadcrumb-item"><a href="{{route('mypage')}}" class="text-success">
     マイページ
 </a></li>
 <li class="breadcrumb-item" aria-current="page">
-    {{ 'いいね一覧' }}
+    {{ 'いいねした問題集' }}
 </li>
 @endsection
 
@@ -34,21 +34,21 @@
 @section('contents')
     <section>
         <div class="container-1200 my-5">
-            <div class="row">
-                <!-- サイドコンテンツ -->
-                <div class="d-none d-md-block" style="width:300px;">
+            <div class="d-md-flex">
 
-                    @include('Mypage.side.creater_user_info')
-
+                <!-- サイドコンテンツ[pc] -->
+                <div class="d-none d-md-block  pe-3" style="width:300px;">
+                    @include('_parts.user_info')
                 </div>
+
+
+
+
                 <!-- 中央コンテンツ -->
-                <div class="col">
+                <div class="flex-fill">
                     hoge
                 </div>
             </div>
-
-
-
         </div>
     </section>
 @endsection
