@@ -23,7 +23,9 @@ class MakeQuestionGroupController extends Controller
 
         # ユーザーの問題集情報の取得
         $question_groups = \App\Models\QuestionGroup::where('user_id',$user->id)
-        ->orderBy('created_at','desc')->get();
+        ->orderBy('created_at','desc')
+        ->paginate(10);
+
 
         # ページの表示
         return view('MakeQuestionGroup.list', compact('question_groups'));

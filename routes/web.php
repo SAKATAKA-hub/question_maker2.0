@@ -162,9 +162,9 @@ Route::middleware(['user_auth'])->group(function () {
 
     # 受検成績 //->name('results.list');
 
-    # 未読コメント(unread_comment_list)
-    Route::get('/mypage/unread_comment_list',[Controllers\MyPageController::class, 'unread_comment_list'])
-    ->name('unread_comment_list');
+    # 通知(infomation_list)
+    Route::get('/mypage/infomation_list',[Controllers\MyPageController::class, 'infomation_list'])
+    ->name('infomation_list');
 
     # プロフィール・設定変更(settings) //->name('settings');
 
@@ -176,6 +176,12 @@ Route::middleware(['user_auth'])->group(function () {
 | クリエーターページ　処理　CreaterUserController
 |--------------------------------------------------------------------------
 */
+    # クリエーターページ トップ(creater)
+    Route::get('/creater/{creater_user_id}',
+    function( $creater_user_id ){ return redirect()->route('creater.questin_group_list',$creater_user_id); })
+    ->name('creater');
+
+
     # 公開中問題集一覧[クリエーターページトップ](questin_group_list)
     Route::get('/creater/questin_group_list/{creater_user_id}',[Controllers\CreaterUserController::class, 'questin_group_list'])
     ->name('creater.questin_group_list');

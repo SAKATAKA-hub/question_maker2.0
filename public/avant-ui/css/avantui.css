@@ -522,33 +522,46 @@ h6, .h6 {
 }
 
 .alert-primary {
-  border-color: #406AFF;
-  background-color: #406AFF;
+  /* border-color: #426bff;
+  background-color: #426bff; */
+  border-color: #a8bbff;
+  background-color: #a8bbff;
 }
 
 .alert-secondary {
-  border-color: #6C757D;
-  background-color: #6C757D;
+  /* border-color: #6C757D;
+  background-color: #6C757D; */
+  border-color: #a2a9ae;
+  background-color: #a2a9ae;
+
 }
 
 .alert-success {
-  border-color: #14CFA0;
-  background-color: #14CFA0;
+    /* border-color: #14CFA0;;
+    background-color: #14CFA0; */
+    border-color: #5defca;
+    background-color: #5defca;
 }
 
 .alert-danger {
-  border-color: #ED5565;
-  background-color: #ED5565;
+    /* border-color: #ED5565;
+    background-color: #ED5565; */
+    border-color: #f7b1b8;
+    background-color: #f7b1b8;
 }
 
 .alert-warning {
-  border-color: #FFA833;
-  background-color: #FFA833;
+  /* border-color: #FFA833;
+  background-color: #FFA833; */
+  border-color: #ffd399;
+  background-color: #ffd399;
 }
 
 .alert-info {
-  border-color: #2CBED2;
-  background-color: #2CBED2;
+  /* border-color: #2CBED2;
+  background-color: #2CBED2; */
+  border-color: #81d9e4;
+  background-color: #81d9e4;
 }
 
 .alert-light {
@@ -589,6 +602,7 @@ h6, .h6 {
 
 .badge.badge-pill {
   padding: 5px 5px 5.5px;
+  border-radius: 10rem;
 }
 
 .badge-primary {

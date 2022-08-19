@@ -48,10 +48,33 @@
 
                     <div class="">
 
-                        <div class="card mb-5">
+                        {{-- <div class="card mb-5">
                             <div class="card-body">
                                 解答した問題数　平均正解率
                             </div>
+                        </div> --}}
+                        <div class="card card-body border-success text-secondary mb-5">
+                            <span class="text-success">{{Auth::user()->name}}さんの受検成績</span>
+                            <div class="d-lg-flex gap-3">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <span class="fs-5 fw-bold">受検数</span>
+                                        <span class="fs-3 ms-1">100</span>
+                                        <span>件</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <span class="fs-5 fw-bold">平均正解率</span>
+                                        <span class="fs-3 ms-1">100.0</span>
+                                        <span>点</span>
+                                    </div>
+                                </div>
+
+                                <div class="">
+                                    <span class="fs-5 fw-bold">合計学習時間</span>
+                                    <span class="fs-3 ms-1">640時間57分59秒</span>
+                                </div>
+                            </div>
+
                         </div>
 
                         <ul class="list-group list-group-flush">
@@ -61,21 +84,24 @@
 
                             <li class="list-group-item">
                                 <div class="row">
-                                    <div class="col-auto">
-                                        <div class="card-image" style="
-                                            background:url({{ asset('storage/'.$question_group->image_puth) }});
-                                            background-repeat  : no-repeat;
-                                            background-size    : cover;
-                                            background-position: center center;
-                                            width: 4rem; height: 4rem; border-radius: .5rem;
-                                        "></div>
-                                    </div>
-                                    <div class="col">
-                                        <!-- タイトル -->
-                                        <a href="{{route('results.detail', $answer_group )}}" class="fs-3" style="text-decoration:none;"
-                                        >{{ $question_group->title }}</a>
+                                    <!-- [ left ] -->
+                                    <div class="col p-0">
+                                        <a href="{{route('results.detail', $answer_group )}}"
+                                        class="fs-3 btn w-100 d-flex align-items-center">
 
+                                            <div class="card-image" style="
+                                                background:url({{ asset('storage/'.$question_group->image_puth) }});
+                                                background-repeat  : no-repeat;
+                                                background-size    : cover;
+                                                background-position: center center;
+                                                width: 4rem; height: 4rem; border-radius: .5rem;
+                                            "></div>
+
+                                            <span class="ms-3">{{ $question_group->title }}</span>
+                                        </a>
                                     </div>
+
+                                    <!-- [ right ] -->
                                     <div class="col-auto text-secondary">
                                         <div class="d-flex justify-content-between align-items-end">
                                                 <span class="">正解率</span>

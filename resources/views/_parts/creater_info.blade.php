@@ -6,9 +6,10 @@
         background-repeat  : no-repeat;
         background-size    : cover;
         background-position: center center;
-        width:20%; border-radius:50%;
+        width:50px; border-radius:50%;
         "></div>
-        <div class="text-center ms-3">
+        <div class="ms-3">
+            <p class="text-secondary mb-0" style="font-size:.6rem">クリエイター</p>
             <h5>{{$creater_user->name}}</h5>
         </div>
     </div>
@@ -17,10 +18,10 @@
     <!-- 三点セット -->
     <div class="row mb-1">
         <div class="col p-0 text-center">
-            <a href="{{route('creater.questin_group_list',$creater_user->id)}}"
+            <a href="{{route('creater',$creater_user->id)}}"
             class="btn list-group-item-action">
                 <h3 class="mb-0"><i class="bi bi-card-checklist"></i></h3>
-                <p class="text-secondary mb-0" style="font-size:.6rem;">公開問題</p>
+                <p class="text-secondary mb-0" style="font-size:.6rem;">公開問題集</p>
                 <h5 class="text-info mb-0">10000</h5>
             </a>
         </div>
@@ -51,16 +52,13 @@
     <div class="card border-1 card-body mb-3">
         <p class="text-secondary" style="font-size:.6rem">自己紹介</p>
         <p>
-            hogehogehogehoge <br>
-            hogehogehogehoge <br>
-            hogehogehogehoge <br>
-
+            {!! nl2br( e($creater_user->profile) ) !!}
         </p>
     </div>
 
     <!-- メニューリスト -->
-    <div class="card">
+    {{-- <div class="card">
         @include('_parts.user_menu')
-    </div>
+    </div> --}}
 
 </div>

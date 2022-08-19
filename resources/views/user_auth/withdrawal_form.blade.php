@@ -48,7 +48,7 @@
         placeholder="サービス向上のため、ご意見・ご感想をお聞かせください。"></textarea>
     </div>
 
-    <button type="submit" class="btn btn-outline-success">退会の確定</button>
+    <button type="submit" class="btn btn-outline-danger">退会の確定</button>
 </form>
 
 

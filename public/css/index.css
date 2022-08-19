@@ -95,21 +95,21 @@ main{
 @keyframes fadein-alert{
     0% {
         transform: rotateX(30deg);
-        top: 7rem;
+        top: 4rem;
         opacity: 0;
     }
     20% {
         transform: rotateX(0deg);
-        top: 6rem;
+        top: 2rem;
         opacity: 1;
     }
     80% {
-        top: 6rem;
+        top: 2rem;
         opacity: 1;
         z-index: 1;
     }
     100% {
-        top: 6rem;
+        top: 2rem;
         opacity: 0;
         z-index: -10;
     }

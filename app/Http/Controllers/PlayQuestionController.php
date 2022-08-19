@@ -18,8 +18,8 @@ class PlayQuestionController extends Controller
     public function list()
     {
         # ユーザーの問題集情報の取得
-        $question_groups = \App\Models\QuestionGroup::
-        orderBy('published_at','desc')->where('published_at', '<>', null)
+        $question_groups = \App\Models\QuestionGroup::orderBy('published_at','desc')
+        ->where('published_at', '<>', null) //非公開は除く
         ->paginate(10);
 
         # ページの表示

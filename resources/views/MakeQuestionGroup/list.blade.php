@@ -233,12 +233,18 @@
                             </li>
                             @empty
                             <li class="list-group-item">
-                                <div class="h2 text-secondary text-center">
+                                <div class="h2 text-secondary text-center py-5">
                                     問題集を作成しましょう！
                                 </div>
                             </li>
                             @endforelse
                         </ul>
+
+
+                        <!-- ページネーション -->
+                        <div class="mb-5 d-flex justify-content-center">
+                            {{ $question_groups->links('vendor.pagination.bootstrap-4') }}
+                        </div>
 
 
                         <!-- 問題追加ボタン -->

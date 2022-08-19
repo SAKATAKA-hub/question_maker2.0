@@ -6,9 +6,9 @@
         background-repeat  : no-repeat;
         background-size    : cover;
         background-position: center center;
-        width:20%; border-radius:50%;
+        width:50px; border-radius:50%;
         "></div>
-        <div class="text-center ms-3">
+        <div class="ms-3">
             <h5>{{Auth::user()->name}}</h5>
         </div>
     </div>
@@ -17,10 +17,10 @@
     <!-- 三点セット -->
     <div class="row mb-1">
         <div class="col p-0 text-center">
-            <a href="{{route('creater.questin_group_list',Auth::user()->id)}}"
+            <a href="{{route('creater',Auth::user()->id)}}"
                 class="btn list-group-item-action">
                 <h3 class="mb-0"><i class="bi bi-card-checklist"></i></h3>
-                <p class="text-secondary mb-0" style="font-size:.6rem;">公開問題</p>
+                <p class="text-secondary mb-0" style="font-size:.6rem;">公開問題集</p>
                 <h5 class="text-info mb-0">10000</h5>
             </a>
         </div>
