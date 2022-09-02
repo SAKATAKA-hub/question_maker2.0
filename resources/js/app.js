@@ -42,6 +42,7 @@ Vue.component('reset-pass-component', require('./components/UserAuth/ResetPassCo
 Vue.component('register-component',   require('./components/UserAuth/RegisterComponent.vue').default);
 
 /* その他のサービス */
+Vue.component('please-login-modal-component', require('./components/Service/PleaseLoginModalComponebt.vue').default);
 Vue.component('keep-question-group-component', require('./components/Service/KeepQuestionGroupComponent.vue').default);
 Vue.component('keep-creator-user-component',   require('./components/Service/KeepCreatorUserComponent.vue').default);
 Vue.component('comment-component',             require('./components/Service/CommentComponent.vue').default);

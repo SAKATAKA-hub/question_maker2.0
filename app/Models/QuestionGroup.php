@@ -86,6 +86,7 @@ class QuestionGroup extends Model
                 $text = $value['num'] ? $value['num'].$value['text'] : $text;
             }
 
+
             return $text;
         }
 
@@ -114,6 +115,7 @@ class QuestionGroup extends Model
 
             return $text;
         }
+
 
         /**
          * 全体の最大更新日時 $question_group->max_updated_at

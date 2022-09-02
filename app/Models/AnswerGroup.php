@@ -19,23 +19,19 @@ class AnswerGroup extends Model
 
 
 
+
     /*
     |--------------------------------------------------------------------------
     | リレーション
     |--------------------------------------------------------------------------
     */
         # QuestionGroupテーブルとのリレーション
-        public function question_group()
-        {
+        public function question_group(){
             return $this->belongsTo(QuestionGroup::class);
         }
 
-
-
-
         # Answerテーブルとのリレーション
-        public function answers()
-        {
+        public function answers(){
             return $this->hasMany(Answer::class);
         }
 

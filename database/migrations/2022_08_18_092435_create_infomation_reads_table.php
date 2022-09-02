@@ -30,7 +30,6 @@ class CreateInfomationReadsTable extends Migration
 
             $table->boolean('read')->comment('既読か否か')->default(0);
             $table->timestamps();
-
         });
     }
 

@@ -2,7 +2,7 @@
 
 
 <!----- title ----->
-@section('title', '作成問題集リスト' )
+@section('title', '作成した問題集リスト' )
 
 <!----- breadcrumb ----->
 @section('breadcrumb')
@@ -10,7 +10,7 @@
     マイページ
 </a></li>
 <li class="breadcrumb-item" aria-current="page">
-    {{ '作成問題集リスト' }}
+    {{ '作成した問題集リスト' }}
 </li>
 @endsection
 
@@ -140,20 +140,6 @@
                                                     </div>
                                                 </div>
                                                 <div class="list-group">
-                                                    {{-- <a class="list-group-item list-group-item-action text-secondary"
-                                                    href=""
-                                                    >問題集情報の編集</a>
-                                                    <a class="list-group-item list-group-item-action text-secondary"
-                                                    href=""
-                                                    >問題集情報の編集</a>
-                                                    <a class="list-group-item list-group-item-action text-secondary"
-                                                    href=""
-                                                    >プレイ</a>
-                                                    <a class="list-group-item list-group-item-action text-secondary"
-                                                    href="#"
-                                                    data-bs-toggle="modal" data-bs-target="#deleteQuestionGroupModal{{$key}}"
-                                                    >削除</a> --}}
-
                                                     <a href="{{ route('make_question_group.edit', $question_group->id ) }}"
                                                     class="list-group-item list-group-item-action">
                                                         <div class="d-flex justify-content-between">
@@ -190,7 +176,7 @@
                                                         <div class="d-flex justify-content-between">
                                                             <p class="mb-0">
                                                                 <i class="bi bi-trash"></i>
-                                                                <span class="ms-3">削除する</span>
+                                                                <span class="ms-3">問題集を削除する</span>
                                                             </p>
                                                             <i class="bi bi-chevron-right"></i>
                                                         </div>

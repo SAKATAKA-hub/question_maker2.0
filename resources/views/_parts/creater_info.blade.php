@@ -22,7 +22,7 @@
             class="btn list-group-item-action">
                 <h3 class="mb-0"><i class="bi bi-card-checklist"></i></h3>
                 <p class="text-secondary mb-0" style="font-size:.6rem;">公開問題集</p>
-                <h5 class="text-info mb-0">10000</h5>
+                <h5 class="text-info mb-0">{{ $creater_user->public_question_groups->count() }}</h5>
             </a>
         </div>
         <div class="col p-0 text-center">
@@ -30,7 +30,7 @@
             class="btn list-group-item-action">
                 <h3 class="mb-0"><i class="bi bi-people-fill"></i></h3>
                 <p class="text-secondary mb-0" style="font-size:.6rem;">フォロワー</p>
-                <h5 class="text-info mb-0">10000</h5>
+                <h5 class="text-info mb-0">{{ count( $creater_user->follower_users ) }}</h5>
             </a>
         </div>
         <div class="col p-0 text-center">
@@ -38,14 +38,20 @@
             class="btn list-group-item-action">
                 <h3 class="mb-0"><i class="bi bi-person-heart"></i></h3>
                 <p class="text-secondary mb-0" style="font-size:.6rem;">フォロー中</p>
-                <h5 class="text-info mb-0">10000</h5>
+                <h5 class="text-info mb-0">{{ count( $creater_user->follow_creators ) }}</h5>
             </a>
         </div>
     </div>
 
     <!-- フォローボタン -->
+
     <div class="mb-3">
-        <button class="btn btn-success btn-sm">フォローする</button>
+        @if  (Auth::check() )
+            <keep-creator-user-component
+            user_id="{{Auth::user()->id}}" creater_user_id="{{$creater_user->id}}"
+            keep="{{ \App\Models\KeepCreatorUser::where('user_id',Auth::user()->id)->where('creater_user_id',$creater_user->id)->first()->keep }}"
+            route="{{route('keep_creator_user.api')}}"/>
+        @endif
     </div>
 
     <!-- 自己紹介 -->

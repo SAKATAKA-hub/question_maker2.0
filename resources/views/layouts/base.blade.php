@@ -62,7 +62,7 @@
             @if ( session( $alert_name ) )
                 <div class="fadein-alert-box">
                     <div class="container-1200">
-                        <p class="alert {{ $alert_name }} alert-dismissible fade show" role="alert">
+                        <p class="alert {{ $alert_name }} alert-dismissible text-dark fade show" role="alert">
                             {{ session( $alert_name ) }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </p>
@@ -71,7 +71,6 @@
             @endif
 
         @endforeach
-
 
 
     </main>

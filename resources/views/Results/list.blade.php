@@ -59,19 +59,19 @@
                                 <div class="row">
                                     <div class="col-auto">
                                         <span class="fs-5 fw-bold">受検数</span>
-                                        <span class="fs-3 ms-1">100</span>
+                                        <span class="fs-3 ms-1">{{ count( Auth::user()->answer_groups ) }}</span>
                                         <span>件</span>
                                     </div>
                                     <div class="col-auto">
                                         <span class="fs-5 fw-bold">平均正解率</span>
-                                        <span class="fs-3 ms-1">100.0</span>
+                                        <span class="fs-3 ms-1">{{ Auth::user()->answer_groups->sum('score') }}</span>
                                         <span>点</span>
                                     </div>
                                 </div>
 
                                 <div class="">
                                     <span class="fs-5 fw-bold">合計学習時間</span>
-                                    <span class="fs-3 ms-1">640時間57分59秒</span>
+                                    <span class="fs-3 ms-1">640時間57分59秒(仮)</span>
                                 </div>
                             </div>
 

@@ -11,13 +11,10 @@
                 <li class="nav-item dropdown d-none d-md-block">
                     <a class="nav-link dropdown-toggle p-0" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
                         <div class="user-image border ratio ratio-1x1 d-inline-block" style="
-                        background:url({{ asset('storage/'. Auth::user()->image_puth ) }});
-                        background-repeat  : no-repeat;
-                        background-size    : cover;
-                        background-position: center center;
-                        width:1.2rem; border-radius:50%;
-                        transform: translateY(3px);
+                        background:url({{ asset('storage/'. Auth::user()->image_puth ) }}) no-repeat center center /cover;
+                        width:1.2rem; border-radius:50%; transform: translateY(3px);
                         "></div>
+
                         {{ Auth::user()->name.' さん' }}
                     </a>
                     {{-- <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -46,13 +43,11 @@
                     >
                         <!--[user image]-->
                         <div class="user-image border ratio ratio-1x1 d-inline-block" style="
-                        background:url({{ asset('storage/'. Auth::user()->image_puth ) }});
-                        background-repeat  : no-repeat;
-                        background-size    : cover;
-                        background-position: center center;
-                        width:1.8rem; border-radius:50%;
-                        transform: translateY(3px);
+                        background:url({{ asset('storage/'. Auth::user()->image_puth ) }}) no-repeat center center /cover;
+                        width:1.8rem; border-radius:50%; transform: translateY(3px);
                         "></div>
+
+
                     </a>
                 </li>
             @else

@@ -17,6 +17,7 @@
 
 <!----- meta ----->
 @section('meta')
+<meta name="csrf_token" content="{{ csrf_token() }}">
 @endsection
 
 
@@ -52,7 +53,42 @@
                     @if ( true )
 
                         <ul class="list-group">
-                            @for ($i = 0; $i < 6; $i++)
+                            @foreach ($creater_user->follower_users as $follower_user)
+                                <li class="list-group-item list-group-item-action">
+                                    <div class="row">
+                                        <!--[フォロワー画像]-->
+                                        <div class="col-auto">
+                                            <div class="user-image border border-1 ratio ratio-1x1 mb-1" style="
+                                            background:url({{ asset('storage/'.$follower_user->image_puth) }});
+                                            background-repeat  : no-repeat;
+                                            background-size    : cover;
+                                            background-position: center center;
+                                            width:50px; border-radius:50%;
+                                            "></div>
+                                        </div>
+
+                                        <!--[フォロワー名前]-->
+                                        <div class="col">
+                                            <div class="d-flex align-items-center h-100">
+                                                <h5 class="mb-0">{{$follower_user->name}}</h5>
+                                            </div>
+                                        </div>
+
+                                        <!--[フォローボタン]-->
+                                        <div class="col-auto">
+                                            @if  (Auth::check() )
+                                                <keep-creator-user-component
+                                                user_id="{{Auth::user()->id}}" creater_user_id="{{$follower_user->id}}"
+                                                keep="{{ \App\Models\KeepCreatorUser::where('user_id',Auth::user()->id)->where('creater_user_id',$follower_user->id)->first()->keep }}"
+                                                route="{{route('keep_creator_user.api')}}"/>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </li>
+
+                            @endforeach
+
+                            {{-- @for ($i = 0; $i < 6; $i++)
                             <li class="list-group-item list-group-item-action">
                                 <div class="row">
                                     <!--[フォロワー画像]-->
@@ -81,7 +117,7 @@
                                     </div>
                                 </div>
                             </li>
-                            @endfor
+                            @endfor --}}
                         </ul>
 
                     @else

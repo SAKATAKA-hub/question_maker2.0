@@ -8,9 +8,16 @@
             <button type="submit" class="btn btn-primary btn-sm">{{btn_text}}</button>
         </form>
 
-        <button class="btn btn-sm"
+        <button  v-if=" user_id "
+        class="btn btn-sm" @click="click" type="button"
         :class="{'btn-success':inputs.keep, 'text-success fw-bold':!inputs.keep}"
-        @click="click" type="button">{{btn_text}}</button>
+        >{{btn_text}}</button>
+
+        <button  v-else
+        data-bs-toggle="modal" data-bs-target="#PleaseLoginModal"
+        class="btn btn-sm" type="button"
+        :class="{'btn-success':inputs.keep, 'text-success fw-bold':!inputs.keep}"
+        >{{btn_text}}</button>
 
 
     </div>

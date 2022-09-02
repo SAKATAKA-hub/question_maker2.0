@@ -99,27 +99,58 @@ class ServiceController extends Controller
     */
 
         /**
-         * 問題集へのコメント[投稿](comment_post_api)
+         * 問題集へのコメント[投稿](comment_api)
          * @param \Illuminate\Http\Request $request
          * @return JSON
         */
-        public function comment_post_api(Request $request)
+        public function comment_api(Request $request)
         {
-            # 入力内容の修正
-            $input = $request->only([
-                'user_id','gest_name','gest_email','question_group_id','body',
-            ]);
+            # コメントの投稿
+            if( $request->body )
+            {
+                // 入力内容の修正
+                $input = $request->only([
+                    'user_id','question_group_id','body',
+                ]);
 
-            # 投稿内容をDBに保存
-            $comment = new \App\Models\QuestionGroupComment($input);
-            $comment->save();
+                // 投稿内容をDBに保存
+                $comment = new \App\Models\QuestionGroupComment($input);
+                $comment->save();
+            }
+
+
+            # コメント一覧の取得
+            $comments = \App\Models\QuestionGroupComment::CommentListAPI( $request->question_group_id );
 
 
             # JSONを返す
-            return response()->json(['comment' => 'ok',]);
+            return response()->json(['comments' => $comments,]);
         }
-        # 問題集へのコメント[一覧](comment_list_api)
-        # 問題集へのコメント[削除](comment_destroy_api)
+
+
+
+
+        /**
+         * 問題集へのコメント[削除(非表示)](comment_destroy_api)
+         * @param \Illuminate\Http\Request $request
+         * @return JSON
+        */
+        public function comment_destroy_api(Request $request)
+        {
+            # 指定されたコメントを非表示登録する
+            $destroy_comment = \App\Models\QuestionGroupComment::find( $request->comment_id );
+            $destroy_comment->update(['is_hidden' => 1]);
+
+
+            # コメント一覧の取得
+            $comments = \App\Models\QuestionGroupComment::CommentListAPI( $request->question_group_id );
+
+
+            # JSONを返す
+            return response()->json(['comments' => $comments,]);
+        }
+
+
 
 
     /*

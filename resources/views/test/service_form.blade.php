@@ -31,49 +31,106 @@
 <section>
     <div class="container-1200 my-5">
 
-        <div class="card card-body">
+        @php
+            $user_id =  Auth::check() ? Auth::user()->id : '' ;
+            $user_id =  1;
+
+
+
+
+            $question_group_id =1;
+
+            $keep_question_group =
+            \App\Models\KeepQuestionGroup
+            ::where('user_id',$user_id)
+            ->where('question_group_id',$question_group_id)->first();
+
+
+            $keep_creator_user =
+            \App\Models\KeepCreatorUser
+            ::where('user_id',$user_id)
+            ->where('creater_user_id',1)->first();
+
+        @endphp
+
+
+        <!-- Please Login Modal -->
+        <please-login-modal-component login_form_route="{{ route('user_auth.login_form') }}"
+        ></please-login-modal-component>
+
+
+
+        <div class="card card-body mb-3">
 
             <h5>問題集のお気に入り登録</h5>
+
             <!-- お気に入りボタン -->
-            <keep-question-group-component
-            user_id="1" question_group_id="1"
-            keep="{{ \App\Models\KeepQuestionGroup::where('user_id',1)->where('question_group_id',1)->first()->keep }}"
-            route="{{route('keep_question_group.api')}}"/>
+            <div class="d-flex align-items-center">
+                <keep-question-group-component user_id="{{$user_id}}" question_group_id="{{$question_group_id}}"
+                keep="{{ $keep_question_group ? $keep_question_group->keep : '' }}"
+                route="{{route('keep_question_group.api')}}"></keep-question-group-component>
+
+                <span class="ms-3">←ログイン済みイイネボタン</span>
+            </div>
+
+            <!-- お気に入りボタン ログアウト中 -->
+            <div class="d-flex align-items-center">
+                <keep-question-group-component user_id="" question_group_id="{{$question_group_id}}" keep=""
+                route="{{route('keep_question_group.api')}}"></keep-question-group-component>
+
+                <span class="ms-3">←ログインしていない時のイイネボタン</span>
+            </div>
+
 
         </div>
         <div class="card card-body">
 
             <h5>クリエーターユーザーのキープ[フォロー]</h5>
+
             <!-- フォローボタン -->
-            <keep-creator-user-component
-            user_id="1" creater_user_id="1"
-            keep="{{ \App\Models\KeepCreatorUser::where('user_id',1)->where('creater_user_id',1)->first()->keep }}"
-            route="{{route('keep_creator_user.api')}}"/>
+            <div class="d-flex align-items-center">
+                <keep-creator-user-component user_id="{{$user_id}}" creater_user_id="1"
+                keep="{{ $keep_creator_user ? $keep_creator_user->keep : '' }}"
+                route="{{route('keep_creator_user.api')}}"></keep-creator-user-component>
+
+                <span class="ms-3">←ログイン済みフォローボタン</span>
+            </div>
+
+
+            <!-- フォローボタン ログアウト中 -->
+            <div class="d-flex align-items-center">
+                <keep-creator-user-component user_id="" creater_user_id="1" keep=""
+                route="{{route('keep_creator_user.api')}}"></keep-creator-user-component>
+
+                <span class="ms-3">←ログインしていない時のフォローボタン</span>
+            </div>
+
 
         </div>
-        <div class="card card-body">
+        <div class="card card-body  border-0">
+
+
             <h5>問題集へのコメント</h5>
-            <form action="{{route('comment.post.api')}}" method="POST">
+
+
+            <!-- コメントリストコンポーネントコンポーネント -->
+            <comment-component
+            route_comment_api="{{        route('comment.api')}}"
+            route_comment_destory_api="{{route('comment.destroy.api')}}"
+            user_id="{{$user_id}}" question_group_id="{{$question_group_id}}"
+            ></comment-component>
+
+
+
+
+
+
+
+            <form action="{{route('comment.api')}}" method="POST">
                 @csrf
-                <input type="hidden" name="user_id" value="0">
+                <input type="hidden" name="user_id" value="1">
                 <input type="hidden" name="question_group_id" value="1">
 
-                <!-- ゲスト 氏名 -->
-                <div class="mb-3">
-                    <label for="comment_name" class="form-label">
-                        氏名<small class="text-danger ms-3">※必須</small>
-                    </label>
-                    <input type="text" name="gest_name" class="form-control" id="comment_name"
-                    placeholder="山田　太郎" maxlength="50" required>
-                </div>
-                <!-- ゲスト メールアドレス -->
-                <div class="mb-3">
-                    <label for="comment_email" class="form-label">
-                        メールアドレス<small class="text-danger ms-3">※必須</small>
-                    </label>
-                    <input type="email" name="gest_email" class="form-control" id="comment_email"
-                    placeholder="yamada@mail.co.jp" maxlength="50" required>
-                </div>
                 <!-- 本文 -->
                 <div class="mb-3">
                     <label for="comment_body" class="form-label">
@@ -85,12 +142,14 @@
 
                 <button type="submit" class="btn btn-primary">投稿</button>
             </form>
-            <comment-component/>
+
 
 
 
         </div>
         <div class="card card-body">
+
+
             <h5>規約違反問題集の通報</h5>
             <form action="{{route('violation_report.post.api')}}" method="POST">
                 @csrf

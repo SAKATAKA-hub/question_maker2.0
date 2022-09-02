@@ -1,5 +1,9 @@
 <div class="">
 
+    <!-- Please Login Modal -->
+    <please-login-modal-component login_form_route="{{ route('user_auth.login_form') }}"
+    ></please-login-modal-component>
+
 
     <div class="row">
     @foreach ($question_groups as $i => $question_group)
@@ -89,6 +93,17 @@
 
                 </div>
 
+            </div>
+            <div class="">
+                <!-- お気に入りボタン -->
+                @php
+                    $user_id = Auth::check() ? Auth::user()->id : '' ;
+                @endphp
+                <keep-question-group-component
+                user_id="{{$user_id}}" question_group_id="{{$question_group->id}}"
+                keep="{{\App\Models\KeepQuestionGroup::isKeep($user_id, $question_group->id)}}"
+                route="{{route('keep_question_group.api')}}"
+                ></keep-question-group-component>
             </div>
 
             <!-- Modal -->

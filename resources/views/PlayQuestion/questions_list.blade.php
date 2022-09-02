@@ -17,6 +17,8 @@
     <link href="{{ asset('avant-ui/css/avantui.css') }}" rel="stylesheet">
     <link href="{{ asset('css/index.css') }}" rel="stylesheet">
 
+    <meta name="csrf_token" content="{{ csrf_token() }}">
+
 
     <style>
 
@@ -56,7 +58,7 @@
     <header>
         @include('_parts.header')
     </header>
-    <main class="">
+    <main id="app" class="">
         <section class="top">
             <!-- 背景 -->
             <div class="top_bg_container">
@@ -374,7 +376,6 @@
 
     <!-- JavaScript -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('avant-ui/js/avantui.js') }}" defer></script>
 
 
 </body>

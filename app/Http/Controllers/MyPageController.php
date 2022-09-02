@@ -15,13 +15,17 @@ class MyPageController extends Controller
     {
         $user = \Illuminate\Support\Facades\Auth::user();
 
-        # クリエイターの問題集情報の取得
-        $question_groups = \App\Models\QuestionGroup::where('user_id',$user->id)
-        ->where('published_at', '<>', null) //非公開は除く
-        ->orderBy('published_at','desc')
+        # いいねした問題集のkeepを取得
+        $keep_question_groups =
+        \App\Models\KeepQuestionGroup::where('user_id',$user->id)
+        ->where('keep', 1 )->orderBy('created_at','desc')
         ->paginate(10);
 
-        return view('Mypage.like_list',compact('user','question_groups'));
+        /*
+        | # 問題集の表示
+        | {{ $keep_question_group->question_group }}
+        */
+        return view('Mypage.like_list',compact('user','keep_question_groups'));
     }
 
 

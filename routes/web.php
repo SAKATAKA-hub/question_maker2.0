@@ -24,14 +24,6 @@ Route::get('/', function(){ return redirect()->route('questions_list'); })
     Route::get('questions_search_list', [Controllers\PlayQuestionController::class, 'questions_search_list'])
     ->name('questions_search_list');
 
-    # 自分で作成した問題集一覧ページの表示(my_list)
-    # 他者が作成した問題集一覧ページの表示(others_list)
-    # 問題集の一覧表示・キーワード検索(seached_list)
-
-    # 問題開始の準備(befor_play_question)
-    // Route::post('/befor_play_question', [Controllers\PlayQuestionController::class, 'befor_play_question'])
-    // ->name('befor_play_question');
-
     # 問題を解く(play_question)
     Route::get('/play_question/{question_group}',
     function( \App\Models\QuestionGroup $question_group ){ return view('PlayQuestion.play_question', compact('question_group')); })
@@ -245,11 +237,22 @@ Route::middleware(['user_auth'])->group(function () {
 
     # 問題集へのコメント
 
+        # 問題集へのコメント[一覧・投稿](comment/api)
+        Route::post('/comment/api', [Controllers\ServiceController::class, 'comment_api'])
+        ->name('comment.api');
+
         # 問題集へのコメント[投稿](comment/post/api)
-        Route::post('/comment/post/api', [Controllers\ServiceController::class, 'comment_post_api'])
-        ->name('comment.post.api');
+        // Route::post('/comment/post/api', [Controllers\ServiceController::class, 'comment_post_api'])
+        // ->name('comment.post.api');
+
         # 問題集へのコメント[一覧](comment/list/api)
-        # 問題集へのコメント[削除](comment/destroy/api)
+        // Route::post('/comment/list/api', [Controllers\ServiceController::class, 'comment_list_api'])
+        // ->name('comment.list.api');
+
+        # 問題集へのコメント[削除(非表示)](comment/destroy/api)
+        Route::patch('/comment/destroy/api', [Controllers\ServiceController::class, 'comment_destroy_api'])
+        ->name('comment.destroy.api');
+
 
     # 規約違反問題集の通報
 
@@ -395,7 +398,9 @@ Route::get('/test/question_detail', function(){ return view( 'test.question_deta
 ->name('test.question_detail');
 
 # その他サービスのテスト
-Route::get('/test/service_form', function(){ return view( 'test.service_form' ); })
+Route::get('/test/service_form', function(){
+    return view( 'test.service_form');
+})
 ->name('test.service_form');
 
 

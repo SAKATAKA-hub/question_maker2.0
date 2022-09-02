@@ -36,6 +36,9 @@ class CreaterUserController extends Controller
         # クリエイター情報
         $creater_user = \App\Models\User::find( $creater_user_id );
 
+        // dd(
+        //     $creater_user->follower_users
+        // );
         return view('CreaterUser.follower_list',compact('creater_user'));
     }
 

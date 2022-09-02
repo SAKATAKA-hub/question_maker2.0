@@ -313,9 +313,9 @@ class UserAuthController extends Controller
 
         # ログアウトの処理
         $user = Auth::user();
-        // Auth::logout(); //ユーザーセッションの削除
-        // $request->session()->invalidate(); //全セッションの削除
-        // $request->session()->regenerateToken(); //セッションの再作成(二重送信の防止)
+        Auth::logout(); //ユーザーセッションの削除
+        $request->session()->invalidate(); //全セッションの削除
+        $request->session()->regenerateToken(); //セッションの再作成(二重送信の防止)
 
 
         # アンケートの入力

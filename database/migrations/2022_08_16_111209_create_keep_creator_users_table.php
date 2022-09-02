@@ -27,7 +27,6 @@ class CreateKeepCreatorUsersTable extends Migration
             $table->integer('creater_user_id')->comment('回答の種類');
             $table->boolean('keep')->comment('キープ中か否か')->default(1);
             $table->timestamps();
-
         });
     }
 

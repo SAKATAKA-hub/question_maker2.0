@@ -28,14 +28,12 @@ class Question extends Model
     |--------------------------------------------------------------------------
     */
         # QuestionOptionテーブルとのリレーション
-        public function question_options()
-        {
+        public function question_options(){
             return $this->hasMany(QuestionOption::class);
         }
 
         # QuestionGroupテーブルとのリレーション
-        public function question_group()
-        {
+        public function question_group(){
             return $this->belongsTo(QuestionGroup::class);
         }
 

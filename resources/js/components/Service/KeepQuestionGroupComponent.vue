@@ -8,14 +8,28 @@
             <button type="submit" class="btn btn-primary btn-sm">お気に入り</button>
         </form>
 
+        <!-- ログインしているとき => いいねボタン -->
+        <button v-if=" user_id "
+        class="like_btn btn btn-sm" :class="{'show':!inputs.keep}"   @click="click" type="button">
+            <div class="icon w-100" :class="{'animation_icon':animation_icon}">
+                <i class="fs-5 bi bi-heart"></i>
+                <i class="fs-5 bi bi-heart-fill text-danger"></i>
+            </div>
+            <div style="font-size:.6rem;">いいね</div>
+        </button>
 
-        <button class="like_btn btn btn-sm" :class="{'show':!inputs.keep}" @click="click" type="button">
+        <!-- ログインしていないとき => ログインモーダルボタン -->
+        <button v-else
+        data-bs-toggle="modal" data-bs-target="#PleaseLoginModal"
+        class="like_btn btn btn-sm" :class="{'show':!inputs.keep}" type="button">
             <div class="icon w-100">
                 <i class="fs-5 bi bi-heart"></i>
                 <i class="fs-5 bi bi-heart-fill text-danger"></i>
             </div>
             <div style="font-size:.6rem;">いいね</div>
         </button>
+
+
 
     </div>
 </template>
@@ -26,6 +40,7 @@
 
                 test: false,
 
+                animation_icon: false,
 
                 inputs:{
                     _token: document.querySelector('[name="csrf_token"]').content,
@@ -50,6 +65,8 @@
             this.inputs.question_group_id = this.question_group_id;
             this.inputs.keep = (this.keep==1) ? 0 : 1 ;// keepの状態が１のとき、送信内容は0（状態と送信内容は逆に登録）
 
+            // console.log( this.user_id );
+
         },
         methods:{
 
@@ -66,8 +83,8 @@
                 })
                 .then(json => {
                     // 表示の切り替え
-                    this.inputs.keep = !this.inputs.keep ? 1 : 0 ;
-
+                    this.inputs.keep    = !this.inputs.keep ? 1 : 0 ;
+                    this.animation_icon = !this.inputs.keep ? true : false ;
                     // console.log( json );
                 })
 
@@ -96,10 +113,12 @@
         position: absolute;
         width: 100%;
         top:0;left:0;
-        animation: icon .5s;
         transform-origin: center center;
     }
-    @keyframes icon{
+    .animation_icon{
+        animation: animation_icon .5s;
+    }
+    @keyframes animation_icon{
         0% {
             transform: scale(1);
         }

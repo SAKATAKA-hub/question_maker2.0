@@ -30,6 +30,8 @@ class ResultsController extends Controller
     }
 
 
+
+
     /**
      * 詳細成績ページの表示(detail)
      *  ※ログインしていない人用の成績表示法に合わせる。

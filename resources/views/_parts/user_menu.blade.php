@@ -3,8 +3,8 @@
     class="list-group-item list-group-item-action">
         <div class="d-flex justify-content-between">
             <p class="mb-0">
-                <i class="bi bi-person-fill"></i>
-                <span class="ms-3">マイページ</span>
+                <i class="bi bi-journals"></i>
+                <span class="ms-3">作成した問題集</span>
             </p>
             <i class="bi bi-chevron-right"></i>
         </div>
