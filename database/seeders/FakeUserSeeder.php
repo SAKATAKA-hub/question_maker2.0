@@ -14,6 +14,7 @@ class FakeUserSeeder extends Seeder
      */
     public function run()
     {
+
         $user = new \App\Models\User([
             'name' => 'Next Arrow',
             'email' => 'nextarrow.line@gmail.com',
@@ -28,12 +29,16 @@ class FakeUserSeeder extends Seeder
             'image' => 'site/image/sakai.png',
         ]);
         $user->save();
+
+        /* ログインしていないユーザー用アカウント */
         $user = new \App\Models\User([
-            'name' => '山田　太郎',
+            'name' => 'gest user',
             'email' => 'contact@next-arrow.co.jp',
             'password' => Hash::make('password'),
         ]);
         $user->save();
+
     }
+
 
 }

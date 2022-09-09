@@ -365,12 +365,7 @@
 
     </main>
     <footer>
-        <section class="bg-dark">
-            <div class="section_container text-white text-center" style="font-size:.8rem;">
-                <p class="d-inline-block m-0">Copyright &copy; Next Arrow Inc.</p>
-                <p class="d-inline-block m-0">All Rights Reserved.</p>
-            </div>
-        </section>
+        @include('_parts.footer')
     </footer>
 
 

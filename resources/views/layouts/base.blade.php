@@ -27,11 +27,9 @@
 <body class="bg-white">
     <header>
         @include('_parts.header')
-    </header>
-    <main>
 
         <!-- 見出しタイトル -->
-        <section class="border-bottom border-1">
+        <section class="border-bottom border-1 bg-white">
             <div class="container-1200 pb-0">
 
                 <h2 class="text-secondary fw-bold">@yield('title')</h2>
@@ -48,6 +46,11 @@
             </div>
         </section>
 
+    </header>
+    <main
+    {{-- style="background:url( {{ asset('storage/site/image/22636100.jpg') }} );
+    background-repeat  : repeat;" --}}
+    >
 
         <!-- contents -->
         <div id="app">
@@ -74,10 +77,8 @@
 
 
     </main>
-    <footer class="bg-dark p-3 text-center text-white">
-
-        <p class="m-0 ">&copy; Next Arrow Inc. All Rights Reserved.</p>
-
+    <footer>
+        @include('_parts.footer')
     </footer>
 
 

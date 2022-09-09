@@ -78,8 +78,8 @@
                     body: new URLSearchParams( this.inputs ),
                 })
                 .then(response => {
-                    if(!response.ok){ alert('データ送信エラーが発生しました。'); }
-                    // return response.json();
+                    if(!response.ok){ throw new Error('送信エラー'); }
+                    return response.json();
                 })
                 .then(json => {
                     // 表示の切り替え
@@ -87,7 +87,9 @@
                     this.animation_icon = !this.inputs.keep ? true : false ;
                     // console.log( json );
                 })
-
+                .catch(err=>{
+                    alert('データ送信エラーが発生しました。');
+                })
 
             },
         }

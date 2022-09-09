@@ -125,8 +125,26 @@
     <section>
         <div class="container-1200 my-3">
 
+            <!--
+                // Please Login Modal //
+                利用：フォローボタン・いいねボタン・通報ボタン・コメントコンポーネント
+            -->
+            <please-login-modal-component login_form_route="{{ route('user_auth.login_form') }}"
+            ></please-login-modal-component>
+            @php
+                $user_id = Auth::check() ? Auth::user()->id : '' ;
+            @endphp
+
+
             <div class="card card-body mb-3">
                 <h5>問題集の作成者情報(仮)</h5>
+
+                <!-- フォローボタン -->
+                <div>
+                    <keep-creator-user-component user_id="{{$user_id}}" creater_user_id="1"
+                    keep="{{\App\Models\KeepCreatorUser::isKeep($user_id, $question_group->user->id)}}"
+                    route="{{route('keep_creator_user.api')}}"></keep-creator-user-component>
+                </div>
             </div>
 
             <div class="card card-body mb-3">
@@ -136,24 +154,50 @@
                 </p>
 
                 <div class="d-flex align-items-center gap-3">
+                    <!-- お気に入りボタン -->
                     <div>
-                        <!-- お気に入りボタン -->
-                        @php
-                            $user_id = Auth::check() ? Auth::user()->id : '' ;
-                        @endphp
                         <keep-question-group-component
                         user_id="{{$user_id}}" question_group_id="{{$question_group->id}}"
                         keep="{{\App\Models\KeepQuestionGroup::isKeep($user_id, $question_group->id)}}"
                         route="{{route('keep_question_group.api')}}"
                         ></keep-question-group-component>
                     </div>
+
+                    <!-- コメントボタン -->
+                    @if( $user_id )
+                        <div>
+                            <button class="btn btn-sm"
+                            data-bs-toggle="offcanvas" data-bs-target="#commentOffcanvas" aria-controls="commentOffcanvas"
+                            >
+                                <div class="fs-5">
+                                    <i class="bi bi-chat-square-text"></i>
+                                </div>
+                                <div style="font-size:.6rem;">コメント</div>
+                            </button>
+                        </div>
+                    @else
+                        <div>
+                            <button class="btn btn-sm"
+                            data-bs-toggle="modal" data-bs-target="#PleaseLoginModal"                        >
+                                <div class="fs-5">
+                                    <i class="bi bi-chat-square-text"></i>
+                                </div>
+                                <div style="font-size:.6rem;">コメント</div>
+                            </button>
+                        </div>
+                    @endif
+
+
+
+                    <!-- 通報ボタン -->
                     <div>
-                        <button class="btn border text-secondary">通 報</button>
+                        <violation-report-component user_id="{{$user_id}}" question_group_id="{{$question_group->id}}"
+                        route="{{route('violation_report.post.api')}}"></violation-report-component>
                     </div>
                 </div>
             </div>
 
-            <!-- コメントリストコンポーネントコンポーネント -->
+            <!-- コメントリストコンポーネント -->
             <div>
                 @php
                     $user_id = Auth::check() ? Auth::user()->id : '' ;

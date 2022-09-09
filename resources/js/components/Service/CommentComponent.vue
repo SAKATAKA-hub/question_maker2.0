@@ -160,33 +160,57 @@
                     <!-- Comment Offcanvas -->
                     <div class="offcanvas offcanvas-bottom"  style="height:10rem;"
                     tabindex="-1" id="commentOffcanvas" aria-labelledby="commentOffcanvasLabel">
-                        <div class="offcanvas-header">
+                        <!-- <div class="offcanvas-header">
                             <h5 class="offcanvas-title" id="commentOffcanvasLabel">
                                 <i class="bi bi-chat-square-text"></i>
                                 <span class="ms-2">コメントを書く</span>
                             </h5>
                             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                        </div>
-                        <div class="offcanvas-body py-0">
-                            <div class="row">
-                                <!--[コメント入力テキストエリア]-->
-                                <div class="col p-0">
-                                    <textarea class="form-control bg-white border-0" placeholder="コメントを入力"
-                                    v-model="inputs.body" name="body" :maxlength="body_maxlength"></textarea>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="text-center">
-                                        <!--[入力中文字数の表示]-->
-                                        <label class="form-label">{{ inputs.body.length +'/'+ body_maxlength }}</label>
-                                    </div>
+                        </div> -->
 
-                                    <button class="btn btn-success" type="button"
-                                    data-bs-dismiss="offcanvas" aria-label="Close"
-                                    @click="comment_api()"
-                                    >送信</button>
-                                </div>
+
+                        <div class="offcanvas-body small  position-relative">
+
+                            <!-- close btn -->
+                            <div class="p-3 position-absolute top-0 end-0">
+                                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
+
+                            <!--title-->
+                            <div class="mx-auto mb-3" style="max-width:1200px;">
+                                <h5 class="offcanvas-title" id="commentOffcanvasLabel">
+                                    <i class="bi bi-chat-square-text"></i>
+                                    <span class="ms-2">コメントを書く</span>
+                                </h5>
+                            </div>
+
+                            <!--body-->
+                            <div class="mx-auto" style="max-width:1200px;">
+                                <div class="row">
+                                    <!--[コメント入力テキストエリア]-->
+                                    <div class="col p-0">
+                                        <textarea class="form-control bg-white border-0" placeholder="コメントを入力"
+                                        v-model="inputs.body" name="body" :maxlength="body_maxlength"></textarea>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="text-center">
+                                            <!--[入力中文字数の表示]-->
+                                            <label class="form-label">{{ inputs.body.length +'/'+ body_maxlength }}</label>
+                                        </div>
+
+                                        <button class="btn btn-success" type="button"
+                                        data-bs-dismiss="offcanvas" aria-label="Close"
+                                        @click="comment_api()"
+                                        >送信</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
                         </div>
+
+                        <!-- <div class="offcanvas-body py-0">
+                        </div> -->
                     </div>
                 </li>
 
@@ -269,7 +293,6 @@
                     // テキストエリアの入力をクリアする
                     this.inputs.body = '';
 
-
                     // console.log( json );
                 })
 
@@ -295,7 +318,7 @@
                     body: new URLSearchParams( inputs ),
                 })
                 .then(response => {
-                    if(!response.ok){ alert('データ送信エラーが発生しました。'); }
+                    if(!response.ok){ throw new Error('送信エラー'); }
                     return response.json();
                 })
                 .then(json => {
@@ -308,8 +331,9 @@
 
                     console.log( json );
                 })
-
-                // console.log(inputs);
+                .catch(err=>{
+                    alert('データ送信エラーが発生しました。');
+                })
             },
 
         }

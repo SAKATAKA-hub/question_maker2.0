@@ -6475,6 +6475,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   /*
       [ memo ]
@@ -6566,7 +6590,7 @@ __webpack_require__.r(__webpack_exports__);
         body: new URLSearchParams(inputs)
       }).then(function (response) {
         if (!response.ok) {
-          alert('データ送信エラーが発生しました。');
+          throw new Error('送信エラー');
         }
 
         return response.json();
@@ -6576,7 +6600,9 @@ __webpack_require__.r(__webpack_exports__);
 
         _this2.inputs.body = '';
         console.log(json);
-      }); // console.log(inputs);
+      })["catch"](function (err) {
+        alert('データ送信エラーが発生しました。');
+      });
     }
   }
 });
@@ -6632,8 +6658,7 @@ __webpack_require__.r(__webpack_exports__);
       "default": 'prop2'
     }
   },
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  mounted: function mounted() {// console.log('Component mounted.')
   },
   methods: {
     countUp: function countUp() {
@@ -6728,13 +6753,16 @@ __webpack_require__.r(__webpack_exports__);
         body: new URLSearchParams(this.inputs)
       }).then(function (response) {
         if (!response.ok) {
-          alert('データ送信エラーが発生しました。');
-        } // return response.json();
+          throw new Error('送信エラー');
+        }
 
+        return response.json();
       }).then(function (json) {
         // 表示の切り替え
         _this.inputs.keep = !_this.inputs.keep ? 1 : 0;
         _this.btn_text = !_this.inputs.keep ? 'フォロー中' : 'フォローする'; // console.log( json );
+      })["catch"](function (err) {
+        alert('データ送信エラーが発生しました。');
       });
     }
   }
@@ -6836,13 +6864,16 @@ __webpack_require__.r(__webpack_exports__);
         body: new URLSearchParams(this.inputs)
       }).then(function (response) {
         if (!response.ok) {
-          alert('データ送信エラーが発生しました。');
-        } // return response.json();
+          throw new Error('送信エラー');
+        }
 
+        return response.json();
       }).then(function (json) {
         // 表示の切り替え
         _this.inputs.keep = !_this.inputs.keep ? 1 : 0;
         _this.animation_icon = !_this.inputs.keep ? true : false; // console.log( json );
+      })["catch"](function (err) {
+        alert('データ送信エラーが発生しました。');
       });
     }
   }
@@ -6940,31 +6971,427 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      title: '通報',
-      body: '本文ほげほげ',
-      count: 0
+      test: false,
+      // 報告済みかどうか
+      reported: false,
+      // 入力できる最大文字数
+      body_maxlength: 140,
+      inputs: {
+        _token: document.querySelector('[name="csrf_token"]').content,
+        user_id: '',
+        question_group_id: '',
+        body: ''
+      }
     };
   },
   props: {
-    //最初に表示する画像のパス
-    prop1: {
+    route: {
       type: String,
-      "default": 'prop1'
+      "default": ''
     },
-    prop2: {
+    user_id: {
       type: String,
-      "default": 'prop2'
+      "default": ''
+    },
+    question_group_id: {
+      type: String,
+      "default": ''
+    },
+    is_reported: {
+      type: String,
+      "default": ''
     }
   },
   mounted: function mounted() {
-    console.log('Component mounted.');
+    this.inputs.user_id = this.user_id;
+    this.inputs.question_group_id = this.question_group_id;
   },
   methods: {
-    countUp: function countUp() {
-      this.count++;
+    click: function click() {
+      var _this = this;
+
+      // [ 非同期通信 ]
+      fetch(this.route, {
+        method: 'POST',
+        body: new URLSearchParams(this.inputs)
+      }).then(function (response) {
+        if (!response.ok) {
+          throw new Error('送信エラー');
+        }
+
+        return response.json();
+      }).then(function (json) {
+        // 表示の切り替え
+        _this.reported = true; // console.log( json );
+      })["catch"](function (err) {
+        alert('データ送信エラーが発生しました。');
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Service/ViolationReportListComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Service/ViolationReportListComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      test: false,
+      // データリスト
+      data_list: [
+        /*
+            // 日時
+            'date': '',
+             // 報告情報
+            'report':         [],
+             //報告者情報
+            'reported_user':  [],
+             // 問題集情報
+            'question_group': [],
+             // 作成者情報
+            'creater_user':   [],
+         */
+      ],
+      inputs: {
+        app_key: ''
+      }
+    };
+  },
+  props: {
+    route_list: {
+      type: String,
+      "default": ''
+    },
+    //一覧表示
+    route_responsed: {
+      type: String,
+      "default": ''
+    },
+    //対応済変更
+    rote_destoroy: {
+      type: String,
+      "default": ''
+    },
+    //削除
+    app_key: {
+      type: String,
+      "default": ''
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.inputs.app_key = this.app_key; // [ 非同期通信 ]
+
+    fetch(this.route_list, {
+      method: 'POST',
+      body: new URLSearchParams(this.inputs)
+    }).then(function (response) {
+      if (!response.ok) {
+        throw new Error('送信エラー');
+      }
+
+      return response.json();
+    }).then(function (json) {
+      // データの保存
+      _this.data_list = json.data_list; // console.log( json );
+    })["catch"](function (err) {
+      alert('通信エラーが発生しました。再読みを行います。');
+      location.reload();
+    });
+  },
+  methods: {
+    /* 対応状況の変更 */
+    changeResponsed: function changeResponsed(dKey) {
+      var _this2 = this;
+
+      // params
+      var inputs = {
+        _method: 'patch',
+        app_key: this.app_key,
+        id: this.data_list[dKey].report.id,
+        responsed: this.data_list[dKey].report.responsed
+      }; // [ 非同期通信 ]
+
+      fetch(this.route_responsed, {
+        method: 'POST',
+        body: new URLSearchParams(inputs)
+      }).then(function (response) {
+        if (!response.ok) {
+          throw new Error('送信エラー');
+        }
+
+        return response.json();
+      }).then(function (json) {
+        // 保存状態の変更
+        console.log(json);
+        console.log(inputs);
+      })["catch"](function (err) {
+        alert('通信エラーが発生しました。');
+        _this2.data_list[dKey].report.responsed = (inputs.responsed + 1) % 2;
+      });
+    },
+
+    /* 報告の削除 */
+    destory: function destory(id) {
+      var _this3 = this;
+
+      // params
+      var inputs = {
+        _method: 'delete',
+        app_key: this.app_key,
+        id: id
+      }; // [ 非同期通信 ]
+
+      fetch(this.rote_destoroy, {
+        method: 'POST',
+        body: new URLSearchParams(inputs)
+      }).then(function (response) {
+        if (!response.ok) {
+          throw new Error('送信エラー');
+        }
+
+        return response.json();
+      }).then(function (json) {
+        // データの保存
+        _this3.data_list = json.data_list; // console.log( json );
+      })["catch"](function (err) {
+        alert('通信エラーが発生しました。');
+      });
     }
   }
 });
@@ -7844,6 +8271,7 @@ Vue.component('keep-question-group-component', (__webpack_require__(/*! ./compon
 Vue.component('keep-creator-user-component', (__webpack_require__(/*! ./components/Service/KeepCreatorUserComponent.vue */ "./resources/js/components/Service/KeepCreatorUserComponent.vue")["default"]));
 Vue.component('comment-component', (__webpack_require__(/*! ./components/Service/CommentComponent.vue */ "./resources/js/components/Service/CommentComponent.vue")["default"]));
 Vue.component('violation-report-component', (__webpack_require__(/*! ./components/Service/ViolationReportComponent.vue */ "./resources/js/components/Service/ViolationReportComponent.vue")["default"]));
+Vue.component('violation-report-list-component', (__webpack_require__(/*! ./components/Service/ViolationReportListComponent.vue */ "./resources/js/components/Service/ViolationReportListComponent.vue")["default"]));
 Vue.component('contact-component', (__webpack_require__(/*! ./components/Service/ContactComponent.vue */ "./resources/js/components/Service/ContactComponent.vue")["default"]));
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -31313,6 +31741,45 @@ component.options.__file = "resources/js/components/Service/ViolationReportCompo
 
 /***/ }),
 
+/***/ "./resources/js/components/Service/ViolationReportListComponent.vue":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/Service/ViolationReportListComponent.vue ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ViolationReportListComponent_vue_vue_type_template_id_31afd3eb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ViolationReportListComponent.vue?vue&type=template&id=31afd3eb& */ "./resources/js/components/Service/ViolationReportListComponent.vue?vue&type=template&id=31afd3eb&");
+/* harmony import */ var _ViolationReportListComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ViolationReportListComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/Service/ViolationReportListComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ViolationReportListComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ViolationReportListComponent_vue_vue_type_template_id_31afd3eb___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ViolationReportListComponent_vue_vue_type_template_id_31afd3eb___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Service/ViolationReportListComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/UserAuth/RegisterComponent.vue":
 /*!****************************************************************!*\
   !*** ./resources/js/components/UserAuth/RegisterComponent.vue ***!
@@ -31599,6 +32066,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Service/ViolationReportListComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/Service/ViolationReportListComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ViolationReportListComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ViolationReportListComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Service/ViolationReportListComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ViolationReportListComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/UserAuth/RegisterComponent.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************!*\
   !*** ./resources/js/components/UserAuth/RegisterComponent.vue?vue&type=script&lang=js& ***!
@@ -31874,6 +32357,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ViolationReportComponent_vue_vue_type_template_id_54a96de9___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ViolationReportComponent_vue_vue_type_template_id_54a96de9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ViolationReportComponent.vue?vue&type=template&id=54a96de9& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Service/ViolationReportComponent.vue?vue&type=template&id=54a96de9&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Service/ViolationReportListComponent.vue?vue&type=template&id=31afd3eb&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/Service/ViolationReportListComponent.vue?vue&type=template&id=31afd3eb& ***!
+  \*********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ViolationReportListComponent_vue_vue_type_template_id_31afd3eb___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ViolationReportListComponent_vue_vue_type_template_id_31afd3eb___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ViolationReportListComponent_vue_vue_type_template_id_31afd3eb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ViolationReportListComponent.vue?vue&type=template&id=31afd3eb& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Service/ViolationReportListComponent.vue?vue&type=template&id=31afd3eb&");
 
 
 /***/ }),
@@ -33541,69 +34041,90 @@ var render = function () {
               },
             },
             [
-              _vm._m(6),
-              _vm._v(" "),
-              _c("div", { staticClass: "offcanvas-body py-0" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col p-0" }, [
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.inputs.body,
-                          expression: "inputs.body",
-                        },
-                      ],
-                      staticClass: "form-control bg-white border-0",
-                      attrs: {
-                        placeholder: "コメントを入力",
-                        name: "body",
-                        maxlength: _vm.body_maxlength,
-                      },
-                      domProps: { value: _vm.inputs.body },
-                      on: {
-                        input: function ($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.inputs, "body", $event.target.value)
-                        },
-                      },
-                    }),
-                  ]),
+              _c(
+                "div",
+                { staticClass: "offcanvas-body small  position-relative" },
+                [
+                  _vm._m(6),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-auto" }, [
-                    _c("div", { staticClass: "text-center" }, [
-                      _c("label", { staticClass: "form-label" }, [
-                        _vm._v(
-                          _vm._s(
-                            _vm.inputs.body.length + "/" + _vm.body_maxlength
-                          )
-                        ),
+                  _vm._m(7),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "mx-auto",
+                      staticStyle: { "max-width": "1200px" },
+                    },
+                    [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col p-0" }, [
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.inputs.body,
+                                expression: "inputs.body",
+                              },
+                            ],
+                            staticClass: "form-control bg-white border-0",
+                            attrs: {
+                              placeholder: "コメントを入力",
+                              name: "body",
+                              maxlength: _vm.body_maxlength,
+                            },
+                            domProps: { value: _vm.inputs.body },
+                            on: {
+                              input: function ($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.inputs,
+                                  "body",
+                                  $event.target.value
+                                )
+                              },
+                            },
+                          }),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-auto" }, [
+                          _c("div", { staticClass: "text-center" }, [
+                            _c("label", { staticClass: "form-label" }, [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.inputs.body.length +
+                                    "/" +
+                                    _vm.body_maxlength
+                                )
+                              ),
+                            ]),
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success",
+                              attrs: {
+                                type: "button",
+                                "data-bs-dismiss": "offcanvas",
+                                "aria-label": "Close",
+                              },
+                              on: {
+                                click: function ($event) {
+                                  return _vm.comment_api()
+                                },
+                              },
+                            },
+                            [_vm._v("送信")]
+                          ),
+                        ]),
                       ]),
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-success",
-                        attrs: {
-                          type: "button",
-                          "data-bs-dismiss": "offcanvas",
-                          "aria-label": "Close",
-                        },
-                        on: {
-                          click: function ($event) {
-                            return _vm.comment_api()
-                          },
-                        },
-                      },
-                      [_vm._v("送信")]
-                    ),
-                  ]),
-                ]),
-              ]),
+                    ]
+                  ),
+                ]
+              ),
             ]
           ),
         ]),
@@ -33702,20 +34223,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "offcanvas-header" }, [
-      _c(
-        "h5",
-        {
-          staticClass: "offcanvas-title",
-          attrs: { id: "commentOffcanvasLabel" },
-        },
-        [
-          _c("i", { staticClass: "bi bi-chat-square-text" }),
-          _vm._v(" "),
-          _c("span", { staticClass: "ms-2" }, [_vm._v("コメントを書く")]),
-        ]
-      ),
-      _vm._v(" "),
+    return _c("div", { staticClass: "p-3 position-absolute top-0 end-0" }, [
       _c("button", {
         staticClass: "btn-close text-reset",
         attrs: {
@@ -33725,6 +34233,29 @@ var staticRenderFns = [
         },
       }),
     ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "mx-auto mb-3", staticStyle: { "max-width": "1200px" } },
+      [
+        _c(
+          "h5",
+          {
+            staticClass: "offcanvas-title",
+            attrs: { id: "commentOffcanvasLabel" },
+          },
+          [
+            _c("i", { staticClass: "bi bi-chat-square-text" }),
+            _vm._v(" "),
+            _c("span", { staticClass: "ms-2" }, [_vm._v("コメントを書く")]),
+          ]
+        ),
+      ]
+    )
   },
 ]
 render._withStripped = true
@@ -34080,26 +34611,578 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _vm._v(_vm._s(_vm.title) + _vm._s(_vm.prop1)),
-          ]),
+    _vm.reported
+      ? _c("button", { staticClass: "btn btn-sm", attrs: { disabled: "" } }, [
+          _vm._m(0),
           _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _vm._v(_vm._s(_vm.body) + _vm._s(_vm.count)),
+          _c("div", { staticStyle: { "font-size": ".6rem" } }, [
+            _vm._v("報告済み"),
           ]),
+        ])
+      : _vm.user_id
+      ? _c(
+          "button",
+          {
+            staticClass: "btn btn-sm",
+            attrs: {
+              "data-bs-toggle": "offcanvas",
+              "data-bs-target": "#violationReportOffcanvas",
+              "aria-controls": "violationReportOffcanvas",
+            },
+          },
+          [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("div", { staticStyle: { "font-size": ".6rem" } }, [
+              _vm._v("報　告"),
+            ]),
+          ]
+        )
+      : _c(
+          "button",
+          {
+            staticClass: "btn btn-sm",
+            attrs: {
+              "data-bs-toggle": "modal",
+              "data-bs-target": "#PleaseLoginModal",
+            },
+          },
+          [
+            _vm._m(2),
+            _vm._v(" "),
+            _c("div", { staticStyle: { "font-size": ".6rem" } }, [
+              _vm._v("報　告"),
+            ]),
+          ]
+        ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "offcanvas offcanvas-bottom",
+        attrs: {
+          tabindex: "-1",
+          id: "violationReportOffcanvas",
+          "aria-labelledby": "violationReportOffcanvasLabel",
+        },
+      },
+      [
+        _c("div", { staticClass: "offcanvas-body small  position-relative" }, [
+          _vm._m(3),
           _vm._v(" "),
-          _c("div", [
-            _c("button", { on: { click: _vm.countUp } }, [_vm._v("加算")]),
-          ]),
+          _vm._m(4),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "mx-auto", staticStyle: { "max-width": "1200px" } },
+            [
+              _c("div", { staticClass: "callout callout-warning mb-3" }, [
+                _vm._v(
+                  "\n                    利用規約に反する内容があった場合、内容をご報告ください。\n                "
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col pb-0" }, [
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.inputs.body,
+                        expression: "inputs.body",
+                      },
+                    ],
+                    staticClass: "form-control bg-white h-100",
+                    attrs: {
+                      placeholder: "規約違反内容を入力",
+                      name: "body",
+                      maxlength: _vm.body_maxlength,
+                    },
+                    domProps: { value: _vm.inputs.body },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.inputs, "body", $event.target.value)
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-auto" }, [
+                  _c("div", { staticClass: "text-center" }, [
+                    _c("label", { staticClass: "form-label" }, [
+                      _vm._v(
+                        _vm._s(
+                          _vm.inputs.body.length + "/" + _vm.body_maxlength
+                        )
+                      ),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-warning",
+                      attrs: {
+                        type: "button",
+                        "data-bs-dismiss": "offcanvas",
+                        "aria-label": "Close",
+                      },
+                      on: { click: _vm.click },
+                    },
+                    [_vm._v("送信")]
+                  ),
+                ]),
+              ]),
+            ]
+          ),
         ]),
-      ]),
-    ]),
+      ]
+    ),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "fs-5" }, [
+      _c("i", { staticClass: "bi bi-exclamation-triangle" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "fs-5" }, [
+      _c("i", { staticClass: "bi bi-exclamation-triangle" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "fs-5" }, [
+      _c("i", { staticClass: "bi bi-exclamation-triangle" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-3 position-absolute top-0 end-0" }, [
+      _c("button", {
+        staticClass: "btn-close text-reset",
+        attrs: {
+          type: "button",
+          "data-bs-dismiss": "offcanvas",
+          "aria-label": "Close",
+        },
+      }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "mx-auto mb-3", staticStyle: { "max-width": "1200px" } },
+      [
+        _c(
+          "h5",
+          {
+            staticClass: "offcanvas-title",
+            attrs: { id: "violationReportOffcanvasLabel" },
+          },
+          [
+            _c("span", { staticClass: "text-warning me-2" }, [
+              _c("i", { staticClass: "bi bi-exclamation-triangle" }),
+            ]),
+            _vm._v("\n                    規約違反の報告\n                "),
+          ]
+        ),
+      ]
+    )
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Service/ViolationReportListComponent.vue?vue&type=template&id=31afd3eb&":
+/*!************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Service/ViolationReportListComponent.vue?vue&type=template&id=31afd3eb& ***!
+  \************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "form",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.test,
+            expression: "test",
+          },
+        ],
+        attrs: { action: _vm.route_list, method: "POST" },
+      },
+      [
+        _vm._l(_vm.inputs, function (input, key) {
+          return _c("input", {
+            key: key,
+            attrs: { type: "hidden", name: key },
+            domProps: { value: input },
+          })
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-primary btn-sm", attrs: { type: "submit" } },
+          [_vm._v("テスト")]
+        ),
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "list-group" },
+      _vm._l(_vm.data_list, function (data, dKey) {
+        return _c(
+          "div",
+          {
+            key: dKey,
+            staticClass: "list-group-item list-group-item-action p-0 d-flex",
+          },
+          [
+            _c(
+              "a",
+              {
+                staticClass:
+                  "d-block p-3 py-2 col text-dark text-decoration-none",
+                attrs: {
+                  href: "#",
+                  "data-bs-toggle": "offcanvas",
+                  "data-bs-target": "#violationReportListOffcanvas" + dKey,
+                  "aria-controls": "violationReportListOffcanvas" + dKey,
+                },
+              },
+              [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-auto" }, [
+                    data.report.responsed
+                      ? _c("span", { staticClass: "badge text-secondary" }, [
+                          _vm._v("対応済"),
+                        ])
+                      : _c("span", { staticClass: "badge bg-danger" }, [
+                          _vm._v("未対応"),
+                        ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-auto  d-none d-md-block" }, [
+                    _vm._v(_vm._s(data.date)),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col overflow-hidden" }, [
+                    _c(
+                      "span",
+                      {
+                        staticClass: "d-inline-block text-truncate",
+                        staticStyle: { width: "200px" },
+                      },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(data.question_group.title) +
+                            "\n                        "
+                        ),
+                      ]
+                    ),
+                  ]),
+                ]),
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-auto" }, [
+              _c("div", { staticClass: "dropdown" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn",
+                    attrs: {
+                      type: "button",
+                      id: "dropdownMenuButton" + dKey,
+                      "data-bs-toggle": "dropdown",
+                      "aria-expanded": "false",
+                    },
+                  },
+                  [_vm._m(0, true)]
+                ),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  {
+                    staticClass: "dropdown-menu",
+                    attrs: { "aria-labelledby": "dropdownMenuButton" + dKey },
+                  },
+                  [
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "dropdown-item",
+                          attrs: {
+                            "data-bs-toggle": "modal",
+                            "data-bs-target": "#deleteModal" + dKey,
+                            href: "#",
+                          },
+                          on: {
+                            click: function ($event) {
+                              return _vm.destory(data.report.id)
+                            },
+                          },
+                        },
+                        [_vm._v("削除")]
+                      ),
+                    ]),
+                  ]
+                ),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "offcanvas offcanvas-end",
+                staticStyle: { width: "600px" },
+                attrs: {
+                  tabindex: "-1",
+                  id: "violationReportListOffcanvas" + dKey,
+                  "aria-labelledby": "violationReportListOffcanvasLabel" + dKey,
+                },
+              },
+              [
+                _c("div", { staticClass: "offcanvas-header" }, [
+                  _c(
+                    "h5",
+                    {
+                      attrs: { id: "violationReportListOffcanvasLabel" + dKey },
+                    },
+                    [_vm._v("報告内容")]
+                  ),
+                  _vm._v(" "),
+                  _c("button", {
+                    staticClass: "btn-close text-reset",
+                    attrs: {
+                      type: "button",
+                      "data-bs-dismiss": "offcanvas",
+                      "aria-label": "Close",
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "offcanvas-body" }, [
+                  _c("div", { staticClass: "card card-body mb-3" }, [
+                    _c("strong", [_vm._v("報告者情報")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row py-2 border-top" }, [
+                      _c("div", { staticClass: "col-4" }, [_vm._v("対応状況")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-8" }, [
+                        _c("div", { staticClass: "row align-items-center" }, [
+                          _c("div", { staticClass: "col" }, [
+                            data.report.responsed
+                              ? _c("span", { staticClass: "text-success" }, [
+                                  _vm._v("対応済"),
+                                ])
+                              : _c("span", { staticClass: "text-danger" }, [
+                                  _vm._v("未対応"),
+                                ]),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-auto" }, [
+                            _c(
+                              "div",
+                              { staticClass: "form-check form-switch" },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: data.report.responsed,
+                                      expression: "data.report.responsed",
+                                    },
+                                  ],
+                                  staticClass: "form-check-input",
+                                  attrs: {
+                                    type: "checkbox",
+                                    id: "flexSwitchResponsed" + dKey,
+                                  },
+                                  domProps: {
+                                    checked: Array.isArray(
+                                      data.report.responsed
+                                    )
+                                      ? _vm._i(data.report.responsed, null) > -1
+                                      : data.report.responsed,
+                                  },
+                                  on: {
+                                    change: [
+                                      function ($event) {
+                                        var $$a = data.report.responsed,
+                                          $$el = $event.target,
+                                          $$c = $$el.checked ? true : false
+                                        if (Array.isArray($$a)) {
+                                          var $$v = null,
+                                            $$i = _vm._i($$a, $$v)
+                                          if ($$el.checked) {
+                                            $$i < 0 &&
+                                              _vm.$set(
+                                                data.report,
+                                                "responsed",
+                                                $$a.concat([$$v])
+                                              )
+                                          } else {
+                                            $$i > -1 &&
+                                              _vm.$set(
+                                                data.report,
+                                                "responsed",
+                                                $$a
+                                                  .slice(0, $$i)
+                                                  .concat($$a.slice($$i + 1))
+                                              )
+                                          }
+                                        } else {
+                                          _vm.$set(
+                                            data.report,
+                                            "responsed",
+                                            $$c
+                                          )
+                                        }
+                                      },
+                                      function ($event) {
+                                        return _vm.changeResponsed(dKey)
+                                      },
+                                    ],
+                                  },
+                                }),
+                              ]
+                            ),
+                          ]),
+                        ]),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row py-2 border-top" }, [
+                      _c("div", { staticClass: "col-4" }, [_vm._v("日時")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-8" }, [
+                        _vm._v(_vm._s(data.date)),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row py-2 border-top" }, [
+                      _c("div", { staticClass: "col-4" }, [_vm._v("氏名・ID")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-8" }, [
+                        _vm._v(
+                          _vm._s(data.reported_user.name) +
+                            "（ID:" +
+                            _vm._s(data.reported_user.id) +
+                            "）"
+                        ),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row py-2 border-top" }, [
+                      _c("div", { staticClass: "col-4" }, [_vm._v("報告内容")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-12 col-md-8" }, [
+                        _vm._v(_vm._s(data.report.body)),
+                      ]),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card card-body mb-3" }, [
+                    _c("strong", [_vm._v("問題集情報")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row py-2 border-top" }, [
+                      _c("div", { staticClass: "col-4" }, [_vm._v("ID")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-8" }, [
+                        _vm._v(_vm._s(data.question_group.id)),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row py-2 border-top" }, [
+                      _c("div", { staticClass: "col-4" }, [_vm._v("タイトル")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-8" }, [
+                        _vm._v(_vm._s(data.question_group.title)),
+                      ]),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card card-body mb-3" }, [
+                    _c("strong", [_vm._v("作成者情報")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row py-2 border-top" }, [
+                      _c("div", { staticClass: "col-4" }, [_vm._v("氏名")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-8" }, [
+                        _vm._v(_vm._s(data.creater_user.name)),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row py-2 border-top" }, [
+                      _c("div", { staticClass: "col-4" }, [
+                        _vm._v("メールアドレス"),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-8" }, [
+                        _vm._v(_vm._s(data.creater_user.email)),
+                      ]),
+                    ]),
+                  ]),
+                ]),
+              ]
+            ),
+          ]
+        )
+      }),
+      0
+    ),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "fs-5" }, [
+      _c("i", { staticClass: "bi bi-three-dots-vertical" }),
+    ])
+  },
+]
 render._withStripped = true
 
 

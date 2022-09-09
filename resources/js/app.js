@@ -47,6 +47,8 @@ Vue.component('keep-question-group-component', require('./components/Service/Kee
 Vue.component('keep-creator-user-component',   require('./components/Service/KeepCreatorUserComponent.vue').default);
 Vue.component('comment-component',             require('./components/Service/CommentComponent.vue').default);
 Vue.component('violation-report-component',    require('./components/Service/ViolationReportComponent.vue').default);
+Vue.component('violation-report-list-component',    require('./components/Service/ViolationReportListComponent.vue').default);
+
 Vue.component('contact-component',             require('./components/Service/ContactComponent.vue').default);
 
 

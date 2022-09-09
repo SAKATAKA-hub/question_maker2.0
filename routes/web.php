@@ -241,14 +241,6 @@ Route::middleware(['user_auth'])->group(function () {
         Route::post('/comment/api', [Controllers\ServiceController::class, 'comment_api'])
         ->name('comment.api');
 
-        # 問題集へのコメント[投稿](comment/post/api)
-        // Route::post('/comment/post/api', [Controllers\ServiceController::class, 'comment_post_api'])
-        // ->name('comment.post.api');
-
-        # 問題集へのコメント[一覧](comment/list/api)
-        // Route::post('/comment/list/api', [Controllers\ServiceController::class, 'comment_list_api'])
-        // ->name('comment.list.api');
-
         # 問題集へのコメント[削除(非表示)](comment/destroy/api)
         Route::patch('/comment/destroy/api', [Controllers\ServiceController::class, 'comment_destroy_api'])
         ->name('comment.destroy.api');
@@ -259,8 +251,7 @@ Route::middleware(['user_auth'])->group(function () {
         # 規約違反問題集の通報[投稿]  (violation_report/post/api)
         Route::post('/violation_report/post/api', [Controllers\ServiceController::class, 'violation_report_post_api'])
         ->name('violation_report.post.api');
-        # 規約違反問題集の通報[一覧]  (violation_report/list/api)
-        # 規約違反問題集の通報[対応済](violation_report/responsed/api)
+
 
     # お問い合わせ
 
@@ -278,23 +269,33 @@ Route::middleware(['user_auth'])->group(function () {
 | フッターメニュー (footer_menu)
 |--------------------------------------------------------------------------
 */
-    # 利用規約(trems)
-    Route::get('/trems', function () { view('footer_menu.trems'); })
-    ->name('footer_menu.trems');
+    # このサイトの使い方(how_use)
+    Route::get('/how_use', function () { return view('footer_menu.how_use'); })
+    ->name('footer_menu.how_use');
+
+    # 問題集公開時の注意点(important)
+    Route::get('/important', function () { return view('footer_menu.important'); })
+    ->name('footer_menu.important');
 
     # プライバシーポリシー(privacy_policy)
-    Route::get('/privacy_policy', function () { view('footer_menu.privacy_policy'); })
+    Route::get('/privacy_policy', function () { return view('footer_menu.privacy_policy'); })
     ->name('footer_menu.privacy_policy');
 
+    # 利用規約(trems)
+    Route::get('/trems', function () { return view('footer_menu.trems'); })
+    ->name('footer_menu.trems');
+
     # お問い合わせ(contact)
-    Route::get('/contact', function () { view('footer_menu.contact'); })
+    Route::get('/contact', function () { return view('footer_menu.contact'); })
     ->name('footer_menu.contact');
 
+    # よくある質問(faq)
+    Route::get('/faq', function () { return view('footer_menu.faq'); })
+    ->name('footer_menu.faq');
 
-    # よくある質問(q_and_a)
-    Route::get('/q_and_a', function () { view('footer_menu.q_and_a'); })
-    ->name('footer_menu.q_and_a');
-
+    # 運営会社について(operating_companiy)
+    Route::get('/operating_companiy', function () { return redirect('https://www.google.com/'); })
+    ->name('footer_menu.operating_companiy');
 
 
 /*

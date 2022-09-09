@@ -165,14 +165,16 @@ class ServiceController extends Controller
         */
         public function violation_report_post_api(Request $request)
         {
+
+
             # 入力内容の修正
             $input = $request->only([
-                'user_id','gest_name','gest_email','question_group_id','body',
+                'user_id','question_group_id','body',
             ]);
             // dd($input);
 
             # 通報内容をDBに保存
-            $violation_report = new \App\Models\QuestionGroupViolationReport($input);
+            $violation_report = new \App\Models\ViolationReport($input);
             $violation_report->save();
 
 
@@ -181,8 +183,75 @@ class ServiceController extends Controller
         }
 
 
-        # 規約違反問題集の通報[一覧]  (violation_report_list_api)
-        # 規約違反問題集の通報[対応済](violation_report_responsed_api)
+
+
+        /**
+         * 規約違反問題集の通報[一覧]  (violation_report_list_api)
+         * @param \Illuminate\Http\Request $request
+         * @return JSON
+        */
+        public function violation_report_list_api(Request $request)
+        {
+            # APP_KEY認証チェック
+            if( $request->app_key != env('APP_KEY')){
+                return \App::abort(404);
+            }
+
+
+            # JSONを返す(報告一覧データ)
+            return response()->json(['data_list' => \App\Models\ViolationReport::dataList() ]);
+        }
+
+
+
+
+        /**
+         * 規約違反問題集の通報[対応済変更](violation_report_responsed_api)
+         * @param \Illuminate\Http\Request $request
+         * @return JSON
+        */
+        public function violation_report_responsed_api(Request $request)
+        {
+            # APP_KEY認証チェック
+            if( $request->app_key != env('APP_KEY')){
+                return \App::abort(404);
+            }
+
+
+            # 報告の更新
+            $report = \App\Models\ViolationReport::find( $request->id );
+            $report->update(['responsed' => $request->responsed == 'true' ? 1 : 0 ]);
+
+
+            return response()->json(['report'=>$report]);
+
+            # JSONを返す(報告一覧データ)
+            return response()->json(['data_list' => \App\Models\ViolationReport::dataList() ]);
+        }
+
+
+        /**
+         * 規約違反問題集の通報[削除](violation_report_destory_api)
+         * @param \Illuminate\Http\Request $request
+         * @return JSON
+        */
+        public function violation_report_destory_api(Request $request)
+        {
+            # APP_KEY認証チェック
+            if( $request->app_key != env('APP_KEY')){
+                return \App::abort(404);
+            }
+
+            # 報告の削除
+            $report = \App\Models\ViolationReport::find( $request->id );
+            $report->delete();
+
+
+            # JSONを返す(報告一覧データ)
+            return response()->json(['data_list' => \App\Models\ViolationReport::dataList() ]);
+        }
+
+
 
 
     /*

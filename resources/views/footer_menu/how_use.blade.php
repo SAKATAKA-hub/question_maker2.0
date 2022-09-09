@@ -2,15 +2,12 @@
 
 
 <!----- title ----->
-@section('title','タイトル')
+@section('title','このサイトの使い方')
 
 <!----- breadcrumb ----->
 @section('breadcrumb')
-<li class="breadcrumb-item"><a href="{{route('mypage')}}" class="text-success">
-    マイページ
-</a></li>
 <li class="breadcrumb-item" aria-current="page">
-    {{ 'タイトル' }}
+    {{ 'このサイトの使い方' }}
 </li>
 @endsection
 
@@ -22,6 +19,9 @@
 
 <!----- style ----->
 @section('style')
+<style>
+    main{ background-color: #F8F9FA !important; }
+</style>
 @endsection
 
 
@@ -32,9 +32,12 @@
 
 <!----- contents ----->
 @section('contents')
-<div class="container-1200">
+<section>
+    <div class="container-1200">
 
+        hoge
 
-</div>
+    </div>
+</section>
 
 @endsection
