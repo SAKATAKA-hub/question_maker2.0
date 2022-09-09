@@ -59,7 +59,6 @@
         ></please-login-modal-component>
 
 
-
         <div class="card card-body mb-3">
 
             <h5>問題集のお気に入り登録</h5>
@@ -107,7 +106,6 @@
 
 
         </div>
-
         <div class="my-3">
 
 
@@ -138,7 +136,6 @@
 
                     <button type="submit" class="btn btn-primary">投稿</button>
                 </form>
-
 
             </div>
 
@@ -178,7 +175,7 @@
 
 
         </div>
-        <div class="mb-3">
+        <div class="my-3">
 
             報告リストコンポーネント
             <violation-report-list-component
@@ -193,6 +190,8 @@
             rote_destoroy: {{  route('violation_report.destory.api')}}
 
         </div>
+
+
         <div class="card card-body">
             <h5>お問い合わせ[投稿]</h5>
             <form action="{{route('contact.post.api')}}" method="POST">
@@ -205,7 +204,7 @@
                     <label for="contact_name" class="form-label">
                         氏名<small class="text-danger ms-3">※必須</small>
                     </label>
-                    <input type="text" name="gest_name" class="form-control" id="contact_name"
+                    <input type="text" name="name" class="form-control" id="contact_name"
                     placeholder="山田　太郎" maxlength="50" required>
                 </div>
                 <!-- ゲスト メールアドレス -->
@@ -213,7 +212,7 @@
                     <label for="contact_email" class="form-label">
                         メールアドレス<small class="text-danger ms-3">※必須</small>
                     </label>
-                    <input type="email" name="gest_email" class="form-control" id="contact_email"
+                    <input type="email" name="email" class="form-control" id="contact_email"
                     placeholder="yamada@mail.co.jp" maxlength="50" required>
                 </div>
                 <!-- 本文 -->
@@ -228,10 +227,24 @@
                 <button type="submit" class="btn btn-primary">送信</button>
             </form>
             <contact-component/>
+        </div>
+        <div class="my-3">
 
+            報告リストコンポーネント
+            <contact-list-component
+            route_list="{{     route('contact.list.api')}}"
+            route_responsed="{{route('contact.responsed.api')}}"
+            rote_destoroy="{{  route('contact.destory.api')}}"
+            app_key="{{env('APP_KEY')}}"
+            ></contact-list-component>
 
+            route_list: {{     route('contact.list.api')}} <br>
+            route_responsed: {{route('contact.responsed.api')}} <br>
+            rote_destoroy: {{  route('contact.destory.api')}}
 
         </div>
+
+
 
     </div>
 </section>

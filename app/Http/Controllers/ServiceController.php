@@ -223,8 +223,6 @@ class ServiceController extends Controller
             $report->update(['responsed' => $request->responsed == 'true' ? 1 : 0 ]);
 
 
-            return response()->json(['report'=>$report]);
-
             # JSONを返す(報告一覧データ)
             return response()->json(['data_list' => \App\Models\ViolationReport::dataList() ]);
         }
@@ -267,9 +265,7 @@ class ServiceController extends Controller
         public function contact_post_api(Request $request)
         {
             # 入力内容の修正
-            $input = $request->only([
-                'user_id','gest_name','gest_email','body',
-            ]);
+            $input = $request->only('name','email','body');
             // dd($input);
 
             # お問い合わせ内容をDBに保存
@@ -282,8 +278,78 @@ class ServiceController extends Controller
         }
 
 
-        # お問い合わせ[一覧](contact_list_api)
-        # お問い合わせ[削除](contact_destroy_api)
+
+
+        /**
+         * お問い合わせ[一覧](contact_list_api)
+         * @param \Illuminate\Http\Request $request
+         * @return JSON
+        */
+        public function contact_list_api(Request $request)
+        {
+            # APP_KEY認証チェック
+            if( $request->app_key != env('APP_KEY')){
+                return \App::abort(404);
+            }
+
+
+
+            # JSONを返す(報告一覧データ)
+            return response()->json([ 'data_list' => \App\Models\Contact::dataList() ]);
+        }
+
+
+
+
+        /**
+         * お問い合わせ[対応済変更](contact_responsed_api)
+         * @param \Illuminate\Http\Request $request
+         * @return JSON
+        */
+        public function contact_responsed_api(Request $request)
+        {
+            # APP_KEY認証チェック
+            if( $request->app_key != env('APP_KEY')){
+                return \App::abort(404);
+            }
+
+
+            # 報告の更新
+            $report = \App\Models\Contact::find( $request->id );
+            $report->update(['responsed' => $request->responsed == 'true' ? 1 : 0 ]);
+
+
+            return response()->json($report->all);
+
+
+
+            # JSONを返す(報告一覧データ)
+            return response()->json(['data_list' => \App\Models\Contact::dataList() ]);
+        }
+
+
+
+
+        /**
+         * お問い合わせ[削除](contact_destory_api)
+         * @param \Illuminate\Http\Request $request
+         * @return JSON
+        */
+        public function contact_destory_api(Request $request)
+        {
+            # APP_KEY認証チェック
+            if( $request->app_key != env('APP_KEY')){
+                return \App::abort(404);
+            }
+
+            # 報告の削除
+            $report = \App\Models\Contact::find( $request->id );
+            $report->delete();
+
+
+            # JSONを返す(報告一覧データ)
+            return response()->json(['data_list' => \App\Models\Contact::dataList() ]);
+        }
 
     //
 }

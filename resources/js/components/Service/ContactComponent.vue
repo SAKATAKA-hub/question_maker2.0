@@ -1,6 +1,5 @@
 <template>
-    <div>
-
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -13,7 +12,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -23,7 +21,7 @@
             return{
 
 
-                title : 'お問い合わせ',
+                title : 'タイトル',
                 body : '本文ほげほげ',
                 count: 0,
 
@@ -39,7 +37,7 @@
         mounted() {
 
 
-            // console.log('Component mounted.')
+            console.log('Component mounted.')
 
 
         },

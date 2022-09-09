@@ -160,14 +160,6 @@
                     <!-- Comment Offcanvas -->
                     <div class="offcanvas offcanvas-bottom"  style="height:10rem;"
                     tabindex="-1" id="commentOffcanvas" aria-labelledby="commentOffcanvasLabel">
-                        <!-- <div class="offcanvas-header">
-                            <h5 class="offcanvas-title" id="commentOffcanvasLabel">
-                                <i class="bi bi-chat-square-text"></i>
-                                <span class="ms-2">コメントを書く</span>
-                            </h5>
-                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                        </div> -->
-
 
                         <div class="offcanvas-body small  position-relative">
 

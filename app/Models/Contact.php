@@ -14,6 +14,44 @@ class Contact extends Model
     use HasFactory;
     public $timestamps = true;
     protected $fillable = [
-        'user_id','gest_name','gest_email','body','responded','type_text'
+        'name','email','body','responsed','type_text'
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | スコープ
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+
+        /**
+         * 一覧表示用データリスト（data_list)
+         * @return Array
+        */
+        public function scopeDataList( $query )
+        {
+            # 報告一覧データの取得
+            $contacts =  $query->orderBy('created_at','desc')->get();
+
+            # データの加工
+            $data_list = [];
+            for ($i=0; $i < $contacts->count(); $i++) {
+                $question_group = \App\Models\QuestionGroup::find( $contacts[$i]->question_group_id );
+
+
+                $data = [
+                    // 日時
+                    'date' => \Carbon\Carbon::parse( $contacts[$i]->created_at )->format('Y年m月d日 H:i'),
+                    // 報告情報
+                    'contact' => $contacts[$i],
+                ];
+                $data_list[] = $data;
+            }
+
+
+            return $data_list;
+        }
+    //
+
 }

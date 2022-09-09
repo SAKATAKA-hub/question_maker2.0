@@ -6491,14 +6491,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   /*
       [ memo ]
@@ -6637,12 +6629,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      title: 'お問い合わせ',
+      title: 'タイトル',
       body: '本文ほげほげ',
       count: 0
     };
@@ -6658,11 +6648,299 @@ __webpack_require__.r(__webpack_exports__);
       "default": 'prop2'
     }
   },
-  mounted: function mounted() {// console.log('Component mounted.')
+  mounted: function mounted() {
+    console.log('Component mounted.');
   },
   methods: {
     countUp: function countUp() {
       this.count++;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Service/ContactListComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Service/ContactListComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      test: true,
+      loading: true,
+      // データリスト
+      data_list: [
+        /*
+            // 日時
+            'date': '',
+             // お問い合わせ情報
+            'contact':         [],
+         */
+      ],
+      inputs: {
+        app_key: ''
+      }
+    };
+  },
+  props: {
+    route_list: {
+      type: String,
+      "default": ''
+    },
+    //一覧表示
+    route_responsed: {
+      type: String,
+      "default": ''
+    },
+    //対応済変更
+    rote_destoroy: {
+      type: String,
+      "default": ''
+    },
+    //削除
+    app_key: {
+      type: String,
+      "default": ''
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.inputs.app_key = this.app_key; // [ 非同期通信 ]
+
+    fetch(this.route_list, {
+      method: 'POST',
+      body: new URLSearchParams(this.inputs)
+    }).then(function (response) {
+      if (!response.ok) {
+        throw new Error('送信エラー');
+      }
+
+      return response.json();
+    }).then(function (json) {
+      // データの保存
+      _this.data_list = json.data_list; // ローディング表示->非表示
+
+      _this.loading = false;
+      console.log(json);
+    })["catch"](function (err) {
+      alert('通信エラーが発生しました。再読みを行います。');
+      location.reload();
+    });
+  },
+  methods: {
+    /* 対応状況の変更 */
+    changeResponsed: function changeResponsed(dKey) {
+      var _this2 = this;
+
+      // params
+      var inputs = {
+        _method: 'patch',
+        app_key: this.app_key,
+        id: this.data_list[dKey].contact.id,
+        responsed: this.data_list[dKey].contact.responsed
+      }; // [ 非同期通信 ]
+
+      fetch(this.route_responsed, {
+        method: 'POST',
+        body: new URLSearchParams(inputs)
+      }).then(function (response) {
+        if (!response.ok) {
+          throw new Error('送信エラー');
+        }
+
+        return response.json();
+      }).then(function (json) {
+        // 保存状態の変更
+        console.log(json);
+      })["catch"](function (err) {
+        alert('通信エラーが発生しました。');
+        _this2.data_list[dKey].report.responsed = (inputs.responsed + 1) % 2;
+      });
+    },
+
+    /* お問い合わせの削除 */
+    destory: function destory(id) {
+      var _this3 = this;
+
+      // params
+      var inputs = {
+        _method: 'delete',
+        app_key: this.app_key,
+        id: id
+      }; // [ 非同期通信 ]
+
+      fetch(this.rote_destoroy, {
+        method: 'POST',
+        body: new URLSearchParams(inputs)
+      }).then(function (response) {
+        if (!response.ok) {
+          throw new Error('送信エラー');
+        }
+
+        return response.json();
+      }).then(function (json) {
+        // データの保存
+        _this3.data_list = json.data_list; // console.log( json );
+      })["catch"](function (err) {
+        alert('通信エラーが発生しました。');
+      });
     }
   }
 });
@@ -7267,10 +7545,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       test: false,
+      loading: true,
       // データリスト
       data_list: [
         /*
@@ -7328,7 +7632,9 @@ __webpack_require__.r(__webpack_exports__);
       return response.json();
     }).then(function (json) {
       // データの保存
-      _this.data_list = json.data_list; // console.log( json );
+      _this.data_list = json.data_list; // ローディング表示->非表示
+
+      _this.loading = false; // console.log( json );
     })["catch"](function (err) {
       alert('通信エラーが発生しました。再読みを行います。');
       location.reload();
@@ -7356,10 +7662,8 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         return response.json();
-      }).then(function (json) {
-        // 保存状態の変更
-        console.log(json);
-        console.log(inputs);
+      }).then(function (json) {// 保存状態の変更
+        // console.log( json );
       })["catch"](function (err) {
         alert('通信エラーが発生しました。');
         _this2.data_list[dKey].report.responsed = (inputs.responsed + 1) % 2;
@@ -8273,6 +8577,7 @@ Vue.component('comment-component', (__webpack_require__(/*! ./components/Service
 Vue.component('violation-report-component', (__webpack_require__(/*! ./components/Service/ViolationReportComponent.vue */ "./resources/js/components/Service/ViolationReportComponent.vue")["default"]));
 Vue.component('violation-report-list-component', (__webpack_require__(/*! ./components/Service/ViolationReportListComponent.vue */ "./resources/js/components/Service/ViolationReportListComponent.vue")["default"]));
 Vue.component('contact-component', (__webpack_require__(/*! ./components/Service/ContactComponent.vue */ "./resources/js/components/Service/ContactComponent.vue")["default"]));
+Vue.component('contact-list-component', (__webpack_require__(/*! ./components/Service/ContactListComponent.vue */ "./resources/js/components/Service/ContactListComponent.vue")["default"]));
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -31583,6 +31888,45 @@ component.options.__file = "resources/js/components/Service/ContactComponent.vue
 
 /***/ }),
 
+/***/ "./resources/js/components/Service/ContactListComponent.vue":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/Service/ContactListComponent.vue ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ContactListComponent_vue_vue_type_template_id_385ecb38___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ContactListComponent.vue?vue&type=template&id=385ecb38& */ "./resources/js/components/Service/ContactListComponent.vue?vue&type=template&id=385ecb38&");
+/* harmony import */ var _ContactListComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ContactListComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/Service/ContactListComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ContactListComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ContactListComponent_vue_vue_type_template_id_385ecb38___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ContactListComponent_vue_vue_type_template_id_385ecb38___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Service/ContactListComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Service/KeepCreatorUserComponent.vue":
 /*!**********************************************************************!*\
   !*** ./resources/js/components/Service/KeepCreatorUserComponent.vue ***!
@@ -32002,6 +32346,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Service/ContactListComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/Service/ContactListComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ContactListComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ContactListComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Service/ContactListComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ContactListComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Service/KeepCreatorUserComponent.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************!*\
   !*** ./resources/js/components/Service/KeepCreatorUserComponent.vue?vue&type=script&lang=js& ***!
@@ -32289,6 +32649,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ContactComponent_vue_vue_type_template_id_0f9a58e2___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ContactComponent_vue_vue_type_template_id_0f9a58e2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ContactComponent.vue?vue&type=template&id=0f9a58e2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Service/ContactComponent.vue?vue&type=template&id=0f9a58e2&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Service/ContactListComponent.vue?vue&type=template&id=385ecb38&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/Service/ContactListComponent.vue?vue&type=template&id=385ecb38& ***!
+  \*************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ContactListComponent_vue_vue_type_template_id_385ecb38___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ContactListComponent_vue_vue_type_template_id_385ecb38___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ContactListComponent_vue_vue_type_template_id_385ecb38___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ContactListComponent.vue?vue&type=template&id=385ecb38& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Service/ContactListComponent.vue?vue&type=template&id=385ecb38&");
 
 
 /***/ }),
@@ -34280,7 +34657,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "col-md-8" }, [
         _c("div", { staticClass: "card" }, [
@@ -34301,6 +34678,422 @@ var render = function () {
   ])
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Service/ContactListComponent.vue?vue&type=template&id=385ecb38&":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Service/ContactListComponent.vue?vue&type=template&id=385ecb38& ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "form",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.test,
+            expression: "test",
+          },
+        ],
+        attrs: { action: _vm.route_list, method: "POST" },
+      },
+      [
+        _vm._l(_vm.inputs, function (input, key) {
+          return _c("input", {
+            key: key,
+            attrs: { type: "hidden", name: key },
+            domProps: { value: input },
+          })
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-primary btn-sm", attrs: { type: "submit" } },
+          [_vm._v("テスト")]
+        ),
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c("div", [
+      _vm.loading
+        ? _c("div", { staticClass: "card card-body py-5" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("h2", { staticClass: "text-center" }, [_vm._v("読み込み中")]),
+          ])
+        : !_vm.data_list.length
+        ? _c("div", { staticClass: "card card-body py-5" }, [
+            _c("h5", { staticClass: "text-center" }, [
+              _vm._v("お問い合わせ情報はありません"),
+            ]),
+          ])
+        : _c(
+            "div",
+            { staticClass: "list-group" },
+            [
+              !_vm.data_list.length
+                ? _c("h5", { staticClass: "my-5 text-center" }, [
+                    _vm._v(
+                      "\n                お問い合わせ情報はありません。\n            "
+                    ),
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.data_list, function (data, dKey) {
+                return _c(
+                  "div",
+                  {
+                    key: dKey,
+                    staticClass:
+                      "list-group-item list-group-item-action p-0 d-flex",
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "d-block p-3 py-2 col text-dark text-decoration-none",
+                        attrs: {
+                          href: "#",
+                          "data-bs-toggle": "offcanvas",
+                          "data-bs-target":
+                            "#violationReportListOffcanvas" + dKey,
+                          "aria-controls":
+                            "violationReportListOffcanvas" + dKey,
+                        },
+                      },
+                      [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-auto" }, [
+                            data.contact.responsed
+                              ? _c(
+                                  "span",
+                                  { staticClass: "badge text-secondary" },
+                                  [_vm._v("対応済")]
+                                )
+                              : _c("span", { staticClass: "badge bg-danger" }, [
+                                  _vm._v("未対応"),
+                                ]),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-auto" }, [
+                            _vm._v(_vm._s(data.date)),
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "col d-none d-md-block overflow-hidden",
+                            },
+                            [
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "d-inline-block text-truncate",
+                                  staticStyle: { width: "200px" },
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(data.contact.name) +
+                                      "様\n                            "
+                                  ),
+                                ]
+                              ),
+                            ]
+                          ),
+                        ]),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-auto" }, [
+                      _c("div", { staticClass: "dropdown" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn",
+                            attrs: {
+                              type: "button",
+                              id: "dropdownMenuButton" + dKey,
+                              "data-bs-toggle": "dropdown",
+                              "aria-expanded": "false",
+                            },
+                          },
+                          [_vm._m(1, true)]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "ul",
+                          {
+                            staticClass: "dropdown-menu",
+                            attrs: {
+                              "aria-labelledby": "dropdownMenuButton" + dKey,
+                            },
+                          },
+                          [
+                            _c("li", [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "dropdown-item",
+                                  attrs: {
+                                    "data-bs-toggle": "modal",
+                                    "data-bs-target": "#deleteModal" + dKey,
+                                    href: "#",
+                                  },
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.destory(data.contact.id)
+                                    },
+                                  },
+                                },
+                                [_vm._v("削除")]
+                              ),
+                            ]),
+                          ]
+                        ),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "offcanvas offcanvas-end",
+                        staticStyle: { width: "600px" },
+                        attrs: {
+                          tabindex: "-1",
+                          id: "violationReportListOffcanvas" + dKey,
+                          "aria-labelledby":
+                            "violationReportListOffcanvasLabel" + dKey,
+                        },
+                      },
+                      [
+                        _c("div", { staticClass: "offcanvas-header" }, [
+                          _c(
+                            "h5",
+                            {
+                              attrs: {
+                                id: "violationReportListOffcanvasLabel" + dKey,
+                              },
+                            },
+                            [_vm._v("お問い合わせ内容")]
+                          ),
+                          _vm._v(" "),
+                          _c("button", {
+                            staticClass: "btn-close text-reset",
+                            attrs: {
+                              type: "button",
+                              "data-bs-dismiss": "offcanvas",
+                              "aria-label": "Close",
+                            },
+                          }),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "offcanvas-body" }, [
+                          _c("div", { staticClass: "card card-body mb-3" }, [
+                            _c("strong", [_vm._v("お問い合わせ者情報")]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row py-2 border-top" }, [
+                              _c("div", { staticClass: "col-4" }, [
+                                _vm._v("対応状況"),
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-8" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "row align-items-center" },
+                                  [
+                                    _c("div", { staticClass: "col" }, [
+                                      data.contact.responsed
+                                        ? _c(
+                                            "span",
+                                            { staticClass: "text-success" },
+                                            [_vm._v("対応済")]
+                                          )
+                                        : _c(
+                                            "span",
+                                            { staticClass: "text-danger" },
+                                            [_vm._v("未対応")]
+                                          ),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "col-auto" }, [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "form-check form-switch",
+                                        },
+                                        [
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: data.contact.responsed,
+                                                expression:
+                                                  "data.contact.responsed",
+                                              },
+                                            ],
+                                            staticClass: "form-check-input",
+                                            attrs: {
+                                              type: "checkbox",
+                                              id: "flexSwitchResponsed" + dKey,
+                                            },
+                                            domProps: {
+                                              checked: Array.isArray(
+                                                data.contact.responsed
+                                              )
+                                                ? _vm._i(
+                                                    data.contact.responsed,
+                                                    null
+                                                  ) > -1
+                                                : data.contact.responsed,
+                                            },
+                                            on: {
+                                              change: [
+                                                function ($event) {
+                                                  var $$a =
+                                                      data.contact.responsed,
+                                                    $$el = $event.target,
+                                                    $$c = $$el.checked
+                                                      ? true
+                                                      : false
+                                                  if (Array.isArray($$a)) {
+                                                    var $$v = null,
+                                                      $$i = _vm._i($$a, $$v)
+                                                    if ($$el.checked) {
+                                                      $$i < 0 &&
+                                                        _vm.$set(
+                                                          data.contact,
+                                                          "responsed",
+                                                          $$a.concat([$$v])
+                                                        )
+                                                    } else {
+                                                      $$i > -1 &&
+                                                        _vm.$set(
+                                                          data.contact,
+                                                          "responsed",
+                                                          $$a
+                                                            .slice(0, $$i)
+                                                            .concat(
+                                                              $$a.slice($$i + 1)
+                                                            )
+                                                        )
+                                                    }
+                                                  } else {
+                                                    _vm.$set(
+                                                      data.contact,
+                                                      "responsed",
+                                                      $$c
+                                                    )
+                                                  }
+                                                },
+                                                function ($event) {
+                                                  return _vm.changeResponsed(
+                                                    dKey
+                                                  )
+                                                },
+                                              ],
+                                            },
+                                          }),
+                                        ]
+                                      ),
+                                    ]),
+                                  ]
+                                ),
+                              ]),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row py-2 border-top" }, [
+                              _c("div", { staticClass: "col-4" }, [
+                                _vm._v("日時"),
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-8" }, [
+                                _vm._v(_vm._s(data.date)),
+                              ]),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row py-2 border-top" }, [
+                              _c("div", { staticClass: "col-4" }, [
+                                _vm._v("氏名"),
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-8" }, [
+                                _vm._v(_vm._s(data.contact.name)),
+                              ]),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row py-2 border-top" }, [
+                              _c("div", { staticClass: "col-4" }, [
+                                _vm._v("お問い合わせ内容"),
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-12 col-md-8" }, [
+                                _c("div", {
+                                  domProps: {
+                                    innerHTML: _vm._s(
+                                      data.contact.body.replace(
+                                        /\r?\n/g,
+                                        "<br>"
+                                      )
+                                    ),
+                                  },
+                                }),
+                              ]),
+                            ]),
+                          ]),
+                        ]),
+                      ]
+                    ),
+                  ]
+                )
+              }),
+            ],
+            2
+          ),
+    ]),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-flex justify-content-center" }, [
+      _c("div", { staticClass: "spinner-border", attrs: { role: "status" } }, [
+        _c("span", { staticClass: "visually-hidden" }, [_vm._v("Loading...")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "fs-5" }, [
+      _c("i", { staticClass: "bi bi-three-dots-vertical" }),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -34863,317 +35656,404 @@ var render = function () {
       2
     ),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "list-group" },
-      _vm._l(_vm.data_list, function (data, dKey) {
-        return _c(
-          "div",
-          {
-            key: dKey,
-            staticClass: "list-group-item list-group-item-action p-0 d-flex",
-          },
-          [
-            _c(
-              "a",
-              {
-                staticClass:
-                  "d-block p-3 py-2 col text-dark text-decoration-none",
-                attrs: {
-                  href: "#",
-                  "data-bs-toggle": "offcanvas",
-                  "data-bs-target": "#violationReportListOffcanvas" + dKey,
-                  "aria-controls": "violationReportListOffcanvas" + dKey,
-                },
-              },
-              [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-auto" }, [
-                    data.report.responsed
-                      ? _c("span", { staticClass: "badge text-secondary" }, [
-                          _vm._v("対応済"),
-                        ])
-                      : _c("span", { staticClass: "badge bg-danger" }, [
-                          _vm._v("未対応"),
-                        ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-auto  d-none d-md-block" }, [
-                    _vm._v(_vm._s(data.date)),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col overflow-hidden" }, [
-                    _c(
-                      "span",
-                      {
-                        staticClass: "d-inline-block text-truncate",
-                        staticStyle: { width: "200px" },
-                      },
-                      [
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(data.question_group.title) +
-                            "\n                        "
-                        ),
-                      ]
-                    ),
-                  ]),
-                ]),
-              ]
-            ),
+    _c("div", [
+      _vm.loading
+        ? _c("div", { staticClass: "card card-body py-5" }, [
+            _vm._m(0),
             _vm._v(" "),
-            _c("div", { staticClass: "col-auto" }, [
-              _c("div", { staticClass: "dropdown" }, [
-                _c(
-                  "button",
+            _c("h2", { staticClass: "text-center" }, [_vm._v("読み込み中")]),
+          ])
+        : !_vm.data_list.length
+        ? _c("div", { staticClass: "card card-body py-5" }, [
+            _c("h5", { staticClass: "text-center" }, [
+              _vm._v("報告情報はありません"),
+            ]),
+          ])
+        : _c(
+            "div",
+            { staticClass: "list-group" },
+            [
+              !_vm.data_list.length
+                ? _c("h5", { staticClass: "my-5 text-center" }, [
+                    _vm._v(
+                      "\n                報告情報はありません。\n            "
+                    ),
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.data_list, function (data, dKey) {
+                return _c(
+                  "div",
                   {
-                    staticClass: "btn",
-                    attrs: {
-                      type: "button",
-                      id: "dropdownMenuButton" + dKey,
-                      "data-bs-toggle": "dropdown",
-                      "aria-expanded": "false",
-                    },
-                  },
-                  [_vm._m(0, true)]
-                ),
-                _vm._v(" "),
-                _c(
-                  "ul",
-                  {
-                    staticClass: "dropdown-menu",
-                    attrs: { "aria-labelledby": "dropdownMenuButton" + dKey },
+                    key: dKey,
+                    staticClass:
+                      "list-group-item list-group-item-action p-0 d-flex",
                   },
                   [
-                    _c("li", [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "dropdown-item",
-                          attrs: {
-                            "data-bs-toggle": "modal",
-                            "data-bs-target": "#deleteModal" + dKey,
-                            href: "#",
-                          },
-                          on: {
-                            click: function ($event) {
-                              return _vm.destory(data.report.id)
-                            },
-                          },
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "d-block p-3 py-2 col text-dark text-decoration-none",
+                        attrs: {
+                          href: "#",
+                          "data-bs-toggle": "offcanvas",
+                          "data-bs-target":
+                            "#violationReportListOffcanvas" + dKey,
+                          "aria-controls":
+                            "violationReportListOffcanvas" + dKey,
                         },
-                        [_vm._v("削除")]
-                      ),
-                    ]),
-                  ]
-                ),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "offcanvas offcanvas-end",
-                staticStyle: { width: "600px" },
-                attrs: {
-                  tabindex: "-1",
-                  id: "violationReportListOffcanvas" + dKey,
-                  "aria-labelledby": "violationReportListOffcanvasLabel" + dKey,
-                },
-              },
-              [
-                _c("div", { staticClass: "offcanvas-header" }, [
-                  _c(
-                    "h5",
-                    {
-                      attrs: { id: "violationReportListOffcanvasLabel" + dKey },
-                    },
-                    [_vm._v("報告内容")]
-                  ),
-                  _vm._v(" "),
-                  _c("button", {
-                    staticClass: "btn-close text-reset",
-                    attrs: {
-                      type: "button",
-                      "data-bs-dismiss": "offcanvas",
-                      "aria-label": "Close",
-                    },
-                  }),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "offcanvas-body" }, [
-                  _c("div", { staticClass: "card card-body mb-3" }, [
-                    _c("strong", [_vm._v("報告者情報")]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "row py-2 border-top" }, [
-                      _c("div", { staticClass: "col-4" }, [_vm._v("対応状況")]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-8" }, [
-                        _c("div", { staticClass: "row align-items-center" }, [
-                          _c("div", { staticClass: "col" }, [
+                      },
+                      [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-auto" }, [
                             data.report.responsed
-                              ? _c("span", { staticClass: "text-success" }, [
-                                  _vm._v("対応済"),
-                                ])
-                              : _c("span", { staticClass: "text-danger" }, [
+                              ? _c(
+                                  "span",
+                                  { staticClass: "badge text-secondary" },
+                                  [_vm._v("対応済")]
+                                )
+                              : _c("span", { staticClass: "badge bg-danger" }, [
                                   _vm._v("未対応"),
                                 ]),
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col-auto" }, [
+                          _c(
+                            "div",
+                            { staticClass: "col-auto  d-none d-md-block" },
+                            [_vm._v(_vm._s(data.date))]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col overflow-hidden" }, [
                             _c(
-                              "div",
-                              { staticClass: "form-check form-switch" },
+                              "span",
+                              {
+                                staticClass: "d-inline-block text-truncate",
+                                staticStyle: { width: "200px" },
+                              },
                               [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: data.report.responsed,
-                                      expression: "data.report.responsed",
-                                    },
-                                  ],
-                                  staticClass: "form-check-input",
-                                  attrs: {
-                                    type: "checkbox",
-                                    id: "flexSwitchResponsed" + dKey,
-                                  },
-                                  domProps: {
-                                    checked: Array.isArray(
-                                      data.report.responsed
-                                    )
-                                      ? _vm._i(data.report.responsed, null) > -1
-                                      : data.report.responsed,
-                                  },
-                                  on: {
-                                    change: [
-                                      function ($event) {
-                                        var $$a = data.report.responsed,
-                                          $$el = $event.target,
-                                          $$c = $$el.checked ? true : false
-                                        if (Array.isArray($$a)) {
-                                          var $$v = null,
-                                            $$i = _vm._i($$a, $$v)
-                                          if ($$el.checked) {
-                                            $$i < 0 &&
-                                              _vm.$set(
-                                                data.report,
-                                                "responsed",
-                                                $$a.concat([$$v])
-                                              )
-                                          } else {
-                                            $$i > -1 &&
-                                              _vm.$set(
-                                                data.report,
-                                                "responsed",
-                                                $$a
-                                                  .slice(0, $$i)
-                                                  .concat($$a.slice($$i + 1))
-                                              )
-                                          }
-                                        } else {
-                                          _vm.$set(
-                                            data.report,
-                                            "responsed",
-                                            $$c
-                                          )
-                                        }
-                                      },
-                                      function ($event) {
-                                        return _vm.changeResponsed(dKey)
-                                      },
-                                    ],
-                                  },
-                                }),
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(data.question_group.title) +
+                                    "\n                            "
+                                ),
                               ]
                             ),
                           ]),
                         ]),
-                      ]),
-                    ]),
+                      ]
+                    ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "row py-2 border-top" }, [
-                      _c("div", { staticClass: "col-4" }, [_vm._v("日時")]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-8" }, [
-                        _vm._v(_vm._s(data.date)),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "row py-2 border-top" }, [
-                      _c("div", { staticClass: "col-4" }, [_vm._v("氏名・ID")]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-8" }, [
-                        _vm._v(
-                          _vm._s(data.reported_user.name) +
-                            "（ID:" +
-                            _vm._s(data.reported_user.id) +
-                            "）"
+                    _c("div", { staticClass: "col-auto" }, [
+                      _c("div", { staticClass: "dropdown" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn",
+                            attrs: {
+                              type: "button",
+                              id: "dropdownMenuButton" + dKey,
+                              "data-bs-toggle": "dropdown",
+                              "aria-expanded": "false",
+                            },
+                          },
+                          [_vm._m(1, true)]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "ul",
+                          {
+                            staticClass: "dropdown-menu",
+                            attrs: {
+                              "aria-labelledby": "dropdownMenuButton" + dKey,
+                            },
+                          },
+                          [
+                            _c("li", [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "dropdown-item",
+                                  attrs: {
+                                    "data-bs-toggle": "modal",
+                                    "data-bs-target": "#deleteModal" + dKey,
+                                    href: "#",
+                                  },
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.destory(data.report.id)
+                                    },
+                                  },
+                                },
+                                [_vm._v("削除")]
+                              ),
+                            ]),
+                          ]
                         ),
                       ]),
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "row py-2 border-top" }, [
-                      _c("div", { staticClass: "col-4" }, [_vm._v("報告内容")]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-12 col-md-8" }, [
-                        _vm._v(_vm._s(data.report.body)),
-                      ]),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card card-body mb-3" }, [
-                    _c("strong", [_vm._v("問題集情報")]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "row py-2 border-top" }, [
-                      _c("div", { staticClass: "col-4" }, [_vm._v("ID")]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-8" }, [
-                        _vm._v(_vm._s(data.question_group.id)),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "row py-2 border-top" }, [
-                      _c("div", { staticClass: "col-4" }, [_vm._v("タイトル")]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-8" }, [
-                        _vm._v(_vm._s(data.question_group.title)),
-                      ]),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card card-body mb-3" }, [
-                    _c("strong", [_vm._v("作成者情報")]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "row py-2 border-top" }, [
-                      _c("div", { staticClass: "col-4" }, [_vm._v("氏名")]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-8" }, [
-                        _vm._v(_vm._s(data.creater_user.name)),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "row py-2 border-top" }, [
-                      _c("div", { staticClass: "col-4" }, [
-                        _vm._v("メールアドレス"),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-8" }, [
-                        _vm._v(_vm._s(data.creater_user.email)),
-                      ]),
-                    ]),
-                  ]),
-                ]),
-              ]
-            ),
-          ]
-        )
-      }),
-      0
-    ),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "offcanvas offcanvas-end",
+                        staticStyle: { width: "600px" },
+                        attrs: {
+                          tabindex: "-1",
+                          id: "violationReportListOffcanvas" + dKey,
+                          "aria-labelledby":
+                            "violationReportListOffcanvasLabel" + dKey,
+                        },
+                      },
+                      [
+                        _c("div", { staticClass: "offcanvas-header" }, [
+                          _c(
+                            "h5",
+                            {
+                              attrs: {
+                                id: "violationReportListOffcanvasLabel" + dKey,
+                              },
+                            },
+                            [_vm._v("報告内容")]
+                          ),
+                          _vm._v(" "),
+                          _c("button", {
+                            staticClass: "btn-close text-reset",
+                            attrs: {
+                              type: "button",
+                              "data-bs-dismiss": "offcanvas",
+                              "aria-label": "Close",
+                            },
+                          }),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "offcanvas-body" }, [
+                          _c("div", { staticClass: "card card-body mb-3" }, [
+                            _c("strong", [_vm._v("報告者情報")]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row py-2 border-top" }, [
+                              _c("div", { staticClass: "col-4" }, [
+                                _vm._v("対応状況"),
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-8" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "row align-items-center" },
+                                  [
+                                    _c("div", { staticClass: "col" }, [
+                                      data.report.responsed
+                                        ? _c(
+                                            "span",
+                                            { staticClass: "text-success" },
+                                            [_vm._v("対応済")]
+                                          )
+                                        : _c(
+                                            "span",
+                                            { staticClass: "text-danger" },
+                                            [_vm._v("未対応")]
+                                          ),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "col-auto" }, [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "form-check form-switch",
+                                        },
+                                        [
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: data.report.responsed,
+                                                expression:
+                                                  "data.report.responsed",
+                                              },
+                                            ],
+                                            staticClass: "form-check-input",
+                                            attrs: {
+                                              type: "checkbox",
+                                              id: "flexSwitchResponsed" + dKey,
+                                            },
+                                            domProps: {
+                                              checked: Array.isArray(
+                                                data.report.responsed
+                                              )
+                                                ? _vm._i(
+                                                    data.report.responsed,
+                                                    null
+                                                  ) > -1
+                                                : data.report.responsed,
+                                            },
+                                            on: {
+                                              change: [
+                                                function ($event) {
+                                                  var $$a =
+                                                      data.report.responsed,
+                                                    $$el = $event.target,
+                                                    $$c = $$el.checked
+                                                      ? true
+                                                      : false
+                                                  if (Array.isArray($$a)) {
+                                                    var $$v = null,
+                                                      $$i = _vm._i($$a, $$v)
+                                                    if ($$el.checked) {
+                                                      $$i < 0 &&
+                                                        _vm.$set(
+                                                          data.report,
+                                                          "responsed",
+                                                          $$a.concat([$$v])
+                                                        )
+                                                    } else {
+                                                      $$i > -1 &&
+                                                        _vm.$set(
+                                                          data.report,
+                                                          "responsed",
+                                                          $$a
+                                                            .slice(0, $$i)
+                                                            .concat(
+                                                              $$a.slice($$i + 1)
+                                                            )
+                                                        )
+                                                    }
+                                                  } else {
+                                                    _vm.$set(
+                                                      data.report,
+                                                      "responsed",
+                                                      $$c
+                                                    )
+                                                  }
+                                                },
+                                                function ($event) {
+                                                  return _vm.changeResponsed(
+                                                    dKey
+                                                  )
+                                                },
+                                              ],
+                                            },
+                                          }),
+                                        ]
+                                      ),
+                                    ]),
+                                  ]
+                                ),
+                              ]),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row py-2 border-top" }, [
+                              _c("div", { staticClass: "col-4" }, [
+                                _vm._v("日時"),
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-8" }, [
+                                _vm._v(_vm._s(data.date)),
+                              ]),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row py-2 border-top" }, [
+                              _c("div", { staticClass: "col-4" }, [
+                                _vm._v("氏名・ID"),
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-8" }, [
+                                _vm._v(
+                                  _vm._s(data.reported_user.name) +
+                                    "（ID:" +
+                                    _vm._s(data.reported_user.id) +
+                                    "）"
+                                ),
+                              ]),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row py-2 border-top" }, [
+                              _c("div", { staticClass: "col-4" }, [
+                                _vm._v("報告内容"),
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-12 col-md-8" }, [
+                                _c("div", {
+                                  domProps: {
+                                    innerHTML: _vm._s(
+                                      data.report.body.replace(/\r?\n/g, "<br>")
+                                    ),
+                                  },
+                                }),
+                              ]),
+                            ]),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "card card-body mb-3" }, [
+                            _c("strong", [_vm._v("問題集情報")]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row py-2 border-top" }, [
+                              _c("div", { staticClass: "col-4" }, [
+                                _vm._v("ID"),
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-8" }, [
+                                _vm._v(_vm._s(data.question_group.id)),
+                              ]),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row py-2 border-top" }, [
+                              _c("div", { staticClass: "col-4" }, [
+                                _vm._v("タイトル"),
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-8" }, [
+                                _vm._v(_vm._s(data.question_group.title)),
+                              ]),
+                            ]),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "card card-body mb-3" }, [
+                            _c("strong", [_vm._v("作成者情報")]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row py-2 border-top" }, [
+                              _c("div", { staticClass: "col-4" }, [
+                                _vm._v("氏名"),
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-8" }, [
+                                _vm._v(_vm._s(data.creater_user.name)),
+                              ]),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row py-2 border-top" }, [
+                              _c("div", { staticClass: "col-4" }, [
+                                _vm._v("メールアドレス"),
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-8" }, [
+                                _vm._v(_vm._s(data.creater_user.email)),
+                              ]),
+                            ]),
+                          ]),
+                        ]),
+                      ]
+                    ),
+                  ]
+                )
+              }),
+            ],
+            2
+          ),
+    ]),
   ])
 }
 var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-flex justify-content-center" }, [
+      _c("div", { staticClass: "spinner-border", attrs: { role: "status" } }, [
+        _c("span", { staticClass: "visually-hidden" }, [_vm._v("Loading...")]),
+      ]),
+    ])
+  },
   function () {
     var _vm = this
     var _h = _vm.$createElement

@@ -38,6 +38,21 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
         Route::delete('/violation_report/destory/api', [Controllers\ServiceController::class, 'violation_report_destory_api'])
         ->name('violation_report.destory.api');
 
+    # お問い合わせ
+
+        # お問い合わせ[一覧](contact/list/api)
+        Route::post('/contact/list/api', [Controllers\ServiceController::class, 'contact_list_api'])
+        ->name('contact.list.api');
+
+        # お問い合わせ[対応済変更](contact/responsed/api)
+        Route::patch('/contact/responsed/api', [Controllers\ServiceController::class, 'contact_responsed_api'])
+        ->name('contact.responsed.api');
+
+        # お問い合わせ[削除](contact/destory/api)
+        Route::delete('/contact/destory/api', [Controllers\ServiceController::class, 'contact_destory_api'])
+        ->name('contact.destory.api');
+
     //
+
 //
 

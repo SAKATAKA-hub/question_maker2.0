@@ -21,13 +21,13 @@
             </div>
 
             <div v-else-if="!data_list.length" class="card card-body py-5">
-                <h5 class="text-center">報告情報はありません</h5>
+                <h5 class="text-center">お問い合わせ情報はありません</h5>
             </div>
 
             <div v-else class="list-group">
 
                 <h5 v-if="!data_list.length" class="my-5 text-center">
-                    報告情報はありません。
+                    お問い合わせ情報はありません。
                 </h5>
 
 
@@ -42,16 +42,16 @@
 
                         <div class="row">
                             <div class="col-auto">
-                                <span v-if="data.report.responsed" class="badge text-secondary">対応済</span>
+                                <span v-if="data.contact.responsed" class="badge text-secondary">対応済</span>
 
                                 <span v-else class="badge bg-danger">未対応</span>
                             </div>
                             <!-- 日付 -->
-                            <div class="col-auto  d-none d-md-block">{{data.date}}</div>
-                            <!-- タイトル -->
-                            <div class="col overflow-hidden">
+                            <div class="col-auto">{{data.date}}</div>
+                            <!-- 名前 -->
+                            <div class="col d-none d-md-block overflow-hidden">
                                 <span class="d-inline-block text-truncate" style="width: 200px;">
-                                    {{data.question_group.title}}
+                                    {{data.contact.name}}様
                                 </span>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
 
                             <ul class="dropdown-menu" :aria-labelledby="'dropdownMenuButton'+dKey">
                                 <li>
-                                    <a @click="destory(data.report.id)"
+                                    <a @click="destory(data.contact.id)"
                                     data-bs-toggle="modal" :data-bs-target="'#deleteModal'+dKey"
                                     class="dropdown-item" href="#">削除</a>
                                 </li>
@@ -86,20 +86,20 @@
                     :id="'violationReportListOffcanvas'+dKey " :aria-labelledby="'violationReportListOffcanvasLabel'+dKey "
                     >
                         <div class="offcanvas-header">
-                            <h5 :id="'violationReportListOffcanvasLabel'+dKey ">報告内容</h5>
+                            <h5 :id="'violationReportListOffcanvasLabel'+dKey ">お問い合わせ内容</h5>
                             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
                         <div class="offcanvas-body">
 
                             <div class="card card-body mb-3">
-                                <strong>報告者情報</strong>
+                                <strong>お問い合わせ者情報</strong>
                                 <div class="row py-2 border-top">
                                     <div class="col-4">対応状況</div>
                                     <div class="col-8">
                                         <div class="row align-items-center">
                                             <!--text-->
                                             <div class="col">
-                                                <span v-if="data.report.responsed"
+                                                <span v-if="data.contact.responsed"
                                                 class="text-success">対応済</span>
                                                 <span v-else
                                                 class="text-danger">未対応</span>
@@ -108,7 +108,7 @@
                                             <div class="col-auto">
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input" type="checkbox" @change="changeResponsed(dKey)"
-                                                    :id="'flexSwitchResponsed'+dKey" v-model="data.report.responsed">
+                                                    :id="'flexSwitchResponsed'+dKey" v-model="data.contact.responsed">
                                                 </div>
                                             </div>
                                         </div>
@@ -119,39 +119,14 @@
                                     <div class="col-8">{{data.date}}</div>
                                 </div>
                                 <div class="row py-2 border-top">
-                                    <div class="col-4">氏名・ID</div>
-                                    <div class="col-8">{{data.reported_user.name}}（ID:{{data.reported_user.id}}）</div>
-                                </div>
-                                <div class="row py-2 border-top">
-                                    <div class="col-4">報告内容</div>
-                                    <div class="col-12 col-md-8">
-                                        <div v-html="data.report.body.replace(/\r?\n/g, '<br>')"></div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="card card-body mb-3">
-                                <strong>問題集情報</strong>
-                                <div class="row py-2 border-top">
-                                    <div class="col-4">ID</div>
-                                    <div class="col-8">{{data.question_group.id}}</div>
-                                </div>
-                                <div class="row py-2 border-top">
-                                    <div class="col-4">タイトル</div>
-                                    <div class="col-8">{{data.question_group.title}}</div>
-                                </div>
-                            </div>
-
-                            <div class="card card-body mb-3">
-                                <strong>作成者情報</strong>
-                                <div class="row py-2 border-top">
                                     <div class="col-4">氏名</div>
-                                    <div class="col-8">{{data.creater_user.name}}</div>
+                                    <div class="col-8">{{data.contact.name}}</div>
                                 </div>
                                 <div class="row py-2 border-top">
-                                    <div class="col-4">メールアドレス</div>
-                                    <div class="col-8">{{data.creater_user.email}}</div>
+                                    <div class="col-4">お問い合わせ内容</div>
+                                    <div class="col-12 col-md-8">
+                                        <div v-html="data.contact.body.replace(/\r?\n/g, '<br>')"></div>
+                                    </div>
                                 </div>
 
                             </div>
@@ -176,9 +151,10 @@
         data : function() {
             return{
 
-                test: false,
+                test: true,
 
                 loading: true,
+
 
                 // データリスト
                 data_list: [
@@ -186,25 +162,14 @@
                         // 日時
                         'date': '',
 
-                        // 報告情報
-                        'report':         [],
-
-                        //報告者情報
-                        'reported_user':  [],
-
-                        // 問題集情報
-                        'question_group': [],
-
-                        // 作成者情報
-                        'creater_user':   [],
+                        // お問い合わせ情報
+                        'contact':         [],
 
                     */
                 ] ,
 
 
-                inputs:{
-                    app_key: '',
-                },
+                inputs:{ app_key: '', },
 
 
             }
@@ -236,9 +201,11 @@
 
                 // データの保存
                 this.data_list = json.data_list;
+
+
                 // ローディング表示->非表示
                 this.loading = false;
-                // console.log( json );
+                console.log( json );
             })
             .catch(err=>{
                 alert('通信エラーが発生しました。再読みを行います。');
@@ -256,8 +223,8 @@
                 const inputs = {
                     _method: 'patch',
                     app_key: this.app_key,
-                    id:        this.data_list[dKey].report.id,
-                    responsed: this.data_list[dKey].report.responsed,
+                    id:        this.data_list[dKey].contact.id,
+                    responsed: this.data_list[dKey].contact.responsed,
                 };
                 // [ 非同期通信 ]
                 fetch( this.route_responsed, {
@@ -271,7 +238,7 @@
                 .then(json => {
 
                     // 保存状態の変更
-                    // console.log( json );
+                    console.log( json );
 
                 })
                 .catch(err=>{
@@ -283,7 +250,7 @@
             },
 
 
-            /* 報告の削除 */
+            /* お問い合わせの削除 */
             destory: function(id){
 
                 // params

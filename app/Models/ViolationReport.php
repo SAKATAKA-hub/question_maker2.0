@@ -41,6 +41,7 @@ class ViolationReport extends Model
     |
     |
     */
+
         /**
          * 一覧表示用データリスト（data_list)
          * @return Array
