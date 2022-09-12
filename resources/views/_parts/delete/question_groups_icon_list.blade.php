@@ -96,9 +96,7 @@
             </div>
             <div class="">
                 <!-- お気に入りボタン -->
-                @php
-                    $user_id = Auth::check() ? Auth::user()->id : '' ;
-                @endphp
+                @php $user_id = Auth::check() ? Auth::user()->id : '' ; @endphp
                 <keep-question-group-component
                 user_id="{{$user_id}}" question_group_id="{{$question_group->id}}"
                 keep="{{\App\Models\KeepQuestionGroup::isKeep($user_id, $question_group->id)}}"

@@ -404,6 +404,19 @@ Route::get('/test/service_form', function(){
 })
 ->name('test.service_form');
 
+# 問題一覧
+Route::get('/test/question_group_card', function () {
+
+
+
+
+    $question_group = \App\Models\QuestionGroup::find(1);
+    // dd( $question_group->keep_question_groups->count() );
+
+    return view('test.question_group_card');
+})
+->name('test.question_group_card');
+
 
 // Route::get('test/{page}', function ($page) {
 //     return view('test.'.$page);

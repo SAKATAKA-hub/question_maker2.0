@@ -175,3 +175,9 @@ main{
     }
 
 /**/
+
+
+    /*問題集カード マウスオーバー*/
+    .question_group_card:hover{
+        box-shadow: none !important;
+    }

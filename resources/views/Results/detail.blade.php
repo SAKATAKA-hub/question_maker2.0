@@ -41,8 +41,8 @@
     <!-- 受検結果 -->
     <section>
         <div class="container-1200 my-3">
+            <div class="card shadow mb-3">
 
-            <div class="card mb-3">
                 <div class="card-body">
                     <div class="row">
                         <h5 class="fs-5 mb-0">あなたの受検結果</h5>
@@ -62,59 +62,61 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="card border-bottom-0 overflow-hidden">
-                <table class="table mb-0">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="bg-light">#</th>
-                            <th scope="col" class="bg-light">問題文</th>
-                            <th scope="col">あなたの解答</th>
-                            <th scope="col" class="d-none d-md-block"
-                            style="min-width:5rem;">添削結果</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($answers as $num => $answer)
-                        <tr>
-                            <th scope="row" class="bg-light">{{ $num + 1 }}</th>
 
-                            <td class="bg-light">
-                                <span class="d-inline-block text-truncate d-md-none"
-                                style="max-width: 100px;">{{ $questions[$num]->text }}</span>
-                                <span class="d-none d-md-inline">{{ $questions[$num]->text }}</span>
-                            </td>
+                <div>
+                    <div class="d-flex fw-bold border-top border-bottom">
+                        <div class="col-6 p-2 bg-light">
+                            <span class="me-2">#</span>
+                            <span class="me-2">問題文</span>
+                        </div>
+                        <div class="col p-2">
+                            あなたの解答
+                        </div>
+                        <div class="d-none d-md-block col-2 p-2">
+                            添削結果
+                        </div>
+                    </div>
+                    @foreach ($answers as $num => $answer)
+                    <div class="d-flex">
+                        <!-- 問題文 -->
+                        <div class="col-6 p-2 bg-light">
+                            <span class="me-2 ">{{ $num + 1 }}</span>
+                            <span class="d-inline-block text-truncate d-md-none"
+                            style="max-width: 100px;">{{ $questions[$num]->text }}</span>
+                            <span class="d-none d-md-inline">{{ $questions[$num]->text }}</span>
+                        </div>
+                        <!-- あなたの解答 -->
+                        <div class="col p-2">
+                            {{ $answer->text }}
 
-                            <td class="" >
-                                {{ $answer->text }}
+                            <div class="d-md-none">
+                                @if ( $answer->is_correct )
+                                    <div class="text-info">
+                                        <i class="bi bi-record fs-5"></i><span>正　解</span>
+                                    </div>
+                                @else
+                                    <div class="text-danger">
+                                        <i class="bi bi-x-lg fs-5"></i><span>不正解</span>
+                                    </div>
+                                @endif
+                            </div>
 
-                                <div class="d-md-none">
-                                    @if ( $answer->is_correct )
-                                        <div class="text-info">
-                                            <i class="bi bi-record fs-5"></i><span>正　解</span>
-                                        </div>
-                                    @else
-                                        <div class="text-danger">
-                                            <i class="bi bi-x-lg fs-5"></i><span>不正解</span>
-                                        </div>
-                                    @endif
-                                </div>
-                            </td>
-
-
+                        </div>
+                        <!-- 添削結果 -->
+                        <div class="d-none d-md-block col-2 p-2">
                             @if ( $answer->is_correct )
-                                <th class="d-none d-md-block text-info">
+                                <div class="d-none d-md-block text-info">
                                     <i class="bi bi-record fs-5"></i><span>正　解</span>
-                                </th>
+                                </div>
                             @else
-                                <th class="d-none d-md-block text-danger">
+                                <div class="d-none d-md-block text-danger">
                                     <i class="bi bi-x-lg fs-5"></i><span>不正解</span>
-                                </th>
+                                </div>
                             @endif
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
             </div>
 
         </div>
@@ -136,23 +138,109 @@
             @endphp
 
 
-            <div class="card card-body mb-3">
-                <h5>問題集の作成者情報(仮)</h5>
+            <!-- [ 作成者情報 ] -->
+            <div class="card border-0">
+                <div class="d-flex">
+                    <div class="col">
+                        <a href="{{route('creater',$question_group->user->id)}}" class="btn ps-0 w-100 list-group-item-action">
+                            <div class="d-flex align-items-center">
+                                <div class="user-image border ratio ratio-1x1 me-2" style="
+                                background: no-repeat center center / cover;
+                                background-image:url({{ asset('storage/'.$question_group->user->image_puth) }});
+                                width:1.8rem; border-radius:50%;
+                                "></div>
+                                <span class="text-truncate m-0">
+                                    {{$question_group->user->name}}
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-auto h-100">
+                        <div class="py-2">
 
-                <!-- フォローボタン -->
-                <div>
-                    <keep-creator-user-component user_id="{{$user_id}}" creater_user_id="1"
-                    keep="{{\App\Models\KeepCreatorUser::isKeep($user_id, $question_group->user->id)}}"
-                    route="{{route('keep_creator_user.api')}}"></keep-creator-user-component>
+                            <!-- フォローボタン -->
+                            <keep-creator-user-component user_id="{{$user_id}}" creater_user_id="1"
+                            keep="{{\App\Models\KeepCreatorUser::isKeep($user_id, $question_group->user->id)}}"
+                            route="{{route('keep_creator_user.api')}}"></keep-creator-user-component>
+
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="card card-body mb-3">
-                <h5>問題集の情報(仮)</h5>
-                <p>
-                    texttexttext
-                </p>
 
+            <!-- [ 問題集の情報 ] -->
+            <div class="card card-body mb-3">
+
+
+                <!-- タイトル -->
+                <div class="d-flex align-items-center">
+                    <div class="col">
+                        <h5 class="mb-0">{{ $question_group->title }}</h5>
+                    </div>
+                    <div class="col-auto">
+                        <a href="" class="btn btn-link text-success"
+                        data-bs-toggle="collapse" data-bs-target="#collapseQGInfo" aria-expanded="false" aria-controls="collapseQGInfo"
+                        >詳しく見る</a>
+                    </div>
+                </div>
+
+
+                <div id="collapseQGInfo" class="collapse mt-3">
+                    <div class="d-md-flex">
+                        <div class="col-md-6 order-2 p-3">
+
+
+                            <!-- サムネ画像 -->
+                            <div class="ratio ratio-16x9" style="
+                                background: no-repeat center center / cover;
+                                background-image:url({{ asset('storage/'.$question_group->image_puth) }});
+                                border-radius: .5rem;
+                            "></div>
+
+
+                        </div>
+                        <div class="col-md-6 order-1">
+
+
+                            <!-- [ 基本情報 ] -->
+                            <div class="mb-3">
+                                <div class="d-flex">
+                                    <div class="col-4 ps-3 bg-light">公開日</div>
+                                    <div class="col-8 ps-3">{{\Carbon\Carbon::parse( $question_group->published_at )->format('Y年m月d日 H:i')}}</div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="col-4 ps-3 bg-light">受験回数</div>
+                                    <div class="col-8 ps-3">{{$question_group->answer_groups->count()}}回</div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="col-4 ps-3 bg-light">問題数</div>
+                                    <div class="col-8 ps-3">全{{$question_group->question_count}}問</div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="col-4 ps-3 bg-light">平均点</div>
+                                    <div class="col-8 ps-3">{{$question_group->average_score}}点</div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="col-4 ps-3 bg-light">いいね数</div>
+                                    <div class="col-8 ps-3">{{$question_group->keep_question_groups->count()}}</div>
+                                </div>
+                            </div>
+
+                            <!-- [ 問題集の説明 ] -->
+                            <div class="mb-3">
+                                <div class="card card-body border-0" style="background: #5cf0cb80;">
+                                    {!! nl2br( e( $question_group->resume ) ) !!}
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- 3ボタン -->
                 <div class="d-flex align-items-center gap-3">
                     <!-- お気に入りボタン -->
                     <div>

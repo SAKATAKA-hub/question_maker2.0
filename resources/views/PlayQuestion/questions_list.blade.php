@@ -127,7 +127,7 @@
                 <div class="my-5">
 
                     <!-- 問題集リスト・ページネーション use_param[$question_groups] -->
-                    @include('_parts.question_groups_icon_list')
+                    @include('_parts.question_group_card_list')
 
                 </div>
 
@@ -155,7 +155,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="row my-5 mx-3">
+                <div class="my-5">
+
+                    <!-- 問題集リスト・ページネーション use_param[$question_groups] -->
+                    @include('_parts.question_group_card_list')
+
+                </div>
+
+                {{-- <div class="row my-5 mx-3">
                     @foreach ($question_groups as $i => $question_group)
 
                         <div class="col-md-4 col-lg-3 p-3 pb-3">
@@ -358,7 +365,7 @@
                 <!-- ページネーション -->
                 <div class="mb-5 d-flex justify-content-center">
                     {{ $question_groups->links('vendor.pagination.bootstrap-4') }}
-                </div>
+                </div> --}}
             </div>
         </section>
 

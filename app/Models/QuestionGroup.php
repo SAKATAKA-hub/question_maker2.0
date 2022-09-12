@@ -27,19 +27,29 @@ class QuestionGroup extends Model
     | リレーション
     |--------------------------------------------------------------------------
     */
-    # Questionテーブルとのリレーション ※カラムoderの番号順
-    public function questions()
-    {
-        return $this->hasMany(Question::class)->orderBy('order','asc');
-    }
+        # Userテーブルとのリレーション
+        public function user()
+        {
+            return $this->belongsTo(User::class,'user_id');
+        }
 
-    # Userテーブルとのリレーション
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+        # Questionテーブルとのリレーション ※カラムoderの番号順
+        public function questions()
+        {
+            return $this->hasMany(Question::class)->orderBy('order','asc');
+        }
 
+        # AnswerGroupsテーブルとのリレーション
+        public function answer_groups()
+        {
+            return $this->hasMany(AnswerGroup::class,'question_group_id');
+        }
 
+        # KeepQuestionGroupテーブルとのリレーション
+        public function keep_question_groups()
+        {
+            return $this->hasMany(KeepQuestionGroup::class,'question_group_id');
+        }
 
     /*
     |--------------------------------------------------------------------------
@@ -142,6 +152,21 @@ class QuestionGroup extends Model
 
             return max( $updates_array );
         }
+
+
+        /**
+         * 平均点 $question_group->average_score
+         * @return String
+        */
+        public function getAverageScoreAttribute(){
+
+            $total_score = $this->answer_groups->sum('score'); //合計点
+            $count = $this->answer_groups->count(); //受検者数
+
+            // 受検者数0のときは、'---'を表示、それ以外は'平均点'を表示
+            return  $count ? round( $total_score / $count , 1 ) : '---';
+        }
+
 
     //
     /*

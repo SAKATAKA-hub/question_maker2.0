@@ -32,7 +32,7 @@
             <div class="container-1200">
 
                 <!-- 検索フォーム -->
-                <form action="{{ route('questions_search_list') }}">
+                {{-- <form action="{{ route('questions_search_list') }}">
                     <div  class="input-group overflow-hidden border shadow" style="border-radius:2rem;">
 
                         <span class="input-group-text">
@@ -61,34 +61,34 @@
                             <button type="submit" class="btn"><i class="bi bi-search"></i></button>
                         </span>
                     </div>
-                </form>
+                </form> --}}
 
 
                 <!-- 検索結果 -->
                 <div class="my-5">
 
-                    @if ( $question_groups->count() )
-                    <h5 class="text-secondary">”{{$keywords?$keywords:'すべて'}}”の条件で一致する検索結果</h5>
-                    @else
-                    <h5 class="text-secondary">”{{$keywords}}”の条件に一致する結果がみつかりません。</h5>
-                    @endif
+                    <div class="mb-5">
+                        @if ( $question_groups->count() )
+                        <h5 class="text-secondary">”{{$keywords?$keywords:'すべて'}}”の条件で一致する検索結果</h5>
+                        @else
+                        <h5 class="text-secondary">”{{$keywords}}”の条件に一致する結果がみつかりません。</h5>
+                        @endif
+                    </div>
 
 
                     <!-- 問題集リスト・ページネーション use_param[$question_groups] -->
-                    @include('_parts.question_groups_icon_list')
-
-
+                    @include('_parts.question_group_card_list')
 
                 </div>
 
 
                 <!-- タグ一覧 -->
-                <div class="row my-5">
+                {{-- <div class="row my-5">
                     <h5 class="text-secondary">＃タグから検索する</h5>
                     <div class="bg-light">
                         <div class="card-body">hoge</div>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
         </section>
