@@ -178,12 +178,12 @@
         <div class="my-3">
 
             報告リストコンポーネント
-            <violation-report-list-component
+            {{-- <violation-report-list-component
             route_list="{{     route('violation_report.list.api')}}"
             route_responsed="{{route('violation_report.responsed.api')}}"
             rote_destoroy="{{  route('violation_report.destory.api')}}"
             app_key="{{env('APP_KEY')}}"
-            ></violation-report-list-component>
+            ></violation-report-list-component> --}}
 
             route_list: {{     route('violation_report.list.api')}} <br>
             route_responsed: {{route('violation_report.responsed.api')}} <br>
@@ -199,7 +199,7 @@
                 <input type="hidden" name="user_id" value="0">
                 <input type="hidden" name="question_group_id" value="1">
 
-                <!-- ゲスト 氏名 -->
+                <!-- 氏名 -->
                 <div class="mb-3">
                     <label for="contact_name" class="form-label">
                         氏名<small class="text-danger ms-3">※必須</small>
@@ -207,7 +207,7 @@
                     <input type="text" name="name" class="form-control" id="contact_name"
                     placeholder="山田　太郎" maxlength="50" required>
                 </div>
-                <!-- ゲスト メールアドレス -->
+                <!-- メールアドレス -->
                 <div class="mb-3">
                     <label for="contact_email" class="form-label">
                         メールアドレス<small class="text-danger ms-3">※必須</small>
@@ -226,11 +226,17 @@
 
                 <button type="submit" class="btn btn-primary">送信</button>
             </form>
-            <contact-component/>
         </div>
+        {{-- <div class="my-3">
+
+            <contact-form-component></contact-form-componentt>
+
+
+        </div> --}}
         <div class="my-3">
 
-            報告リストコンポーネント
+
+            お問い合わせコンポーネント
             <contact-list-component
             route_list="{{     route('contact.list.api')}}"
             route_responsed="{{route('contact.responsed.api')}}"

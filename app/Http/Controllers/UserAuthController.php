@@ -173,7 +173,7 @@ class UserAuthController extends Controller
                 'password' => Hash::make( $request->password ),
             ]);
             $user->save();
-
+            $request->session()->regenerateToken(); //二重投稿防止
 
             # JSONレスポンス
             return response()->json([

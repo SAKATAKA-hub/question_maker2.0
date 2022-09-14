@@ -401,18 +401,10 @@ Route::get('/test/question_detail', function(){ return view( 'test.question_deta
 # その他サービスのテスト
 Route::get('/test/service_form', function(){
     return view( 'test.service_form');
-})
-->name('test.service_form');
+})->name('test.service_form');
 
 # 問題一覧
 Route::get('/test/question_group_card', function () {
-
-
-
-
-    $question_group = \App\Models\QuestionGroup::find(1);
-    // dd( $question_group->keep_question_groups->count() );
-
     return view('test.question_group_card');
 })
 ->name('test.question_group_card');

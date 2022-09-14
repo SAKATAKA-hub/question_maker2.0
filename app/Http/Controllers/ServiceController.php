@@ -116,6 +116,8 @@ class ServiceController extends Controller
                 // 投稿内容をDBに保存
                 $comment = new \App\Models\QuestionGroupComment($input);
                 $comment->save();
+                $request->session()->regenerateToken(); //二重投稿防止
+
             }
 
 
@@ -176,6 +178,7 @@ class ServiceController extends Controller
             # 通報内容をDBに保存
             $violation_report = new \App\Models\ViolationReport($input);
             $violation_report->save();
+            $request->session()->regenerateToken(); //二重投稿防止
 
 
             # JSONを返す
@@ -266,11 +269,16 @@ class ServiceController extends Controller
         {
             # 入力内容の修正
             $input = $request->only('name','email','body');
-            // dd($input);
+
+            # テキストのストレージ保存
+            $dir = 'upload/contact/';
+            $input['body'] = Method::uploadStorageText( $dir, $request->body );
+            // $inputs['job_description'] = Method::updateStorageFile();
 
             # お問い合わせ内容をDBに保存
             $contact = new \App\Models\Contact($input);
             $contact->save();
+            $request->session()->regenerateToken(); //二重投稿防止
 
 
             # JSONを返す

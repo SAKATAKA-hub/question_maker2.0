@@ -295,8 +295,14 @@
                 this.submit_button.text = '送信中・・・';
             },
 
-            numAdd: function(){ this.question_num ++; },
-            numSub: function(){ this.question_num --; },
+            numAdd: function(){
+                this.question_num ++;
+                window.scroll({top: 0, behavior: 'smooth'});
+            },
+            numSub: function(){
+                this.question_num --;
+                window.scroll({top: 0, behavior: 'smooth'});
+            },
 
         }
     }

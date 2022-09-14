@@ -17,6 +17,9 @@
 
 <!----- meta ----->
 @section('meta')
+<meta name="csrf_token"                  content="{{ csrf_token() }}">
+<meta name="route_get_questions_api" content="{{ route('get_questions_api') }}">
+<meta name="route_scoring"           content="{{ route('scoring') }}">
 @endsection
 
 
@@ -32,13 +35,22 @@
 
 <!----- contents ----->
 @section('contents')
+    <!--
+        // Please Login Modal //
+        利用：フォローボタン・いいねボタン・通報ボタン・コメントコンポーネント
+    -->
+    <please-login-modal-component login_form_route="{{ route('user_auth.login_form') }}"
+    ></please-login-modal-component>
+    @php $user_id = Auth::check() ? Auth::user()->id : '' ; @endphp
+
+
     <section>
         <div class="container-1200 my-5">
             <div class="d-md-flex">
 
 
                 <!-- サイドコンテンツ -->
-                <div class="  pe-3" style="min-width:300px;">
+                <div class="pe-md-3 mb-5" style="min-width:300px;">
                     @include('_parts.creater_info')
                 </div>
 
@@ -52,14 +64,13 @@
                     @if ( $question_groups->count() )
 
                         <!-- 問題集リスト・ページネーション use_param[$question_groups] -->
-                        @php $list_sm = true; @endphp
-                        @include('_parts.question_groups_icon_list')
+                        @include('_parts.question_group_card_list')
 
                     @else
 
-                        <div class="h2 text-secondary text-center py-5">
+                        <h2 class="text-secondary text-center py-5">
                             現在、公開中の問題はありません。
-                        </div>
+                        </h2>
 
                     @endif
 

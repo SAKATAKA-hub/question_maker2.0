@@ -49,7 +49,7 @@ Vue.component('comment-component',             require('./components/Service/Com
 
 Vue.component('violation-report-component',    require('./components/Service/ViolationReportComponent.vue').default);
 Vue.component('violation-report-list-component',    require('./components/Service/ViolationReportListComponent.vue').default);
-Vue.component('contact-component',             require('./components/Service/ContactComponent.vue').default);
+Vue.component('contact-form-component',             require('./components/Service/ContactFormComponent.vue').default);
 Vue.component('contact-list-component',             require('./components/Service/ContactListComponent.vue').default);
 
 

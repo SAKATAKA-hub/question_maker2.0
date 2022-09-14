@@ -133,9 +133,7 @@
             -->
             <please-login-modal-component login_form_route="{{ route('user_auth.login_form') }}"
             ></please-login-modal-component>
-            @php
-                $user_id = Auth::check() ? Auth::user()->id : '' ;
-            @endphp
+            @php $user_id = Auth::check() ? Auth::user()->id : '' ; @endphp
 
 
             <!-- [ 作成者情報 ] -->
@@ -159,7 +157,7 @@
                         <div class="py-2">
 
                             <!-- フォローボタン -->
-                            <keep-creator-user-component user_id="{{$user_id}}" creater_user_id="1"
+                            <keep-creator-user-component user_id="{{$user_id}}" creater_user_id="{{$question_group->user->id}}"
                             keep="{{\App\Models\KeepCreatorUser::isKeep($user_id, $question_group->user->id)}}"
                             route="{{route('keep_creator_user.api')}}"></keep-creator-user-component>
 

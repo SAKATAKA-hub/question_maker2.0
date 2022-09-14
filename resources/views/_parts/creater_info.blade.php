@@ -1,4 +1,8 @@
 <div class="">
+
+    @php $user_id = Auth::check() ? Auth::user()->id : '' ; @endphp
+
+
     <!-- ユーザーネーム -->
     <div class="d-flex align-items-center ps-2">
         <div class="user-image border border-1 ratio ratio-1x1 mb-1" style="
@@ -43,16 +47,15 @@
         </div>
     </div>
 
-    <!-- フォローボタン -->
 
+    <!-- フォローボタン -->
     <div class="mb-3">
-        @if  (Auth::check() )
-            <keep-creator-user-component
-            user_id="{{Auth::user()->id}}" creater_user_id="{{$creater_user->id}}"
-            keep="{{ \App\Models\KeepCreatorUser::where('user_id',Auth::user()->id)->where('creater_user_id',$creater_user->id)->first()->keep }}"
-            route="{{route('keep_creator_user.api')}}"/>
-        @endif
+        <keep-creator-user-component
+        user_id="{{$user_id}}" creater_user_id="{{$creater_user->id}}"
+        keep="{{\App\Models\KeepCreatorUser::isKeep($user_id, $creater_user->id)}}"
+        route="{{route('keep_creator_user.api')}}"></keep-creator-user-component>
     </div>
+
 
     <!-- 自己紹介 -->
     <div class="card border-1 card-body mb-3">
@@ -62,9 +65,14 @@
         </p>
     </div>
 
-    <!-- メニューリスト -->
-    {{-- <div class="card">
-        @include('_parts.user_menu')
-    </div> --}}
+
+    @if ( $user_id == $creater_user->id)
+            <!-- メニューリスト -->
+        <div class="card d-none d-md-block">
+            @include('_parts.user_menu')
+        </div>
+
+    @endif
+
 
 </div>

@@ -84,7 +84,7 @@
                         <div class="my-5">
                             <!-- 検索フォーム -->
                             <form action="{{ route('questions_search_list') }}">
-                                <div  class="input-group overflow-hidden border shadow" style="border-radius:2rem;">
+                                <div  class="input-group overflow-hidden shadow" style="border-radius:2rem;">
                                     <input type="text" name="seach_keywords" class="form-control bg-white border-0 ps-3"
                                     value="@if ( isset($keywords) ){{  $keywords.' '  }}@endif" placeholder="キーワード" aria-label="SeachKeywords" aria-describedby="basic-addon1">
 

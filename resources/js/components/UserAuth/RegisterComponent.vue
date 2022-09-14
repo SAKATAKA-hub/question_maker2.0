@@ -156,7 +156,7 @@
                     <div class="step bg-warning text-white">
                         <h5>1</h5><p>入力</p>
                     </div>
-                    <div class="step  bg-warning text-white">
+                    <div class="step bg-warning text-white">
                         <h5>2</h5><p>確認</p>
                     </div>
                     <div class="step">
@@ -190,7 +190,7 @@
 
                     <div class="row mt-5 mb-3">
                         <div class="col-sm-8 offset-sm-2 mb-3">
-                            <button type="button" @click="nextToStep02"
+                            <button type="button" @click="nextToStep02" :disabled="conp_btn_disabled"
                             class="btn rounded-pill btn-warning text-white w-100">
                                 {{ '登録' }}
                             </button>
@@ -262,7 +262,6 @@
 
     </div>
 </template>
-
 <script>
     export default {
         data : function() {
@@ -297,6 +296,9 @@
 
                 /* 確認ボタン */
                 conf_btn_disabled: true,
+
+                /* 完了ボタン */
+                conp_btn_disabled: false,
 
 
                 /* エラー内容 */
@@ -337,6 +339,9 @@
             /* ステップ02の次へメソッド */
             nextToStep02 :function(){
 
+                //完了ボタン
+                this.conp_btn_disabled = true;
+
                 // 新規会員情報の登録[ 非同期通信 ]
                 fetch( this.route.register_api, {
                     method: 'POST',
@@ -346,13 +351,17 @@
                     }),
                 })
                 .then(response => {
-                    if(!response.ok){ alert('データ送信エラーが発生しました。'); }
-                    return response.json();
-                })
-                .then(json => {
-                    this.addCardNum();
-                    // console.log( json );
-                })
+                        if(!response.ok){ throw new Error('送信エラー'); }
+                        return response.json();
+                    })
+                    .then(json => {
+                        this.addCardNum();
+                        // console.log( json );
+                    })
+                    .catch(err=>{
+                        alert('データ送信エラーが発生しました。');
+                        // location.reload();
+                    })
 
             },
 
@@ -366,7 +375,7 @@
 
                 // 入力必須
                 this.errors.name = this.inputs.name == ''
-                ? 'メールアドレスの入力は必須です。' : '' ;
+                ? '氏名の入力は必須です。' : '' ;
 
                 this.confInputs();
             },
@@ -403,17 +412,18 @@
                         }),
                     })
                     .then(response => {
-                        if(!response.ok){ alert('データ送信エラーが発生しました。'); }
+                        if(!response.ok){ throw new Error('送信エラー'); }
                         return response.json();
                     })
-                    // [ 非同期通信・成功処理 ]
                     .then(json => {
-
                         this.errors.email = json.email_ique
                         ? 'このメールアドレスは、すでに登録されています。' : '' ;
-
                         this.confInputs();
                         // console.log( json.email_ique );
+                    })
+                    .catch(err=>{
+                        alert('データ送信エラーが発生しました。');
+                        // location.reload();
                     })
 
                 //

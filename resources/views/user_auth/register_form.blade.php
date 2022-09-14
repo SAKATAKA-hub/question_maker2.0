@@ -15,7 +15,6 @@
 @endsection
 
 
-
 <!----- style ----->
 @section('style')
 @endsection

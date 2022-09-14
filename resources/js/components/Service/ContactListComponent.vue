@@ -37,7 +37,7 @@
 
                     <a href="#"
                     class="d-block p-3 py-2 col text-dark text-decoration-none"
-                    data-bs-toggle="offcanvas" :data-bs-target="'#violationReportListOffcanvas'+dKey " :aria-controls="'violationReportListOffcanvas'+dKey "
+                    data-bs-toggle="offcanvas" :data-bs-target="'#contactListOffcanvas'+dKey " :aria-controls="'contactListOffcanvas'+dKey "
                     >
 
                         <div class="row">
@@ -63,14 +63,14 @@
                     <div class="col-auto">
                         <div class="dropdown">
                             <button class="btn" type="button"
-                            :id="'dropdownMenuButton'+dKey" data-bs-toggle="dropdown" aria-expanded="false"
+                            :id="'contactDropdownMenuButton'+dKey" data-bs-toggle="dropdown" aria-expanded="false"
                             >
                                 <span class="fs-5">
                                     <i class="bi bi-three-dots-vertical"></i>
                                 </span>
                             </button>
 
-                            <ul class="dropdown-menu" :aria-labelledby="'dropdownMenuButton'+dKey">
+                            <ul class="dropdown-menu" :aria-labelledby="'contactDropdownMenuButton'+dKey">
                                 <li>
                                     <a @click="destory(data.contact.id)"
                                     data-bs-toggle="modal" :data-bs-target="'#deleteModal'+dKey"
@@ -83,10 +83,10 @@
 
                     <!-- offcanvas -->
                     <div class="offcanvas offcanvas-end" tabindex="-1" style="width:600px;"
-                    :id="'violationReportListOffcanvas'+dKey " :aria-labelledby="'violationReportListOffcanvasLabel'+dKey "
+                    :id="'contactListOffcanvas'+dKey " :aria-labelledby="'contactListOffcanvasLabel'+dKey "
                     >
                         <div class="offcanvas-header">
-                            <h5 :id="'violationReportListOffcanvasLabel'+dKey ">お問い合わせ内容</h5>
+                            <h5 :id="'contactListOffcanvasLabel'+dKey ">お問い合わせ内容</h5>
                             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
                         <div class="offcanvas-body">
@@ -123,9 +123,9 @@
                                     <div class="col-8">{{data.contact.name}}</div>
                                 </div>
                                 <div class="row py-2 border-top">
-                                    <div class="col-4">お問い合わせ内容</div>
+                                    <div class="col-12 col-md-4">お問い合わせ内容</div>
                                     <div class="col-12 col-md-8">
-                                        <div v-html="data.contact.body.replace(/\r?\n/g, '<br>')"></div>
+                                        <div v-html="data.contact.body_text.replace(/\r?\n/g, '<br>')"></div>
                                     </div>
                                 </div>
 

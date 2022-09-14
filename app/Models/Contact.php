@@ -17,6 +17,28 @@ class Contact extends Model
         'name','email','body','responsed','type_text'
     ];
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | アクセサー
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+        /**
+         * ストレージ保存された文章（経歴要約） $contact->body_text
+         * @return String
+         */
+        public function getBodyTextAttribute()
+        {
+            // パスから改行を取り除く
+            $text = $this->body;
+            $path = str_replace(["\r\n", "\r", "\n"], '', $text);
+
+            return \Illuminate\Support\Facades\Storage::exists($path) ?
+            \Illuminate\Support\Facades\Storage::get($path) : $text;
+        }
+
     /*
     |--------------------------------------------------------------------------
     | スコープ
@@ -37,14 +59,15 @@ class Contact extends Model
             # データの加工
             $data_list = [];
             for ($i=0; $i < $contacts->count(); $i++) {
-                $question_group = \App\Models\QuestionGroup::find( $contacts[$i]->question_group_id );
 
+                $contact = $contacts[$i];
+                $contact->body_text = $contact->body_text; //ストレージテキスト
 
                 $data = [
                     // 日時
                     'date' => \Carbon\Carbon::parse( $contacts[$i]->created_at )->format('Y年m月d日 H:i'),
                     // 報告情報
-                    'contact' => $contacts[$i],
+                    'contact' => $contact,
                 ];
                 $data_list[] = $data;
             }

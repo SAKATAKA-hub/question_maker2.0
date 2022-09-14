@@ -10,13 +10,13 @@
 
         <button  v-if=" user_id "
         class="btn btn-sm" @click="click" type="button"
-        :class="{'btn-success':inputs.keep, 'text-success fw-bold':!inputs.keep}"
+        :class="{'btn-success':inputs.keep, 'border border-success':!inputs.keep, 'text-success fw-bold':!inputs.keep}"
         >{{btn_text}}</button>
 
         <button  v-else
         data-bs-toggle="modal" data-bs-target="#PleaseLoginModal"
         class="btn btn-sm" type="button"
-        :class="{'btn-success':inputs.keep, 'text-success fw-bold':!inputs.keep}"
+        :class="{'btn-success':inputs.keep, 'border border-success':inputs.keep, 'text-success fw-bold':!inputs.keep}"
         >{{btn_text}}</button>
 
 
