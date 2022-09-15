@@ -410,14 +410,15 @@ Route::get('/test/question_group_card', function () {
 ->name('test.question_group_card');
 
 
-// Route::get('test/{page}', function ($page) {
-//     return view('test.'.$page);
-// });
+# 送信メール一覧
+Route::get('/test/emails', function () {return view('test.emails');})
+->name('test.emails');
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+# メール内容の確認
+Route::get('/test/emails/{mail}', function($mail){ return view( 'emails.'.$mail); })
+->name('test.emails.mail');
 
-// Auth::routes();
+    # パスワード変更確認メール /test/emails/reset_pass01_verification
+    # パスワード変更完了メール /test/emails/reset_pass02_completion
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//

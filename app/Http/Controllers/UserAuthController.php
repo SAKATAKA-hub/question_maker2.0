@@ -183,6 +183,7 @@ class UserAuthController extends Controller
         }
 
 
+
     /*
     | ---------------------------------
     |   パスワード変更
@@ -216,7 +217,7 @@ class UserAuthController extends Controller
                 Mail::to( $request->email ) //宛先
                 ->send(new \App\Mail\SendMailMailable([
                     'inputs' => ['reset_pass_code' => $reset_pass_code] , //入力変数
-                    'view' => 'emails.worker_reset_pass01_verification' , //テンプレート
+                    'view' => 'emails.reset_pass01_verification' , //テンプレート
                     'subject' => '【'.env('APP_NAME').'】パスワード変更認証コード' , //件名
                 ]) );
 
@@ -287,7 +288,7 @@ class UserAuthController extends Controller
             Mail::to( $request->email ) //宛先
             ->send(new \App\Mail\SendMailMailable([
                 'inputs' => $request , //入力変数
-                'view' => 'emails.worker_reset_pass02_completion' , //テンプレート
+                'view' => 'emails.reset_pass02_completion' , //テンプレート
                 'subject' => '【'.env('APP_NAME').'】パスワード変更が完了いたしました' , //件名
             ]) );
 
@@ -315,13 +316,12 @@ class UserAuthController extends Controller
         $user = Auth::user();
         Auth::logout(); //ユーザーセッションの削除
         $request->session()->invalidate(); //全セッションの削除
-        $request->session()->regenerateToken(); //セッションの再作成(二重送信の防止)
 
 
         # アンケートの入力
         $contact = new \App\Models\Contact([
-            'gest_name'  => $user->name,
-            'gest_email' => $user->email,
+            'name'  => $user->name,
+            'email' => $user->email,
             'body'       => $request->body,
             'type_text'  => '退会手続き',
             'responded'  => 1,
