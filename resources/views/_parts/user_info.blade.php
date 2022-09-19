@@ -42,16 +42,12 @@
         </div>
     </div>
 
-    <!-- フォローボタン -->
-    {{-- <div class="mb-3">
-        <button class="btn btn-success btn-sm">フォローする</button>
-    </div> --}}
 
     <!-- 自己紹介 -->
     <div class="card card-body border-1 mb-3">
         <p class="text-secondary" style="font-size:.6rem">自己紹介</p>
         <p>
-            {!! nl2br( e(Auth::user()->profile) ) !!}
+            {!! nl2br( e(Auth::user()->profile_text) ) !!}
         </p>
     </div>
 

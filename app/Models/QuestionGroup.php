@@ -15,7 +15,7 @@ class QuestionGroup extends Model
     use HasFactory;
     public $timestamps = true;
     protected $fillable = [
-        'title','resume','image','tags','time_limit','published_at','user_id',
+        'title','resume','image','tags','time_limit','published_at','limited_published','key','user_id',
         'accessed_count',    //'アクセス数'
         'evaluation_points', //'評価ポイント'
         'average_score',     //'平均点'
@@ -69,6 +69,21 @@ class QuestionGroup extends Model
             $no_image = 'site/image/no_image.png';
 
             return Storage::exists( $this->image ) ? $this->image : $no_image;
+        }
+
+
+        /**
+         * ストレージ保存された文章（説明文）$question_group->resume_text
+         * @return String
+         */
+        public function getResumeTextAttribute()
+        {
+            // パスから改行を取り除く
+            $text = $this->resume;
+            $path = str_replace(["\r\n", "\r", "\n"], '', $text);
+
+            return \Illuminate\Support\Facades\Storage::exists($path) ?
+            \Illuminate\Support\Facades\Storage::get($path) : $text;
         }
 
 

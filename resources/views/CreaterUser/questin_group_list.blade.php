@@ -50,11 +50,14 @@
 
 
                 <!-- サイドコンテンツ -->
-                <div class="pe-md-3 mb-5" style="min-width:300px;">
+                <!--PC-->
+                <div class="d-none d-md-block pe-3" style="width:300px;">
                     @include('_parts.creater_info')
                 </div>
-
-
+                <!--movile-->
+                <div class="d-md-none mb-5 w-100">
+                    @include('_parts.creater_info')
+                </div>
 
 
                 <!-- 中央コンテンツ -->

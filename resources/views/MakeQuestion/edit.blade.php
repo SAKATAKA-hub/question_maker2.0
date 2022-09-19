@@ -61,12 +61,26 @@
         @endif
 
 
-            <div class="card mb-5 card-body shadow">
+            @if ( $question_group->questions->count() == 0 )
+                <!-- 最初の問題作成時の表示 -->
+                <div class="card  shadow border-success border-2 mb-5">
+                    <div class="card-header bg-success text-white d-md-flex">
+                        <h5 class="mb-0 card-title">『問題』を登録しよう！</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text text-secondary">
+                            『ひとつの答えを選ぶ』、『複数の答えを選ぶ』、『テキストで答えを入力する』の三種類から解答方法を選択して、問題をつくろう。
+                        </p>
+                    </div>
+                </div>
+            @endif
 
+
+            <div class="card mb-5 card-body border-0 shadow">
                 <!-- 出題順 -->
-                <div class="form-group mb-4">
+                <div class="form-group mb-4 card card-body border-info">
                     <label for="order_input" class="form-check-label fs-5 mb-2 fw-bold"
-                    >出題順</label>
+                    >出題の順番</label>
                     <select name="order" class="form-select" id="order_input">
                         @php
                             $count = $question_group->questions->count(); //更新前の問題数
@@ -91,14 +105,14 @@
 
 
                 <!-- 問題文 -->
-                <div class="form-group mb-4">
+                <div class="form-group mb-4 card card-body border-info">
                     <label for="text" >
                         <span class="form-check-label fs-5 mb-2 fw-bold">問題文</span>
                         <span class="badge bg-danger" style="transform:translateY(-3px);">必須</span>
                     </label>
                     <textarea name="text" class="form-control" id="text" rows="3"
-                    maxlength="150" required>@if( isset($question) ) {{$question->text}} @endif</textarea>
-                    <div class="form-text">※150文字以内</div>
+                    required>@if( isset($question) ) {{$question->text_text}} @endif</textarea>
+                    {{-- <div class="form-text">※150文字以内</div> --}}
                 </div>
 
 
@@ -108,17 +122,18 @@
                     $answer_type_num = isset($question) ? $question->answer_type : 1 ;
                     $question_id = isset($question) ? $question->id : null ;
                 @endphp
-                <select-answer-component
-                    answer_type_num="{{ $answer_type_num }}"
-                    question_id="{{ $question_id }}"
-                    token="{{ csrf_token() }}"
-                    api_route="{{ route('make_question.question_options_api') }}"
-                ></select-answer-component>
-
+                <div class="form-group mb-4 card card-body border-info">
+                    <select-answer-component
+                        answer_type_num="{{ $answer_type_num }}"
+                        question_id="{{ $question_id }}"
+                        token="{{ csrf_token() }}"
+                        api_route="{{ route('make_question.question_options_api') }}"
+                    ></select-answer-component>
+                </div>
 
 
                 <!-- 問題画像 -->
-                <div class="form-group mb-4">
+                <div class="form-group mb-4 card card-body border-info">
                     <label for="exampleFormControlInput1" class="form-check-label fs-5 mb-2 fw-bold"
                     >問題画像</label>
 

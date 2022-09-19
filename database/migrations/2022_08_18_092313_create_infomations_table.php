@@ -21,7 +21,12 @@ class CreateInfomationsTable extends Migration
             $table->id();
             $table->string('title'  ,150)->comment('題名');
             $table->string('body'   ,150)->comment('ほんぶん');
-            $table->string('subject',150)->comment('対象者')->nullable()->default(null);
+            $table->boolean('read')->comment('既読か否か')->default(0);
+
+            $table->unsignedBigInteger('user_id')->comment('ユーザーID');
+            $table->foreign('user_id')->references('id')->on('users') //存在しないidの登録は不可
+            ->onDelete('cascade');//主テーブルに関連する従テーブルのレコードを削除
+
             $table->timestamps();
         });
     }

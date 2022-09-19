@@ -5,10 +5,10 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 /**
  * ===============================
- *  ユーザーへのお知らせ　既読管理
+ *  メールの受信設定
  * ===============================
  */
-class CreateInfomationReadsTable extends Migration
+class CreateMailSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,18 +17,17 @@ class CreateInfomationReadsTable extends Migration
      */
     public function up()
     {
-        Schema::create('infomation_reads', function (Blueprint $table) {
+        Schema::create('mail_settings', function (Blueprint $table) {
             $table->id();
-
-            $table->unsignedBigInteger('infomation_id')->comment('お知らせID');
-            $table->foreign('infomation_id')->references('id')->on('infomations') //存在しないidの登録は不可
-            ->onDelete('cascade');//主テーブルに関連する従テーブルのレコードを削除
+            $table->boolean('keep_question_group')->comment('いいね')->default(1);
+            $table->boolean('keep_creator_user'  )->comment('フォロー')->default(1);
+            $table->boolean('comment'            )->comment('コメント')->default(1);
+            $table->boolean('infomation'         )->comment('運営会社からのお知らせ')->default(1);
 
             $table->unsignedBigInteger('user_id')->comment('ユーザーID');
             $table->foreign('user_id')->references('id')->on('users') //存在しないidの登録は不可
             ->onDelete('cascade');//主テーブルに関連する従テーブルのレコードを削除
 
-            $table->boolean('read')->comment('既読か否か')->default(0);
             $table->timestamps();
         });
     }
@@ -40,6 +39,6 @@ class CreateInfomationReadsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('infomation_reads');
+        Schema::dropIfExists('mail_settings');
     }
 }

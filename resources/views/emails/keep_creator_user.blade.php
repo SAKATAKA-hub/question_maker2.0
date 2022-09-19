@@ -5,8 +5,7 @@
     if( !isset($inputs) ){
         $test = true;
         $inputs =[
-            'keeper_name' =>'山田花子',
-            'mypage_url'=>route('mypage'),
+            'user_name' =>'山田花子',
         ];
     }
 @endphp
@@ -16,19 +15,19 @@
     <h2>件名：{{'【'.env('APP_NAME').'】フォローされました' }}</h2>
 @endif
 
-<p>
-    {{$inputs['keeper_name']}}があなたを『フォロー』しました。<br>
+<div>
+    <strong>{{$inputs['user_name']}}</strong>さんがあなたを『フォロー』しました。<br>
     詳細は下のURLよりご確認ください。
-</p>
-<p>
-    ----------------------------------------------------<br>
+</div><br>
+
+<div>
     [マイページURL]<br>
-    {{ $inputs['mypage_url'] }}<br>
-    ----------------------------------------------------<br>
-</p>
-<p>
+    <a href="{{ route('mypage') }}">{{ route('mypage') }}</a><br>
+</div><br>
+
+<div>
     引き続き、≪{{ env('APP_NAME') }}≫をよろしくお願い致します。<br>
-</p>
+</div><br>
 <br>
 <!-- 共通署名 -->
 @include('emails._signature')

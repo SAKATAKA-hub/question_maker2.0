@@ -31,10 +31,11 @@ class MakeQuestionController extends Controller
     */
     public function store(Request $request, \App\Models\QuestionGroup $question_group)
     {
+
         # 画像のアップロード
 
             /* 基本設定 */
-            $dir = 'upload/images/questions'; //保存先ディレクトリ
+            $dir = 'upload/user/question/image/'; //保存先ディレクトリ
             $input_file_name = 'image';             //インプットファイルのname
             $image_path = null;
 
@@ -45,6 +46,11 @@ class MakeQuestionController extends Controller
             }//end if
 
         //end 画像のアップロード
+
+
+        # テキストのストレージ保存
+        $dir = 'upload/user/question/text/';
+        $request->text = Method::uploadStorageText( $dir, $request->text );
 
 
         # 問題順の入替え
@@ -111,7 +117,7 @@ class MakeQuestionController extends Controller
 
         # 問題集の編集ヶ所選択ページへリダイレクト
         return redirect()->route('make_question_group.select_edit', $question_group)
-        ->with('alert-success','問題を1件登録しました。');
+        ->with('alert-info','問題を1件登録しました。');
     }
 
 
@@ -175,6 +181,8 @@ class MakeQuestionController extends Controller
     }
 
 
+
+
     /**
      * 編集問題の保存(update)
      * @param \Illuminate\Http\Request $request
@@ -190,7 +198,7 @@ class MakeQuestionController extends Controller
         # 画像のアップロード
 
             /* 基本設定 */
-            $dir = 'upload/images/questions'; //保存先ディレクトリ
+            $dir = 'upload/user/question/image/'; //保存先ディレクトリ
             $input_file_name = 'image';             //インプットファイルのname
             $old_image_path = $question->image;
             $image_path = null;
@@ -210,6 +218,11 @@ class MakeQuestionController extends Controller
             }
 
         //end 画像のアップロード
+
+
+        # テキストのストレージ保存
+        $dir = 'upload/user/question/text/';
+        $request->text = Method::uploadStorageText( $dir, $new_text=$request->text, $old_text=$question->text );
 
 
         # 問題順の入替え
@@ -352,6 +365,11 @@ class MakeQuestionController extends Controller
         # アップロードファイルを削除
         $delete_path = $question->image;
         if( Storage::exists( $delete_path ) ){ storage::delete( $delete_path ); }
+
+        # ストレージテキストの削除
+        $delete_path = $question->text;
+        Method::deleteStorageText( $delete_path );
+
 
 
         # 問題順の入替え

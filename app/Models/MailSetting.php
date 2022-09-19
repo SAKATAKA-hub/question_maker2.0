@@ -6,14 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 /**
  * ===============================
- *  ユーザーへのお知らせ　既読管理
+ *  メールの受信設定
  * ===============================
  */
-class InfomationRead extends Model
+class MailSetting extends Model
 {
     use HasFactory;
     public $timestamps = true;
     protected $fillable = [
-        'infomation_id', 'user_id', 'read',
+        'user_id', 'keep_question_group', 'keep_creator_user','comment','infomation'
     ];
+
 }

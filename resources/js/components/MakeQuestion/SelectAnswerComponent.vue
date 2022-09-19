@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="mb-4">
+    <div class="">
         <label>
             <span class="form-check-label fs-5 mb-2 fw-bold">正解と解答方法</span>
             <span class="badge bg-danger" style="transform:translateY(-3px);">1つ以上必須</span>
@@ -8,21 +8,28 @@
         <div class="ms-3 d-flex flex-column flex-md-row gap-3 my-3">
 
 
-            <div class="form-check">
-                <input name="answer_type" value="1" type="radio" class="form-check-input"
-                id="answerType1" v-model="answer_type">
-                <label class="form-check-label fw-bold" for="answerType1">ひとつの答えを選ぶ</label>
-            </div>
-            <div class="form-check">
-                <input name="answer_type" value="2" type="radio" class="form-check-input"
-                id="answerType2" v-model="answer_type">
-                <label class="form-check-label fw-bold" for="answerType2">複数の答えを選ぶ</label>
-            </div>
-            <div class="form-check">
-                <input name="answer_type" value="0" type="radio" class="form-check-input"
-                id="answerType0" v-model="answer_type">
-                <label class="form-check-label fw-bold" for="answerType0">テキストで答えを入力する</label>
-            </div>
+            <label class="card p-2"  for="answerType1">
+                <div class="form-check w-100">
+                    <input name="answer_type" value="1" type="radio" class="form-check-input"
+                    id="answerType1" v-model="answer_type">
+                    <label class="form-check-label fw-bold" for="answerType1">ひとつの答えを選ぶ</label>
+                </div>
+            </label>
+
+            <label class="card p-2"  for="answerType2">
+                <div class="form-check">
+                    <input name="answer_type" value="2" type="radio" class="form-check-input"
+                    id="answerType2" v-model="answer_type">
+                    <label class="form-check-label fw-bold" for="answerType2">複数の答えを選ぶ</label>
+                </div>
+            </label>
+            <label class="card p-2"  for="answerType0">
+                <div class="form-check">
+                    <input name="answer_type" value="0" type="radio" class="form-check-input"
+                    id="answerType0" v-model="answer_type">
+                    <label class="form-check-label fw-bold" for="answerType0">テキストで答えを入力する</label>
+                </div>
+            </label>
 
 
         </div>

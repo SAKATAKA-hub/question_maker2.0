@@ -79,6 +79,7 @@ class FakeQuestinonSeeder extends Seeder
                 'image'   => 'site/image/sample.jpg',
                 'tags'    => '仮登録問題　テスト　hoge',
                 'time_limit'       => '00:01:00',
+                'key'      =>\Illuminate\Support\Str::random(40),
                 'published_at'     => \Carbon\Carbon::parse("-".$i."week")->format('Y-m-d H:i:s'),
                 'accessed_count'   => ( $i%6 )*10,    //'アクセス数'
                 'evaluation_points'=> $i%6,           //'評価ポイント'
@@ -123,6 +124,7 @@ class FakeQuestinonSeeder extends Seeder
             'image'   => 'site/image/sample.jpg',
             'tags'    => '仮登録問題　テスト　hoge',
             'time_limit' => '00:01:00',
+            'key'      =>\Illuminate\Support\Str::random(40)
         ]);
         $question_group->save();
         foreach ($questions_data as $question_data)

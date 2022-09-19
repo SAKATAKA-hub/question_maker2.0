@@ -33,6 +33,11 @@ class ViolationReport extends Model
         }
 
 
+        # Userテーブルとのリレーション
+        public function question_group()
+        {
+            return $this->belongsTo(QuestionGroup::class,'question_group_id');
+        }
 
     /*
     |--------------------------------------------------------------------------

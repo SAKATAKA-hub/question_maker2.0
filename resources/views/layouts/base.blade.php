@@ -10,18 +10,10 @@
     <title>@yield('title')</title>
 
 
-    <!-- ファビコン画像の読み込み -->
-    <link rel="shortcut icon" href="{{asset('storage/site/image/favicon.png')}}">
-    <!-- bootstrap アイコン -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-    <!-- bootstrap CSS -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <!-- avant-ui CSS -->
-    <link href="{{ asset('avant-ui/css/avantui.css') }}" rel="stylesheet">
-    <!-- 基本 CSS -->
-    <link href="{{ asset('css/index.css') }}" rel="stylesheet">
-
+    <!-- 基本CSS -->
+    @include('_parts.meta_css')
     @yield('style')
+
 
 </head>
 <body class="bg-white">
@@ -47,10 +39,7 @@
         </section>
 
     </header>
-    <main
-    {{-- style="background:url( {{ asset('storage/site/image/22636100.jpg') }} );
-    background-repeat  : repeat;" --}}
-    >
+    <main>
 
         <!-- contents -->
         <div id="app">
@@ -59,21 +48,7 @@
 
 
         <!-- フェードインアラート -->
-        @php $session_alerts = [ 'alert-primary','alert-success','alert-info','alert-warning','alert-danger' ]; @endphp
-        @foreach ($session_alerts as $alert_name)
-
-            @if ( session( $alert_name ) )
-                <div class="fadein-alert-box">
-                    <div class="container-1200">
-                        <p class="alert {{ $alert_name }} alert-dismissible text-dark fade show" role="alert">
-                            {{ session( $alert_name ) }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </p>
-                    </div>
-                </div>
-            @endif
-
-        @endforeach
+        @include('_parts.alert')
 
 
     </main>

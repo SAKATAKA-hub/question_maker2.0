@@ -25,6 +25,7 @@ class User extends Authenticatable
         'image',
         'profile',
         'error_count',
+        'key',
     ];
 
     /**
@@ -75,6 +76,10 @@ class User extends Authenticatable
             return $this->hasMany(KeepCreatorUser::class,'creater_user_id')->orderBy('created_at','desc');
         }
 
+        # MailSettingとのリレーション(メール設定)
+        public function mail_setting(){
+            return $this->hasOne(MailSetting::class);
+        }
 
 
 
@@ -180,6 +185,19 @@ class User extends Authenticatable
         }
 
 
+        /**
+         * ストレージ保存された文章（自己紹介） $user->profile_text
+         * @return String
+         */
+        public function getProfileTextAttribute()
+        {
+            // パスから改行を取り除く
+            $text = $this->profile;
+            $path = str_replace(["\r\n", "\r", "\n"], '', $text);
+
+            return \Illuminate\Support\Facades\Storage::exists($path) ?
+            \Illuminate\Support\Facades\Storage::get($path) : $text;
+        }
     /*
     |--------------------------------------------------------------------------
     | memo

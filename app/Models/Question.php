@@ -59,6 +59,21 @@ class Question extends Model
 
 
         /**
+         * ストレージ保存された文章（問題文）$question->text_text
+         * @return String
+         */
+        public function getTextTextAttribute()
+        {
+            // パスから改行を取り除く
+            $text = $this->text;
+            $path = str_replace(["\r\n", "\r", "\n"], '', $text);
+
+            return \Illuminate\Support\Facades\Storage::exists($path) ?
+            \Illuminate\Support\Facades\Storage::get($path) : $text;
+        }
+
+
+        /**
          * 問題の選択肢（解答用） $question->option_answer_texts
          * @return Array
         */

@@ -38,7 +38,7 @@
             <div class="d-md-flex">
 
                 <!-- サイドコンテンツ[pc] -->
-                <div class="d-none d-md-block  pe-3" style="min-width:300px;">
+                <div class="d-none d-md-block  pe-3" style="width:300px;">
                     @include('_parts.user_info')
                 </div>
 
@@ -104,13 +104,6 @@
 
 
                                             <div class="text-muted">
-                                                <!--評価点 (評価無し=>非表示)-->
-                                                {{-- <div class="">
-                                                    @for ($si = 1; $si <= 5; $si++)
-                                                        {{ !$question_group->evaluation_points ? '' :
-                                                        ( $question_group->evaluation_points >= $si ? '★' : '☆' ) }}
-                                                    @endfor
-                                                </div> --}}
 
                                                 <div class="">
                                                     <!--問題数-->

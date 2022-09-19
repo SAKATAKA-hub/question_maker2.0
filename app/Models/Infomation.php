@@ -14,6 +14,6 @@ class Infomation extends Model
     use HasFactory;
     public $timestamps = true;
     protected $fillable = [
-        'title', 'body', 'subject',
+        'title', 'body', 'read', 'user_id',
     ];
 }

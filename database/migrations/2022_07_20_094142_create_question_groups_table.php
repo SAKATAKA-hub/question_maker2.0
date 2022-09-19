@@ -24,7 +24,9 @@ class CreateQuestionGroupsTable extends Migration
             $table->string('image',150 )->comment('サムネイル画像パス')->nullable()->default(null);
             $table->string('tags',150  )->comment('タグ')->nullable()->default(null);
             $table->time('time_limit'  )->comment('制限時間')->nullable()->default(null);
-            $table->dateTime('published_at')->comment('公開日')->nullable()->default(null);
+            $table->dateTime('published_at'    )->comment('公開日')->nullable()->default(null);
+            $table->boolean('limited_published')->comment('限定公開か否か')->default(0);
+            $table->string('key',150  )->comment('認証キー');
 
             $table->integer('accessed_count' )->comment('アクセス数')->default(0);
             $table->integer('evaluation_points')->comment('評価ポイント')->default(0);

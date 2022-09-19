@@ -19,7 +19,8 @@ class MyPageController extends Controller
         $keep_question_groups =
         \App\Models\KeepQuestionGroup::where('user_id',$user->id)
         ->where('keep', 1 )->orderBy('created_at','desc')
-        ->paginate(10);
+        ->paginate( env('APP_PAGENATE_COUNT') );
+
 
         /*
         | # 問題集の表示

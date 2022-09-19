@@ -181,3 +181,7 @@ main{
     .question_group_card:hover{
         box-shadow: none !important;
     }
+
+    .bg-light-success{
+        background: rgba(92, 240, 203, 0.5);
+    }

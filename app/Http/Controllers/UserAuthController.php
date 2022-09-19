@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 /*
 | =================================
 |  認証・登録・パスワード変更
@@ -57,7 +58,6 @@ class UserAuthController extends Controller
 
                 # ログイン成功処理（求職者のアカウントが照合された時）
                 Auth::attempt( $request->only('email','password'), $request->remember );
-
 
 
                 if( Auth::check() )
@@ -120,9 +120,9 @@ class UserAuthController extends Controller
         {
             $user = Auth::user();
 
-            Auth::logout(); //ユーザーセッションの削除
+            Auth::logout(); //ユーザーセッションを削除
 
-            $request->session()->invalidate(); //全セッションの削除
+            $request->session()->invalidate(); //全セッションを削除
 
             $request->session()->regenerateToken(); //セッションの再作成(二重送信の防止)
 
@@ -167,13 +167,41 @@ class UserAuthController extends Controller
         public function register_api( Request $request)
         {
             # ユーザー登録
-            $user = new \App\Models\User([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make( $request->password ),
-            ]);
-            $user->save();
-            $request->session()->regenerateToken(); //二重投稿防止
+
+                $user = new \App\Models\User([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Hash::make( $request->password ),
+                    'key'      =>\Illuminate\Support\Str::random(40),
+                ]);
+                $user->save();
+                $request->session()->regenerateToken(); //二重投稿防止
+
+                # メール設定モデル
+                $mail_setting = new  \App\Models\MailSetting([ 'user_id' => $user->id]);
+                $mail_setting->save();
+
+
+            # ログイン成功処理
+
+                //（求職者のアカウントが照合された時）
+                Auth::attempt( $request->only('email','password'), $request->remember );
+                // ユーザー情報をセッションに保存
+                $request->session()->regenerate();
+                // ログイン履歴の保存
+                $login_record = new \App\Models\LoginRecord(['user_id' => Auth::user()->id,]);
+                $login_record->save();
+
+
+            //
+            # メールの送信
+            Mail::to( $request->email ) //宛先
+            ->send(new \App\Mail\SendMailMailable([
+                'inputs' => $request->all() , //入力変数
+                'view' => 'emails.user_register_completion' , //テンプレート
+                'subject' => '【'.env('APP_NAME').'】会員登録ありがとうございます' , //件名
+            ]) );
+
 
             # JSONレスポンス
             return response()->json([
@@ -314,23 +342,74 @@ class UserAuthController extends Controller
 
         # ログアウトの処理
         $user = Auth::user();
-        Auth::logout(); //ユーザーセッションの削除
-        $request->session()->invalidate(); //全セッションの削除
+
+        # アンケートの入力(アンケートの入力があるとき)
+        if($request->body){
+
+            $contact = new \App\Models\Contact([
+                'name'  => $user->name,
+                'email' => $user->email,
+                'body'       => $request->body,
+                'type_text'  => '退会手続き',
+                'responded'  => 1,
+            ]);
+            $contact->save();
+        }
 
 
-        # アンケートの入力
-        $contact = new \App\Models\Contact([
-            'name'  => $user->name,
-            'email' => $user->email,
-            'body'       => $request->body,
-            'type_text'  => '退会手続き',
-            'responded'  => 1,
-        ]);
-        $contact->save();
+        # ユーザー作成問題集のストレージファイルを削除
+        $question_groups = \App\Models\QuestionGroup::where('user_id',$user->id)->get();
+        foreach ($question_groups as $question_group) {
+
+            # 各問題保存ファイルを削除
+            foreach ($question_group->questions as $question) {
+
+                # アップロードファイルを削除
+                $delete_path = $question->image;
+                if( Storage::exists( $delete_path ) ){ storage::delete( $delete_path ); }
+
+                # ストレージテキストを削除
+                $delete_path = $question->text;
+                Method::deleteStorageText( $delete_path );
+
+            }
+
+            # 問題集のサムネ画像を削除
+            $delete_path = $question_group->image;
+            if( Storage::exists( $delete_path ) ){ storage::delete( $delete_path ); }
+
+            # 問題集の説明文を削除
+            $delete_path = $question_group->resume;
+            Method::deleteStorageText( $delete_path );
+
+        }
 
 
         # ユーザー情報の削除
-        $user->delete();
+
+            # ユーザーのサムネ画像を削除
+            $delete_path = $user->image;
+            if( Storage::exists( $delete_path ) ){ storage::delete( $delete_path ); }
+
+            # ユーザーのプロフィールを削除
+            $delete_path = $user->profile;
+            Method::deleteStorageText( $delete_path );
+
+
+            # ユーザーのDB情報を削除
+            Auth::logout(); //ユーザーセッションを削除
+            $request->session()->invalidate(); //全セッションを削除
+            $user->delete();
+
+        //
+        # メールの送信
+        Mail::to( $request->email ) //宛先
+        ->send(new \App\Mail\SendMailMailable([
+            'inputs' => [ 'body' => $request->body, ] , //入力変数
+            'view' => 'emails.user_destroy' , //テンプレート
+            'subject' => '【'.env('APP_NAME').'】退会手続き完了のお知らせ' , //件名
+        ]) );
+
 
 
         # ログアウト完了ページへリダイレクト

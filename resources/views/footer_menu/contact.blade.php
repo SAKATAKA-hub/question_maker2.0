@@ -32,7 +32,7 @@
 <!----- script ----->
 @section('script')
 <!-- フォームのページ離脱防止アラート -->
-{{-- <script src="{{asset('js/page_exit_prevention_alert.js')}}"></script> --}}
+<script src="{{asset('js/page_exit_prevention_alert.js')}}"></script>
 @endsection
 
 
@@ -46,7 +46,18 @@
             <strong class="text-success">{{env('APP_NAME')}}</strong>のサービズについて、ご意見・ご感想・改善のご指摘など、お気づきの点がございましたら、下記フォームよりお気軽にお問い合わせください。
         </div>
 
-        <contact-form-component></contact-form-componentt>
+        <contact-form-component></contact-form-component>
+
+
+        {{--
+        <form action="{{route('contact.post.api')}}" method="POST">
+            @csrf
+            <input type="hidden" name="name" value="テスト">
+            <input type="hidden" name="email" value="t.sakai@next-arrow.co.jp">
+            <input type="hidden" name="body" value="hoge">
+            <button type="submit">送信</button>
+        </form>
+        --}}
 
     </div>
 </section>

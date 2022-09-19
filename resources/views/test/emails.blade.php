@@ -37,7 +37,7 @@
             お問い合わせ完了
         </a>
         <a href="{{route('test.emails.mail','violation_report')}}" class="list-group-item list-group-item-action">
-            『規約違反報告』を送信しました。
+            『規約違反報告』を受付けました。
         </a>
         <a href="{{route('test.emails.mail','keep_question_group')}}" class="list-group-item list-group-item-action">
             公開中の問題集が『いいね』されました。

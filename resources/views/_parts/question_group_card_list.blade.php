@@ -23,7 +23,7 @@
                     "></div>
 
                 </div>
-                <div class="col">
+                <div class="col col-md-9">
 
                     <!-- タイトル -->
                     <h5 class="comment-author">{{ $question_group->title }}</h5>
@@ -56,9 +56,9 @@
                     </div>
 
                     <!-- 説明文 -->
-                    <div class="d-none d-md-block mt-3">
-                        <div class="col-12 text-truncate">
-                            {{ $question_group->resume }}
+                    <div class="d-none d-md-block w-100">
+                        <div class="col-12 text-truncate w-100">
+                            {{ $question_group->resume_text }}
                         </div>
                     </div>
 
@@ -156,16 +156,20 @@
                             <div class="col-8 ps-3">{{\Carbon\Carbon::parse( $question_group->published_at )->format('Y年m月d日 H:i')}}</div>
                         </div>
                         <div class="d-flex">
-                            <div class="col-4 ps-3 bg-light">受験回数</div>
-                            <div class="col-8 ps-3">{{$question_group->answer_groups->count()}}回</div>
-                        </div>
-                        <div class="d-flex">
                             <div class="col-4 ps-3 bg-light">問題数</div>
                             <div class="col-8 ps-3">全{{$question_group->question_count}}問</div>
                         </div>
                         <div class="d-flex">
+                            <div class="col-4 ps-3 bg-light">制限時間</div>
+                            <div class="col-8 ps-3">{{$question_group->time_limit_text}}</div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="col-4 ps-3 bg-light">受験回数</div>
+                            <div class="col-8 ps-3">{{$question_group->answer_groups->count()}}回</div>
+                        </div>
+                        <div class="d-flex">
                             <div class="col-4 ps-3 bg-light">平均点</div>
-                            <div class="col-8 ps-3">{{$question_group->average_score}}点</div>
+                            <div class="col-8 ps-3">{{sprintf('%.1f',$question_group->average_score)}}点</div>
                         </div>
                         <div class="d-flex">
                             <div class="col-4 ps-3 bg-light">いいね数</div>
@@ -174,12 +178,15 @@
                     </div>
 
 
+
                     <!-- [ 問題集の説明 ] -->
-                    <div class="modal-body">
-                        <div class="card card-body border-0" style="background: #5cf0cb80;">
-                            {!! nl2br( e( $question_group->resume ) ) !!}
+                    @if ( $question_group->resume_text )
+                        <div class="modal-body">
+                            <div class="card card-body border-0 bg-light-success">
+                                {!! nl2br( e( $question_group->resume_text ) ) !!}
+                            </div>
                         </div>
-                    </div>
+                    @endif
 
 
                     <div class="modal-body text-center fw-bold">

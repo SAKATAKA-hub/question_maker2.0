@@ -51,7 +51,6 @@ class MakeQuestionGroupController extends Controller
     */
     public function store(Request $request)
     {
-
         # ユーザー情報
         $user = Auth::user();
 
@@ -59,7 +58,7 @@ class MakeQuestionGroupController extends Controller
         # 画像のアップロード
 
             /* 基本設定 */
-            $dir = 'upload/images/question_groups'; //保存先ディレクトリ
+            $dir = 'upload/user/question_group/image/'; //保存先ディレクトリ
             $input_file_name = 'image';             //インプットファイルのname
             $image_path = null;
 
@@ -72,6 +71,10 @@ class MakeQuestionGroupController extends Controller
         //end 画像のアップロード
 
 
+        # テキストのストレージ保存
+        $dir = 'upload/user/question_group/resume/';
+        $request->resume = Method::uploadStorageText( $dir, $request->resume );
+
 
         # 問題集基本情報の保存
         $question_group = new \App\Models\QuestionGroup([
@@ -81,13 +84,14 @@ class MakeQuestionGroupController extends Controller
             'time_limit' => implode(':',$request->time_limit),
             'image'      => $image_path,
             'tags'       => str_replace(' ','　',$request->tags),//タグの空文字を大文字に統一
+            'key'      =>\Illuminate\Support\Str::random(40),
         ]);
         $question_group->save();
 
 
         # 問題集の編集ヶ所選択ページへリダイレクト
-        return redirect()->route('make_question_group.select_edit', $question_group)
-        ->with('alert-success','問題集の基本情報を登録しました。');
+        return redirect()->route('make_question.create', $question_group)
+        ->with('alert-success',"問題集の基本情報を登録しました！\n続けて問題の１問目を作成しましょう。");
     }
 
 
@@ -147,7 +151,7 @@ class MakeQuestionGroupController extends Controller
         # 画像のアップロード
 
             /* 基本設定 */
-            $dir = 'upload/images/question_groups'; //保存先ディレクトリ
+            $dir = 'upload/user/question_group/image/'; //保存先ディレクトリ
             $input_file_name = 'image';             //インプットファイルのname
             $old_image_path = $question_group->image;
             $image_path = null;
@@ -172,6 +176,12 @@ class MakeQuestionGroupController extends Controller
         //end 画像のアップロード
 
 
+        # テキストのストレージ保存
+        $dir = 'upload/user/question_group/resume/';
+        $input['resume'] =
+        Method::uploadStorageText( $dir, $new_text=$input['resume'] , $old_text=$question_group->resume);
+
+
         # 入力内容をDBへ保存
         $question_group->update( $input );
 
@@ -191,10 +201,17 @@ class MakeQuestionGroupController extends Controller
     public function destroy(Request $request, \App\Models\QuestionGroup $question_group)
     {
 
-        # 各問題のアップロード画像の削除
+        # ストレージ保存ファイルの削除
         foreach ($question_group->questions as $question) {
+
+            # アップロードファイルを削除
             $delete_path = $question->image;
             if( Storage::exists( $delete_path ) ){ storage::delete( $delete_path ); }
+
+            # ストレージテキストの削除
+            $delete_path = $question->text;
+            Method::deleteStorageText( $delete_path );
+
         }
 
 
@@ -202,8 +219,12 @@ class MakeQuestionGroupController extends Controller
         $delete_path = $question_group->image;
         if( Storage::exists( $delete_path ) ){ storage::delete( $delete_path ); }
 
+        # 問題集の説明文を削除
+        $delete_path = $question_group->resume;
+        Method::deleteStorageText( $delete_path );
 
-        # 問題集の削除
+
+        # 問題集のDB情報を削除
         $question_group->delete();
 
 
@@ -214,12 +235,48 @@ class MakeQuestionGroupController extends Controller
     }
 
 
+
     /**
-     * CSVファイルから問題集の新規作成(read_csv_create)
+     * 公開設定の更新(update_published)
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\QuestionGroup $question_group //選択した問題集グループ
+     * @return \Illuminate\View\View
+    */
+    public function update_published(Request $request, \App\Models\QuestionGroup $question_group)
+    {
+        // dd($question_group->published_at);
+
+
+        # 公開日の登録
+        $request->published_at =  $question_group->published_at;
+        if( $request->is_public && empty(  $question_group->published_at ) ){
+            $request->published_at = \Carbon\Carbon::parse('now')->format('Y-m-d H:i:s');
+        }
+        # 非公開の登録
+        if( !$request->is_public ){ $request->published_at = null; }
+
+
+        $question_group->update([
+            'published_at'      => $request->published_at,     //公開日
+            // 'limited_published' => $request->limited_published //限定公開
+        ]);
+
+
+        # 問題集の編集ヶ所選択ページへリダイレクト
+        return redirect()->route('make_question_group.select_edit', $question_group)
+        ->with('alert-primary','問題集の公開設公開設定を更新しました。');
+    }
+
+
+
+
+
+    /**
+     * CSVファイルから問題集の新規作成(read_csv_post)
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\View\View
     */
-    public function read_csv_create(Request $request)
+    public function read_csv_post(Request $request)
     {
 
 

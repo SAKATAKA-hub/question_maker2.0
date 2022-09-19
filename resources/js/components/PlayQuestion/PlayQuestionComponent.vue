@@ -1,5 +1,5 @@
 <template>
-    <div class="w-100 mx-auto" style="max-width:600px;">
+    <div class="w-100 mx-auto">
 
         <!-- フォームテスト -->
         <div v-if="test.form">
@@ -28,15 +28,25 @@
 
 
             <div class="mb-2">
-                <!-- 残り時間 -->
-                <div v-if="time_limit">
-                    残り時間
-                    <count-down-timer-component :time_limit="time_limit" @time_up="timeUP"></count-down-timer-component>
-                </div>
-                <!-- 経過時間 -->
-                <div v-show="!time_limit">
-                    経過時間
-                    <count-up-timer-component   :time_limit="time_limit" @getElapsedTime="getElapsedTime"></count-up-timer-component>
+                <div class="d-flex justify-content-between align-items-end">
+                    <h5>
+                        <!-- 残り時間 -->
+                        <div v-if="time_limit">
+                            残り時間
+                            <count-down-timer-component :time_limit="time_limit" @time_up="timeUP"></count-down-timer-component>
+                        </div>
+                        <!-- 経過時間 -->
+                        <div v-show="!time_limit">
+                            経過時間
+                            <count-up-timer-component   :time_limit="time_limit" @getElapsedTime="getElapsedTime"></count-up-timer-component>
+                        </div>
+                    </h5>
+                    <h3>
+                        <!-- 現在の問題番号 -->
+                        <span class="text-success fs-1">{{ question_num+1 > questions.length ? questions.length : question_num+1 }}</span>
+                        <span class="mx-1">/</span>
+                        <span>{{questions.length}}</span>
+                    </h3>
                 </div>
             </div>
 
@@ -195,15 +205,38 @@
             <!-- 操作ボタン -->
             <div class="d-flex justify-content-between mt-3">
                 <!-- 戻るボタン -->
-                <button class="btn btn-light border rounded-pill"
+                <button class="btn btn-light border rounded-pill" style="height:3rem;"
                 @click="numSub" :disabled="(question_num <= 0)||(question_num > questions.length)"
                 ><i class="bi bi-arrow-left  fw-bold"></i></button>
+
+
+                <!-- 問題番号ボタン -->
+                <div>
+                    <div class="d-flex flex-wrap justify-content-center">
+                        <div v-for="btn_num in questions.length" :key="btn_num">
+                            <div v-if="true">
+
+                                <button class="btn rounded-pill"
+                                :class="{'btn-light border':(question_num != btn_num-1), 'btn-success':(question_num == btn_num-1)}"
+                                @click="numChange(btn_num)" :disabled="(question_num == btn_num-1)||(question_num > questions.length)"
+                                >{{btn_num}}</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <!-- 進むボタン -->
-                <button class="btn btn-light border rounded-pill"
+                <button class="btn btn-light border rounded-pill" style="height:3rem;"
                 @click="numAdd" :disabled="question_num >= questions.length"
                 ><i class="bi bi-arrow-right fw-bold"></i></button>
             </div>
 
+            <div class="mt-5 text-center">
+                <button class="btn btn-light btn-lg border rounded-pill"
+                onClick="history.back(); return false;">終了する</button>
+            </div>
 
         </div>
 
@@ -272,7 +305,7 @@
             .then(json => {
 
                 this.questions = json.questions;
-                this.time_limit = json.time_limit;
+                this.time_limit = json.time_limit!='00:00:00' ? json.time_limit : null ;
                 // console.log( json );
             })
 
@@ -295,14 +328,19 @@
                 this.submit_button.text = '送信中・・・';
             },
 
-            numAdd: function(){
-                this.question_num ++;
-                window.scroll({top: 0, behavior: 'smooth'});
-            },
             numSub: function(){
                 this.question_num --;
                 window.scroll({top: 0, behavior: 'smooth'});
             },
+            numAdd: function(){
+                this.question_num ++;
+                window.scroll({top: 0, behavior: 'smooth'});
+            },
+            numChange: function(btn_num){
+                this.question_num = btn_num -1;
+                window.scroll({top: 0, behavior: 'smooth'});
+            },
+
 
         }
     }

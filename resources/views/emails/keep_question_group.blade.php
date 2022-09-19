@@ -6,7 +6,6 @@
         $test = true;
         $inputs =[
             'question_group_title'=>'いいねされた問題',
-            'mypage_url'=>route('mypage'),
         ];
     }
 @endphp
@@ -16,21 +15,21 @@
     <h2>件名：{{'【'.env('APP_NAME').'】公開中の問題集が『いいね』されました' }}</h2>
 @endif
 
-<p>
+<div>
     公開中の問題集が『いいね』されました。<br>
     詳細は下のURLよりご確認ください。
-</p>
-<p>
+</div><br>
+<div>
     ----------------------------------------------------<br>
     [問題集タイトル]<br>
     {{ $inputs['question_group_title'] }}<br>
     [マイページURL]<br>
-    {{ $inputs['mypage_url'] }}<br>
+    <a href="{{ route('mypage') }}">{{ route('mypage') }}</a><br>
     ----------------------------------------------------<br>
-</p>
-<p>
+</div><br>
+<div>
     引き続き、≪{{ env('APP_NAME') }}≫をよろしくお願い致します。<br>
-</p>
+</div><br>
 <br>
 <!-- 共通署名 -->
 @include('emails._signature')

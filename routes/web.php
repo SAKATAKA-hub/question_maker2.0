@@ -70,15 +70,27 @@ Route::middleware(['user_auth'])->group(function () {
     Route::patch('/make_question_group/update/{question_group}', [Controllers\MakeQuestionGroupController::class, 'update'])
     ->name('make_question_group.update');
 
-
     # 問題集の削除(destroy)
     Route::delete('/make_question_group/destroy/{question_group}', [Controllers\MakeQuestionGroupController::class, 'destroy'])
     ->name('make_question_group.destroy');
 
+    # 公開設定の更新(update_published)
+    Route::patch('/make_question_group/update_published/{question_group}', [Controllers\MakeQuestionGroupController::class, 'update_published'])
+    ->name('make_question_group.update_published');
 
-    # CSVファイルから問題集の新規作成(read_csv_create)
-    Route::post('/make_question_group/read_csv_create', [Controllers\MakeQuestionGroupController::class, 'read_csv_create'])
+
+    # CSVファイルから問題集の新規作成ページの表示(read_csv_create)
+    Route::get('/make_question_group/read_csv_create', function(){ return view('MakeQuestionGroup.read_csv_create'); })
     ->name('make_question_group.read_csv_create');
+
+    # CSVファイルから問題集の新規作成(read_csv_post)
+    Route::post('/make_question_group/read_csv_post', [Controllers\MakeQuestionGroupController::class, 'read_csv_post'])
+    ->name('make_question_group.read_csv_post');
+
+    # CSVテンプレートファイルのダウンロード(download_csv_file)
+    Route::get('/make_question_group/download_csv_file',
+    function(){ return Storage::download('site/csv/create_questions.csv', 'create_questions');
+    })->name('make_question_group.download_csv_file');
 
 
 });//end middleware
@@ -210,6 +222,10 @@ Route::middleware(['user_auth'])->group(function () {
     # メールアドレスの変更(update_user_email)
     Route::post('/mypage/settings/update_user_email', [Controllers\SettingsController::class,'update_user_email'])
     ->name('update_user_email');
+
+    # メール受信設定の変更(email_setting)
+    Route::post('/mypage/settings/email_setting', [Controllers\SettingsController::class,'email_setting'])
+    ->name('email_setting');
 
 
     # 退会前アンケートフォーム(withdrawal_form)
@@ -415,7 +431,7 @@ Route::get('/test/emails', function () {return view('test.emails');})
 ->name('test.emails');
 
 # メール内容の確認
-Route::get('/test/emails/{mail}', function($mail){ return view( 'emails.'.$mail); })
+Route::get('/test/emails/{mail}', function($mail){ return view( 'emails.'.$mail ); })
 ->name('test.emails.mail');
 
     # パスワード変更確認メール /test/emails/reset_pass01_verification

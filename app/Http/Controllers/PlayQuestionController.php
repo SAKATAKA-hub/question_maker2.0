@@ -17,6 +17,7 @@ class PlayQuestionController extends Controller
     */
     public function list()
     {
+
         # ユーザーの問題集情報の取得
         $question_groups = \App\Models\QuestionGroup::orderBy('published_at','desc')
         ->where('published_at', '<>', null) //非公開は除く
@@ -57,9 +58,6 @@ class PlayQuestionController extends Controller
 
     }
 
-    # 自分で作成した問題集一覧ページの表示(my_list)
-    # 他者が作成した問題集一覧ページの表示(others_list)
-    # 問題集の一覧表示・キーワード検索(seached_list)
 
     /**
      * 問題情報の取得(get_questions_api)
@@ -79,6 +77,8 @@ class PlayQuestionController extends Controller
             // 画像パス
             $questions[ $i ][ 'image' ] = $question->image ? asset('storage/'.$question->image_puth) : null;
 
+            // 問題文（ストレージ保存）
+            $questions[ $i ][ 'text' ] = $question->text_text;
 
             // 解答選択肢（または正解テキスト）をランダムで取得
             $questions[ $i ][ 'option_answer_texts' ] = $question->option_answer_texts;

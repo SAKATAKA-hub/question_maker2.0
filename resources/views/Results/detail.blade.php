@@ -81,9 +81,10 @@
                         <!-- 問題文 -->
                         <div class="col-6 p-2 bg-light">
                             <span class="me-2 ">{{ $num + 1 }}</span>
+
                             <span class="d-inline-block text-truncate d-md-none"
-                            style="max-width: 100px;">{{ $questions[$num]->text }}</span>
-                            <span class="d-none d-md-inline">{{ $questions[$num]->text }}</span>
+                            style="max-width: 100px;">{{ $questions[$num]->text_text }}</span>
+                            <span class="d-none d-md-inline">{{ $questions[$num]->text_text }}</span>
                         </div>
                         <!-- あなたの解答 -->
                         <div class="col p-2">
@@ -172,12 +173,12 @@
 
 
                 <!-- タイトル -->
-                <div class="d-flex align-items-center">
+                <div class="d-md-flex align-items-center">
                     <div class="col">
                         <h5 class="mb-0">{{ $question_group->title }}</h5>
                     </div>
-                    <div class="col-auto">
-                        <a href="" class="btn btn-link text-success"
+                    <div class="col-auto py-2">
+                        <a href="" class="text-decoration-none text-success"
                         data-bs-toggle="collapse" data-bs-target="#collapseQGInfo" aria-expanded="false" aria-controls="collapseQGInfo"
                         >詳しく見る</a>
                     </div>
@@ -200,6 +201,20 @@
                         </div>
                         <div class="col-md-6 order-1">
 
+                            <!-- タグ -->
+                            <div class="mb-3">
+                                @if ($question_group->tags)
+                                <div class="d-flex gap-1 align-items-center">
+                                    @foreach ( explode('　',$question_group->tags) as $tag )
+                                    <form action="{{ route('questions_search_list') }}">
+                                        <input type="hidden" name="seach_keywords" value="{{$tag}}">
+
+                                        <button type="submit" class="btn p-0 px-1 border text-muted" style="font-size:.8rem;">{{ $tag }}</button>
+                                    </form>
+                                    @endforeach
+                                </div>
+                                @endif
+                            </div>
 
                             <!-- [ 基本情報 ] -->
                             <div class="mb-3">
@@ -208,16 +223,20 @@
                                     <div class="col-8 ps-3">{{\Carbon\Carbon::parse( $question_group->published_at )->format('Y年m月d日 H:i')}}</div>
                                 </div>
                                 <div class="d-flex">
-                                    <div class="col-4 ps-3 bg-light">受験回数</div>
-                                    <div class="col-8 ps-3">{{$question_group->answer_groups->count()}}回</div>
-                                </div>
-                                <div class="d-flex">
                                     <div class="col-4 ps-3 bg-light">問題数</div>
                                     <div class="col-8 ps-3">全{{$question_group->question_count}}問</div>
                                 </div>
                                 <div class="d-flex">
+                                    <div class="col-4 ps-3 bg-light">制限時間</div>
+                                    <div class="col-8 ps-3">{{$question_group->time_limit_text}}</div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="col-4 ps-3 bg-light">受験回数</div>
+                                    <div class="col-8 ps-3">{{$question_group->answer_groups->count()}}回</div>
+                                </div>
+                                <div class="d-flex">
                                     <div class="col-4 ps-3 bg-light">平均点</div>
-                                    <div class="col-8 ps-3">{{$question_group->average_score}}点</div>
+                                    <div class="col-8 ps-3">{{sprintf('%.1f',$question_group->average_score)}}点</div>
                                 </div>
                                 <div class="d-flex">
                                     <div class="col-4 ps-3 bg-light">いいね数</div>
@@ -226,12 +245,13 @@
                             </div>
 
                             <!-- [ 問題集の説明 ] -->
-                            <div class="mb-3">
-                                <div class="card card-body border-0" style="background: #5cf0cb80;">
-                                    {!! nl2br( e( $question_group->resume ) ) !!}
+                            @if ( $question_group->resume_text )
+                                <div class="modal-body">
+                                    <div class="card card-body border-0 bg-light-success">
+                                        {!! nl2br( e( $question_group->resume_text ) ) !!}
+                                    </div>
                                 </div>
-                            </div>
-
+                            @endif
 
                         </div>
                     </div>

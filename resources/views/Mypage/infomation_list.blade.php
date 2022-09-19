@@ -37,7 +37,7 @@
             <div class="d-md-flex">
 
                 <!-- サイドコンテンツ[pc] -->
-                <div class="d-none d-md-block  pe-3" style="min-width:300px;">
+                <div class="d-none d-md-block  pe-3" style="width:300px;">
                     @include('_parts.user_info')
                 </div>
 

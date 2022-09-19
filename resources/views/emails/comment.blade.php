@@ -5,10 +5,9 @@
     if( !isset($inputs) ){
         $test = true;
         $inputs =[
-            'post_user_name' =>'山田花子',
+            'user_name' =>'山田花子',
             'question_group_title'=>'コメントされた問題集',
             'body'=>"テキストテキストテキスト\nテキストテキストテキスト\nテキストテキストテキスト",
-            'mypage_url'=>route('mypage'),
         ];
     }
 @endphp
@@ -18,29 +17,29 @@
     <h2>件名：{{'【'.env('APP_NAME').'】公開中の問題集にコメントが届きました' }}</h2>
 @endif
 
-<p>
+<div>
     公開中の問題集にコメントが届きました。<br>
-    詳細は下のURLよりご確認ください。
-</p>
+    詳細は下のURLよりご確認ください。<br>
+</div><br>
 
-<p>
+<div>
     ----------------------------------------------------<br>
     [問題集タイトル]<br>
     {{ $inputs['question_group_title'] }}<br><br>
 
     [コメントユーザー]<br>
-    {{ $inputs['post_user_name'] }}　さん<br><br>
+    {{ $inputs['user_name'] }}　さん<br><br>
 
     [コメント内容]<br>
     {!! nl2br( e( $inputs['body'] ) ) !!}<br><br>
 
     [マイページURL]<br>
-    {{ $inputs['mypage_url'] }}<br>
+    <a href="{{ route('mypage') }}">{{ route('mypage') }}</a><br>
     ----------------------------------------------------<br>
-</p>
-<p>
+</div><br>
+<div>
     引き続き、≪{{ env('APP_NAME') }}≫をよろしくお願い致します。<br>
-</p>
+</div><br>
 <br>
 <!-- 共通署名 -->
 @include('emails._signature')

@@ -1,7 +1,7 @@
 <template>
 <div>
     <div style="max-width: 400px;">
-        <div class="card mb-2">
+        <div class="card overflow-hidden mb-2">
             <img :src="src" :alt="alt">
         </div>
         <input type="file" name="image" class="form-control" id="file_input"

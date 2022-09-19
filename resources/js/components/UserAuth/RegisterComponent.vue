@@ -20,9 +20,9 @@
                 </form>
 
             </div>
+
         </div>
         <!------------------------------------------------>
-
         <h3 class="text-secondary fw-bold mb-3">{{ '会員登録' }}</h3>
 
 
@@ -238,18 +238,10 @@
 
                     <div class="row mt-5 mb-3">
                         <div class="col-sm-8 offset-sm-2 mb-3">
-                            <form :action="route.login" method="post" class="mb-3"
-                             onsubmit="stopOnbeforeunload()"
-                            >
 
-                                <input type="hidden" :value="token"           name="_token">   <!-- token -->
-                                <input type="hidden" :value="inputs.email"    name="email" >   <!-- email -->
-                                <input type="hidden" :value="inputs.password" name="password"> <!-- password -->
+                            <a :href="route.mypage" onclick="stopOnbeforeunload()"
+                            class="btn rounded-pill btn-success w-100">マイページへ</a>
 
-                                <button type="submit"
-                                class="btn rounded-pill btn-success w-100">{{ 'ログインする' }}</button>
-
-                            </form>
                         </div>
                     </div>
 
@@ -277,8 +269,9 @@
                 route : {
                     email_unique_api: document.querySelector('[name="rote_email_unique_api"]').content, //登録済メールアドレスか確認するAPI
                     register_api    : document.querySelector('[name="rote_register_api"]').content,     //会員登録API
-                    login           : document.querySelector('[name="route_login"]').content,           // ログイン
+                    // login           : document.querySelector('[name="route_login"]').content,           // ログイン
                     privacy_policy  : document.querySelector('[name="route_privacy_policy"]').content,  //プライバシーポリシー
+                    mypage          : document.querySelector('[name="route_mypage"]').content,           // マイページ
                 },
 
 

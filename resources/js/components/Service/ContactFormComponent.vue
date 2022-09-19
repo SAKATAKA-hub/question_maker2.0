@@ -16,7 +16,6 @@
         </div>
         <!------------------------------------------------>
 
-
         <!----- [ ステップ1 ] ----->
         <div v-if="card_num===1" class="anima-fadein-bottom">
 
@@ -303,8 +302,8 @@
                     // console.log( json );
                 })
                 .catch(err=>{
-                    alert('データ送信エラーが発生しました。');
-                    // location.reload();
+                    alert('データ送信エラーが発生しました。再読み込みします。');
+                    location.reload();
                 })
 
             },

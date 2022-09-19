@@ -1,20 +1,20 @@
 <div class="list-group list-group-flush">
-    <a href="{{route( 'mypage' )}}"
-    class="list-group-item list-group-item-action">
-        <div class="d-flex justify-content-between">
-            <p class="mb-0">
-                <i class="bi bi-journals"></i>
-                <span class="ms-3">作成した問題集</span>
-            </p>
-            <i class="bi bi-chevron-right"></i>
-        </div>
-    </a>
     <a href="{{route( 'make_question_group.create' )}}"
     class="list-group-item list-group-item-action">
         <div class="d-flex justify-content-between">
             <p class="mb-0">
                 <i class="bi bi-pencil-square"></i>
                 <span class="ms-3">問題集を作る</span>
+            </p>
+            <i class="bi bi-chevron-right"></i>
+        </div>
+    </a>
+    <a href="{{route( 'mypage' )}}"
+    class="list-group-item list-group-item-action">
+        <div class="d-flex justify-content-between">
+            <p class="mb-0">
+                <i class="bi bi-journals"></i>
+                <span class="ms-3">作成した問題集</span>
             </p>
             <i class="bi bi-chevron-right"></i>
         </div>
@@ -39,17 +39,17 @@
             <i class="bi bi-chevron-right"></i>
         </div>
     </a>
-    <a href="{{route( 'infomation_list' )}}"
+    {{-- <a href="{{route( 'infomation_list' )}}"
     class="list-group-item list-group-item-action">
         <div class="d-flex justify-content-between">
             <p class="mb-0">
                 <i class="bi bi-bell"></i>
-                <span class="ms-3">通知</span>
+                <span class="ms-3">おしらせ</span>
                 <span class="badge  badge-pill badge-danger">100</span>
             </p>
             <i class="bi bi-chevron-right"></i>
         </div>
-    </a>
+    </a> --}}
     <a href="{{route( 'settings' )}}"
     class="list-group-item list-group-item-action">
         <div class="d-flex justify-content-between">

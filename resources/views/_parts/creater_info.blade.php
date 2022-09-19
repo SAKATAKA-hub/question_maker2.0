@@ -49,19 +49,21 @@
 
 
     <!-- フォローボタン -->
-    <div class="mb-3">
-        <keep-creator-user-component
-        user_id="{{$user_id}}" creater_user_id="{{$creater_user->id}}"
-        keep="{{\App\Models\KeepCreatorUser::isKeep($user_id, $creater_user->id)}}"
-        route="{{route('keep_creator_user.api')}}"></keep-creator-user-component>
-    </div>
+    @if ( $user_id!=$creater_user->id)
+        <div class="mb-3">
+            <keep-creator-user-component
+            user_id="{{$user_id}}" creater_user_id="{{$creater_user->id}}"
+            keep="{{\App\Models\KeepCreatorUser::isKeep($user_id, $creater_user->id)}}"
+            route="{{route('keep_creator_user.api')}}"></keep-creator-user-component>
+        </div>
+    @endif
 
 
     <!-- 自己紹介 -->
     <div class="card border-1 card-body mb-3">
         <p class="text-secondary" style="font-size:.6rem">自己紹介</p>
         <p>
-            {!! nl2br( e($creater_user->profile) ) !!}
+            {!! nl2br( e($creater_user->profile_text) ) !!}
         </p>
     </div>
 

@@ -28,7 +28,7 @@ class SettingsController extends Controller
         # 画像のアップロード
 
             /* 基本設定 */
-            $dir = sprintf('upload/%06d/user_image',$user->id); //保存先ディレクトリ
+            $dir = 'upload/user/image/'; //保存先ディレクトリ
             $input_file_name = 'image';             //インプットファイルのname
             $old_image_path = $user->image;
             $image_path = null;
@@ -48,6 +48,12 @@ class SettingsController extends Controller
             }
 
         //end 画像のアップロード
+
+
+        # テキストのストレージ保存
+        $dir = 'upload/user/profile/';
+        $request->profile =
+        Method::uploadStorageText( $dir, $new_text=$request->profile, $old_text=$user->profile );
 
 
         # DBの更新
@@ -72,6 +78,24 @@ class SettingsController extends Controller
 
         return redirect()->route('settings')
         ->with('alert-success','メールアドレスを変更しました。');
+    }
+
+
+    # メール受信設定の変更(email_setting)
+    public function email_setting(Request $request){
+
+        # メール受信設定の更新
+        $mail_setting = \App\Models\MailSetting::find( $request->mail_setting_id );
+        $mail_setting->update([
+            'keep_question_group' => $request['keep_question_group'] ? 1 : 0,
+            'keep_creator_user'   => $request['keep_creator_user']   ? 1 : 0,
+            'comment'             => $request['comment']             ? 1 : 0,
+            'infomation'          => $request['infomation']          ? 1 : 0,
+        ]);
+
+
+        return redirect()->route('settings')
+        ->with('alert-success','メール受信設定を変更しました。');
     }
 
 }

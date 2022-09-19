@@ -26,7 +26,7 @@ class Contact extends Model
     |
     */
         /**
-         * ストレージ保存された文章（経歴要約） $contact->body_text
+         * ストレージ保存された文章（本文） $contact->body_text
          * @return String
          */
         public function getBodyTextAttribute()

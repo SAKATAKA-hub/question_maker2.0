@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+
 /*
 | =================================
 |  その他サービス
@@ -46,6 +48,37 @@ class ServiceController extends Controller
                 $keep->update(['keep' => $request->keep]);
             }
 
+            # メールの送信
+
+                // 問題の作成者
+                $creater_user =
+                \App\Models\QuestionGroup::find( $request->question_group_id )->user;
+
+                if(
+                    $request->keep &&                                         //いいねされているとき
+                    $creater_user->mail_setting['keep_question_group'] //メール受信可のとき
+                ){
+
+                    # 問題集情報
+                    $question_group = \App\Models\QuestionGroup::find( $request->question_group_id );
+
+                    // パラメーター
+                    $inputs =[
+                        'question_group_title' => $question_group->title,
+                    ];
+
+                    // メールの送信
+                    Mail::to( $question_group->user->email ) //宛先
+                    ->send(new \App\Mail\SendMailMailable([
+                        'inputs' => $inputs , //入力変数
+                        'view' => 'emails.keep_question_group' , //テンプレート
+                        'subject' => '【'.env('APP_NAME').'】公開中の問題集が『いいね』されました' , //件名
+                    ]) );
+
+                }
+
+            //
+
 
             # JSONを返す
             return response()->json(['comment' => 'ok',]);
@@ -81,6 +114,38 @@ class ServiceController extends Controller
             }
 
 
+            # メールの送信
+
+                // 問題の作成者
+                $creater_user =\App\Models\User::find( $request->creater_user_id );
+
+                if(
+                    $request->keep && //フォローされているとき
+                    $creater_user->mail_setting['keep_creator_user'] //メール受信可のとき
+                ){
+
+                    # ユーザー情報
+                    $user         = \App\Models\User::find( $request->user_id );
+                    $creater_user = \App\Models\User::find( $request->creater_user_id );
+
+                    // パラメーター
+                    $inputs =[
+                        'user_name' => $user->name,
+                    ];
+
+                    // メールの送信
+                    Mail::to( $creater_user->email ) //宛先
+                    ->send(new \App\Mail\SendMailMailable([
+                        'inputs' => $inputs , //入力変数
+                        'view' => 'emails.keep_creator_user' , //テンプレート
+                        'subject' => '【'.env('APP_NAME').'】ユーザーがあなたをフォローしました' , //件名
+                    ]) );
+
+                }
+
+            //
+
+
             # JSONを返す
             return response()->json(['comment' => 'ok',]);
         }
@@ -105,6 +170,9 @@ class ServiceController extends Controller
         */
         public function comment_api(Request $request)
         {
+            $user           = \App\Models\User::find( $request->user_id );
+            $question_group = \App\Models\QuestionGroup::find( $request->question_group_id );
+
             # コメントの投稿
             if( $request->body )
             {
@@ -117,6 +185,29 @@ class ServiceController extends Controller
                 $comment = new \App\Models\QuestionGroupComment($input);
                 $comment->save();
                 $request->session()->regenerateToken(); //二重投稿防止
+
+
+                # メールの送信
+                if(
+                    $user->id != $question_group->user->id
+                    && //問題集作成者のコメントはメール送信不要
+                    $question_group->user->mail_setting['comment']
+                ){
+
+                    $inputs =[
+                        'user_name'            => $user->name,            //投稿ユーザー名
+                        'question_group_title' => $question_group->title, //問題集タイトル
+                        'body' => $request->body,
+                    ];
+
+                    Mail::to( $question_group->user->email ) //宛先
+                    ->send(new \App\Mail\SendMailMailable([
+                        'inputs' => $inputs , //入力変数
+                        'view' => 'emails.comment' , //テンプレート
+                        'subject' => '【'.env('APP_NAME').'】公開中の問題集にコメントが届きました' , //件名
+                    ]) );
+                }
+
 
             }
 
@@ -179,6 +270,15 @@ class ServiceController extends Controller
             $violation_report = new \App\Models\ViolationReport($input);
             $violation_report->save();
             $request->session()->regenerateToken(); //二重投稿防止
+
+
+            # メールの送信
+            Mail::to( $violation_report->user->email ) //宛先
+            ->send(new \App\Mail\SendMailMailable([
+                'inputs' => $violation_report , //入力変数
+                'view' => 'emails.violation_report' , //テンプレート
+                'subject' => '【'.env('APP_NAME').'】『規約違反報告』を受付けました' , //件名
+            ]) );
 
 
             # JSONを返す
@@ -273,12 +373,22 @@ class ServiceController extends Controller
             # テキストのストレージ保存
             $dir = 'upload/contact/';
             $input['body'] = Method::uploadStorageText( $dir, $request->body );
-            // $inputs['job_description'] = Method::updateStorageFile();
+
 
             # お問い合わせ内容をDBに保存
             $contact = new \App\Models\Contact($input);
             $contact->save();
             $request->session()->regenerateToken(); //二重投稿防止
+
+
+            # メールの送信
+            Mail::to( $request->email ) //宛先
+            ->send(new \App\Mail\SendMailMailable([
+                'inputs' => $request->all() , //入力変数
+                'view' => 'emails.contact' , //テンプレート
+                'subject' => '【'.env('APP_NAME').'】お問い合わせいただきありがとうございます' , //件名
+            ]) );
+
 
 
             # JSONを返す

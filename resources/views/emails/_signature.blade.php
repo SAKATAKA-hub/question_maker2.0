@@ -11,7 +11,7 @@
     <div>====================================</div>
     <!-- サイト名　URL -->
     <div>＜サイト＞</div>
-    <strong>{{env('APP_NAME')}}</strong>　{{route('home')}}<br>
+    <strong>{{env('APP_NAME')}}</strong>　<a href="{{route('home')}}">{{route('home')}}</a><br>
     <br>
     <!-- 運営会社名　URL -->
     <div>＜運営会社＞</div>
@@ -19,7 +19,7 @@
     〒105-0003<br>
     東京都港区西新橋1-6-12 アイオス虎ノ門803<br>
     tel:03-6555-4677 fax:03-6555-4679<br>
-    {{env('COMPANY_URL')}}<br><!-- URL -->
+    <a href="{{env('COMPANY_URL')}}">{{env('COMPANY_URL')}}</a><br><!-- URL -->
     <div>====================================</div>
 </p>
 
