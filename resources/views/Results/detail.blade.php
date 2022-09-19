@@ -328,7 +328,8 @@
                 <div class="col-md h-100 card">
                     <div class="card-body text-center">
                         <h6 class="mb-3">同じ問題に挑戦する</h6>
-                        <a href="{{ route('play_question',$question_group) }}" class="btn rounded-pill btn-outline-success mx-auto"
+                        @php $param = ['question_group'=>$question_group->id,'key'=>$question_group->key,]; @endphp
+                        <a href="{{ route('play_question', $param ) }}" class="btn rounded-pill btn-outline-success mx-auto"
                         >GO!</a>
                     </div>
                 </div>

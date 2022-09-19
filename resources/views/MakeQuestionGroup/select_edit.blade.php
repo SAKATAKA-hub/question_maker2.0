@@ -121,11 +121,13 @@
                                             <div class="form-check w-100">
                                                 <input name="is_public" value="1" type="radio" id="publishedType1" class="form-check-input"
                                                 {{ $question_group->published_at ? 'checked' : ''}}
+                                                {{ $question_group->questions->count() < 1 ? 'disabled' : ''}}
                                                 >
                                                 <h5 class="mb-0">公開</h5>
                                             </div>
                                             <p class="ms-4">
-                                                『いいね』で評価をもらったり、『コメント』機能で感想をもらったり、全国のユーザーに問題を解いてもらおう！
+                                                『いいね』で評価をもらったり、『コメント』機能で感想をもらったり、全国のユーザーに問題を解いてもらおう！<br>
+                                                <small>※問題が1問以上登録されていない場合、自動的に非公開となります。</small>
                                             </p>
                                         </label>
                                         {{-- <label for="publishedType2" class="card card-body mb-3">
@@ -273,14 +275,17 @@
                         <div class="accordion-item border border-success">
                             <h2 class="accordion-header" id="questionsAccoHeadingOne">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#questionsAccoOne" aria-expanded="true" aria-controls="questionsAccoOne">
-                                    <h5 class="mb-0">問題</h5>
+                                    <div class="d-flex align-items-center">
+                                        <h5 class="mb-0">問題</h5>
+                                        <div>（全{{$question_group->question_count}}問）</div>
+                                    </div>
                                 </button>
                             </h2>
                             <div id="questionsAccoOne" class="accordion-collapse collapse show" aria-labelledby="questionsAccoHeadingOne" data-bs-parent="#questionsAcco">
                                 <div class="accordion-body  bg-white">
 
 
-                                    @foreach ($question_group->questions as $key => $question)
+                                    @forelse ($question_group->questions as $key => $question)
                                     <div class="card mb-3">
                                         <div class="card-body">
                                             <h2 class="text-secondary fw-bold">
@@ -291,8 +296,12 @@
                                                 <!-- 問題画像 -->
                                                 @if ($question->image)
                                                 <div class="col-md-4 order-md-2">
-                                                    <div class="card overflow-hidden w-100 mb-3">
-                                                        <img src="{{asset('storage/'.$question->image_puth)}}" alt="サムネ画像">
+                                                    <div class="card w-100  mb-3">
+                                                        <div class="ratio ratio-16x9 border border-light" style="
+                                                            background: no-repeat center center / cover;
+                                                            background-image:url({{asset('storage/'.$question->image_puth)}});
+                                                            border-radius: .5rem;
+                                                        "></div>
                                                     </div>
                                                 </div>
                                                 @endif
@@ -348,7 +357,9 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                問題 {{sprintf('%02d', $question->order )}}を削除します。<br>よろしいですか？
+                                                <strong>問題 {{sprintf('%02d', $question->order )}}</strong>を削除します。<br>
+                                                公開中の問題集の問題数が<strong>"0問"</strong>になると、自動的に<strong>”非公開”</strong>となります。<br>
+                                                <strong>本当に、削除してもよろしいですか？</strong>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" style="text-decoration:none;" class="btn btn-link text-secondary fw-bold" data-bs-dismiss="modal"
@@ -364,7 +375,9 @@
                                         </div>
                                         </div>
                                     </div>
-                                    @endforeach
+                                    @empty
+                                        <h3 class="text-secondary text-center">問題はまだ作成されていません</h3>
+                                    @endforelse
 
 
                                 </div>

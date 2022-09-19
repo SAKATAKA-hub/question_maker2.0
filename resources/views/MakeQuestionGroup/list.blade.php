@@ -184,7 +184,8 @@
 
                                             <!-- menu -->
                                             <div class="list-group mx-3 mb-5">
-                                                <a href="{{ route('play_question', $question_group->id ) }}"
+                                                @php $param = ['question_group'=>$question_group->id,'key'=>$question_group->key,]; @endphp
+                                                <a href="{{ route('play_question', $param ) }}"
                                                 class="list-group-item list-group-item-action">
                                                     <div class="d-flex justify-content-between">
                                                         <p class="mb-0">
@@ -194,11 +195,10 @@
                                                         <i class="bi bi-chevron-right"></i>
                                                     </div>
                                                 </a>
-                                                <a href="{{ route('make_question_group.select_edit', $question_group->id ) }}"
+                                                <a href="{{ route('make_question_group.select_edit', $question_group ) }}"
                                                 class="list-group-item list-group-item-action">
                                                     <div class="d-flex justify-content-between">
                                                         <p class="mb-0">
-                                                            {{-- <i class="bi bi-file-earmark"></i> --}}
                                                             <i class="bi bi-pencil"></i>
                                                             <span class="ms-3">編集</span>
                                                         </p>
@@ -232,7 +232,8 @@
 
                                         <!--dropdownMenu-->
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenu{{ $i }}" style="width:160px;">
-                                            <a href="{{ route('play_question', $question_group->id ) }}"
+                                            @php $param = ['question_group'=>$question_group->id,'key'=>$question_group->key,]; @endphp
+                                            <a href="{{ route('play_question', $param ) }}"
                                             class="list-group-item list-group-item-action border-0">
                                                 <div class="d-flex justify-content-between">
                                                     <p class="mb-0">
@@ -242,15 +243,13 @@
                                                     {{-- <i class="bi bi-chevron-right"></i> --}}
                                                 </div>
                                             </a>
-                                            <a href="{{ route('make_question_group.select_edit', $question_group->id ) }}"
+                                            <a href="{{ route('make_question_group.select_edit', $question_group ) }}"
                                             class="list-group-item list-group-item-action border-0">
                                                 <div class="d-flex justify-content-between">
                                                     <p class="mb-0">
-                                                        {{-- <i class="bi bi-file-earmark"></i> --}}
                                                         <i class="bi bi-pencil"></i>
                                                         <span class="ms-3">編集</span>
                                                     </p>
-                                                    {{-- <i class="bi bi-chevron-right"></i> --}}
                                                 </div>
                                             </a>
                                             <a href="#"
@@ -285,6 +284,7 @@
                                     <div class="modal-footer">
                                         <button type="button" style="text-decoration:none;" class="btn btn-link text-secondary fw-bold" data-bs-dismiss="modal"
                                         >閉じる</button>
+
 
                                         <form action="{{route('make_question_group.destroy',$question_group)}}" method="post">
                                             @csrf

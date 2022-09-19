@@ -124,12 +124,12 @@ class MakeQuestionGroupController extends Controller
 
 
     /**
-     * 編集問題集の保存(update)
+     * 編集問題集の更新(update)
      * @param \Illuminate\Http\Request $request
      * @param \App\Models\QuestionGroup $question_group //選択した問題集グループ
      * @return \Illuminate\View\View
     */
-    public function update(Request $request, \App\Models\QuestionGroup $question_group)
+    public function update(Request $request, \App\Models\QuestionGroup $question_group )
     {
         # 入力内容の加工
         $input = $request->all();
@@ -187,7 +187,7 @@ class MakeQuestionGroupController extends Controller
 
 
         # 問題集の編集ヶ所選択ページへリダイレクト
-        return redirect()->route('make_question_group.select_edit', $question_group)
+        return redirect()->route('make_question_group.select_edit', $question_group )
         ->with('alert-warning','問題集の基本情報を更新しました。');
     }
 
@@ -228,7 +228,6 @@ class MakeQuestionGroupController extends Controller
         $question_group->delete();
 
 
-
         # 問題集の編集ヶ所選択ページへリダイレクト
         return redirect()->route('make_question_group.list')
         ->with('alert-danger','問題集の基本情報を削除しました。');
@@ -244,8 +243,6 @@ class MakeQuestionGroupController extends Controller
     */
     public function update_published(Request $request, \App\Models\QuestionGroup $question_group)
     {
-        // dd($question_group->published_at);
-
 
         # 公開日の登録
         $request->published_at =  $question_group->published_at;
@@ -258,7 +255,6 @@ class MakeQuestionGroupController extends Controller
 
         $question_group->update([
             'published_at'      => $request->published_at,     //公開日
-            // 'limited_published' => $request->limited_published //限定公開
         ]);
 
 

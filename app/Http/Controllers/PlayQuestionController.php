@@ -59,6 +59,31 @@ class PlayQuestionController extends Controller
     }
 
 
+
+    /**
+     * 問題を解く(play_question)
+     * @param \App\Models\QuestionGroup $question_group //選択した問題集グループ
+     * @param String $key //認証キー
+     * @return JSON
+    */
+    public function play_question(\App\Models\QuestionGroup $question_group, $key=null)
+    {
+
+        # キー認証
+        if( $key != $question_group->key ){
+            return \App::abort(404);
+        }
+
+        # 問題数が0のとき、前ページへ戻る
+        if( $question_group->questions->count() < 1 ){
+            return redirect()->back()->with('alert-danger',"問題が登録されていません。\n問題を1問以上登録してください。");
+        }
+
+
+        return view('PlayQuestion.play_question', compact('question_group'));
+    }
+
+
     /**
      * 問題情報の取得(get_questions_api)
      * @param \Illuminate\Http\Request $request

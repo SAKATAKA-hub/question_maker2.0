@@ -25,8 +25,8 @@ Route::get('/', function(){ return redirect()->route('questions_list'); })
     ->name('questions_search_list');
 
     # 問題を解く(play_question)
-    Route::get('/play_question/{question_group}',
-    function( \App\Models\QuestionGroup $question_group ){ return view('PlayQuestion.play_question', compact('question_group')); })
+    Route::get('/play_question/{question_group}/{key}',[Controllers\PlayQuestionController::class, 'play_question'])
+    // function( \App\Models\QuestionGroup $question_group ){ return view('PlayQuestion.play_question', compact('question_group')); })
     ->name('play_question');
 
     # 問題情報の取得(get_questions_api)
@@ -59,23 +59,28 @@ Route::middleware(['user_auth'])->group(function () {
 
     # 問題集の編集ヶ所選択ページの表示(select_edit)
     Route::get('/make_question_group/select_edit/{question_group}', [Controllers\MakeQuestionGroupController::class, 'select_edit'])
+    ->middleware(['question_group_auth'])
     ->name('make_question_group.select_edit');
 
     # 問題集基本情報の新規作成・編集ページの表示(edit)
     Route::get('/make_question_group/edit/{question_group}', [Controllers\MakeQuestionGroupController::class, 'edit'])
+    ->middleware(['question_group_auth'])
     ->name('make_question_group.edit');
 
 
     # 問題集基本情報の更新(update)
-    Route::patch('/make_question_group/update/{question_group}', [Controllers\MakeQuestionGroupController::class, 'update'])
+    Route::patch('/make_question_group/update/{question_group}',[Controllers\MakeQuestionGroupController::class, 'update'])
+    ->middleware(['question_group_auth'])
     ->name('make_question_group.update');
 
     # 問題集の削除(destroy)
     Route::delete('/make_question_group/destroy/{question_group}', [Controllers\MakeQuestionGroupController::class, 'destroy'])
+    ->middleware(['question_group_auth'])
     ->name('make_question_group.destroy');
 
     # 公開設定の更新(update_published)
     Route::patch('/make_question_group/update_published/{question_group}', [Controllers\MakeQuestionGroupController::class, 'update_published'])
+    ->middleware(['question_group_auth'])
     ->name('make_question_group.update_published');
 
 
@@ -103,15 +108,18 @@ Route::middleware(['user_auth'])->group(function () {
 
     # 問題の新規作成ページの表示(create)
     Route::get('/make_question/create/{question_group}', [Controllers\MakeQuestionController::class, 'create'])
+    ->middleware(['question_group_auth'])
     ->name('make_question.create');
 
     # 新規作成問題の保存(store)
     Route::post('/make_question/store/{question_group}', [Controllers\MakeQuestionController::class, 'store'])
+    ->middleware(['question_group_auth'])
     ->name('make_question.store');
 
 
     # 問題の編集ページの表示(edit)
     Route::get('/make_question/edit/{question}', [Controllers\MakeQuestionController::class, 'edit'])
+    ->middleware(['question_auth'])
     ->name('make_question.edit');
 
     # 問題選択肢情報のAPI取得(question_options_api)
@@ -120,11 +128,13 @@ Route::middleware(['user_auth'])->group(function () {
 
     # 編集問題の保存(update)
     Route::patch('/make_question/update/{question}', [Controllers\MakeQuestionController::class, 'update'])
+    ->middleware(['question_auth'])
     ->name('make_question.update');
 
 
     # 問題の削除(destroy)
     Route::delete('/make_question/destroy/{question}', [Controllers\MakeQuestionController::class, 'destroy'])
+    ->middleware(['question_auth'])
     ->name('make_question.destroy');
 
 });//end middleware

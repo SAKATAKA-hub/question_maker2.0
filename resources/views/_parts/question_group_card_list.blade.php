@@ -195,7 +195,8 @@
 
                         <div class="d-flex gap-3">
                             <div class="col">
-                                <a href="{{ route('play_question', $question_group->id ) }}" class="btn btn-lg fs-5 btn-success w-100">挑戦する</a>
+                                @php $param = ['question_group'=>$question_group->id,'key'=>$question_group->key,]; @endphp
+                                <a href="{{ route('play_question', $param ) }}" class="btn btn-lg fs-5 btn-success w-100">挑戦する</a>
                             </div>
                             <div class="col">
                                 <button type="button" class="btn btn-lg fs-5 btn-secondary w-100" data-bs-dismiss="modal">戻る</button>

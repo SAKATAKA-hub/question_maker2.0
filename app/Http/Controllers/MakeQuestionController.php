@@ -393,6 +393,12 @@ class MakeQuestionController extends Controller
         $question->delete();
 
 
+        # 問題数が0のとき、問題集を非公開に設定
+        if( $question_group->questions->count() < 1 ){
+            $question_group->update([ 'published_at' => null , ]);
+        }
+
+
         # 問題集の編集ヶ所選択ページへリダイレクト
         return redirect()->route('make_question_group.select_edit', $question_group)
         ->with('alert-danger','問題を1件削除しました。');

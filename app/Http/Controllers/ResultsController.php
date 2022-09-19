@@ -41,6 +41,8 @@ class ResultsController extends Controller
     */
     public function detail( \App\Models\AnswerGroup $answer_group )
     {
+
+
         // 解答情報
         $answers = $answer_group->answers;
 

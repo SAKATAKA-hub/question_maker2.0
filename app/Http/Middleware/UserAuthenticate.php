@@ -20,20 +20,18 @@ class UserAuthenticate
      */
     public function handle(Request $request, Closure $next)
     {
+        if ( !Auth::check() )
         {
-            if ( !Auth::check() )
-            {
-                # 前ページのURLをセッションに保存
-                $before_url = $request->path();
-                $request->session()->put( 'before_url', $before_url);
+            # 前ページのURLをセッションに保存
+            $before_url = $request->path();
+            $request->session()->put( 'before_url', $before_url);
 
 
-                # 「ログインが必要です」ページへリダイレクト
-                return redirect()->route('user_auth.require_login');
-            }
-
-
-            return $next($request);
+            # 「ログインが必要です」ページへリダイレクト
+            return redirect()->route('user_auth.require_login');
         }
-        }
+
+
+        return $next($request);
+    }
 }
