@@ -25,6 +25,7 @@ class ResultsController extends Controller
         $answer_groups = \App\Models\AnswerGroup::where('user_id',$user->id)
         ->orderBy('created_at','desc')->paginate(10);
 
+
         # ページの表示
         return view('Results.list', compact('answer_groups'));
     }
@@ -39,9 +40,12 @@ class ResultsController extends Controller
      * @param \App\Models\AnswerGroup $answer_group
      * @return \Illuminate\View\View
     */
-    public function detail( \App\Models\AnswerGroup $answer_group )
+    public function detail( \App\Models\AnswerGroup $answer_group ,$key=null)
     {
-
+        if( $answer_group->user->key != $key )
+        {
+          return \App::abort(404);
+        }
 
         // 解答情報
         $answers = $answer_group->answers;

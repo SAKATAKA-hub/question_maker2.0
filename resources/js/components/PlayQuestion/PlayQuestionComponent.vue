@@ -234,8 +234,8 @@
             </div>
 
             <div class="mt-5 text-center">
-                <button class="btn btn-light btn-lg border rounded-pill"
-                onClick="history.back(); return false;">終了する</button>
+                <button class="btn btn-light btn-sm border rounded-pill"
+                onClick="history.back(); return false;">中断する</button>
             </div>
 
         </div>

@@ -45,7 +45,9 @@
 
                 <div class="card-body">
                     <div class="row">
-                        <h5 class="fs-5 mb-0">あなたの受検結果</h5>
+                        <h5 class="fs-5 mb-0">
+                            <strong class="text-success">{{$answer_group->user->name}}</strong>さんの受検結果
+                        </h5>
                         <div class="col">
 
                         </div>

@@ -48,7 +48,7 @@ class FakeUserSeeder extends Seeder
 
         /* ログインしていないユーザー用アカウント */
         $user = new \App\Models\User([
-            'name'     => 'gest user',
+            'name'     => 'ゲスト',
             'email'    => 'contact@next-arrow.co.jp',
             'password' => Hash::make('password'),
             'key'      =>\Illuminate\Support\Str::random(40)

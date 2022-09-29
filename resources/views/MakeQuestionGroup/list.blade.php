@@ -345,7 +345,7 @@
                                         <div class="card  shadow border-success border-2 mb-3">
                                             <div class="card-header bg-success text-white d-md-flex">
                                                 <h6 class="mb-0 bg-white text-primary d-inline-block px-2 py-1 me-2">Step 3</h6>
-                                                <h5 class="mb-0 card-title">『公開設定』を選択しよう</h5>
+                                                <h5 class="mb-0 card-title">『『公開設定』を登録しよう！</h5>
                                             </div>
                                             <div class="card-body">
                                                 <p class="card-text text-secondary">
@@ -355,11 +355,6 @@
                                                     <strong class="text-success">\ 公開 /</strong><br>
                                                     『いいね』で評価をもらったり、『コメント』機能で感想をもらったり、全国のユーザーに問題を解いてもらおう！
                                                 </p>
-                                                {{-- <p class="card-text text-secondary">
-                                                    <strong class="text-success">\ 限定公開 /</strong><br>
-                                                    問題集の一覧や検索では表示されないよ！<br>
-                                                    公開用URLを発行し、URLを教えた友達だけに自分の問題にチャレンジしてもらうことができるよ！
-                                                </p> --}}
                                                 <p class="card-text text-secondary">
                                                     <strong class="text-success">\ 非公開 /</strong><br>
                                                     問題集の一覧や検索では表示されないよ！<br>

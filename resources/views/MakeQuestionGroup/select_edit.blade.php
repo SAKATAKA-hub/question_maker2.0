@@ -62,16 +62,15 @@
 </section> --}}
 <section>
     <div class="container-1200 my-5">
-        <div class="d-md-flex">
+        <div class="row">
 
             <!-- サイドコンテンツ[pc] -->
-            <div class="d-none d-md-block  pe-3" style="width:300px;">
+            <div class="d-none d-lg-block" style="width:300px;">
                 @include('_parts.user_info')
             </div>
 
-
             <!-- 中央コンテンツ -->
-            <div class="flex-fill">
+            <div class="col">
 
 
                 <div class="mb-5 border-bottom border-2 border-success">
@@ -125,24 +124,11 @@
                                                 >
                                                 <h5 class="mb-0">公開</h5>
                                             </div>
-                                            <p class="ms-4">
+                                            <p>
                                                 『いいね』で評価をもらったり、『コメント』機能で感想をもらったり、全国のユーザーに問題を解いてもらおう！<br>
                                                 <small>※問題が1問以上登録されていない場合、自動的に非公開となります。</small>
                                             </p>
                                         </label>
-                                        {{-- <label for="publishedType2" class="card card-body mb-3">
-                                            <div class="form-check w-100">
-                                                <input name="is_public" value="2" type="radio" id="publishedType2" class="form-check-input"
-                                                {{ !$question_group->published_at && $question_group->limited_published ? 'checked' : ''}}
-                                                >
-                                                <h5>限定公開</h5>
-                                            </div>
-                                            <p class="ms-4">
-                                                問題集の一覧や検索では表示されないよ！<br>
-                                                公開用URLを発行し、URLを教えた友達だけに自分の問題にチャレンジしてもらうことができるよ！
-                                            </p>
-
-                                        </label> --}}
                                         <label for="publishedType3" class="card card-body mb-3">
                                             <div class="form-check w-100">
                                                 <input name="is_public" value="0" type="radio" id="publishedType3" class="form-check-input"
@@ -150,7 +136,7 @@
                                                 >
                                                 <h5>非公開</h5>
                                             </div>
-                                            <p class="ms-4">
+                                            <p>
                                                 問題集の一覧や検索では表示されないよ！<br>
                                                 作成中の問題を一時保存したり、個人的に問題を解いて楽しもう！<br>
                                                 公開URLを使えば、URLを教えた友達だけに自分の問題にチャレンジしてもらうこともできるよ！
@@ -164,24 +150,6 @@
                                     </form>
 
 
-                                    {{-- <div class="form-group mb-4 card card-body border-success">
-                                        <label class="form-check-label fs-5 mb-2 fw-bold">公開設定</label>
-                                        <div class="ms-3 d-flex gap-3">
-
-                                            <div class="form-check">
-                                                <input name="is_public" value="true" type="radio" class="form-check-input" id="exampleCheck1"
-                                                {{ isset($question_group) && !$question_group->published_at ? '' : 'checked'}}
-                                                >
-                                                <label class="form-check-label fw-bold" for="exampleCheck1">公開</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input name="is_public" value="" type="radio" class="form-check-input" id="exampleCheck2"
-                                                {{ isset($question_group) && !$question_group->published_at ? 'checked' : ''}}
-                                                >
-                                                <label class="form-check-label fw-bold" for="exampleCheck2">非公開</label>
-                                            </div>
-                                        </div>
-                                    </div> --}}
 
                                 </div>
                             </div>

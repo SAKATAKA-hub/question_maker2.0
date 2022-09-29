@@ -1,8 +1,19 @@
 <nav class="navbar navbar-expand navbar-light mx-auto" style="max-width:1200px;">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ route('home')}} ">
-            <strong class="text-success"> {{ env('APP_NAME') }}</strong>
-        </a>
+
+        <!--PC-->
+        <div class="d-none d-md-block">
+            <a class="navbar-brand" href="{{ route('home')}} ">
+                <img src="{{asset('storage/site/image/header_logo.png')}}" alt="サイトロゴ" style="height:3rem;">
+            </a>
+        </div>
+        <!--movile-->
+        <div class="d-md-none">
+            <a class="navbar-brand" href="{{ route('home')}} ">
+                <img src="{{asset('storage/site/image/header_logo.png')}}" alt="サイトロゴ" style="width:6rem;">
+            </a>
+        </div>
+
 
 
         <ul class="navbar-nav ms-auto p-0 gap-2 my-2">
@@ -82,16 +93,16 @@ id="seachOffcanvas" aria-labelledby="seachOffcanvasLabel">
                     >新着順</option>
                     <option value="published_at,asc"  {{$order=='published_at,asc'  ? 'selected' : ''}}
                     >古い順</option>
-                    <option value="evaluation_points,desc" {{$order=='evaluation_points,desc' ? 'selected' : ''}}
-                    >高評価</option>
+                    {{-- <option value="evaluation_points,desc" {{$order=='evaluation_points,desc' ? 'selected' : ''}}
+                    >高評価</option> --}}
                     <option value="accessed_count,desc" {{$order=='accessed_count,desc' ? 'selected' : ''}}
-                    >受検者多</option>
+                    >受検者数多い順</option>
                     <option value="accessed_count,asc"  {{$order=='accessed_count,asc' ? 'selected' : ''}}
-                    >受検者少</option>
+                    >受検者数少ない順</option>
                     <option value="average_score,asc" {{$order=='average_score,asc' ? 'selected' : ''}}
                     >難しい</option>
                     <option value="average_score,desc"  {{$order=='average_score,desc' ? 'selected' : ''}}
-                    >かんたん</option>
+                    >やさしい</option>
                 </select>
             </div>
 

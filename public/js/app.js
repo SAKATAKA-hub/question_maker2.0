@@ -34540,10 +34540,10 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-light btn-lg border rounded-pill",
+          staticClass: "btn btn-light btn-sm border rounded-pill",
           attrs: { onClick: "history.back(); return false;" },
         },
-        [_vm._v("終了する")]
+        [_vm._v("中断する")]
       ),
     ])
   },

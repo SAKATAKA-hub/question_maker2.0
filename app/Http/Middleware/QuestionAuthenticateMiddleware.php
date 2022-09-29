@@ -22,6 +22,7 @@ class QuestionAuthenticateMiddleware
           return \App::abort(404);
         }
 
+
         return $next($request);
     }
 }

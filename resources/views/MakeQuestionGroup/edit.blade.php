@@ -88,6 +88,20 @@
                 </div>
 
 
+                <!-- 説明文 -->
+                <div class="form-group mb-4 card card-body border-success">
+                    <div class="d-flex align-items-center">
+                        <label for="resume_input1" class="form-check-label fs-5 mb-2 fw-bold"
+                        >説明文</label>
+                        <span class="badge bg-danger ms-2 mb-2">必須</span>
+                    </div>
+
+                    <textarea name="resume" class="form-control" id="resume_input1" rows="10"
+                    placeholder="問題集の簡単な説明を書きましょう！" required
+                    >{{ isset($question_group) ? $question_group->resume_text : '' }}</textarea>
+                    {{-- <div class="form-text">※150文字以内</div> --}}
+                </div>
+
 
 
                 <!-- サムネ画像 -->
@@ -163,21 +177,6 @@
                     <input type="text" name="tags" class="form-control" id="exampleFormControlInput1" placeholder="タグ"
                     value="{{ isset($question_group) ? $question_group->tags : '' }}"
                     maxlength="150">
-                </div>
-
-
-                <!-- 説明文 -->
-                <div class="form-group mb-4 card card-body border-success">
-                    <div class="d-flex align-items-center">
-                        <label for="resume_input1" class="form-check-label fs-5 mb-2 fw-bold"
-                        >説明文</label>
-                        <span class="badge bg-danger ms-2 mb-2">必須</span>
-                    </div>
-
-                    <textarea name="resume" class="form-control" id="resume_input1" rows="10"
-                    placeholder="問題集の簡単な説明を書きましょう！" required
-                    >{{ isset($question_group) ? $question_group->resume_text : '' }}</textarea>
-                    {{-- <div class="form-text">※150文字以内</div> --}}
                 </div>
 
 

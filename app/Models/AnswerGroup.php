@@ -25,6 +25,13 @@ class AnswerGroup extends Model
     | リレーション
     |--------------------------------------------------------------------------
     */
+
+        # Userテーブルとのリレーション
+        public function user()
+        {
+            return $this->belongsTo(User::class,'user_id');
+        }
+
         # QuestionGroupテーブルとのリレーション
         public function question_group(){
             return $this->belongsTo(QuestionGroup::class);
@@ -34,6 +41,8 @@ class AnswerGroup extends Model
         public function answers(){
             return $this->hasMany(Answer::class);
         }
+
+    //
 
 
 

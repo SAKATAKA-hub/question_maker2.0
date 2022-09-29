@@ -19,40 +19,6 @@
 
     <meta name="csrf_token" content="{{ csrf_token() }}">
 
-
-    <style>
-
-        main{
-            margin-top: 0;
-            min-height: 100vh;
-        }
-        /* ＴＯＰ背景 */
-        .top{
-            position: relative;
-        }
-        .top_bg_container{
-            position: absolute;
-            top:0; right:0;
-            width: 100%; height:100%;
-            z-index: -1;
-        }
-        .top_bg{
-            position: relative;
-            width: 100%; height:100%;
-        }
-        .top_bg::after{
-            content: '';
-            position: absolute;
-            top:0; right:0;
-            width: 100%; height:100%;
-            background-color: rgba(255, 255, 255, 0.843);
-        }
-
-        /* ユーザー画像 */
-        .user-image{
-        }
-    </style>
-
 </head>
 <body class="bg-white ">
     <header>
@@ -71,20 +37,22 @@
 
             <div class="container-1200">
                 <div class="px-4 py-5 my-5 text-center">
-                    <h5 class="fw-bold">\自由に作れる！オリジナル問題集/</h5>
-                    <h2 class="display-1 h-1 text-success fw-bold mb-4">mondai</h2>
-                    <div class="col-lg-6 mx-auto">
-                        <p class="lead mb-4">
-                            このサイトはじぶんでオリジナルの<br class="d-md-none">
-                            問題を作ることができます。<br>
-                            作った問題を公開したり、<br class="d-md-none">
-                            誰かが作った問題に挑戦したり、<br>
-                            オリジナル問題制作をたのしもう！！
-                        </small>
-                        <div class="my-5">
+                    {{-- <h2 class="display-1 h-1 text-success fw-bold mb-4">{{ env('APP_NAME') }}</h2> --}}
+                    <div class="col-12 col-md-6 mx-auto  position-relative">
+                        <h5 class="fw-bold  position-absolute top-0 start-50 translate-middle-x w-100"
+                        >\ オリジナル問題集が自由に作れる！ /</h5>
+
+                        <img src="{{asset('storage/site/image/logo_lg.png')}}" alt="サイトロゴ" class="d-block w-100">
+                    </div>
+                    <div class="col-md-6 mx-auto">
+                        <div class="mt-3">
                             <!-- 検索フォーム -->
                             <form action="{{ route('questions_search_list') }}">
                                 <div  class="input-group overflow-hidden shadow" style="border-radius:2rem;">
+                                    <span class="input-group-text bg-white border-0 ms-3 text-secondary" id="basic-addon1">
+                                        問題集の検索：
+                                    </span>
+
                                     <input type="text" name="seach_keywords" class="form-control bg-white border-0 ps-3"
                                     value="@if ( isset($keywords) ){{  $keywords.' '  }}@endif" placeholder="キーワード" aria-label="SeachKeywords" aria-describedby="basic-addon1">
 
@@ -95,16 +63,29 @@
                             </form>
                         </div>
                         <div class="mt-5">
-                            <a href="{{ route('make_question_group.list') }}" class="btn rounded-pill btn-outline-success btn-lg px-4"
-                            >問題を作る</a>
+                            <a href="{{ route('make_question_group.list') }}" class="btn rounded-pill btn-outline-success btn-lg fw-bold w-100"
+                            >問題集を作る</a>
                         </div>
                     </div>
+
+                    {{-- <div class="mt-5">
+                        <p class="lead mb-4 bg-white">
+                            このサイトではオリジナルの『問題集』を作って公開したり、誰かが作った『問題集』に挑戦することができます。
+                        </p>
+                    </div> --}}
                 </div>
+            </div>
+        </section>
+        <section class="bg-light-success">
+            <div class="container-1200">
+                <p class="lead text-center mb-0" style="font-size:12px;">
+                    このサイトではオリジナルの『問題集』を <strong class="fw-bold">DIYして（作って）</strong>公開したり、誰かが作った『問題集』に挑戦することができます。
+                </p>
             </div>
         </section>
         {{-- <div class="container-1200 divider divider-dashed"></div><!---- Divider ----> --}}
         <section>
-            <div class="container-1200">
+            <div class="container-1200 my-5">
 
 
                 <div class="row mx-3">
@@ -116,9 +97,9 @@
                             <p class="fw-bold text-success">
                                 Most popular handmade questions
                             </p>
-                            <h3>もっとも人気な問題集をピックアップ！</h3>
+                            <h3>人気な問題集トップ５！</h3>
                             <p class="my-4 text-secondary">
-                                もっとも利用されている問題集をピックアップしました。<br>
+                                もっとも受検されている問題集をピックアップしました。<br>
                                 問題を解いて、お気に入りの問題集をフォローしましょう！！
                             </p>
                         </div>
@@ -126,8 +107,19 @@
                 </div>
                 <div class="my-5">
 
-                    <!-- 問題集リスト・ページネーション use_param[$question_groups] -->
+                    <!-- 問題集リスト -->
+                    @php $question_groups = $popular_question_groups; @endphp
                     @include('_parts.question_group_card_list')
+
+                    <div class="mt-5 text-center">
+                        <a href="{{ route('questions_search_list',['order'=>'accessed_count,desc']) }}" class="btn rounded-pill btn-outline-success"
+                        >もっと表示する</a>
+                    </div>
+
+                    <!-- ページネーション -->
+                    {{-- <div class="my-5 d-flex justify-content-center">
+                        {{ $question_groups->links('vendor.pagination.bootstrap-4') }}
+                    </div> --}}
 
                 </div>
 
@@ -136,29 +128,39 @@
         </section>
         <div class="container-1200 divider divider-dashed my-5"></div><!---- Divider ---->
         <section>
-            <div class="container-1200">
+            <div class="container-1200 my-5">
 
                 <div class="row mx-3">
                     <div class="col-md-6" >
-                        <img src="{{ asset('storage/site/image/22931523.jpg') }}" class="d-block w-100" alt="人気の問題集">
+                        <img src="{{ asset('storage/site/image/23020196.jpg') }}" class="d-block w-100" alt="人気の問題集">
                     </div>
                     <div class="col-md-6 d-flex align-items-center">
                         <div>
                             <p class="fw-bold text-success">
-                                Challenge many questions!
+                               New handmade questions!
                             </p>
-                            <h3>多くの問題集にチャレンジしよう！</h3>
+                            <h3>新着問題集トップ１０！</h3>
                             <p class="my-4 text-secondary">
-                                多種多様な問題集が用意されています。<br>
-                                みんなが作った問題を解いて、知識を広げよう！
+                                新着の問題集にチャレンジしよう！
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="my-5">
 
-                    <!-- 問題集リスト・ページネーション use_param[$question_groups] -->
+                    <!-- 問題集リスト -->
+                    @php $question_groups = $new_question_groups; @endphp
                     @include('_parts.question_group_card_list')
+
+                    <div class="mt-5 text-center">
+                        <a href="{{ route('questions_search_list') }}" class="btn rounded-pill btn-outline-success"
+                        >もっと表示する</a>
+                    </div>
+
+                    <!-- ページネーション -->
+                    {{-- <div class="my-5 d-flex justify-content-center">
+                        {{ $question_groups->links('vendor.pagination.bootstrap-4') }}
+                    </div> --}}
 
                 </div>
 
@@ -368,7 +370,27 @@
                 </div> --}}
             </div>
         </section>
+        <section>
+            <div class="container-1200 my-5">
+                <h5 class="text-center">\ 公式アカウント /</h5>
+                <div class="d-flex justify-content-center gap-3">
 
+                    <a href="#" class="d-block btn rounded-pill p-0 fs-1 text-white" style="width:4rem; height:4rem;line-height:3.8rem; background-color:#07b53b;">
+                        <!--LINE-->
+                        <i class="bi bi-line"></i>
+                    </a>
+                    <a href="#" class="d-block btn rounded-pill p-0 fs-1 text-white" style="width:4rem; height:4rem;line-height:3.8rem; background-color:#1DA1F2;">
+                        <!--twitter-->
+                        <i class="bi bi-twitter"></i>
+                    </a>
+                    <a href="#" class="d-block btn rounded-pill p-0 fs-1 text-white" style="width:4rem; height:4rem;line-height:3.8rem; background-color:#CF2E92;">
+                        <!--instagram-->
+                        <i class="bi bi-instagram"></i>
+                    </a>
+
+                </div>
+            </div>
+        </section>
 
     </main>
     <footer>

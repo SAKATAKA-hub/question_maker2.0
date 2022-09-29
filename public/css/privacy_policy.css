@@ -1,0 +1,61 @@
+        /* 中央寄せコンテナー */
+        .container-900{
+            max-width: 900px;
+            padding: 1rem;
+            margin: 0 auto;
+        }
+        .container-1200{
+            max-width: 1200px; /*横幅を最高でも1200px*/
+            padding: 1rem;
+            margin: 0 auto; /*中央寄せ*/
+        }
+
+
+        /* 先頭見出し */
+        /* h2{
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: bold;
+        } */
+
+
+
+        /* リストスタイルのリセット( <li class="list-style_reset"> ) */
+        .list-style_reset{
+            list-style: none;
+            padding-left: 0;
+        }
+        .list-style_reset>li{
+            margin-bottom: 2rem;
+        }
+        .list-style_reset>li>ol>li{margin-bottom: 0rem;}
+
+        /* (1)と先頭につく、オーダーリスト */
+        .original_ol{
+            /*要素の連番（カウンタ）の値をリセットする*/
+            counter-reset: li;
+            padding-left: 0;
+        }
+        .original_ol > li{
+            position: relative;
+            list-style: none;
+            margin-left: 2rem;
+        }
+        .original_ol > li:before{
+            position: absolute;
+            top: -.1rem;
+            left: -1.5rem;
+            /*要素の連番（カウンタ）の値を進める*/
+            counter-increment: li;
+            /*自動連番を付ける関数*/
+            content: '('counter(li)')';
+        }
+
+
+        .last{
+            width: 12rem;
+        }
+        .last_box{
+            display: flex;
+            justify-content: right;
+        }

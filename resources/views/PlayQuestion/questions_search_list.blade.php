@@ -31,38 +31,6 @@
         <section>
             <div class="container-1200">
 
-                <!-- 検索フォーム -->
-                {{-- <form action="{{ route('questions_search_list') }}">
-                    <div  class="input-group overflow-hidden border shadow" style="border-radius:2rem;">
-
-                        <span class="input-group-text">
-                            <select class="form-select border-0" name="order" id="inputGroupSelect04" aria-label="Example select with button addon">
-                                <option value="published_at,desc" {{$order=='published_at,desc' ? 'selected' : ''}}
-                                >新着順</option>
-                                <option value="published_at,asc"  {{$order=='published_at,asc'  ? 'selected' : ''}}
-                                >古い順</option>
-                                <option value="evaluation_points,desc" {{$order=='evaluation_points,desc' ? 'selected' : ''}}
-                                >高評価</option>
-                                <option value="accessed_count,desc" {{$order=='accessed_count,desc' ? 'selected' : ''}}
-                                >受検者多</option>
-                                <option value="accessed_count,asc"  {{$order=='accessed_count,asc' ? 'selected' : ''}}
-                                >受検者少</option>
-                                <option value="average_score,asc" {{$order=='average_score,asc' ? 'selected' : ''}}
-                                >難しい</option>
-                                <option value="average_score,desc"  {{$order=='average_score,desc' ? 'selected' : ''}}
-                                >かんたん</option>
-                            </select>
-                        </span>
-
-                        <input type="text" name="seach_keywords" class="form-control bg-white border-0 ps-3"
-                        value="@if ( isset($keywords) ){{  $keywords.' '  }}@endif" placeholder="キーワード" aria-label="SeachKeywords" aria-describedby="basic-addon1">
-
-                        <span class="input-group-text bg-white border-0" id="basic-addon1">
-                            <button type="submit" class="btn"><i class="bi bi-search"></i></button>
-                        </span>
-                    </div>
-                </form> --}}
-
 
                 <!-- 検索結果 -->
                 <div class="my-5">
@@ -76,8 +44,12 @@
                     </div>
 
 
-                    <!-- 問題集リスト・ページネーション use_param[$question_groups] -->
+                    <!-- 問題集リスト -->
                     @include('_parts.question_group_card_list')
+                    <!-- ページネーション -->
+                    <div class="my-5 d-flex justify-content-center">
+                        {{ $question_groups->links('vendor.pagination.bootstrap-4') }}
+                    </div>
 
                 </div>
 

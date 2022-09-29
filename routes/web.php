@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers;
 
 # Home
-Route::get('/', function(){ return redirect()->route('questions_list'); })
+Route::get('/', [Controllers\PlayQuestionController::class, 'list'])
 ->name('home');
 
 // Route::get('/', function(){ return 'question maker'; })
@@ -153,7 +153,7 @@ Route::middleware(['user_auth'])->group(function () {
 
 
     # 詳細成績ページの表示(detail)
-    Route::get('/results/detail/{answer_group}', [Controllers\ResultsController::class, 'detail'])
+    Route::get('/results/detail/{answer_group}/{key?}', [Controllers\ResultsController::class, 'detail'])
     ->name('results.detail');
     // ゲストユーザーの採点表示も行うため、'user_auth'ミドルウェアにかけない。
 
@@ -300,8 +300,8 @@ Route::middleware(['user_auth'])->group(function () {
     ->name('footer_menu.how_use');
 
     # 問題集公開時の注意点(important)
-    Route::get('/important', function () { return view('footer_menu.important'); })
-    ->name('footer_menu.important');
+    // Route::get('/important', function () { return view('footer_menu.important'); })
+    // ->name('footer_menu.important');
 
     # プライバシーポリシー(privacy_policy)
     Route::get('/privacy_policy', function () { return view('footer_menu.privacy_policy'); })
@@ -320,7 +320,7 @@ Route::middleware(['user_auth'])->group(function () {
     ->name('footer_menu.faq');
 
     # 運営会社について(operating_companiy)
-    Route::get('/operating_companiy', function () { return redirect('https://www.google.com/'); })
+    Route::get('/operating_companiy', function () { return redirect( env('COMPANY_URL') ); })
     ->name('footer_menu.operating_companiy');
 
 

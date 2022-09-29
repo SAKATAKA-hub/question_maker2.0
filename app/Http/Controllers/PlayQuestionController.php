@@ -23,8 +23,28 @@ class PlayQuestionController extends Controller
         ->where('published_at', '<>', null) //非公開は除く
         ->paginate(10);
 
+
+        # 人気な問題集トップ５
+        $popular_question_groups =
+        \App\Models\QuestionGroup::orderBy('accessed_count','desc') //アクセス数が高い順
+        ->orderBy('published_at','desc') //公開順
+        ->where('published_at', '<>', null) //非公開は除く
+        ->limit(5)->get();
+
+
+        # 新着問題集トップ１０
+        $new_question_groups =
+        \App\Models\QuestionGroup::orderBy('published_at','desc') //公開順
+        ->where('published_at', '<>', null) //非公開は除く
+        ->limit(10)->get();
+
+
+
         # ページの表示
-        return view('PlayQuestion.questions_list', compact('question_groups'));
+        return view('PlayQuestion.questions_list', compact(
+            // 'question_groups',
+            'popular_question_groups','new_question_groups',
+        ));
     }
 
 
@@ -48,7 +68,7 @@ class PlayQuestionController extends Controller
         $question_groups = \App\Models\QuestionGroup::search( $keywords )
         ->where('published_at', '<>', null) //非公開は除く
         ->orderBy( $order[0], $order[1])
-        ->paginate(10);
+        ->paginate(env('APP_PAGENATE_COUNT'));
 
 
         $order = implode(',',$order);
@@ -129,6 +149,7 @@ class PlayQuestionController extends Controller
     {
         // 問題集情報
         $question_group = \App\Models\QuestionGroup::find( $request->question_group_id );
+
         // 問題情報
         $questions = $question_group->questions;
 
@@ -226,26 +247,13 @@ class PlayQuestionController extends Controller
 
 
         # 受検者数の登録
-
-            //過去に同じユーザーが同じ問題を解いているか確認
-            $sameuser_answer_groups =
-            \App\Models\AnswerGroup::where('user_id',$user->id)
-            ->where('question_group_id',$question_group->id)->get();
-
-
-            //過去に同じユーザーが同じ問題を解いていなければ、受験者数を加算
-            if( !$sameuser_answer_groups->count() ){
-                $question_group->accessed_count ++ ;
-                $question_group->save();
-            }
-
-        //
-
+        $question_group->update(['accessed_coun' => $question_group->accessed_count ++]);
 
 
 
         # 成績詳細ページへリダイレクト
-        return redirect()->route( 'results.detail', $answer_group);
+        $param = [ 'answer_group'=>$answer_group, 'key'=>$user->key ];
+        return redirect()->route( 'results.detail', $param);
     }
 
 

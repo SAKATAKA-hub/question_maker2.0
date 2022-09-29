@@ -15,18 +15,17 @@ class MyPageController extends Controller
     {
         $user = \Illuminate\Support\Facades\Auth::user();
 
-        # いいねした問題集のkeepを取得
-        $keep_question_groups =
-        \App\Models\KeepQuestionGroup::where('user_id',$user->id)
-        ->where('keep', 1 )->orderBy('created_at','desc')
-        ->paginate( env('APP_PAGENATE_COUNT') );
+        $keep_question_groups = $user->keep_question_groups;
+
+        $question_groups = [];
+        foreach( $keep_question_groups as $keep_question_group )
+        {
+            $question_groups[] = \App\Models\QuestionGroup::find( $keep_question_group->question_group_id );
+
+        }
 
 
-        /*
-        | # 問題集の表示
-        | {{ $keep_question_group->question_group }}
-        */
-        return view('Mypage.like_list',compact('user','keep_question_groups'));
+        return view('Mypage.like_list',compact('keep_question_groups','question_groups'));
     }
 
 

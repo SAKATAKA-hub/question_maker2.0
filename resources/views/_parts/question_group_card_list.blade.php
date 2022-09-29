@@ -46,7 +46,9 @@
                         <!-- 公開日(0日前) -->
                         <span class="text-muted">{{$question_group->befor_datetime_text}}</span>
                         <!-- 受験回数 -->
-                        <span class="text-muted">-受験回数{{$question_group->answer_groups->count()}}</span>
+                        {{-- <span class="text-muted">-受験回数{{$question_group->answer_groups->count()}}</span> --}}
+                        <span class="text-muted">-受験回数{{$question_group->accessed_count}}</span>
+
                         <!-- 問題数 -->
                         <span class="text-muted d-none d-md-inline">-全{{$question_group->question_count}}問</span>
                         <!-- 制限時間 -->
@@ -165,7 +167,8 @@
                         </div>
                         <div class="d-flex">
                             <div class="col-4 ps-3 bg-light">受験回数</div>
-                            <div class="col-8 ps-3">{{$question_group->answer_groups->count()}}回</div>
+                            {{-- <div class="col-8 ps-3">{{$question_group->answer_groups->count()}}回</div> --}}
+                            <div class="col-8 ps-3">{{$question_group->accessed_count}}回</div>
                         </div>
                         <div class="d-flex">
                             <div class="col-4 ps-3 bg-light">平均点</div>
@@ -193,6 +196,7 @@
 
                         <div class="mb-3">この問題に挑戦しますか？</div>
 
+
                         <div class="d-flex gap-3">
                             <div class="col">
                                 @php $param = ['question_group'=>$question_group->id,'key'=>$question_group->key,]; @endphp
@@ -211,12 +215,6 @@
 
     </div>
     @endforeach
-
-
-    <!-- ページネーション -->
-    <div class="my-5 d-flex justify-content-center">
-        {{ $question_groups->links('vendor.pagination.bootstrap-4') }}
-    </div>
 
 
 </div>

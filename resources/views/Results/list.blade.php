@@ -48,25 +48,13 @@
 
                     <div class="">
 
-                        {{-- <div class="card mb-5">
-                            <div class="card-body">
-                                解答した問題数　平均正解率
-                            </div>
-                        </div> --}}
                         <div class="card card-body border-success text-secondary mb-5">
                             <span class="text-success">{{Auth::user()->name}}さんの受検成績</span>
                             <div class="d-lg-flex gap-3">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <span class="fs-5 fw-bold">受検数</span>
-                                        <span class="fs-3 ms-1">{{ count( Auth::user()->answer_groups ) }}</span>
-                                        <span>件</span>
-                                    </div>
-                                    <div class="col-auto">
-                                        <span class="fs-5 fw-bold">平均正解率</span>
-                                        <span class="fs-3 ms-1">{{ Auth::user()->answer_groups->sum('score') }}</span>
-                                        <span>点</span>
-                                    </div>
+                                <div class="col-auto">
+                                    <span class="fs-5 fw-bold">受検数</span>
+                                    <span class="fs-3 ms-1">{{ count( Auth::user()->answer_groups ) }}</span>
+                                    <span>件</span>
                                 </div>
 
                                 <div class="">
@@ -77,16 +65,17 @@
 
                         </div>
 
-                        <ul class="list-group list-group-flush">
+                        <ul class="list-group ">
                             @forelse ( $answer_groups as $key => $answer_group)
-                            @php $question_group = $answer_group->question_group @endphp
+                            @php $question_group = $answer_group->question_group; @endphp
 
 
                             <li class="list-group-item">
                                 <div class="row">
                                     <!-- [ left ] -->
                                     <div class="col p-0">
-                                        <a href="{{route('results.detail', $answer_group )}}"
+                                        @php $param = [ 'answer_group'=>$answer_group, 'key'=>Auth::user()->key ]; @endphp
+                                        <a href="{{route('results.detail', $param )}}"
                                         class="fs-3 btn w-100 d-flex align-items-center">
 
                                             <div class="card-image" style="

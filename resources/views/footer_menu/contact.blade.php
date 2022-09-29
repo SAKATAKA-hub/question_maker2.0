@@ -24,7 +24,8 @@
 <!----- style ----->
 @section('style')
 <style>
-    main{ background-color: rgb(20, 207, 160,.1); }
+    /* main{ background-color: rgb(20, 207, 160,.1); } */
+    main{ background: rgba(92, 240, 203, 0.5);}
 </style>
 @endsection
 
@@ -39,25 +40,14 @@
 <!----- contents ----->
 @section('contents')
 <section>
-    <div class="container-600 py-5">
+    <div class="container-600 py-4">
 
-        <div class="callout callout-success mb-5">
+        <div class="callout callout-success mb-4">
             <h5 class="text-center">お問い合わせ</h5>
             <strong class="text-success">{{env('APP_NAME')}}</strong>のサービズについて、ご意見・ご感想・改善のご指摘など、お気づきの点がございましたら、下記フォームよりお気軽にお問い合わせください。
         </div>
 
         <contact-form-component></contact-form-component>
-
-
-        {{--
-        <form action="{{route('contact.post.api')}}" method="POST">
-            @csrf
-            <input type="hidden" name="name" value="テスト">
-            <input type="hidden" name="email" value="t.sakai@next-arrow.co.jp">
-            <input type="hidden" name="body" value="hoge">
-            <button type="submit">送信</button>
-        </form>
-        --}}
 
     </div>
 </section>

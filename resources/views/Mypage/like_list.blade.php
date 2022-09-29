@@ -48,10 +48,15 @@
                 <!-- 中央コンテンツ -->
                 <div class="flex-fill">
 
+                    <!-- 問題集リスト・ページネーション use_param[$question_groups] -->
+                    @include('_parts.question_group_card_list')
 
-                    @if ( $keep_question_groups->count() )
+                    {{-- @if ( $keep_question_groups->count() )
 
                         <div class="row">
+
+
+
                             @foreach ($keep_question_groups as $i => $keep_question_group)
                             @php $question_group = $keep_question_group->question_group @endphp
 
@@ -251,13 +256,15 @@
                                                 </div>
                                                 <div class="modal-footer border-0">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">戻る</button>
-                                                    <a href="{{ route('play_question', $question_group->id ) }}" class="btn btn-success">挑戦する</a>
+                                                    @php $param = ['question_group'=>$question_group->id,'key'=>$question_group->key,]; @endphp
+                                                    <a href="{{ route('play_question', $param ) }}" class="btn btn-success">挑戦する</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
                                 </div>
+
 
 
                             @endforeach
@@ -275,7 +282,7 @@
                             現在、公開中の問題はありません。
                         </div>
 
-                    @endif
+                    @endif --}}
 
 
                 </div>
