@@ -14,6 +14,8 @@
     @include('_parts.meta_css')
     @yield('style')
 
+    <!-- Google tag (gtag.js) -->
+    @include('_parts.google_tag')
 
 </head>
 <body class="bg-white">

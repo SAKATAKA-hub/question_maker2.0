@@ -6546,6 +6546,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   /*
       [ memo ]
@@ -6616,7 +6620,8 @@ __webpack_require__.r(__webpack_exports__);
         // コメントデータの保存
         _this.comments = json.comments; // テキストエリアの入力をクリアする
 
-        _this.inputs.body = ''; // console.log( json );
+        _this.inputs.body = '';
+        console.log(_this.inputs);
       });
     },
 

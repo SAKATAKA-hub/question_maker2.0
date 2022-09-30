@@ -173,6 +173,7 @@ class ServiceController extends Controller
             $user           = \App\Models\User::find( $request->user_id );
             $question_group = \App\Models\QuestionGroup::find( $request->question_group_id );
 
+
             # コメントの投稿
             if( $request->body )
             {
@@ -184,7 +185,7 @@ class ServiceController extends Controller
                 // 投稿内容をDBに保存
                 $comment = new \App\Models\QuestionGroupComment($input);
                 $comment->save();
-                $request->session()->regenerateToken(); //二重投稿防止
+                // $request->session()->regenerateToken(); //二重投稿防止 -> 非同期の時は不要
 
 
                 # メールの送信

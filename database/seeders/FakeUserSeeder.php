@@ -49,12 +49,18 @@ class FakeUserSeeder extends Seeder
         /* ログインしていないユーザー用アカウント */
         $user = new \App\Models\User([
             'name'     => 'ゲスト',
-            'email'    => 'contact@next-arrow.co.jp',
+            'email'    => env('GEST_MAIL_ADDRESS'),
             'password' => Hash::make('password'),
             'key'      =>\Illuminate\Support\Str::random(40)
         ]);
         $user->save();
-        $mail_setting = new  \App\Models\MailSetting([ 'user_id' => $user->id]);
+        $mail_setting = new  \App\Models\MailSetting([
+            'user_id' => $user->id,
+            'keep_question_group' => 0,
+            'keep_creator_user'   => 0,
+            'comment'             => 0,
+            'infomation'          => 0,
+        ]);
         $mail_setting->save();
 
     }

@@ -153,7 +153,8 @@ class PlayQuestionController extends Controller
         // 問題情報
         $questions = $question_group->questions;
 
-        $gest_user = \App\Models\User::where('name','gest user')->first();
+        // ゲストユーザーアカウント
+        $gest_user = \App\Models\User::where('email', env('GEST_MAIL_ADDRESS') )->first();
 
         // 利用者（ログイン中でなければ、ゲストユーザーとして保存）
         $user = Auth::check() ? Auth::user() : $gest_user;

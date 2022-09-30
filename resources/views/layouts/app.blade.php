@@ -18,6 +18,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Google tag (gtag.js) -->
+    @include('_parts.google_tag')
+
 </head>
 <body>
     <div id="app">

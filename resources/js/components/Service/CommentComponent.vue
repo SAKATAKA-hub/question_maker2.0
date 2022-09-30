@@ -194,6 +194,12 @@
                                         data-bs-dismiss="offcanvas" aria-label="Close"
                                         @click="comment_api()"
                                         >送信</button>
+
+
+                                        <!-- <form :action="route_comment_api" method="post">
+
+                                        </form> -->
+
                                     </div>
                                 </div>
 
@@ -201,8 +207,6 @@
 
                         </div>
 
-                        <!-- <div class="offcanvas-body py-0">
-                        </div> -->
                     </div>
                 </li>
 
@@ -285,7 +289,7 @@
                     // テキストエリアの入力をクリアする
                     this.inputs.body = '';
 
-                    // console.log( json );
+                    console.log( this.inputs );
                 })
 
             },

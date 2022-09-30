@@ -108,7 +108,7 @@
                             @empty
                             <li class="list-group-item">
                                 <div class="h2 text-secondary text-center">
-                                    挑戦した問題はありません。
+                                    挑戦した問題集はありません。
                                 </div>
                             </li>
                             @endforelse

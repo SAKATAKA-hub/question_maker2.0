@@ -13,11 +13,11 @@
     @include('_parts.meta_css')
     @yield('style')
 
-    <style>
-        main{
-            min-height: 0;
-        }
-    </style>
+    <style> main{ min-height: 0; } </style>
+
+    <!-- Google tag (gtag.js) -->
+    @include('_parts.google_tag')
+
 </head>
 <body class="bg-white">
     <header class="container-600">
