@@ -175,88 +175,21 @@
 
 
                 <!-- タイトル -->
-                <div class="d-md-flex align-items-center">
-                    <div class="col">
-                        <h5 class="mb-0">{{ $question_group->title }}</h5>
+                <h5 class="">{{ $question_group->title }}</h5>
+
+                <!-- タグ -->
+                <div class="mb-3">
+                    @if ($question_group->tags)
+                    <div class="d-flex gap-1 align-items-center">
+                        @foreach ( explode('　',$question_group->tags) as $tag )
+                        <form action="{{ route('questions_search_list') }}">
+                            <input type="hidden" name="seach_keywords" value="{{$tag}}">
+
+                            <button type="submit" class="btn p-0 px-1 border text-muted" style="font-size:.8rem;">{{ $tag }}</button>
+                        </form>
+                        @endforeach
                     </div>
-                    <div class="col-auto py-2">
-                        <a href="" class="text-decoration-none text-success"
-                        data-bs-toggle="collapse" data-bs-target="#collapseQGInfo" aria-expanded="false" aria-controls="collapseQGInfo"
-                        >詳しく見る</a>
-                    </div>
-                </div>
-
-
-                <div id="collapseQGInfo" class="collapse mt-3">
-                    <div class="d-md-flex">
-                        <div class="col-md-6 order-2 p-3">
-
-
-                            <!-- サムネ画像 -->
-                            <div class="ratio ratio-16x9" style="
-                                background: no-repeat center center / cover;
-                                background-image:url({{ asset('storage/'.$question_group->image_puth) }});
-                                border-radius: .5rem;
-                            "></div>
-
-
-                        </div>
-                        <div class="col-md-6 order-1">
-
-                            <!-- タグ -->
-                            <div class="mb-3">
-                                @if ($question_group->tags)
-                                <div class="d-flex gap-1 align-items-center">
-                                    @foreach ( explode('　',$question_group->tags) as $tag )
-                                    <form action="{{ route('questions_search_list') }}">
-                                        <input type="hidden" name="seach_keywords" value="{{$tag}}">
-
-                                        <button type="submit" class="btn p-0 px-1 border text-muted" style="font-size:.8rem;">{{ $tag }}</button>
-                                    </form>
-                                    @endforeach
-                                </div>
-                                @endif
-                            </div>
-
-                            <!-- [ 基本情報 ] -->
-                            <div class="mb-3">
-                                <div class="d-flex">
-                                    <div class="col-4 ps-3 bg-light">公開日</div>
-                                    <div class="col-8 ps-3">{{\Carbon\Carbon::parse( $question_group->published_at )->format('Y年m月d日 H:i')}}</div>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="col-4 ps-3 bg-light">問題数</div>
-                                    <div class="col-8 ps-3">全{{$question_group->question_count}}問</div>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="col-4 ps-3 bg-light">制限時間</div>
-                                    <div class="col-8 ps-3">{{$question_group->time_limit_text}}</div>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="col-4 ps-3 bg-light">受験回数</div>
-                                    <div class="col-8 ps-3">{{$question_group->answer_groups->count()}}回</div>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="col-4 ps-3 bg-light">平均点</div>
-                                    <div class="col-8 ps-3">{{sprintf('%.1f',$question_group->average_score)}}点</div>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="col-4 ps-3 bg-light">いいね数</div>
-                                    <div class="col-8 ps-3">{{$question_group->keep_question_groups->count()}}</div>
-                                </div>
-                            </div>
-
-                            <!-- [ 問題集の説明 ] -->
-                            @if ( $question_group->resume_text )
-                                <div class="modal-body">
-                                    <div class="card card-body border-0 bg-light-success">
-                                        {!! nl2br( e( $question_group->resume_text ) ) !!}
-                                    </div>
-                                </div>
-                            @endif
-
-                        </div>
-                    </div>
+                    @endif
                 </div>
 
 
@@ -303,6 +236,85 @@
                         route="{{route('violation_report.post.api')}}"></violation-report-component>
                     </div>
                 </div>
+
+
+                <!-- URLコピー -->
+                <div class="py-2">
+                    <div class="d-flex align-items-center">
+                        <span class="badge rounded-pill bg-success me-1">
+                            <i class="bi bi-link-45deg"></i>
+                        </span>
+                        問題集のURLを友達に送ろう！
+                    </div>
+                    @php $param = ['question_group'=>$question_group->id,'key'=>$question_group->key,]; @endphp
+                    <url-copy-component copy_url="{{ route('play_question', $param ) }}"></url-copy-component>
+                </div>
+
+
+                <div id="collapseQGInfo" class="collapse mt-3">
+                    <div class="d-md-flex">
+                        <div class="col-md-6 order-2 p-3">
+
+
+                            <!-- サムネ画像 -->
+                            <div class="ratio ratio-16x9" style="
+                                background: no-repeat center center / cover;
+                                background-image:url({{ asset('storage/'.$question_group->image_puth) }});
+                                border-radius: .5rem;
+                            "></div>
+
+
+                        </div>
+                        <div class="col-md-6 order-1">
+
+                            <!-- [ 基本情報 ] -->
+                            <div class="mb-3">
+                                <div class="d-flex">
+                                    <div class="col-4 ps-3 bg-light">公開日</div>
+                                    <div class="col-8 ps-3">{{\Carbon\Carbon::parse( $question_group->published_at )->format('Y年m月d日 H:i')}}</div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="col-4 ps-3 bg-light">問題数</div>
+                                    <div class="col-8 ps-3">全{{$question_group->question_count}}問</div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="col-4 ps-3 bg-light">制限時間</div>
+                                    <div class="col-8 ps-3">{{$question_group->time_limit_text}}</div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="col-4 ps-3 bg-light">受験回数</div>
+                                    <div class="col-8 ps-3">{{$question_group->answer_groups->count()}}回</div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="col-4 ps-3 bg-light">平均点</div>
+                                    <div class="col-8 ps-3">{{sprintf('%.1f',$question_group->average_score)}}点</div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="col-4 ps-3 bg-light">いいね数</div>
+                                    <div class="col-8 ps-3">{{$question_group->keep_question_groups->count()}}</div>
+                                </div>
+                            </div>
+
+                            <!-- [ 問題集の説明 ] -->
+                            @if ( $question_group->resume_text )
+                                <div class="modal-body">
+                                    <div class="card card-body border-0 bg-light-success">
+                                        {!! nl2br( e( $question_group->resume_text ) ) !!}
+                                    </div>
+                                </div>
+                            @endif
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="py-2 text-end">
+                    <a href="" class="text-decoration-none text-success"
+                    data-bs-toggle="collapse" data-bs-target="#collapseQGInfo" aria-expanded="false" aria-controls="collapseQGInfo"
+                    >詳しく見る</a>
+                </div>
+
             </div>
 
             <!-- コメントリストコンポーネント -->

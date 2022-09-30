@@ -44,12 +44,29 @@
                     </div>
 
 
-                    <!-- 問題集リスト -->
-                    @include('_parts.question_group_card_list')
-                    <!-- ページネーション -->
-                    <div class="my-5 d-flex justify-content-center">
-                        {{ $question_groups->links('vendor.pagination.bootstrap-4') }}
+                    <div class="">
+
+                        <!-- Please Login Modal -->
+                        <please-login-modal-component login_form_route="{{ route('user_auth.login_form') }}"
+                        ></please-login-modal-component>
+                        @php $user_id = Auth::check() ? Auth::user()->id : '' ; @endphp
+
+
+                        <!-- 問題集リスト -->
+                        @foreach ($question_groups as $question_group)
+
+                            @include('_parts.question_group_card_list')
+
+                        @endforeach
+
+
+                        <!-- ページネーション -->
+                        <div class="my-5 d-flex justify-content-center">
+                            {{ $question_groups->links('vendor.pagination.bootstrap-4') }}
+                        </div>
+
                     </div>
+
 
                 </div>
 

@@ -35,7 +35,7 @@ Vue.component('select-answer-component',   require('./components/MakeQuestion/Se
 /* 部品アイテム */
 Vue.component('submit-button-component',  require('./components/Items/SubmitButtonComponent.vue').default);
 // Vue.component('count-up-timer-component', require('./components/Items/CountUpTimerComponent.vue').default);
-
+Vue.component('url-copy-component',       require('./components/Items/UrlCopyComponent.vue').default);
 
 /* 認証 */
 Vue.component('reset-pass-component', require('./components/UserAuth/ResetPassComponent.vue').default);

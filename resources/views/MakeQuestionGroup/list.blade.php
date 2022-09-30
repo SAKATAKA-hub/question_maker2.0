@@ -90,6 +90,17 @@
 
 
                                             <div class="col">
+                                                <div class="text-start">
+                                                    <!-- 公開設定 -->
+                                                    @if ( $question_group->published_at )
+                                                    <span class="badge badge-primary"  style="border-radius:.8rem; transform: translateY(-0.1rem);"
+                                                    >公開中</span>
+                                                    @else
+                                                    <span class="badge badge-secondary" style="border-radius:.8rem; transform: translateY(-0.1rem);"
+                                                    >非公開</span>
+                                                    @endif
+                                                </div>
+
                                                 <!-- タイトル -->
                                                 <h4 class="modal-title text-start mb-0" id="questionModal{{ $i+1 }}Label">
                                                     {{ $question_group->title }}
@@ -124,6 +135,22 @@
                                                 background-image:url({{ asset('storage/'.$question_group->image_puth) }});
                                                 border-radius: .5rem;
                                             "></div>
+
+                                            <!-- URLコピー -->
+                                            <div class="modal-body">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="badge rounded-pill bg-success me-1">
+                                                        <i class="bi bi-link-45deg"></i>
+                                                    </span>
+                                                    問題集のURLを友達に送ろう！
+                                                </div>
+                                                @php $param = ['question_group'=>$question_group->id,'key'=>$question_group->key,]; @endphp
+                                                <url-copy-component copy_url="{{ route('play_question', $param ) }}"></url-copy-component>
+
+                                                <div class="text-secondary fst-italic">
+                                                    <i class="bi bi-exclamation-circle me-1"></i>
+                                                    公開設定が『非公開』のときでも、受検用URLを教えた友達だけに自分の問題集にチャレンジしてもらうことができるよ！                                                </div>
+                                            </div>
 
                                             <!-- 公開日等 -->
                                             <div class="card-body">

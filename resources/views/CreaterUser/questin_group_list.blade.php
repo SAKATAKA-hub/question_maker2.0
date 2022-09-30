@@ -35,14 +35,6 @@
 
 <!----- contents ----->
 @section('contents')
-    <!--
-        // Please Login Modal //
-        利用：フォローボタン・いいねボタン・通報ボタン・コメントコンポーネント
-    -->
-    <please-login-modal-component login_form_route="{{ route('user_auth.login_form') }}"
-    ></please-login-modal-component>
-    @php $user_id = Auth::check() ? Auth::user()->id : '' ; @endphp
-
 
     <section>
         <div class="container-1200 my-5">
@@ -66,8 +58,26 @@
 
                     @if ( $question_groups->count() )
 
-                        <!-- 問題集リスト・ページネーション use_param[$question_groups] -->
-                        @include('_parts.question_group_card_list')
+
+                        <!-- Please Login Modal -->
+                        <please-login-modal-component login_form_route="{{ route('user_auth.login_form') }}"
+                        ></please-login-modal-component>
+                        @php $user_id = Auth::check() ? Auth::user()->id : '' ; @endphp
+
+
+                        <!-- 問題集リスト -->
+                        @foreach ($question_groups as $question_group)
+
+                            @include('_parts.question_group_card_list')
+
+                        @endforeach
+
+
+                        <!-- ページネーション -->
+                        <div class="my-5 d-flex justify-content-center">
+                            {{ $question_groups->links('vendor.pagination.bootstrap-4') }}
+                        </div>
+
 
                     @else
 

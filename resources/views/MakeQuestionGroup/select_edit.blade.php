@@ -139,11 +139,22 @@
                                             <p>
                                                 問題集の一覧や検索では表示されないよ！<br>
                                                 作成中の問題を一時保存したり、個人的に問題を解いて楽しもう！<br>
-                                                公開URLを使えば、URLを教えた友達だけに自分の問題にチャレンジしてもらうこともできるよ！
+                                                公開設定が『非公開』のときでも、受検用URLを教えた友達だけに自分の問題集にチャレンジしてもらうことができるよ！
                                             </p>
-
+                                            <!-- URLコピー -->
+                                            <div class="mb-3">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="badge rounded-pill bg-success me-1">
+                                                        <i class="bi bi-link-45deg"></i>
+                                                    </span>
+                                                    問題集のURLを友達に送ろう！
+                                                </div>
+                                                @php $param = ['question_group'=>$question_group->id,'key'=>$question_group->key,]; @endphp
+                                                <url-copy-component copy_url="{{ route('play_question', $param ) }}"></url-copy-component>
+                                            </div>
                                         </label>
-                                        <div class="mb-3">
+
+                                        <div class="my-3">
                                             <button class="btn btn-primary rounded-pill" type="submit"
                                             >公開設定の更新</button>
                                         </div>

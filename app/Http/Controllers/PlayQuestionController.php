@@ -18,12 +18,6 @@ class PlayQuestionController extends Controller
     public function list()
     {
 
-        # ユーザーの問題集情報の取得
-        $question_groups = \App\Models\QuestionGroup::orderBy('published_at','desc')
-        ->where('published_at', '<>', null) //非公開は除く
-        ->paginate(10);
-
-
         # 人気な問題集トップ５
         $popular_question_groups =
         \App\Models\QuestionGroup::orderBy('accessed_count','desc') //アクセス数が高い順
@@ -42,7 +36,6 @@ class PlayQuestionController extends Controller
 
         # ページの表示
         return view('PlayQuestion.questions_list', compact(
-            // 'question_groups',
             'popular_question_groups','new_question_groups',
         ));
     }

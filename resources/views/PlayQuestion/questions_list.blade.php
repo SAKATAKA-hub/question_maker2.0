@@ -19,7 +19,6 @@
     <meta property="og:locale" content="ja_JP"  />
 
 
-
     <!-- ファビコン -->
     <link rel="icon" href="{{asset('storage/site/image/fabicon.png')}}">
     <!-- Styles -->
@@ -41,6 +40,9 @@
         @include('_parts.header')
     </header>
     <main id="app" class="">
+
+
+        <!-- [ ページトップ ] -->
         <section class="top">
             <!-- 背景 -->
             <div class="top_bg_container">
@@ -84,11 +86,6 @@
                         </div>
                     </div>
 
-                    {{-- <div class="mt-5">
-                        <p class="lead mb-4 bg-white">
-                            このサイトではオリジナルの『問題集』を作って公開したり、誰かが作った『問題集』に挑戦することができます。
-                        </p>
-                    </div> --}}
                 </div>
             </div>
         </section>
@@ -99,7 +96,18 @@
                 </p>
             </div>
         </section>
-        {{-- <div class="container-1200 divider divider-dashed"></div><!---- Divider ----> --}}
+        <!-- Please Login Modal -->
+        <section>
+
+
+            <!-- Please Login Modal -->
+            <please-login-modal-component login_form_route="{{ route('user_auth.login_form') }}"
+            ></please-login-modal-component>
+            @php $user_id = Auth::check() ? Auth::user()->id : '' ; @endphp
+
+
+        </section>
+        <!-- [ 人気な問題集トップ５！ ] -->
         <section>
             <div class="container-1200 my-5">
 
@@ -124,18 +132,17 @@
                 <div class="my-5">
 
                     <!-- 問題集リスト -->
-                    @php $question_groups = $popular_question_groups; @endphp
-                    @include('_parts.question_group_card_list')
+                    @foreach ($popular_question_groups as $question_group)
+
+                        @include('_parts.question_group_card_list')
+
+                    @endforeach
+
 
                     <div class="mt-5 text-center">
                         <a href="{{ route('questions_search_list',['order'=>'accessed_count,desc']) }}" class="btn rounded-pill btn-outline-success"
                         >もっと表示する</a>
                     </div>
-
-                    <!-- ページネーション -->
-                    {{-- <div class="my-5 d-flex justify-content-center">
-                        {{ $question_groups->links('vendor.pagination.bootstrap-4') }}
-                    </div> --}}
 
                 </div>
 
@@ -143,6 +150,7 @@
             </div>
         </section>
         <div class="container-1200 divider divider-dashed my-5"></div><!---- Divider ---->
+        <!-- [ 新着問題集トップ１０！ ] -->
         <section>
             <div class="container-1200 my-5">
 
@@ -165,18 +173,16 @@
                 <div class="my-5">
 
                     <!-- 問題集リスト -->
-                    @php $question_groups = $new_question_groups; @endphp
-                    @include('_parts.question_group_card_list')
+                    @foreach ($new_question_groups as $question_group)
+
+                        @include('_parts.question_group_card_list')
+
+                    @endforeach
 
                     <div class="mt-5 text-center">
                         <a href="{{ route('questions_search_list') }}" class="btn rounded-pill btn-outline-success"
                         >もっと表示する</a>
                     </div>
-
-                    <!-- ページネーション -->
-                    {{-- <div class="my-5 d-flex justify-content-center">
-                        {{ $question_groups->links('vendor.pagination.bootstrap-4') }}
-                    </div> --}}
 
                 </div>
 
@@ -187,20 +193,21 @@
                 <h5 class="text-center">\ 公式アカウント /</h5>
                 <div class="d-flex justify-content-center gap-3 snss">
 
-                    <a href="{{env('LINE_URL')}}" class="d-block btn rounded-pill p-0 fs-1 text-white" style="width:4rem; height:4rem;line-height:3.8rem; background-color:#07b53b;">
+                    <a href="{{env('LINE_URL')}}" class="badge rounded-pill fs-1 text-white p-3" style="background-color:#07b53b;">
                         <!--LINE-->
                         <i class="bi bi-line"></i>
                     </a>
-                    <a href="{{env('TWIITER_URL')}}" class="d-block btn rounded-pill p-0 fs-1 text-white" style="width:4rem; height:4rem;line-height:3.8rem; background-color:#1DA1F2;">
+                    <a href="{{env('TWIITER_URL')}}" class="badge rounded-pill fs-1 text-white p-3" style="background-color:#1DA1F2;">
                         <!--twitter-->
                         <i class="bi bi-twitter"></i>
                     </a>
-                    <a href="{{env('INSTAGRAM_URL')}}" class="d-block btn rounded-pill p-0 fs-1 text-white" style="width:4rem; height:4rem;line-height:3.8rem; background-color:#CF2E92;">
+                    <a href="{{env('INSTAGRAM_URL')}}" class="badge rounded-pill fs-1 text-white p-3" style="background-color:#CF2E92;">
                         <!--instagram-->
                         <i class="bi bi-instagram"></i>
                     </a>
 
                 </div>
+
             </div>
         </section>
 
