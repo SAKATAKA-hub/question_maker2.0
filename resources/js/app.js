@@ -28,11 +28,14 @@ Vue.component('count-down-timer-component', require('./components/PlayQuestion/C
 Vue.component('count-up-timer-component', require('./components/PlayQuestion/CountUpTimerComponent.vue').default);
 
 /* 問題作成 */
+Vue.component('commentary-input-component', require('./components/MakeQuestion/CommentaryInputComponent.vue').default);
 Vue.component('read-image-file-component', require('./components/MakeQuestion/ReadImageFileComponent.vue').default);
 Vue.component('select-answer-component',   require('./components/MakeQuestion/SelectAnswerComponent.vue').default);
 
 
 /* 部品アイテム */
+Vue.component('seach-box-component',      require('./components/Items/SeachBoxComponent.vue').default);
+Vue.component('see-more-btn-component',   require('./components/Items/SeeMoreBtnComponebt.vue').default);
 Vue.component('submit-button-component',  require('./components/Items/SubmitButtonComponent.vue').default);
 // Vue.component('count-up-timer-component', require('./components/Items/CountUpTimerComponent.vue').default);
 Vue.component('url-copy-component',       require('./components/Items/UrlCopyComponent.vue').default);

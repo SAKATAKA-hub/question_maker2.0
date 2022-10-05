@@ -48,6 +48,7 @@
     </div>
 
 
+
     <!-- フォローボタン -->
     @if ( $user_id!=$creater_user->id)
         <div class="mb-3">

@@ -41,86 +41,183 @@
     <!-- 受検結果 -->
     <section>
         <div class="container-1200 my-3">
-            <div class="card shadow mb-3">
 
-                <div class="card-body">
-                    <div class="row">
-                        <h5 class="fs-5 mb-0">
-                            <strong class="text-success">{{$answer_group->user->name}}</strong>さんの受検結果
-                        </h5>
-                        <div class="col">
-
+            <div class="card card-body shadow border-0 mb-3">
+                <div class="row">
+                    <h5 class="fs-5 mb-0">
+                        <strong class="text-success">{{$answer_group->user->name}}</strong>さんの受検結果
+                    </h5>
+                    <div class="col"></div>
+                    <div class="col-auto">
+                        <div class="fs-5 text-end">
+                            {{\Carbon\Carbon::parse('now')->format('Y年m月d日')}}
                         </div>
-                        <div class="col-auto">
-                            <div class="d-flex justify-content-between align-items-end"  style="width:10rem;">
-                                    <span class="">正解率</span>
-                                    <span class="">
-                                        <strong class="fs-3">{{$answer_group->score}}</strong>％
-                                    </span>
-                            </div>
-                            <div class="">
-                                解答時間 {{$answer_group->elapsed_time}}
-                            </div>
+
+                        <div class="d-flex justify-content-between align-items-end fs-5"  style="width:10rem;">
+                                <span class="">正解率</span>
+                                <span class="">
+                                    <strong class="fs-1">{{$answer_group->score}}</strong>％
+                                </span>
+                        </div>
+                        <div class="">
+                            解答時間 {{$answer_group->elapsed_time}}
                         </div>
                     </div>
-                </div>
-
-                <div>
-                    <div class="d-flex fw-bold border-top border-bottom">
-                        <div class="col-6 p-2 bg-light">
-                            <span class="me-2">#</span>
-                            <span class="me-2">問題文</span>
-                        </div>
-                        <div class="col p-2">
-                            あなたの解答
-                        </div>
-                        <div class="d-none d-md-block col-2 p-2">
-                            添削結果
-                        </div>
-                    </div>
-                    @foreach ($answers as $num => $answer)
-                    <div class="d-flex">
-                        <!-- 問題文 -->
-                        <div class="col-6 p-2 bg-light">
-                            <span class="me-2 ">{{ $num + 1 }}</span>
-
-                            <span class="d-inline-block text-truncate d-md-none"
-                            style="max-width: 100px;">{{ $questions[$num]->text_text }}</span>
-                            <span class="d-none d-md-inline">{{ $questions[$num]->text_text }}</span>
-                        </div>
-                        <!-- あなたの解答 -->
-                        <div class="col p-2">
-                            {{ $answer->text }}
-
-                            <div class="d-md-none">
-                                @if ( $answer->is_correct )
-                                    <div class="text-info">
-                                        <i class="bi bi-record fs-5"></i><span>正　解</span>
-                                    </div>
-                                @else
-                                    <div class="text-danger">
-                                        <i class="bi bi-x-lg fs-5"></i><span>不正解</span>
-                                    </div>
-                                @endif
-                            </div>
-
-                        </div>
-                        <!-- 添削結果 -->
-                        <div class="d-none d-md-block col-2 p-2">
-                            @if ( $answer->is_correct )
-                                <div class="d-none d-md-block text-info">
-                                    <i class="bi bi-record fs-5"></i><span>正　解</span>
-                                </div>
-                            @else
-                                <div class="d-none d-md-block text-danger">
-                                    <i class="bi bi-x-lg fs-5"></i><span>不正解</span>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                    @endforeach
                 </div>
             </div>
+            <div class="">
+                <ul class="list-group list-group-flush">
+                    @foreach ($answers as $num => $answer)
+                        <li class="list-group-item">
+                            <!-- 00問目 問題文 -->
+                            <div class="row align-items-end">
+                                <div class="col-auto">
+                                    <h5 class="mb-0 text-success">{{ sprintf('%02d',$answer->question->order) }}問目</h5>
+                                </div>
+                                <div class="col text-truncate">
+                                    {{ $answer->question->text_text }}
+                                </div>
+                            </div>
+
+                            <!-- 解答と結果 -->
+                            <div class="row mt-3">
+                                <div class="col text-truncate mb-3">
+                                    <div class="text-secondary" style="font-size:11px;">あなたの解答</div>
+                                    {{ $answer->text ? $answer->text : '---' }}
+                                </div>
+                                <div class="col-12 col-md-auto mb-3">
+                                    <div class="text-secondary" style="font-size:11px;">添削結果</div>
+                                    @if ( $answer->is_correct )
+                                        <div class="text-info">
+                                            <i class="bi bi-record fs-5"></i><span>正　解</span>
+                                        </div>
+                                    @else
+                                        <div class="text-danger">
+                                            <i class="bi bi-x-lg fs-5"></i><span>不正解</span>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
+
+                            <!-- 詳細と解説 -->
+                            <div class="mt-3 flort-right">
+                                <div  class="collapse" id="collapse{{$num}}">
+
+                                    <!-- 詳細 -->
+                                    <div class="row">
+                                        <!-- 問題画像 -->
+                                        @if ( $answer->question->image)
+                                        <div class="col-md-4 order-md-2">
+                                            <div class="my-3">
+                                                <span class="text-success fw-bold">問題画像</span>
+                                                <div class="card w-100  mb-3">
+                                                    <div class="ratio ratio-16x9 border border-light" style="
+                                                        background: no-repeat center center / cover;
+                                                        background-image:url({{asset('storage/'. $answer->question->image_puth)}});
+                                                        border-radius: .5rem;
+                                                    "></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endif
+
+                                        <div class="col-md-8">
+                                            <!-- 問題文 -->
+                                            <div class="my-3">
+                                                <span class="text-success fw-bold">問題文</span>
+                                                <div class="p-2 bg-light">
+                                                    {!! nl2br( e(  $answer->question->text_text ) )  !!}
+                                                </div>
+                                            </div>
+
+                                            <!-- 正解 -->
+                                            <div class="mb-3">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <span class="text-success fw-bold me-5">正解</span>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <div class="mb-2 text-secondary">
+                                                            解答方法：
+                                                            {{  $answer->question->answer_type == 0 ? '文章で答えを入力する' :
+                                                            (   $answer->question->answer_type == 1 ? 'ひとつの答えを選ぶ' : '複数の答えを選ぶ'  ) }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @foreach ( $answer->question->question_options as $option)
+                                                    <div class="row mb-2 pe-3">
+                                                        @if ($option->answer_boolean)
+                                                            <div class="col-auto">
+                                                                <span class="fw-bold text-info">正　解</span>
+                                                            </div>
+                                                            <div class="col card border-info"> {{ $option->answer_text }}</div>
+                                                        @else
+                                                            <div class="col-auto">
+                                                                <span class="fw-bold text-secondary">不正解</span>
+                                                            </div>
+                                                            <div class="col card bg-light">{{ $option->answer_text }}</div>
+                                                        @endif
+                                                    </div>
+                                                @endforeach
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- 解説 -->
+                                    @if($answer->question->commentary_text )
+
+                                        <div class="divider divider-dashed my-3"></div>
+                                        <div class="row">
+
+                                            <!-- 解説画像 -->
+                                            @if ($answer->question->commentary_image)
+                                            <div class="col-md-4 order-md-2">
+                                                <div class="my-3">
+                                                    <span class="text-warning fw-bold">解説画像</span>
+                                                    <div class="card w-100  mb-3">
+                                                        <div class="ratio ratio-16x9 border border-light" style="
+                                                            background: no-repeat center center / cover;
+                                                            background-image:url({{asset('storage/'.$answer->question->commentary_image_puth)}});
+                                                            border-radius: .5rem;
+                                                        "></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @endif
+
+                                            <div class="col-md-8">
+                                                <!-- 解説文 -->
+                                                <div class="my-3">
+                                                    <span class="text-warning fw-bold">解説文</span>
+                                                    <div class="p-2 bg-light">
+                                                        {!! nl2br( e( $answer->question->commentary_storage_text ) )  !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    @endif
+
+                                </div>
+
+                                <!--詳しく見るボタン-->
+                                <div class="py-2">
+                                    <a class="text-decoration-none"
+                                    data-bs-toggle="collapse" href="#collapse{{$num}}" role="button" aria-expanded="false" aria-controls="collapse{{$num}}"
+                                    >
+                                        <see-more-btn-component></see-more-btn-component>
+
+                                    </a>
+                                </div>
+
+                            </div>
+
+                        </li>
+                    @endforeach
+                </ul>
+              </div>
 
         </div>
     </section>
@@ -309,11 +406,13 @@
                 </div>
 
 
+                <!--詳しく見るボタン-->
                 <div class="py-2 text-end">
-                    <a href="" class="text-decoration-none text-success"
+                    <see-more-btn-component
                     data-bs-toggle="collapse" data-bs-target="#collapseQGInfo" aria-expanded="false" aria-controls="collapseQGInfo"
-                    >詳しく見る</a>
+                    ></see-more-btn-component>
                 </div>
+
 
             </div>
 

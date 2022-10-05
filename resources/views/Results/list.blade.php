@@ -34,16 +34,16 @@
 @section('contents')
     <section>
         <div class="container-1200 my-5">
-            <div class="d-md-flex">
+            <div class="row">
 
                 <!-- サイドコンテンツ[pc] -->
-                <div class="d-none d-md-block  pe-3" style="width:300px;">
+                <div class="d-none d-lg-block" style="width:300px;">
                     @include('_parts.user_info')
                 </div>
 
 
                 <!-- 中央コンテンツ -->
-                <div class="flex-fill">
+                <div class="col">
 
 
                     <div class="">
@@ -52,46 +52,46 @@
                             <span class="text-success">{{Auth::user()->name}}さんの受検成績</span>
                             <div class="d-lg-flex gap-3">
                                 <div class="col-auto">
-                                    <span class="fs-5 fw-bold">受検数</span>
-                                    <span class="fs-3 ms-1">{{ count( Auth::user()->answer_groups ) }}</span>
+                                    <span class="fs-5 fw-bold">受検回数</span>
+                                    <span class="fs-5 ms-1">{{ count( Auth::user()->answer_groups ) }}</span>
                                     <span>件</span>
                                 </div>
 
                                 <div class="">
-                                    <span class="fs-5 fw-bold">合計学習時間</span>
-                                    <span class="fs-3 ms-1">640時間57分59秒(仮)</span>
+                                    <span class="fs-5 fw-bold">合計受検時間</span>
+                                    <span class="fs-5 ms-1">{{Auth::user()->answer_groups_total_time}}</span>
                                 </div>
                             </div>
 
                         </div>
 
-                        <ul class="list-group ">
-                            @forelse ( $answer_groups as $key => $answer_group)
+                        @forelse ( $answer_groups as $key => $answer_group)
                             @php $question_group = $answer_group->question_group; @endphp
-
-
-                            <li class="list-group-item">
-                                <div class="row">
-                                    <!-- [ left ] -->
-                                    <div class="col p-0">
+                            <div class="card card-body border-0 shadow-sm mb-3">
+                                <div class="row align-items-center">
+                                    <!-- サムネイル -->
+                                    <div class="col-auto  d-none d-sm-block">
+                                        <div class="card-image border border-light" style="
+                                            background:url({{ asset('storage/'.$question_group->image_puth) }});
+                                            background-repeat  : no-repeat;
+                                            background-size    : cover;
+                                            background-position: center center;
+                                            width: 4rem; height: 4rem; border-radius: .5rem;
+                                        "></div>
+                                    </div>
+                                    <!-- タイトルリンク -->
+                                    <div class="col text-truncate">
+                                        <div>
+                                            受験日{{ \Carbon\Carbon::parse($answer_group->created_at)->format('Y-m-d') }}
+                                        </div>
                                         @php $param = [ 'answer_group'=>$answer_group, 'key'=>Auth::user()->key ]; @endphp
                                         <a href="{{route('results.detail', $param )}}"
-                                        class="fs-3 btn w-100 d-flex align-items-center">
-
-                                            <div class="card-image" style="
-                                                background:url({{ asset('storage/'.$question_group->image_puth) }});
-                                                background-repeat  : no-repeat;
-                                                background-size    : cover;
-                                                background-position: center center;
-                                                width: 4rem; height: 4rem; border-radius: .5rem;
-                                            "></div>
-
-                                            <span class="ms-3">{{ $question_group->title }}</span>
+                                        class="fs-3 text-success" style="text-decoration:none;">
+                                            {{ $question_group->title }}
                                         </a>
                                     </div>
-
-                                    <!-- [ right ] -->
-                                    <div class="col-auto text-secondary">
+                                    <!-- 成績 -->
+                                    <div class="col-auto d-none d-sm-block text-secondary">
                                         <div class="d-flex justify-content-between align-items-end">
                                                 <span class="">正解率</span>
                                                 <span class="">
@@ -102,17 +102,14 @@
                                             解答時間 {{$answer_group->elapsed_time}}
                                         </div>
                                     </div>
-                                </div>
 
-                            </li>
-                            @empty
-                            <li class="list-group-item">
-                                <div class="h2 text-secondary text-center">
-                                    挑戦した問題集はありません。
                                 </div>
-                            </li>
-                            @endforelse
-                        </ul>
+                            </div>
+                        @empty
+                            <div class="h2 text-secondary text-center py-5">
+                                受検した問題集はありません。
+                            </div>
+                        @endforelse
 
 
                         <!-- ページネーション -->

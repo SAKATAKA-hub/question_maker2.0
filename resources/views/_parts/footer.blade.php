@@ -59,4 +59,7 @@
         <p class="d-inline-block m-0">Copyright &copy; Next Arrow Inc.</p>
         <p class="d-inline-block m-0">All Rights Reserved.</p>
     </div>
+    <!-- bottom menu分の余白 -->
+    <div class="d-sm-none" style="height:5rem;"></div>
 </section>
+

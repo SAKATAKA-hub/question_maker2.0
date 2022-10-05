@@ -15,8 +15,11 @@ class Question extends Model
     use HasFactory;
     public $timestamps = true;
     protected $fillable = [
-        'text','answer_type','order','image','question_group_id',
-        'commentary_text','commentary_image',
+        'answer_type','order','question_group_id',
+        'image', //問題画像
+        'text',  //問題文
+        'commentary_image', //説明画像
+        'commentary_text',  //説明文
     ];
 
 
@@ -66,6 +69,34 @@ class Question extends Model
         {
             // パスから改行を取り除く
             $text = $this->text;
+            $path = str_replace(["\r\n", "\r", "\n"], '', $text);
+
+            return \Illuminate\Support\Facades\Storage::exists($path) ?
+            \Illuminate\Support\Facades\Storage::get($path) : $text;
+        }
+
+
+        /**
+         * 解説画像パス（画像無し対応） $question->commentary_image_puth
+         * @return String
+        */
+        public function getCommentaryImagePuthAttribute(){
+
+            //画像無し時の画像パス
+            $no_image = 'site/image/no_image.png';
+
+            return Storage::exists( $this->commentary_image ) ? $this->commentary_image : $no_image;
+        }
+
+
+        /**
+         * ストレージ保存された文章（解説文）$question->commentary_storage_text
+         * @return String
+         */
+        public function getCommentaryStorageTextAttribute()
+        {
+            // パスから改行を取り除く
+            $text = $this->commentary_text;
             $path = str_replace(["\r\n", "\r", "\n"], '', $text);
 
             return \Illuminate\Support\Facades\Storage::exists($path) ?

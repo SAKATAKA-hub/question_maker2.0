@@ -6,23 +6,32 @@
     @if ( empty($question_group) )
     問題集の新規作成
     @else
-    問題集基本情報の修正
+    基本情報の編集
     @endif
 @endsection
 
 
 <!----- breadcrumb ----->
 @section('breadcrumb')
+<li class="breadcrumb-item"><a href="{{route('mypage')}}" class="text-success">
+    マイページ
+</a></li>
 <li class="breadcrumb-item"><a href="{{route('make_question_group.list')}}" class="text-success">
-    作成問題集リスト
+    作成した問題集
+</a></li>
+@if ( empty($question_group) )
+<li class="breadcrumb-item" aria-current="page">
+    問題集の新規作成
+</li>
+@else
+<li class="breadcrumb-item"><a href="{{ route('make_question_group.select_edit', $question_group ) }}" class="text-success">
+    {{'『'.$question_group->title.'』の編集'}}
 </a></li>
 <li class="breadcrumb-item" aria-current="page">
-    @if ( empty($question_group) )
-    問題集の新規作成
-    @else
-    問題集基本情報の修正
-    @endif
+    基本情報の編集
 </li>
+@endif
+
 @endsection
 
 
@@ -178,6 +187,7 @@
                     value="{{ isset($question_group) ? $question_group->tags : '' }}"
                     maxlength="150">
                 </div>
+
 
 
                 <!-- 送信ボタン -->

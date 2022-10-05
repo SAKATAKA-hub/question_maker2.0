@@ -2,15 +2,18 @@
 
 
 <!----- title ----->
-@section('title','問題集の修正')
+@section('title','『'.$question_group->title.'』の編集')
 
 <!----- breadcrumb ----->
 @section('breadcrumb')
+<li class="breadcrumb-item"><a href="{{route('mypage')}}" class="text-success">
+    マイページ
+</a></li>
 <li class="breadcrumb-item"><a href="{{route('make_question_group.list')}}" class="text-success">
     作成した問題集
 </a></li>
 <li class="breadcrumb-item" aria-current="page">
-   問題集の修正
+   {{'『'.$question_group->title.'』の編集'}}
 </li>
 @endsection
 
@@ -43,23 +46,6 @@
 
 <!----- contents ----->
 @section('contents')
-{{-- <section>
-    <div class="container-1200-my-5">
-
-
-
-
-        <div class="callout callout-success mb-5">
-            <h5>問題集に載せる問題を作成しましょう！</h5>
-            <p>
-                <strong>問題の追加</strong>から、問題を沢山追加しましょう。<br>
-                <strong>公開設定の変更</strong>は、<strong>基本情報の修正</strong>から変更できます。
-            </p>
-        </div>
-
-        修正
-    </div>
-</section> --}}
 <section>
     <div class="container-1200 my-5">
         <div class="row">
@@ -237,7 +223,7 @@
 
                                     <div class="mb-3">
                                         <a href="{{route('make_question_group.edit',$question_group)}}" class="btn btn-success rounded-pill"
-                                        >修正</a>
+                                        >編集</a>
                                     </div>
 
 
@@ -275,39 +261,52 @@
                                                 <!-- 問題画像 -->
                                                 @if ($question->image)
                                                 <div class="col-md-4 order-md-2">
-                                                    <div class="card w-100  mb-3">
-                                                        <div class="ratio ratio-16x9 border border-light" style="
-                                                            background: no-repeat center center / cover;
-                                                            background-image:url({{asset('storage/'.$question->image_puth)}});
-                                                            border-radius: .5rem;
-                                                        "></div>
+                                                    <div class="my-3">
+                                                        <span class="text-success fw-bold">問題画像</span>
+                                                        <div class="card w-100  mb-3">
+                                                            <div class="ratio ratio-16x9 border border-light" style="
+                                                                background: no-repeat center center / cover;
+                                                                background-image:url({{asset('storage/'.$question->image_puth)}});
+                                                                border-radius: .5rem;
+                                                            "></div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 @endif
 
                                                 <div class="col-md-8">
                                                     <!-- 問題文 -->
-                                                    <div class="my-3 p-2 bg-light">
-                                                        {!! nl2br( e( $question->text_text ) )  !!}
+                                                    <div class="my-3">
+                                                        <span class="text-success fw-bold">問題文</span>
+                                                        <div class="p-2 bg-light">
+                                                            {!! nl2br( e( $question->text_text ) )  !!}
+                                                        </div>
                                                     </div>
 
                                                     <!-- 正解 -->
                                                     <div class="mb-3">
-                                                        <div class="mb-2" style="font-size:.6rem">
-                                                            解答方法：
-                                                            {{ $question->answer_type == 0 ? '文章で答えを入力する' :
-                                                            (  $question->answer_type == 1 ? 'ひとつの答えを選ぶ' : '複数の答えを選ぶ'  ) }}
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <span class="text-success fw-bold me-5">正解</span>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <div class="mb-2 text-secondary">
+                                                                    解答方法：
+                                                                    {{ $question->answer_type == 0 ? '文章で答えを入力する' :
+                                                                    (  $question->answer_type == 1 ? 'ひとつの答えを選ぶ' : '複数の答えを選ぶ'  ) }}
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         @foreach ($question->question_options as $option)
                                                             <div class="row mb-2 pe-3">
                                                                 @if ($option->answer_boolean)
                                                                     <div class="col-auto">
-                                                                        <span class="fw-bold text-success">正　解</span>
+                                                                        <span class="fw-bold text-info">正　解</span>
                                                                     </div>
-                                                                    <div class="col card border-success"> {{ $option->answer_text }}</div>
+                                                                    <div class="col card border-info"> {{ $option->answer_text }}</div>
                                                                 @else
                                                                     <div class="col-auto">
-                                                                        <span class="fw-bold">不正解</span>
+                                                                        <span class="fw-bold text-secondary">不正解</span>
                                                                     </div>
                                                                     <div class="col card bg-light">{{ $option->answer_text }}</div>
                                                                 @endif
@@ -317,9 +316,46 @@
 
                                                 </div>
                                             </div>
+
+
+                                            <!-- 解説 -->
+                                            @if($question->commentary_text )
+
+                                                <div class="divider divider-dashed my-3"></div>
+                                                <div class="row">
+
+                                                    <!-- 解説画像 -->
+                                                    @if ($question->commentary_image)
+                                                    <div class="col-md-4 order-md-2">
+                                                        <div class="my-3">
+                                                            <span class="text-warning fw-bold">解説画像</span>
+                                                            <div class="card w-100  mb-3">
+                                                                <div class="ratio ratio-16x9 border border-light" style="
+                                                                    background: no-repeat center center / cover;
+                                                                    background-image:url({{asset('storage/'.$question->commentary_image_puth)}});
+                                                                    border-radius: .5rem;
+                                                                "></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @endif
+
+                                                    <div class="col-md-8">
+                                                        <!-- 解説文 -->
+                                                        <div class="my-3">
+                                                            <span class="text-warning fw-bold">解説文</span>
+                                                            <div class="p-2 bg-light">
+                                                                {!! nl2br( e( $question->commentary_storage_text ) )  !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            @endif
+
                                             <div class="my-3">
                                                 <a href="{{route('make_question.edit',$question)}}"    class="btn btn-info rounded-pill" style="text-decoration:none;"
-                                                >修正</a>
+                                                >編集</a>
                                                 <a href="#" class="btn btn-outline-danger  rounded-pill" style="text-decoration:none;"
                                                 data-bs-toggle="modal" data-bs-target="#deleteQuestionModal{{$key}}"
                                                 >削除</a>
@@ -337,8 +373,9 @@
                                             </div>
                                             <div class="modal-body">
                                                 <strong>問題 {{sprintf('%02d', $question->order )}}</strong>を削除します。<br>
-                                                公開中の問題集の問題数が<strong>"0問"</strong>になると、自動的に<strong>”非公開”</strong>となります。<br>
-                                                <strong>本当に、削除してもよろしいですか？</strong>
+                                                <strong>本当に、削除してもよろしいですか？</strong><br>
+                                                ※公開中の問題集の問題数が<strong>"0問"</strong>になると、自動的に公開設定が<strong>”非公開”</strong>となります。<br>
+
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" style="text-decoration:none;" class="btn btn-link text-secondary fw-bold" data-bs-dismiss="modal"
@@ -372,29 +409,15 @@
 
 
     </div>
-
-
-    <!-- 問題追加ボタン -->
-    <div  id="addQuestion">
-        <div class="container-1200">
-
-            <a href="{{route('make_question.create',$question_group)}}" class="d-block text-decoration-none  mx-3 float-end">
-
-                <div class="bg-info d-flex flex-column justify-content-center align-items-center shadow-lg position-relative"
-                style="width:90px; height:90px; border-radius:50%;">
-
-                    <div class="text-white pb-4" style="font-size:4rem;">
-                        <i class="bi bi-plus"></i>
-                    </div>
-                    <div class="position-absolute start-50 translate-middle-x
-                    text-white text-center w-100" style="bottom: 1rem;">問題の追加</div>
-
-                </div>
-            </a>
-
-        </div>
-    </div>
-
-
 </section>
+
+
+<!-- 問題追加ボタン -->
+<a id="addQuestion" href="{{route('make_question.create',$question_group)}}" class="d-block text-decoration-none">
+    <div class="icon text-white bg-info shadow">
+        <i class="bi bi-plus"></i>
+    </div>
+    <div class="text-secondary text-center w-100">問題の追加</div>
+</a>
+
 @endsection

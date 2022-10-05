@@ -35,6 +35,7 @@
                 <!-- 検索結果 -->
                 <div class="my-5">
 
+
                     <div class="mb-5">
                         @if ( $question_groups->count() )
                         <h5 class="text-secondary">”{{$keywords?$keywords:'すべて'}}”の条件で一致する検索結果</h5>
@@ -85,12 +86,7 @@
 
     </main>
     <footer>
-        <section class="bg-dark">
-            <div class="section_container text-white text-center" style="font-size:.8rem;">
-                <p class="d-inline-block m-0">Copyright &copy; Next Arrow Inc.</p>
-                <p class="d-inline-block m-0">All Rights Reserved.</p>
-            </div>
-        </section>
+        @include('_parts.footer')
     </footer>
 
 

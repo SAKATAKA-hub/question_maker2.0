@@ -21,7 +21,6 @@
 @section('style')
 <link href="{{ asset('css/privacy_policy.css') }}" rel="stylesheet">
 <style>
-    /* main{ background-color:  rgb(20, 207, 160,.1); } */
     main{ background: rgba(92, 240, 203, 0.5);}
 </style>
 @endsection
@@ -35,8 +34,8 @@
 <!----- contents ----->
 @section('contents')
 <section>
-    <div class="container-1200 py-4">
-        <div class="card card-body">
+    <div class="container-1200 bg-white">
+        <div class="pb-5">
 
             <!-- [ 見出し ] -->
             <div class="mb-3">

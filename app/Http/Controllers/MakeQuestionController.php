@@ -53,6 +53,28 @@ class MakeQuestionController extends Controller
         $request->text = Method::uploadStorageText( $dir, $request->text );
 
 
+        # 解説画像のアップロード
+
+            /* 基本設定 */
+            $dir = 'upload/user/question/commentary_image/'; //保存先ディレクトリ
+            $input_file_name = 'commentary_image';             //インプットファイルのname
+            $commentary_image_path = null;
+
+            /* アップロードする画像があるとき、画像のアップロード*/
+            if( $request_file = $request->file( $input_file_name ) )
+            {
+                $commentary_image_path =  $request->file( $input_file_name )->store($dir);
+            }//end if
+
+        //end 画像のアップロード
+
+
+        # 解説テキストのストレージ保存
+        $dir = 'upload/user/question/commentary_text/';
+        $request->commentary_text = Method::uploadStorageText( $dir, $request->commentary_text );
+
+
+
         # 問題順の入替え
 
             // 指定番号($request->order)以上の問題をすべて取得
@@ -73,14 +95,14 @@ class MakeQuestionController extends Controller
         # 問題情報の保存
         $question = new \App\Models\Question([
             'question_group_id' => $question_group->id,
-            'text' => $request->text,
             'answer_type' => $request->answer_type,
             'order' => $request->order,
             'image' => $image_path,
+            'text' => $request->text,
+            'commentary_image' => $commentary_image_path,
+            'commentary_text' => $request->commentary_text,
         ]);
         $question->save();
-
-
 
 
 
@@ -115,10 +137,17 @@ class MakeQuestionController extends Controller
         //
 
 
+        # 基本情報更新日時の更新
+        $question_group->updated_at = \Carbon\Carbon::now()->format('Y-m-d H:i:s');
+        $question_group->save();
+
+
         # 問題集の編集ヶ所選択ページへリダイレクト
         return redirect()->route('make_question_group.select_edit', $question_group)
         ->with('alert-info','問題を1件登録しました。');
     }
+
+
 
 
     /**
@@ -133,6 +162,8 @@ class MakeQuestionController extends Controller
         $question_group = \App\Models\QuestionGroup::find($question->question_group_id);
         return view('MakeQuestion.edit', compact( 'question_group', 'question' ) );
     }
+
+
 
 
     /**
@@ -225,6 +256,36 @@ class MakeQuestionController extends Controller
         $request->text = Method::uploadStorageText( $dir, $new_text=$request->text, $old_text=$question->text );
 
 
+        # 解説画像のアップロード
+
+            /* 基本設定 */
+            $dir = 'upload/user/question/commentary_image/'; //保存先ディレクトリ
+            $input_file_name = 'commentary_image';             //インプットファイルのname
+            $old_commentary_image_path = $question->commentary_image;
+            $commentary_image_path = null;
+
+            /* アップロードする画像があるとき、画像のアップロード*/
+            if( $request_file = $request->file( $input_file_name ) )
+            {
+                // ファイルのアップロード
+                $commentary_image_path =  $request->file( $input_file_name )->store($dir);
+
+                // 更新前のアップロードファイルを削除
+                $delete_path = $old_commentary_image_path;
+                if( Storage::exists( $delete_path ) ){ storage::delete( $delete_path ); }
+
+            }else{
+                $commentary_image_path = $old_commentary_image_path;
+            }
+
+        //end 画像のアップロード
+
+
+        # テキストのストレージ保存
+        $dir = 'upload/user/question/commentary_text/';
+        $request->commentary_text = Method::uploadStorageText( $dir, $new_text=$request->commentary_text, $old_text=$question->commentary_text );
+
+
         # 問題順の入替え
 
             // 順番変更の方向 [+]後ろに移動、[-]:前に移動
@@ -271,10 +332,13 @@ class MakeQuestionController extends Controller
         # 問題情報の保存
         $question->update([
             'question_group_id' => $question_group->id,
-            'text' => $request->text,
             'answer_type' => $request->answer_type,
             'order' => $request->order,
             'image' => $image_path,
+            'text'  => $request->text,
+            'commentary_image' => $commentary_image_path,
+            'commentary_text' => $request->commentary_text,
+
         ]);
         $question->save();
 
@@ -342,6 +406,11 @@ class MakeQuestionController extends Controller
         //
 
 
+        # 基本情報更新日時の更新
+        $question_group->updated_at = \Carbon\Carbon::now()->format('Y-m-d H:i:s');
+        $question_group->save();
+
+
         # 問題集の編集ヶ所選択ページへリダイレクト
         return redirect()->route('make_question_group.select_edit', $question_group)
         ->with('alert-warning','問題を1件修正しました。');
@@ -362,12 +431,19 @@ class MakeQuestionController extends Controller
         $question_group = $question->question_group;
 
 
-        # アップロードファイルを削除
+        # アップロードファイルを削除(問題画像)
         $delete_path = $question->image;
         if( Storage::exists( $delete_path ) ){ storage::delete( $delete_path ); }
+        # アップロードファイルを削除(解説画像)
+        $delete_path = $question->commentary_image;
+        if( Storage::exists( $delete_path ) ){ storage::delete( $delete_path ); }
 
-        # ストレージテキストの削除
+
+        # ストレージテキストの削除(問題文)
         $delete_path = $question->text;
+        Method::deleteStorageText( $delete_path );
+        # ストレージテキストの削除(解説文)
+        $delete_path = $question->commentary_text;
         Method::deleteStorageText( $delete_path );
 
 
@@ -397,6 +473,11 @@ class MakeQuestionController extends Controller
         if( $question_group->questions->count() < 1 ){
             $question_group->update([ 'published_at' => null , ]);
         }
+
+
+        # 基本情報更新日時の更新
+        $question_group->updated_at = \Carbon\Carbon::now()->format('Y-m-d H:i:s');
+        $question_group->save();
 
 
         # 問題集の編集ヶ所選択ページへリダイレクト

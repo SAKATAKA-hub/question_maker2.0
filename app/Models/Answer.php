@@ -16,4 +16,18 @@ class Answer extends Model
     protected $fillable = [
         'text','is_correct','answer_group_id','question_id',
     ];
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | リレーション
+    |--------------------------------------------------------------------------
+    */
+
+        # Questionテーブルとのリレーション
+        public function question(){
+            return $this->belongsTo(Question::class);
+        }
+
+    //
 }

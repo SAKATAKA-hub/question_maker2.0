@@ -58,22 +58,28 @@ class User extends Authenticatable
     */
         # KeepQuestionGroupとのリレーション
         public function keep_question_groups(){
-            return $this->hasMany(KeepQuestionGroup::class)->orderBy('created_at','desc');
+            return $this->hasMany(KeepQuestionGroup::class)
+            ->orderBy('created_at','desc');
         }
 
         # AnswerGroupとのリレーション
         public function answer_groups(){
-            return $this->hasMany(AnswerGroup::class)->orderBy('created_at','desc');
+            return $this->hasMany(AnswerGroup::class)
+            ->orderBy('created_at','desc');
         }
 
         # KeepCreatorUserとのリレーション(フォロー)
         public function keep_creater_users(){
-            return $this->hasMany(KeepCreatorUser::class)->orderBy('created_at','desc');
+            return $this->hasMany(KeepCreatorUser::class)
+            ->where('keep',1)
+            ->orderBy('created_at','desc');
         }
 
         # KeepCreatorUserとのリレーション(フォロワー)
         public function kept_users(){
-            return $this->hasMany(KeepCreatorUser::class,'creater_user_id')->orderBy('created_at','desc');
+            return $this->hasMany(KeepCreatorUser::class,'creater_user_id')
+            ->where('keep',1)
+            ->orderBy('created_at','desc');
         }
 
         # MailSettingとのリレーション(メール設定)
@@ -168,6 +174,38 @@ class User extends Authenticatable
             // ユーザーが受検した合計点 / ユーザーの受検数
             $average_score = $this->answer_groups->sum('score') / count( $this->answer_groups);
             return round( $average_score, 1 );
+        }
+
+        /**
+         * ユーザーが受験した合計時間 ($user->answer_groups_total_time)
+         * @return Array
+        */
+        public function getAnswerGroupsTotalTimeAttribute(){
+
+            $time_text = '';
+            $h=0; $m=0; $s=0;
+            foreach ($this->answer_groups as $answer_group) {
+                $time_text = str_replace( '秒', '', $answer_group->elapsed_time );
+                $time_text = str_replace(['時間','分'],':',$time_text);
+                $time_array = explode(':',$time_text);
+
+                $h += $time_array[0];
+                $m += $time_array[1];
+                $s += $time_array[2];
+            }
+
+            //繰り上がり計算
+            $add_m = round( $s/60 );
+            $s = $s % 60;
+
+            $m += $add_m;
+            $add_h =round( $m/60 );
+            $m = $m % 60;
+
+            $h += $add_h;
+
+
+            return sprintf('%02d時間%02d分%02d秒',$h,$m,$s);
         }
 
 

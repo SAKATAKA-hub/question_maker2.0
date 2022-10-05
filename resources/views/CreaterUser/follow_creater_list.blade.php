@@ -66,6 +66,7 @@
                 <div class="flex-fill">
 
 
+
                     <ul class="list-group">
                         @forelse ($creater_user->follow_creators as $follow_creator)
                             <li class="list-group-item" >

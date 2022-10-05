@@ -26,14 +26,31 @@ main{
 
     /* 問題追加ボタンのスタイル */
     #addQuestion{
-        /* background: pink; */
-
         position: fixed;
-        left:0; bottom: 1rem;
-        width: 100%;
-        z-index: 10;
+        right:1rem; bottom: 1rem;
+        z-index: 20;
+    }
+    #addQuestion > .icon{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        margin: 0 auto;
+        font-size:3rem;
+        width:5rem; height:5rem;
+        border-radius:50%;
     }
 
+    @media screen and (max-width: 576px) {
+        /*bottom menu 分の余白*/
+        #addQuestion{
+            bottom: 4rem;
+        }
+        #addQuestion > .icon{
+            width:3rem; height:3rem;
+        }
+    }
 /*
 * ---------------------------
 * コンテナー

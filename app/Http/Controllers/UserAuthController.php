@@ -364,12 +364,18 @@ class UserAuthController extends Controller
             # 各問題保存ファイルを削除
             foreach ($question_group->questions as $question) {
 
-                # アップロードファイルを削除
+                # アップロードファイルを削除(問題画像)
                 $delete_path = $question->image;
                 if( Storage::exists( $delete_path ) ){ storage::delete( $delete_path ); }
+                # アップロードファイルを削除(解説画像)
+                $delete_path = $question->commentary_image;
+                if( Storage::exists( $delete_path ) ){ storage::delete( $delete_path ); }
 
-                # ストレージテキストを削除
+                # ストレージテキストの削除(問題文)
                 $delete_path = $question->text;
+                Method::deleteStorageText( $delete_path );
+                # ストレージテキストの削除(解説文)
+                $delete_path = $question->commentary_text;
                 Method::deleteStorageText( $delete_path );
 
             }

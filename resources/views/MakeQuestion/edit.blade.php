@@ -6,21 +6,31 @@
     @if ( empty($question) )
     問題の新規登録
     @else
-    問題の修正
+    問題の編集
     @endif
 @endsection
 
 
 <!----- breadcrumb ----->
 @section('breadcrumb')
-<li class="breadcrumb-item"><a href="{{route('make_question_group.list')}}" class="text-success">
+{{-- <li class="breadcrumb-item"><a href="{{route('make_question_group.list')}}" class="text-success">
     作成問題集リスト
+</a></li> --}}
+<li class="breadcrumb-item"><a href="{{route('mypage')}}" class="text-success">
+    マイページ
 </a></li>
+<li class="breadcrumb-item"><a href="{{route('make_question_group.list')}}" class="text-success">
+    作成した問題集
+</a></li>
+<li class="breadcrumb-item"><a href="{{ route('make_question_group.select_edit', $question_group ) }}" class="text-success">
+    {{'『'.$question_group->title.'』の編集'}}
+</a></li>
+
 <li class="breadcrumb-item" aria-current="page">
     @if ( empty($question) )
     問題の新規登録
     @else
-    問題の修正
+    問題の編集
     @endif
 </li>
 @endsection
@@ -110,9 +120,9 @@
                         <span class="form-check-label fs-5 mb-2 fw-bold">問題文</span>
                         <span class="badge bg-danger" style="transform:translateY(-3px);">必須</span>
                     </label>
-                    <textarea name="text" class="form-control" id="text" rows="3"
+
+                    <textarea name="text" class="form-control" id="text" rows="3" placeholder="問題文を入力してください。"
                     required>@if( isset($question) ) {{$question->text_text}} @endif</textarea>
-                    {{-- <div class="form-text">※150文字以内</div> --}}
                 </div>
 
 
@@ -139,9 +149,29 @@
 
                     @php $img_path = isset($question) ? $question->image_puth : 'site/image/no_image.png' ; @endphp
                     <read-image-file-component img_path="{{asset('storage/'.$img_path)}}" alt="問題画像"></read-image-file-component>
-
                     <div class="form-text">※ファイルは10Mバイト以内で、jpeg・jpg・pngのいずれかの形式を選択してください。</div>
+
                 </div>
+
+
+                <!-- 解説 -->
+                <div class="form-group mb-4 card card-body border-success bg-light-success">
+
+                    <label for="exampleFormControlInput1" class="form-check-label fs-5 mb-2 fw-bold"
+                    >解説</label>
+
+                    <p class="callout callout-success">
+                        問題集の受検後の成績発表時に、『解説』を表示させることができます。
+                    </p>
+
+                    @php $img_path = isset($question) ? $question->commentary_image_puth : 'site/image/no_image2.png' ; @endphp
+                    <commentary-input-component
+                    img_path="{{asset('storage/'.$img_path)}}"
+                    text="{{ isset($question) ? $question->commentary_storage_text : ''}}"
+                    ></commentary-input-component>
+
+                </div>
+
 
 
                 <!-- 送信ボタン -->
@@ -161,205 +191,6 @@
         </form>
 
 
-        <!-- [ 問題を登録する ] -->
-{{--
-        <h3 class="text-secondary fw-bold mb-3">
-            問題を登録する
-        </h3>
-        <ul class="p-0">
-            <!-- ひとつの答えを選ぶ -->
-            <li class="card mb-3">
-                <div class="card-body">
-
-                    <div class="d-flex justify-content-between  mb-3">
-                        <h3 class="text-secondary fw-bold mb-0">01問目</h3>
-                        <a href="" class="btn btn-danger btn-sm">削除</a>
-                    </div>
-
-                    <!-- 問題文 -->
-                    <div class="form-group mb-3">
-                        <label for="exampleFormControlTextarea1" class="form-check-label fs-5 mb-2 fw-bold"
-                        >問題文</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        <div class="form-text">※150文字以内</div>
-                    </div>
-
-
-                    <!-- 回答の種類 -->
-                    <div class="mb-3">
-                        <label class="form-check-label fs-5 mb-2 fw-bold">回答方法</label>
-                        <div class="ms-3 d-flex gap-3">
-
-                            <div class="form-check">
-                                <input name="answer_type" value="true" type="radio" class="form-check-input" id="exampleCheck1" checked>
-                                <label class="form-check-label fw-bold" for="exampleCheck1">ひとつの答えを選ぶ</label>
-                            </div>
-                            <div class="form-check">
-                                <input name="answer_type" value="" type="radio" class="form-check-input" id="exampleCheck2">
-                                <label class="form-check-label fw-bold" for="exampleCheck2">複数の答えを選ぶ</label>
-                            </div>
-                            <div class="form-check">
-                                <input name="answer_type" value="" type="radio" class="form-check-input" id="exampleCheck3">
-                                <label class="form-check-label fw-bold" for="exampleCheck2">文章で答えを入力する</label>
-                            </div>
-
-                        </div>
-                    </div>
-
-
-                    <!-- 回答選択肢 -->
-                    <div class="form-group mb-3">
-                        <label for="" class="form-check-label fs-5 mb-2 fw-bold"
-                        >回答選択肢</label>
-                        <div class="row gap-1 ps-4 mb-2">
-                            <div class="col-auto form-check mt-2">
-                                <input name="ans" value="" type="radio" class="form-check-input" id="exampleCheck1" checked>
-                                <label class="form-check-label" for="exampleCheck1">正解</label>
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" id="exampleInputPassword1" style="height:2rem;" required>
-                            </div>
-                            <div class="col-auto">
-                                <a href="" class="text-danger" style="text-decoration:none;">削除</a>
-                            </div>
-                        </div>
-                        @for ($i = 0; $i < 3; $i++)
-                        <div class="row gap-1 ps-4 mb-2">
-                            <div class="col-auto form-check mt-2">
-                                <input name="ans" value="" type="radio" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">正解</label>
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" id="exampleInputPassword1" style="height:2rem;" required>
-                            </div>
-                            <div class="col-auto">
-                                <a href="" class="text-danger" style="text-decoration:none;">削除</a>
-                            </div>
-                        </div>
-                        @endfor
-                        <div class="ms-2 mt-3">
-                            <button type="button" class="btn btn-light border">+ 選択肢の追加</button>
-                        </div>
-
-                    </div>
-
-                </div>
-            </li>
-
-            <!-- 複数の答えを選ぶ -->
-            <li class="card mb-3">
-                <div class="card-body">
-                    <h3 class="text-secondary fw-bold mb-3"
-                    >01問目</h3>
-
-                    <!-- 問題文 -->
-                    <div class="form-group mb-3">
-                        <label for="exampleFormControlTextarea1" class="form-check-label fs-5 mb-2 fw-bold"
-                        >問題文</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        <div class="form-text">※150文字以内</div>
-                    </div>
-
-
-                    <!-- 回答の種類 -->
-                    <div class="mb-3">
-                        <label class="form-check-label fs-5 mb-2 fw-bold">回答方法</label>
-                        <div class="ms-3 d-flex gap-3">
-
-                            <div class="form-check">
-                                <input name="answer_type" value="true" type="radio" class="form-check-input" id="exampleCheck1" checked>
-                                <label class="form-check-label fw-bold" for="exampleCheck1">ひとつの答えを選ぶ</label>
-                            </div>
-                            <div class="form-check">
-                                <input name="answer_type" value="" type="radio" class="form-check-input" id="exampleCheck2">
-                                <label class="form-check-label fw-bold" for="exampleCheck2">複数の答えを選ぶ</label>
-                            </div>
-                            <div class="form-check">
-                                <input name="answer_type" value="" type="radio" class="form-check-input" id="exampleCheck3">
-                                <label class="form-check-label fw-bold" for="exampleCheck2">文章で答えを入力する</label>
-                            </div>
-
-                        </div>
-                    </div>
-
-
-                    <!-- 回答選択肢 -->
-                    <div class="form-group mb-3">
-                        <label for="" class="form-check-label fs-5 mb-2 fw-bold"
-                        >回答選択肢</label>
-                        @for ($i = 0; $i < 4; $i++)
-                        <div class="row gap-3 ps-4 mb-2">
-                            <div class="col-auto form-check mt-2">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">正解</label>
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" id="exampleInputPassword1" style="height:2rem;">
-                            </div>
-                        </div>
-                        @endfor
-                        <div class="ms-2 mt-3">
-                            <button type="button" class="btn btn-light border">+ 選択肢の追加</button>
-                        </div>
-
-                    </div>
-
-                </div>
-            </li>
-
-            <!-- 複数の答えを選ぶ -->
-            <li class="card mb-3">
-                <div class="card-body">
-                    <h3 class="text-secondary fw-bold mb-3"
-                    >01問目</h3>
-
-                    <!-- 問題文 -->
-                    <div class="form-group mb-3">
-                        <label for="exampleFormControlTextarea1" class="form-check-label fs-5 mb-2 fw-bold"
-                        >問題文</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        <div class="form-text">※150文字以内</div>
-                    </div>
-
-
-                    <!-- 回答の種類 -->
-                    <div class="mb-3">
-                        <label class="form-check-label fs-5 mb-2 fw-bold">回答方法</label>
-                        <div class="ms-3 d-flex gap-3">
-
-                            <div class="form-check">
-                                <input name="answer_type" value="true" type="radio" class="form-check-input" id="exampleCheck1" checked>
-                                <label class="form-check-label fw-bold" for="exampleCheck1">ひとつの答えを選ぶ</label>
-                            </div>
-                            <div class="form-check">
-                                <input name="answer_type" value="" type="radio" class="form-check-input" id="exampleCheck2">
-                                <label class="form-check-label fw-bold" for="exampleCheck2">複数の答えを選ぶ</label>
-                            </div>
-                            <div class="form-check">
-                                <input name="answer_type" value="" type="radio" class="form-check-input" id="exampleCheck3">
-                                <label class="form-check-label fw-bold" for="exampleCheck2">文章で答えを入力する</label>
-                            </div>
-
-                        </div>
-                    </div>
-
-
-                    <!-- 回答選択肢 -->
-                    <div class="form-group mb-3">
-                        <label for="" class="form-check-label fs-5 mb-2 fw-bold"
-                        >正解</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" style="height:2rem;">
-                    </div>
-
-                </div>
-            </li>
-
-        </ul>
-
-        <div class="mt-3">
-            <button type="button" class="btn btn-secondary border">+ 問題の新規登録</button>
-        </div>
- --}}
 
 
     </div>

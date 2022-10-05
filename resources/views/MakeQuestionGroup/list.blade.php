@@ -10,7 +10,7 @@
     マイページ
 </a></li>
 <li class="breadcrumb-item" aria-current="page">
-    {{ '作成した問題集リスト' }}
+    {{ '作成した問題集' }}
 </li>
 @endsection
 
@@ -59,7 +59,7 @@
                                         width: 4rem; height: 4rem; border-radius: .5rem;
                                     "></div>
                                 </div>
-                                <div class="col">
+                                <div class="col text-truncate">
 
 
                                     <div>
@@ -409,7 +409,6 @@
                         </div>
                         @endforelse
 
-
                         <div class="my-3">
                             <!-- ページネーション -->
                             <div class="mb-5 d-flex justify-content-center">
@@ -418,26 +417,8 @@
                         </div>
 
 
-                        <!-- 問題追加ボタン -->
-                        <div  id="addQuestion">
-                            <div class="container-1200">
 
-                                <a href="{{route('make_question_group.create')}}" class="d-block text-decoration-none  mx-3 float-end">
 
-                                    <div class="bg-success d-flex flex-column justify-content-center align-items-center shadow-lg position-relative"
-                                    style="width:90px; height:90px; border-radius:50%;">
-
-                                        <div class="text-white pb-4" style="font-size:4rem;">
-                                            <i class="bi bi-plus"></i>
-                                        </div>
-                                        <div class="position-absolute start-50 translate-middle-x
-                                        text-white text-center w-100" style="bottom: 1rem;">新規作成</div>
-
-                                    </div>
-                                </a>
-
-                            </div>
-                        </div>
                     </section>
 
 
@@ -445,6 +426,16 @@
             </div>
         </div>
     </section>
+
+
+
+    <!-- 問題追加ボタン -->
+    <a id="addQuestion" href="{{route('make_question_group.create')}}" class="d-block text-decoration-none">
+        <div class="icon text-white bg-success shadow">
+            <i class="bi bi-plus"></i>
+        </div>
+        <div class="text-secondary text-center w-100">新規作成</div>
+    </a>
 @endsection
 
 

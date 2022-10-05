@@ -22,7 +22,8 @@ class CreaterUserController extends Controller
         $question_groups = \App\Models\QuestionGroup::where('user_id',$creater_user->id)
         ->where('published_at', '<>', null) //非公開は除く
         ->orderBy('published_at','desc')
-        ->paginate(10);
+        ->paginate(env('APP_PAGENATE_COUNT'));
+
 
         return view('CreaterUser.questin_group_list',compact('creater_user','question_groups'));
     }

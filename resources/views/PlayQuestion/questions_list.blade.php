@@ -9,14 +9,14 @@
     <title>もんだいDIYパーク - mondai DIY park - オリジナル問題集が自由に作れる！無料の問題作成ツール</title>
 
 
-    <meta  name="description" content="誰でも簡単な操作で、自分の好きな問題集を作れる！作成した問題集のURLをコピーして友達に送れば、簡単に出題できる！『もんだいDIYパーク』は、もんだいを「作る」「答える」「出題する」ツールを揃えた、もんだいのDIY広場です。">
+    {{-- <meta  name="description" content="誰でも簡単な操作で、自分の好きな問題集を作れる！作成した問題集のURLをコピーして友達に送れば、簡単に出題できる！『もんだいDIYパーク』は、もんだいを「作る」「答える」「出題する」ツールを揃えた、もんだいのDIY広場です。">
     <meta property="og:title" content="もんだいDIYパーク - mondai DIY park - オリジナル問題集が自由に作れる！無料の問題作成ツール" />
     <meta property="og:description" content="誰でも簡単な操作で、自分の好きな問題集を作れる！作成した問題集のURLをコピーして友達に送れば、簡単に出題できる！『もんだいDIYパーク』は、もんだいを「作る」「答える」「出題する」ツールを揃えた、もんだいのDIY広場です。" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{route('home')}}" />
     <meta property="og:image" content="{{asset('storage/site/image/logo_lg.png')}}" />
     <meta property="og:site_name" content="もんだいDIYパーク" />
-    <meta property="og:locale" content="ja_JP"  />
+    <meta property="og:locale" content="ja_JP"  /> --}}
 
 
     <!-- ファビコン -->
@@ -54,8 +54,7 @@
 
 
             <div class="container-1200">
-                <div class="px-4 py-5 my-5 text-center">
-                    {{-- <h2 class="display-1 h-1 text-success fw-bold mb-4">{{ env('APP_NAME') }}</h2> --}}
+                <div class="px-4 py-3 py-md-5 text-center">
                     <div class="col-12 col-md-6 mx-auto  position-relative">
                         <h5 class="fw-bold  position-absolute top-0 start-50 translate-middle-x w-100"
                         >\オリジナル問題集をDIYできる！/</h5>

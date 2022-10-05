@@ -49,6 +49,11 @@ Route::middleware(['user_auth'])->group(function () {
     Route::get('/make_question_group/list', [Controllers\MakeQuestionGroupController::class, 'list'])
     ->name('make_question_group.list');
 
+    # 問題集の詳細表示(detail)
+    Route::get('/make_question_group/detail/{question_group}', [Controllers\MakeQuestionGroupController::class, 'detail'])
+    ->middleware(['question_group_auth'])
+    ->name('make_question_group.detail');
+
     # 問題集の新規作成ページの表示(create)
     Route::get('/make_question_group/create', [Controllers\MakeQuestionGroupController::class, 'create'])
     ->name('make_question_group.create');

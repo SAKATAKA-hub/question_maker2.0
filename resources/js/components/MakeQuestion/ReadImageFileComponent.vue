@@ -4,7 +4,7 @@
         <div class="card overflow-hidden mb-2">
             <img :src="src" :alt="alt">
         </div>
-        <input type="file" name="image" class="form-control" id="file_input"
+        <input type="file" :name="name" class="form-control" id="file_input"
         style="padding:.4rem;"
         @change="onChange"
         >
@@ -26,9 +26,10 @@
             }
         },
         props: {
-            //最初に表示する画像のパス
+
             img_path: { type: String, default: '', }, //表示画像のパス
             alt: { type: String, default: 'サムネ画像', }, //表示画像のパス
+            name:{ type: String, default: 'image', }, //インプット要素のname名
 
         },
         mounted() {

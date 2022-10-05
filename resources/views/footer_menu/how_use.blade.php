@@ -117,20 +117,6 @@
             <h3 class="fs-1 text-success">
                 問題集作成時の注意
             </h3>
-            {{-- <div class="card-body">
-                <p class="fw-bold my-3">
-                    このサイトは世代や立場を問わず、広く皆様に楽しんでいただけるよう無料で公開しています。
-                </p>
-                <p class="fw-bold my-3">
-                    ご利用される皆様が気持ちよく楽しんで頂けるよう、問題集作成時の注意点をまとめました。
-                </p>
-                <p class="fw-bold my-3">
-                    作成した問題集を公開することで、他の方を傷つけたり、ご自身が傷つき嫌な思いをせず、
-                </p>
-                <p class="fw-bold my-3">
-                    楽しい時間を過ごしていただけますよう、ご協力お願いします。
-                </p>
-            </div> --}}
         </div>
 
         <div class="py-3">
@@ -163,12 +149,12 @@
             </h3>
             <div class="card card-body border-0">
                 <p>
-                    以下の内容に抵触すること判断した場合は警告・問題集の非公開処置、または悪質と判断した場合は問題集を削除させていただきます。
+                    以下の内容に抵触すること判断した場合は警告・問題集の非公開処置、または悪質と判断した場合は問題集またはアカウントをを削除させていただく場合があります。
                 </p>
                 <p>
-                    <strong class="text-success">1. 著作権に気を付けましょう</strong><br>
-                    ・利用する権利のない文章、画像、書籍・Webサイトからの引用を利用してはいけません。<br>
-                    ・他人が写った写真（肖像権を侵害する写真）を勝手に投稿してはいけません。<br>
+                    <strong class="text-success">1. 他者の権利を害する行為は避けましょう</strong><br>
+                    ・基本的人権を害するような行為は避けましょう。<br>
+                    ・著作権・肖像権などあらゆる権利を侵害する行為は避けましょう。<br>
                 </p>
                 <p>
                     <strong class="text-success">2. 他者を傷つけるような表現は避けましょう</strong><br>
@@ -179,77 +165,13 @@
                 <p>
                     <strong class="text-success">3. 解答に誤りが無いか確認しましょう</strong><br>
                     ・意図的に誤った解答を設定することは避けましょう。<br>
-                    ・解答に誤りがあると気づいた際は、速やかに修正を行いましょう<br>
+                    ・解答に誤りがあると気づいた際は、速やかに修正を行いましょう。<br>
+                    ・解答に様々な考え方がある場合は、問題集の説明文や問題文に以下のような『補足文』を明示するようにしてください。<br>
+                    <span class="ms-3">例）「文献により異なります。」「諸説あります。」</span>
+
                 </p>
             </div>
         </div>
-
-
-
-
-        {{-- <div class="row mx-3 mb-5">
-            <div class="col-lg-6  d-flex align-items-center order-lg-2" >
-                <img src="{{ asset('storage/site/image/22901978.jpg') }}" class="d-block w-100" alt="人気の問題集">
-            </div>
-            <div class="col-lg-12 d-flex align-items-center">
-                <div class="py-3">
-                    <p class="d-inline fw-bold text-success px-3 bg-white">Note 1</p>
-                    <h3 class="my-3">
-                        問題集作成をプライベートで楽しむときは、公開設定を「非公開」にしましょう！
-                    </h3>
-                    <div class="card card-body border-0">
-                        <p>
-                            このサイトで作成した問題集は、公開設定を「公開」にすることで、多くの利用者の方から閲覧できる状態になり、評価やコメントをもらう事ができます。
-                            <br>
-                            ただし、下に記した注意点から外れた制作物を公開した場合、トラブルの原因になる恐れがあるため注意が必要です。
-                        </p>
-                        <p>
-                            公開設定を「非公開」の状態にすることで、他の利用者から閲覧することはできなくなります。
-                        </p>
-                        <p>
-                            <strong class="text-success">公開設定を「非公開」にするとき</strong><br>
-                            ・問題集を作りかけで保存しておきたいとき<br>
-                            ・作った問題集をプライベートで利用したいとき
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mx-3 mb-5">
-            <div class="col-lg-12 d-flex align-items-center" >
-                <img src="{{ asset('storage/site/image/22901978.jpg') }}" class="d-block w-100" alt="人気の問題集">
-            </div>
-            <div class="col-lg-12 d-flex align-items-center">
-                <div class="py-3">
-                    <p class="d-inline fw-bold text-success px-3 bg-white">Note 2</p>
-                    <h3 class="my-3">
-                        公開するときは気を付けよう！！
-                    </h3>
-                    <div class="card card-body border-0">
-                        <p>
-                            以下の内容に抵触すること判断した場合は警告・問題集の非公開処置、または悪質と判断した場合は問題集を削除させていただきます。
-                        </p>
-                        <p>
-                            <strong class="text-success">1. 著作権に気を付けましょう</strong><br>
-                            ・利用する権利のない文章、画像、書籍・Webサイトからの引用を利用してはいけません。<br>
-                            ・他人が写った写真（肖像権を侵害する写真）を勝手に投稿してはいけません。<br>
-                        </p>
-                        <p>
-                            <strong class="text-success">2. 他者を傷つけるような表現は避けましょう</strong><br>
-                            ・特定の誰かを中傷、または名誉を毀損するための文章や画像が含まれるもの<br>
-                            ・過度に性的な表現、または画像などを含むもの（R12以上相当を対象とします）<br>
-                            ・過度に暴力的な表現、または画像などを含むもの（R12以上相当を対象とします）<br>
-                        </p>
-                        <p>
-                            <strong class="text-success">3. 解答に誤りが無いか確認しましょう</strong><br>
-                            ・意図的に誤った解答を設定することは避けましょう。<br>
-                            ・解答に誤りがあると気づいた際は、速やかに修正を行いましょう<br>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
 
     </div>
 </section>

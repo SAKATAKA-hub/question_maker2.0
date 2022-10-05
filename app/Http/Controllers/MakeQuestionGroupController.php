@@ -34,6 +34,18 @@ class MakeQuestionGroupController extends Controller
 
 
     /**
+     * 問題集の詳細表示(detail)
+     * @param \App\Models\QuestionGroup $question_group //選択した問題集グループ
+     * @return \Illuminate\View\View
+    */
+    public function detail(\App\Models\QuestionGroup $question_group)
+    {
+        return 'detail';
+    }
+
+
+
+    /**
      * 問題集の新規作成表示(create)
      * @return \Illuminate\View\View
     */

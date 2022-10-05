@@ -173,7 +173,7 @@
                                             <div class="accordion-body  bg-white p-0">
 
                                                 <ul class="list-group  border-0">
-                                                    <li class="list-group-item list-group-item-action border-0">
+                                                    <li class="list-group-item border-0">
                                                         <div class="row align-items-center">
                                                             <div class="col">「いいね」されたとき</div>
                                                             <div class="col-auto">
@@ -185,7 +185,7 @@
                                                             </div>
                                                         </div>
                                                     </li>
-                                                    <li class="list-group-item list-group-item-action border-0">
+                                                    <li class="list-group-item border-0">
                                                         <div class="row align-items-center">
                                                             <div class="col">「フォロー」されたとき</div>
                                                             <div class="col-auto">
@@ -197,7 +197,7 @@
                                                             </div>
                                                         </div>
                                                     </li>
-                                                    <li class="list-group-item list-group-item-action border-0">
+                                                    <li class="list-group-item border-0">
                                                         <div class="row align-items-center">
                                                             <div class="col">「コメント」されたとき</div>
                                                             <div class="col-auto">
@@ -209,7 +209,7 @@
                                                             </div>
                                                         </div>
                                                     </li>
-                                                    <li class="list-group-item list-group-item-action border-0">
+                                                    <li class="list-group-item border-0">
                                                         <div class="row align-items-center">
                                                             <div class="col">
                                                                 ダイレクトメールの受取り<br>
@@ -224,7 +224,7 @@
                                                             </div>
                                                         </div>
                                                     </li>
-                                                    <li class="list-group-item">
+                                                    <li class="list-group-item border-0">
                                                         <div class="row align-items-center">
                                                             <div class="col">
                                                                 <!------>
@@ -281,188 +281,6 @@
                             </div>
 
                         </div>
-
-                        {{-- <div class="mb-5">
-
-
-                            <h5>プロフィールの変更</h5>
-                            <div class="card card-body  border-2">
-                                <form action="{{route('update_user_profile')}}" method="POST"
-                                enctype="multipart/form-data" onsubmit="stopOnbeforeunload()"
-                                >
-                                    @csrf
-
-                                    <!-- 氏名 -->
-                                    <div class="mb-4">
-                                        <label for="profile_name" class="form-label">
-                                            氏名<small class="text-danger ms-3">※必須</small>
-                                        </label>
-                                        <input type="text" name="name" class="form-control" id="profile_name"
-                                        value="{{Auth::user()->name}}"
-                                        placeholder="山田　太郎" maxlength="50" required>
-                                    </div>
-
-
-                                    <!-- 問題画像 -->
-                                    <div class="mb-4">
-                                        <label class="form-label">問題画像</label>
-                                        <div class="" style="width:200px">
-                                            <read-image-file-component img_path="{{asset('storage/'.Auth::user()->image_puth)}}" alt="問題画像"/>
-                                        </div>
-                                        <div class="form-text">※ファイルは10Mバイト以内で、jpeg・jpg・pngのいずれかの形式を選択してください。</div>
-                                    </div>
-
-                                    <!-- 自己紹介 -->
-                                    <div class="mb-4">
-                                        <label for="profile_profile" class="form-label">
-                                            自己紹介
-                                        </label>
-                                        <textarea class="form-control" name="profile" id="profile_profile" rows="6"
-                                        placeholder="自己紹介の文章を入力しましょう！">{{Auth::user()->profile_text}}</textarea>
-                                    </div>
-
-                                    <div class="d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-success btn-sm">更新</button>
-                                    </div>
-                                </form>
-                            </div>
-
-
-                        </div> --}}
-                        {{-- <div class="mb-5">
-
-
-                            <h5>アカウント情報の変更</h5>
-                            <div class="card card-body  border-2">
-                                <form action="{{route('update_user_email')}}" method="POST"
-                                class="mb-3" onsubmit="stopOnbeforeunload()">
-                                    @csrf
-                                    <label for="inputEmail1" class="form-label">
-                                        メールアドレスの変更<small class="text-danger ms-3">※必須</small>
-                                    </label>
-                                    <div class="row">
-                                        <div class="col">
-                                            <input type="email" name="email" class="form-control" id="inputEmail1" value="{{Auth::user()->email}}" required>
-                                        </div>
-                                        <div class="col-auto">
-                                            <button type="submit" class="btn btn-success btn-sm">更新</button>
-                                        </div>
-                                    </div>
-                                </form>
-                                <div class="">
-                                    <a href="{{route('user_auth.reset_pass_form')}}" class="text-success">パスワードの変更はこちら</a>
-                                </div>
-                            </div>
-
-
-                        </div> --}}
-                        {{-- <div class="mb-5">
-                            <form action="{{route('email_setting')}}" method="POST" onsubmit="stopOnbeforeunload()">
-                                @csrf
-                                <input type="hidden" name="mail_setting_id" value="{{Auth::user()->mail_setting['id']}}">
-
-
-                                <h5>メール受信設定</h5>
-                                <ul class="list-group  border-2">
-                                    <li class="list-group-item list-group-item-action border-bottom-0">
-                                        <div class="row align-items-center">
-                                            <div class="col">「いいね」されたとき</div>
-                                            <div class="col-auto">
-                                                <!--チェックボタン-->
-                                                <div class="form-check form-switch fs-5">
-                                                    <input class="form-check-input" type="checkbox" name="keep_question_group"
-                                                    {{ Auth::user()->mail_setting['keep_question_group'] ? 'checked' : '' }}>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item list-group-item-action border-bottom-0">
-                                        <div class="row align-items-center">
-                                            <div class="col">「フォロー」されたとき</div>
-                                            <div class="col-auto">
-                                                <!--チェックボタン-->
-                                                <div class="form-check form-switch fs-5">
-                                                    <input class="form-check-input" type="checkbox" name="keep_creator_user"
-                                                    {{ Auth::user()->mail_setting['keep_creator_user'] ? 'checked' : '' }}>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item list-group-item-action border-bottom-0">
-                                        <div class="row align-items-center">
-                                            <div class="col">「コメント」されたとき</div>
-                                            <div class="col-auto">
-                                                <!--チェックボタン-->
-                                                <div class="form-check form-switch fs-5">
-                                                    <input class="form-check-input" type="checkbox" name="comment"
-                                                    {{ Auth::user()->mail_setting['comment'] ? 'checked' : '' }}>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item list-group-item-action border-bottom-0">
-                                        <div class="row align-items-center">
-                                            <div class="col">
-                                                ダイレクトメールの受取り<br>
-                                                <small>※重要事項以外のお知らせメール</small>
-                                            </div>
-                                            <div class="col-auto">
-                                                <!--チェックボタン-->
-                                                <div class="form-check form-switch fs-5">
-                                                    <input class="form-check-input" type="checkbox" name="infomation"
-                                                    {{ Auth::user()->mail_setting['infomation'] ? 'checked' : '' }}>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="row align-items-center">
-                                            <div class="col">
-                                                <!------>
-                                            </div>
-                                            <div class="col-auto">
-                                                <!--送信ボタン-->
-                                                <button type="submit" class="btn btn-success btn-sm">更新</button>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                </ul>
-
-
-                            </form>
-                        </div> --}}
-                        {{-- <div class="mb-5">
-
-
-                            <h5>退会の手続き</h5>
-                            <div class="card card-body  border-2">
-                                <p>
-                                    <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseUserDestory" aria-expanded="false" aria-controls="collapseUserDestory">
-                                      退会
-                                    </button>
-                                </p>
-                                <div class="collapse" id="collapseUserDestory">
-                                    <div class="card card-body border-danger">
-                                        一度退会すると、あなたのアカウントに関する情報がすべて失われ、元に戻すことができません。
-                                        <ul class="my-3">
-                                            <li>
-                                                これまで作成した全ての問題集が削除され、他のユーザからも利用できなくなります。
-                                            </li>
-                                            <li>
-                                                これまで受検した問題集の成績結果がすべて失われます。
-                                            </li>
-                                        </ul>
-                                        <h5 class="text-danger">本当に退会しますか？</h5>
-
-                                        <a href="{{route('withdrawal_form')}}" class="btn btn-outline-danger btn-sm"
-                                        onclick="stopOnbeforeunload()"
-                                        >退会</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div> --}}
 
                     </div>
 
