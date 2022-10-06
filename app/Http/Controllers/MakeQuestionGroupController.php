@@ -109,14 +109,17 @@ class MakeQuestionGroupController extends Controller
 
 
 
+
     /**
      * 問題集の編集ヶ所選択ページの表示(select_edit)
      * @param \App\Models\QuestionGroup $question_group //選択した問題集グループ
      * @return \Illuminate\View\View
     */
-    public function select_edit(\App\Models\QuestionGroup $question_group)
+    public function select_edit(\App\Models\QuestionGroup $question_group, $tab_menu='tab01')
     {
-        return view('MakeQuestionGroup.select_edit', compact('question_group') );
+        return view('MakeQuestionGroup.select_edit', compact(
+            'question_group','tab_menu'
+        ) );
     }
 
 

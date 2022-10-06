@@ -84,7 +84,7 @@
                                         <div>
                                             受験日{{ \Carbon\Carbon::parse($answer_group->created_at)->format('Y-m-d') }}
                                         </div>
-                                        @php $param = [ 'answer_group'=>$answer_group, 'key'=>Auth::user()->key ]; @endphp
+                                        @php $param = [ 'answer_group'=>$answer_group, 'key'=>$answer_group->user->key ]; @endphp
                                         <a href="{{route('results.detail', $param )}}"
                                         class="fs-3 text-success" style="text-decoration:none;">
                                             {{ $question_group->title }}

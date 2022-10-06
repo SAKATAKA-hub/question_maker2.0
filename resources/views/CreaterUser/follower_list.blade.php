@@ -76,7 +76,7 @@
                                         background-repeat  : no-repeat;
                                         background-size    : cover;
                                         background-position: center center;
-                                        width:50px; border-radius:50%;
+                                        width:2rem; border-radius:50%;
                                         "></div>
                                     </div>
 

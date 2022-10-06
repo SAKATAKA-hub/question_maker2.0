@@ -42,7 +42,8 @@ class QuestionGroup extends Model
         # AnswerGroupsテーブルとのリレーション
         public function answer_groups()
         {
-            return $this->hasMany(AnswerGroup::class,'question_group_id');
+            return $this->hasMany(AnswerGroup::class,'question_group_id')
+            ->orderBy('created_at','desc');
         }
 
         # KeepQuestionGroupテーブルとのリレーション

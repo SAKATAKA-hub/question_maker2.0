@@ -2,7 +2,7 @@
 
 
 <!----- title ----->
-@section('title','『'.$question_group->title.'』の編集')
+@section('title','『'.$question_group->title.'』詳細情報')
 
 <!----- breadcrumb ----->
 @section('breadcrumb')
@@ -13,27 +13,33 @@
     作成した問題集
 </a></li>
 <li class="breadcrumb-item" aria-current="page">
-   {{'『'.$question_group->title.'』の編集'}}
+   {{'『'.$question_group->title.'』詳細情報'}}
 </li>
 @endsection
 
 
 <!----- meta ----->
 @section('meta')
+<meta name="csrf_token" content="{{ csrf_token() }}">
 @endsection
 
 
 <!----- style ----->
 @section('style')
 <style>
-/* アコーディオン */
-.accordion-button:focus {
-    box-shadow: none;
-}
-.accordion-button:not(.collapsed) {
-    color: #6C757D;
-    background-color:rgba(92, 240, 203, 0.5);
-    /* border-color: #14CFA0 !important; */
+/*タブメニュー*/
+@media screen and (max-width: 576px) {
+    .tab-menu{ font-size:11px; }
+    #question-group-tabmenu .active{
+        font-weight: bold;
+    }
+    #question-group-tabmenu{
+        width: 100%;
+        overflow: auto;
+    }
+    #question-group-tabmenu > ul{
+        width:540px;
+    }
 }
 </style>
 @endsection
@@ -58,144 +64,253 @@
             <!-- 中央コンテンツ -->
             <div class="col">
 
-
-                <div class="mb-5 border-bottom border-2 border-success">
+                <!-- タイトル -->
+                <div class="border-bottom border-2 border-success">
                     <!-- 更新日 -->
-                    <div class="mb-2">更新日{{ \Carbon\Carbon::parse($question_group->updated_at)->format('Y-m-d') }}</div>
+                    <div>
+                        <!-- 公開設定 -->
+                        @if ( $question_group->published_at )
+                        <span class="badge badge-primary"  style="border-radius:.8rem; transform: translateY(-0.1rem);"
+                        >公開中</span>
+                        @else
+                        <span class="badge badge-secondary" style="border-radius:.8rem; transform: translateY(-0.1rem);"
+                        >非公開</span>
+                        @endif
+
+                        <!-- 更新日 -->
+                        <span>更新日{{ \Carbon\Carbon::parse($question_group->updated_at)->format('Y-m-d') }}</span>
+                    </div>
+
+                    {{-- <div class="mb-2">更新日{{ \Carbon\Carbon::parse($question_group->updated_at)->format('Y-m-d') }}</div> --}}
 
                     <!-- タイトル -->
                     <div class="text-success fw-bold" style="font-size:.6rem">問題集のタイトル：</div>
                     <h3>
-                        {{-- <small class="text-success">問題集のタイトル：</small> --}}
                         {{ $question_group->title }}
                     </h3>
 
                 </div>
-                <!-- [ 公開設定 ] -->
-                <div class="mb-3">
-
-                    <div class="accordion" id="publicSettingAcco">
-                        <div class="accordion-item border border-success">
-                            <h2 class="accordion-header" id="publicSettingAccoHeadingOne">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#publicSettingAccoOne" aria-expanded="false" aria-controls="publicSettingAccoOne">
-                                    <div class="d-flex">
-
-                                        <h5 class="mb-0">公開設定</h5>
-
-                                        <div class="ms-3">
-                                            <!-- 公開設定 -->
-                                            @if ( $question_group->published_at )
-                                            <span class="badge badge-primary"  style="border-radius:.8rem;"
-                                            >公開中</span>
-                                            @else
-                                            <span class="badge badge-secondary" style="border-radius:.8rem;"
-                                            >非公開</span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </button>
-                            </h2>
-                            <div id="publicSettingAccoOne" class="accordion-collapse collapse" aria-labelledby="publicSettingAccoHeadingOne" data-bs-parent="#publicSettingAcco">
-                                <div class="accordion-body  bg-white">
 
 
-                                    <form action="{{route('make_question_group.update_published', $question_group)}}" method="POST">
-                                        @csrf
-                                        @method('PATCH')
-                                        <label for="publishedType1" class="card card-body mb-3">
-                                            <div class="form-check w-100">
-                                                <input name="is_public" value="1" type="radio" id="publishedType1" class="form-check-input"
-                                                {{ $question_group->published_at ? 'checked' : ''}}
-                                                {{ $question_group->questions->count() < 1 ? 'disabled' : ''}}
-                                                >
-                                                <h5 class="mb-0">公開</h5>
-                                            </div>
-                                            <p>
-                                                『いいね』で評価をもらったり、『コメント』機能で感想をもらったり、全国のユーザーに問題を解いてもらおう！<br>
-                                                <small>※問題が1問以上登録されていない場合、自動的に非公開となります。</small>
-                                            </p>
-                                        </label>
-                                        <label for="publishedType3" class="card card-body mb-3">
-                                            <div class="form-check w-100">
-                                                <input name="is_public" value="0" type="radio" id="publishedType3" class="form-check-input"
-                                                {{ !$question_group->published_at ? 'checked' : ''}}
-                                                >
-                                                <h5>非公開</h5>
-                                            </div>
-                                            <p>
-                                                問題集の一覧や検索では表示されないよ！<br>
-                                                作成中の問題を一時保存したり、個人的に問題を解いて楽しもう！<br>
-                                                公開設定が『非公開』のときでも、受検用URLを教えた友達だけに自分の問題集にチャレンジしてもらうことができるよ！
-                                            </p>
-                                            <!-- URLコピー -->
-                                            <div class="mb-3">
-                                                <div class="d-flex align-items-center">
-                                                    <span class="badge rounded-pill bg-success me-1">
-                                                        <i class="bi bi-link-45deg"></i>
-                                                    </span>
-                                                    問題集のURLを友達に送ろう！
-                                                </div>
-                                                @php $param = ['question_group'=>$question_group->id,'key'=>$question_group->key,]; @endphp
-                                                <url-copy-component copy_url="{{ route('play_question', $param ) }}"></url-copy-component>
-                                            </div>
-                                        </label>
+                {{-- <div class="card card-body my-3">
+                    <!-- URLコピー -->
+                    <div class="mb-3">
+                        <div class="d-flex align-items-center">
+                            <span class="badge rounded-pill bg-success me-1">
+                                <i class="bi bi-link-45deg"></i>
+                            </span>
+                            問題集のURLを友達に送ろう！
+                        </div>
 
-                                        <div class="my-3">
-                                            <button class="btn btn-primary rounded-pill" type="submit"
-                                            >公開設定の更新</button>
-                                        </div>
-                                    </form>
+                        @php $param = ['question_group'=>$question_group->id,'key'=>$question_group->key,]; @endphp
+                        <url-copy-component copy_url="{{ route('play_question', $param ) }}"></url-copy-component>
 
-
-
+                        <div class="d-flex align-items-center" style="font-size:11px;">
+                            <span class="me-1">
+                                <i class="bi bi-exclamation-circle"></i>
+                            </span>
+                            公開設定が『非公開』のときでも、受検用URLを教えた友達だけに自分の問題集にチャレンジしてもらうことができるよ！
+                        </div>
+                    </div>
+                    <!-- その他情報 -->
+                    <div class="">
+                        <div class="card overflow-hidden">
+                            <div class="">
+                                <div class="d-flex">
+                                    <div class="col-4 ps-3 bg-light">問題数</div>
+                                    <div class="col-8 ps-3">全{{$question_group->question_count}}問</div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="col-4 ps-3 bg-light">制限時間</div>
+                                    <div class="col-8 ps-3">{{$question_group->time_limit_text}}</div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="col-4 ps-3 bg-light">受験回数</div>
+                                    <div class="col-8 ps-3">{{$question_group->answer_groups->count()}}回</div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="col-4 ps-3 bg-light">平均点</div>
+                                    <div class="col-8 ps-3">{{sprintf('%.1f',$question_group->average_score)}}点</div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="col-4 ps-3 bg-light">いいね数</div>
+                                    <div class="col-8 ps-3">{{$question_group->keep_question_groups->count()}}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                </div>
-                <!-- [ 基本情報 ] -->
-                <div class="mb-3">
+                </div> --}}
 
-                    <div class="accordion" id="questionGroupAcco">
-                        <div class="accordion-item border border-success">
-                            <h2 class="accordion-header" id="questionGroupAccoHeadingOne">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#questionGroupAccoOne" aria-expanded="false" aria-controls="questionGroupAccoOne">
-                                    <h5 class="mb-0">基本情報</h5>
+
+                <!-- タブメニュー -->
+                <div class="my-3">
+
+
+                    {{-- @php $tab_menu='tab01'; @endphp --}}
+                    <div id="question-group-tabmenu" style="font-size:11px;">
+                        <ul class="nav nav-tabs nav-fill" id="pills-tab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link @if( $tab_menu === 'tab01' ) active @endif"
+                                id="tab-tab01-tab" data-bs-target="#tab-tab01"
+                                aria-controls="tab-tab01" aria-selected="{{ $tab_menu === 'tab01' ? 'true' : 'false' }}"
+                                type="button" role="tab" data-bs-toggle="pill"
+                                >
+                                    <span class="tab-menu">基本情報</span>
                                 </button>
-                            </h2>
-                            <div id="questionGroupAccoOne" class="accordion-collapse collapse" aria-labelledby="questionGroupAccoHeadingOne" data-bs-parent="#questionGroupAcco">
-                                <div class="accordion-body  bg-white">
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link @if( $tab_menu === 'tab02' ) active @endif"
+                                id="tab-tab02-tab" data-bs-target="#tab-tab02"
+                                aria-controls="tab-tab02" aria-selected="{{ $tab_menu === 'tab02' ? 'true' : 'false' }}"
+                                type="button" role="tab" data-bs-toggle="pill"
+                                >
+                                    <span class="tab-menu">出題問題</span>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link @if( $tab_menu === 'tab03' ) active @endif"
+                                id="tab-tab03-tab" data-bs-target="#tab-tab03"
+                                aria-controls="tab-tab03" aria-selected="{{ $tab_menu === 'tab03' ? 'true' : 'false' }}"
+                                type="button" role="tab" data-bs-toggle="pill"
+                                >
+                                    <span class="tab-menu">公開設定</span>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link @if( $tab_menu === 'tab04' ) active @endif"
+                                id="tab-tab04-tab" data-bs-target="#tab-tab04"
+                                aria-controls="tab-tab04" aria-selected="{{ $tab_menu === 'tab04' ? 'true' : 'false' }}"
+                                type="button" role="tab" data-bs-toggle="pill"
+                                >
+                                    <span class="tab-menu">コメント</span>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link @if( $tab_menu === 'tab05' ) active @endif"
+                                id="tab-tab05-tab" data-bs-target="#tab-tab05"
+                                aria-controls="tab-tab05" aria-selected="{{ $tab_menu === 'tab05' ? 'true' : 'false' }}"
+                                type="button" role="tab" data-bs-toggle="pill"
+                                >
+                                    <span class="tab-menu">受検ユーザー一覧</span>
+                                </button>
+                            </li>
+
+                        </ul>
+                    </div>
 
 
-                                    <!-- タイトル -->
-                                    <div class="form-group mb-3">
-                                        <label for="title_input" class="form-check-label fw-bold">問題集のタイトル</label>
+                    <div class="tab-content bg-light card" id="pills-tabContent" style="border-top-color: transparent;">
+                        <!-- tab01 -->
+                        <div class="tab-pane fade card-body @if( $tab_menu === 'tab01' ) show active @endif" role="tabpane0l"
+                        id="tab-tab01" aria-labelledby="tab-tab01-tab">
 
-                                        <input type="text" name="title" class="form-control bg-white" disabled
-                                        value="{{ $question_group->title }}">
+
+                            <div class="mt-3">
+                                <div class="card card-body my-3">
+                                    <!-- URLコピー -->
+                                    <div class="mb-3">
+                                        <div class="d-flex align-items-center">
+                                            <span class="badge rounded-pill bg-success me-1">
+                                                <i class="bi bi-link-45deg"></i>
+                                            </span>
+                                            問題集のURLを友達に送ろう！
+                                        </div>
+
+                                        @php $param = ['question_group'=>$question_group->id,'key'=>$question_group->key,]; @endphp
+                                        <url-copy-component copy_url="{{ route('play_question', $param ) }}"></url-copy-component>
+
+                                        <div class="d-flex align-items-center" style="font-size:11px;">
+                                            <span class="me-1">
+                                                <i class="bi bi-exclamation-circle"></i>
+                                            </span>
+                                            公開設定が『非公開』のときでも、受検用URLを教えた友達だけに自分の問題集にチャレンジしてもらうことができるよ！
+                                        </div>
                                     </div>
 
-                                    <div class="d-md-flex">
-                                        <div class="col-md-4 pe-md-3">
-
-                                            <label for="title_input" class="form-check-label fw-bold">サムネ画像</label>
-
-                                            <!-- サムネ画像 -->
-                                            <div class="ratio ratio-16x9 border border-light" style="
-                                                background: no-repeat center center / cover;
-                                                background-image:url({{ asset('storage/'.$question_group->image_puth) }});
-                                                border-radius: .5rem;
-                                            "></div>
-
-
+                                    <!-- 公開日等 -->
+                                    <div class="mb-3">
+                                        <div class="d-flex">
+                                            <div class="col-auto ps-3" style="width:6rem;">公開日：</div>
+                                            <div class="col ps-3">{{
+                                            $question_group->published_at ?
+                                            \Carbon\Carbon::parse( $question_group->published_at )->format('Y年m月d日 H:i') :
+                                            '非公開'}}</div>
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="d-flex">
+                                            <div class="col-auto ps-3" style="width:6rem;">作成日時：</div>
+                                            <div class="col ps-3">
+                                                {{\Carbon\Carbon::parse($question_group->created_at)->format('Y年m月d日 H時i分')}}
+                                            </div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div class="col-auto ps-3" style="width:6rem;">更新日時：</div>
+                                            <div class="col ps-3">
+                                                {{\Carbon\Carbon::parse($question_group->updated_at)->format('Y年m月d日 H時i分')}}
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                    <!-- その他情報 -->
+                                    <div class="">
+                                        <div class="card overflow-hidden">
+                                            <div class="">
+                                                <div class="d-flex">
+                                                    <div class="col-4 ps-3 bg-light">問題数</div>
+                                                    <div class="col-8 ps-3">全{{$question_group->question_count}}問</div>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <div class="col-4 ps-3 bg-light">制限時間</div>
+                                                    <div class="col-8 ps-3">{{$question_group->time_limit_text}}</div>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <div class="col-4 ps-3 bg-light">受験回数</div>
+                                                    <div class="col-8 ps-3">{{$question_group->answer_groups->count()}}回</div>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <div class="col-4 ps-3 bg-light">平均点</div>
+                                                    <div class="col-8 ps-3">{{sprintf('%.1f',$question_group->average_score)}}点</div>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <div class="col-4 ps-3 bg-light">いいね数</div>
+                                                    <div class="col-8 ps-3">{{$question_group->keep_question_groups->count()}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- 入力情報 -->
+                                <div class="mb-5">
+                                    <div class="row">
+                                        <!-- サムネ画像 -->
+                                        @if ($question_group->image)
+                                        <div class="col-md-4 order-md-2">
+                                            <div class="my-3">
+                                                <span class="text-success fw-bold">サムネ画像</span>
+                                                <div class="w-100  mb-3">
+                                                    <div class="ratio ratio-16x9 border" style="
+                                                        background: no-repeat center center / cover;
+                                                        background-image:url({{asset('storage/'.$question_group->image_puth)}});
+                                                        border-radius: .5rem;
+                                                    "></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endif
+
+                                        <div class="col-md-8">
+                                            <!-- 問題集のタイトル -->
+                                            <div class="my-3">
+                                                <label for="title_input" class="form-check-label text-success fw-bold">問題集のタイトル</label>
+                                                <input type="text" name="title" class="form-control bg-white" disabled
+                                                value="{{$question_group->title}}">
+                                            </div>
 
                                             <!-- 制限時間 -->
                                             <div class="form-group mb-3">
-                                                <label for="title_input" class="form-check-label fw-bold">制限時間</label>
+                                                <label for="title_input" class="form-check-label text-success fw-bold">制限時間</label>
 
                                                 <input type="text" class="form-control bg-white" disabled
                                                 value="{{ $question_group->time_limit_text }}">
@@ -203,54 +318,39 @@
 
                                             <!-- タグ -->
                                             <div class="form-group mb-3">
-                                                <label for="title_input" class="form-check-label fw-bold">タグ</label>
+                                                <label for="title_input" class="form-check-label text-success fw-bold">タグ</label>
 
                                                 <input type="text" class="form-control bg-white" disabled
                                                 value="{{ $question_group->tags }}">
                                             </div>
 
+                                            <!-- 説明文 -->
+                                            <div class="form-group mb-3">
+                                                <label for="title_input" class="form-check-label text-success fw-bold">説明文</label>
+
+                                                <textarea class="form-control bg-white" rows="6" disabled>{{ $question_group->resume_text }}</textarea>
+                                            </div>
                                         </div>
+
                                     </div>
 
-                                    <!-- 説明文 -->
-                                    <div class="form-group mb-3">
-                                        <label for="title_input" class="form-check-label fw-bold">説明文</label>
-
-                                        <textarea class="form-control bg-white" rows="6" disabled>{{ $question_group->resume_text }}</textarea>
-                                    </div>
-
-
-
-                                    <div class="mb-3">
-                                        <a href="{{route('make_question_group.edit',$question_group)}}" class="btn btn-success rounded-pill"
-                                        >編集</a>
-                                    </div>
-
-
+                                    <a href="{{route('make_question_group.edit',$question_group)}}" class="btn btn-success rounded-pill"
+                                    >基本情報の編集</a>
                                 </div>
+
                             </div>
+
+
                         </div>
-                    </div>
-
-                </div>
-                <!-- [ 問題 ] -->
-                <div class="mb-3">
-
-                    <div class="accordion" id="questionsAcco">
-                        <div class="accordion-item border border-success">
-                            <h2 class="accordion-header" id="questionsAccoHeadingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#questionsAccoOne" aria-expanded="true" aria-controls="questionsAccoOne">
-                                    <div class="d-flex align-items-center">
-                                        <h5 class="mb-0">問題</h5>
-                                        <div>（全{{$question_group->question_count}}問）</div>
-                                    </div>
-                                </button>
-                            </h2>
-                            <div id="questionsAccoOne" class="accordion-collapse collapse show" aria-labelledby="questionsAccoHeadingOne" data-bs-parent="#questionsAcco">
-                                <div class="accordion-body  bg-white">
+                        <!-- tab02 -->
+                        <div class="tab-pane fade p-0 @if( $tab_menu === 'tab02' ) show active @endif" role="tabpane02"
+                        id="tab-tab02" aria-labelledby="tab-tab02-tab">
 
 
-                                    @forelse ($question_group->questions as $key => $question)
+                            <div class="card-body pt-5 overflow-auto" style="height: 90vh;">
+
+
+                                @forelse ($question_group->questions as $key => $question)
                                     <div class="card mb-3">
                                         <div class="card-body">
                                             <h2 class="text-secondary fw-bold">
@@ -263,8 +363,8 @@
                                                 <div class="col-md-4 order-md-2">
                                                     <div class="my-3">
                                                         <span class="text-success fw-bold">問題画像</span>
-                                                        <div class="card w-100  mb-3">
-                                                            <div class="ratio ratio-16x9 border border-light" style="
+                                                        <div class="w-100  mb-3">
+                                                            <div class="ratio ratio-16x9 border" style="
                                                                 background: no-repeat center center / cover;
                                                                 background-image:url({{asset('storage/'.$question->image_puth)}});
                                                                 border-radius: .5rem;
@@ -329,8 +429,8 @@
                                                     <div class="col-md-4 order-md-2">
                                                         <div class="my-3">
                                                             <span class="text-warning fw-bold">解説画像</span>
-                                                            <div class="card w-100  mb-3">
-                                                                <div class="ratio ratio-16x9 border border-light" style="
+                                                            <div class="w-100  mb-3">
+                                                                <div class="ratio ratio-16x9 border" style="
                                                                     background: no-repeat center center / cover;
                                                                     background-image:url({{asset('storage/'.$question->commentary_image_puth)}});
                                                                     border-radius: .5rem;
@@ -391,16 +491,144 @@
                                         </div>
                                         </div>
                                     </div>
-                                    @empty
-                                        <h3 class="text-secondary text-center">問題はまだ作成されていません</h3>
-                                    @endforelse
+                                @empty
+                                    <h3 class="text-secondary text-center">問題はまだ作成されていません</h3>
+                                @endforelse
 
 
-                                </div>
                             </div>
-                        </div>
-                    </div>
 
+
+
+                        </div>
+                        <!-- tab03 -->
+                        <div class="tab-pane fade card-body @if( $tab_menu === 'tab03' ) show active @endif" role="tabpane03"
+                        id="tab-tab03" aria-labelledby="tab-tab03-tab">
+
+
+                            <form action="{{route('make_question_group.update_published', $question_group)}}" method="POST" class="mt-3">
+                                @csrf
+                                @method('PATCH')
+                                <label for="publishedType1" class="card card-body mb-3">
+                                    <div class="form-check w-100">
+                                        <input name="is_public" value="1" type="radio" id="publishedType1" class="form-check-input"
+                                        {{ $question_group->published_at ? 'checked' : ''}}
+                                        {{ $question_group->questions->count() < 1 ? 'disabled' : ''}}
+                                        >
+                                        <h5 class="mb-0">公開</h5>
+                                    </div>
+                                    <p>
+                                        『いいね』で評価をもらったり、『コメント』機能で感想をもらったり、全国のユーザーに問題を解いてもらおう！<br>
+                                        <small>※問題が1問以上登録されていない場合、自動的に非公開となります。</small>
+                                    </p>
+                                </label>
+                                <label for="publishedType3" class="card card-body mb-3">
+                                    <div class="form-check w-100">
+                                        <input name="is_public" value="0" type="radio" id="publishedType3" class="form-check-input"
+                                        {{ !$question_group->published_at ? 'checked' : ''}}
+                                        >
+                                        <h5>非公開</h5>
+                                    </div>
+                                    <p>
+                                        問題集の一覧や検索では表示されないよ！<br>
+                                        作成中の問題を一時保存したり、個人的に問題を解いて楽しもう！<br>
+                                        公開設定が『非公開』のときでも、受検用URLを教えた友達だけに自分の問題集にチャレンジしてもらうことができるよ！
+                                    </p>
+                                </label>
+
+                                <div class="my-3">
+                                    <button class="btn btn-primary rounded-pill" type="submit"
+                                    >公開設定の更新</button>
+                                </div>
+                            </form>
+
+
+                        </div>
+                        <!-- tab04 -->
+                        <div class="tab-pane fade card-body @if( $tab_menu === 'tab04' ) show active @endif" role="tabpane04"
+                        id="tab-tab04" aria-labelledby="tab-info04-tab">
+
+
+                            <!-- コメントリストコンポーネント -->
+                            <div class="mt-3">
+                                @php $user_id = Auth::check() ? Auth::user()->id : '' ; @endphp
+                                <comment-component
+                                route_comment_api="{{        route('comment.api')}}"
+                                route_comment_destory_api="{{route('comment.destroy.api')}}"
+                                user_id="{{$user_id}}" question_group_id="{{$question_group->id}}"
+                                ></comment-component>
+                            </div>
+
+
+                        </div>
+                        <!-- tab05 -->
+                        <div class="tab-pane fade card-body @if( $tab_menu === 'tab05' ) show active @endif" role="tabpane05"
+                        id="tab-tab05" aria-labelledby="tab-info05-tab">
+
+
+                            <ul class="list-group">
+                                @forelse ($question_group->answer_groups as $key => $answer_group)
+                                    <li class="list-group-item" >
+                                        <div class="row">
+                                            <!--[フォロワー画像]-->
+                                            <div class="col">
+                                                <div class="pb-1">
+                                                    受験日{{ \Carbon\Carbon::parse($answer_group->created_at)->format('Y-m-d') }}
+                                                </div>
+                                                <div class="d-flex gap-3">
+                                                    <div class="col-auto">
+                                                        <div class="user-image border border-1 ratio ratio-1x1 mb-1" style="
+                                                        background:url({{ asset('storage/'.$answer_group->user->image_puth) }});
+                                                        background-repeat  : no-repeat;
+                                                        background-size    : cover;
+                                                        background-position: center center;
+                                                        width:2rem; border-radius:50%;
+                                                        "></div>
+                                                    </div>
+
+
+                                                    <div class="col">
+                                                        <div class="d-flex align-items-center h-100">
+                                                            <!--[フォロワー名前]-->
+                                                            <h5 class="mb-0">
+                                                                @php $param = [ 'answer_group'=>$answer_group, 'key'=>$answer_group->user->key ]; @endphp
+                                                                <a href="{{route('results.detail', $param )}}" class="text-decoration-none text-success">
+                                                                    {{$answer_group->user->name}}
+                                                                </a>
+                                                            </h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- 成績 -->
+                                            <div class="col-auto d-none d-sm-block text-secondary">
+                                                <div class="d-flex justify-content-between align-items-end">
+                                                        <span class="">正解率</span>
+                                                        <span class="">
+                                                            <strong class="fs-3">{{$answer_group->score}}</strong>％
+                                                        </span>
+                                                </div>
+                                                <div class="">
+                                                    解答時間 {{$answer_group->elapsed_time}}
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </li>
+
+                                @empty
+                                    <li class="list-group-item  border-0">
+                                        <div class="h5 text-secondary text-center py-5">
+                                            ここに受検したユーザーが表示されます。
+                                        </div>
+                                    </li>
+                                @endforelse
+                            </ul>
+
+                        </div>
+
+                    </div>
                 </div>
 
 

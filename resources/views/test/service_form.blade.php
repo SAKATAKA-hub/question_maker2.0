@@ -18,6 +18,12 @@
 
 <!----- style ----->
 @section('style')
+<style>
+/*タブメニュー*/
+@media screen and (max-width: 576px) {
+    .tab-menu{ font-size:11px; }
+}
+</style>
 @endsection
 
 
@@ -110,7 +116,7 @@
 
 
             <h5>問題集へのコメント</h5>
-
+            <url-copy-component copy_url="{{ route('home') }}"></url-copy-component>
 
             <!-- コメントリストコンポーネントコンポーネント -->
             <comment-component
@@ -251,6 +257,73 @@
         </div>
 
 
+        <!-- タブメニュー -->
+        <div class="my-5">
+            @php $tab_menu='tab01'; @endphp
+            <ul class="nav nav-tabs nav-fill" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link @if( $tab_menu === 'tab01' ) active @endif"
+                    id="tab-tab01-tab" data-bs-target="#tab-tab01"
+                    aria-controls="tab-tab01" aria-selected="{{ $tab_menu === 'tab01' ? 'true' : 'false' }}"
+                    type="button" role="tab" data-bs-toggle="pill"
+                    >
+                        <span class="tab-menu">基本情報</span>
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link @if( $tab_menu === 'tab02' ) active @endif"
+                    id="tab-tab02-tab" data-bs-target="#tab-tab02"
+                    aria-controls="tab-tab02" aria-selected="{{ $tab_menu === 'tab02' ? 'true' : 'false' }}"
+                    type="button" role="tab" data-bs-toggle="pill"
+                    >
+                        <span class="tab-menu">出題問題</span>
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link @if( $tab_menu === 'tab03' ) active @endif"
+                    id="tab-tab03-tab" data-bs-target="#tab-tab03"
+                    aria-controls="tab-tab03" aria-selected="{{ $tab_menu === 'tab03' ? 'true' : 'false' }}"
+                    type="button" role="tab" data-bs-toggle="pill"
+                    >
+                        <span class="tab-menu">公開設定</span>
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link @if( $tab_menu === 'tab04' ) active @endif"
+                    id="tab-tab04-tab" data-bs-target="#tab-tab04"
+                    aria-controls="tab-tab04" aria-selected="{{ $tab_menu === 'tab04' ? 'true' : 'false' }}"
+                    type="button" role="tab" data-bs-toggle="pill"
+                    >
+                        <span class="tab-menu">コメント</span>
+                    </button>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade @if( $tab_menu === 'tab01' ) show active @endif" role="tabpane0l"
+                id="tab-tab01" aria-labelledby="tab-tab01-tab">
+
+                    tab01
+
+
+                </div>
+                <div class="tab-pane fade @if( $tab_menu === 'tab02' ) show active @endif" role="tabpane02"
+                id="tab-tab02" aria-labelledby="tab-tab02-tab">
+
+                    tab02
+                </div>
+                <div class="tab-pane fade @if( $tab_menu === 'tab03' ) show active @endif" role="tabpane03"
+                id="tab-tab03" aria-labelledby="tab-tab03-tab">
+
+                    tab03
+                </div>
+                <div class="tab-pane fade @if( $tab_menu === 'tab04' ) show active @endif" role="tabpane04"
+                id="tab-tab04" aria-labelledby="tab-info04-tab">
+
+                    tab04
+                </div>
+
+            </div>
+        </div>
 
     </div>
 </section>

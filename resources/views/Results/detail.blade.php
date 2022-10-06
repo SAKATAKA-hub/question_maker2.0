@@ -39,13 +39,15 @@
 <!----- contents ----->
 @section('contents')
     <!-- 受検結果 -->
-    <section>
-        <div class="container-1200 my-3">
+    <section class="bg-light">
+        <div class="container-1200 py-3">
 
-            <div class="card card-body shadow border-0 mb-3">
+            <div class="card card-body shadow border border-success mb-3">
                 <div class="row">
                     <h5 class="fs-5 mb-0">
-                        <strong class="text-success">{{$answer_group->user->name}}</strong>さんの受検結果
+                        <a href="{{route('creater',$answer_group->user->id)}}" class="text-success fw-bold fs-5 text-decoration-none">
+                            {{$answer_group->user->name}}
+                        </a>さんの受検結果
                     </h5>
                     <div class="col"></div>
                     <div class="col-auto">
@@ -65,44 +67,48 @@
                     </div>
                 </div>
             </div>
-            <div class="">
+            <div class="card">
                 <ul class="list-group list-group-flush">
                     @foreach ($answers as $num => $answer)
-                        <li class="list-group-item">
+                        <li class="list-group-item p-0 overflow-hidden">
                             <!-- 00問目 問題文 -->
-                            <div class="row align-items-end">
-                                <div class="col-auto">
-                                    <h5 class="mb-0 text-success">{{ sprintf('%02d',$answer->question->order) }}問目</h5>
-                                </div>
-                                <div class="col text-truncate">
-                                    {{ $answer->question->text_text }}
+                            <div class="px-3 py-2 bg-light">
+                                <div class="row align-items-end ">
+                                    <div class="col-auto">
+                                        <h5 class="mb-0 text-success">{{ sprintf('%02d',$answer->question->order) }}問目</h5>
+                                    </div>
+                                    <div class="col text-truncate">
+                                        {{ $answer->question->text_text }}
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- 解答と結果 -->
-                            <div class="row mt-3">
-                                <div class="col text-truncate mb-3">
-                                    <div class="text-secondary" style="font-size:11px;">あなたの解答</div>
-                                    {{ $answer->text ? $answer->text : '---' }}
-                                </div>
-                                <div class="col-12 col-md-auto mb-3">
-                                    <div class="text-secondary" style="font-size:11px;">添削結果</div>
-                                    @if ( $answer->is_correct )
-                                        <div class="text-info">
-                                            <i class="bi bi-record fs-5"></i><span>正　解</span>
-                                        </div>
-                                    @else
-                                        <div class="text-danger">
-                                            <i class="bi bi-x-lg fs-5"></i><span>不正解</span>
-                                        </div>
-                                    @endif
+                            <div class="px-3 py-2">
+                                <div class="row mt-3">
+                                    <div class="col text-truncate">
+                                        <div class="text-secondary" style="font-size:11px;">あなたの解答</div>
+                                        {{ $answer->text ? $answer->text : '---' }}
+                                    </div>
+                                    {{-- <div class="col-12 col-md-auto mb-3"> --}}
+                                    <div class="col-auto">
+                                        <div class="text-secondary" style="font-size:11px;">添削結果</div>
+                                        @if ( $answer->is_correct )
+                                            <div class="text-info">
+                                                <i class="bi bi-record fs-5"></i><span>正　解</span>
+                                            </div>
+                                        @else
+                                            <div class="text-danger">
+                                                <i class="bi bi-x-lg fs-5"></i><span>不正解</span>
+                                            </div>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
 
-
                             <!-- 詳細と解説 -->
-                            <div class="mt-3 flort-right">
-                                <div  class="collapse" id="collapse{{$num}}">
+                            <div class="px-3 py-2">
+                                <div  class="collapse card card-body bg-light-success border-0 mb-3" id="collapse{{$num}}">
 
                                     <!-- 詳細 -->
                                     <div class="row">
@@ -111,7 +117,7 @@
                                         <div class="col-md-4 order-md-2">
                                             <div class="my-3">
                                                 <span class="text-success fw-bold">問題画像</span>
-                                                <div class="card w-100  mb-3">
+                                                <div class="w-100 mb-3">
                                                     <div class="ratio ratio-16x9 border border-light" style="
                                                         background: no-repeat center center / cover;
                                                         background-image:url({{asset('storage/'. $answer->question->image_puth)}});
@@ -176,7 +182,7 @@
                                             <div class="col-md-4 order-md-2">
                                                 <div class="my-3">
                                                     <span class="text-warning fw-bold">解説画像</span>
-                                                    <div class="card w-100  mb-3">
+                                                    <div class="w-100  mb-3">
                                                         <div class="ratio ratio-16x9 border border-light" style="
                                                             background: no-repeat center center / cover;
                                                             background-image:url({{asset('storage/'.$answer->question->commentary_image_puth)}});
@@ -203,7 +209,7 @@
                                 </div>
 
                                 <!--詳しく見るボタン-->
-                                <div class="py-2">
+                                <div class="text-center">
                                     <a class="text-decoration-none"
                                     data-bs-toggle="collapse" href="#collapse{{$num}}" role="button" aria-expanded="false" aria-controls="collapse{{$num}}"
                                     >
@@ -217,15 +223,15 @@
                         </li>
                     @endforeach
                 </ul>
-              </div>
+            </div>
 
         </div>
     </section>
 
 
 
-    <section>
-        <div class="container-1200 my-3">
+    <section class="bg-light">
+        <div class="container-1200 py-3">
 
             <!--
                 // Please Login Modal //
@@ -237,10 +243,10 @@
 
 
             <!-- [ 作成者情報 ] -->
-            <div class="card border-0">
-                <div class="d-flex">
-                    <div class="col">
-                        <a href="{{route('creater',$question_group->user->id)}}" class="btn ps-0 w-100 list-group-item-action">
+            <div class="">
+                <div class="d-flex justify-content-between w-100">
+                    <div class="col-auto">
+                        <a href="{{route('creater',$question_group->user->id)}}" class="btn ps-0">
                             <div class="d-flex align-items-center">
                                 <div class="user-image border ratio ratio-1x1 me-2" style="
                                 background: no-repeat center center / cover;
@@ -408,9 +414,16 @@
 
                 <!--詳しく見るボタン-->
                 <div class="py-2 text-end">
-                    <see-more-btn-component
+                    <a href="" class="text-decoration-none"
                     data-bs-toggle="collapse" data-bs-target="#collapseQGInfo" aria-expanded="false" aria-controls="collapseQGInfo"
-                    ></see-more-btn-component>
+                    >
+                        <see-more-btn-component></see-more-btn-component>
+
+                    </a>
+
+                    {{-- <see-more-btn-component
+                    data-bs-toggle="collapse" data-bs-target="#collapseQGInfo" aria-expanded="false" aria-controls="collapseQGInfo"
+                    ></see-more-btn-component> --}}
                 </div>
 
 
@@ -435,8 +448,8 @@
 
 
     <!-- 三連メニュー -->
-    <section class="mb-5">
-        <div class="container-1200 my-3">
+    <section class="bg-light">
+        <div class="container-1200 py-3 pb-5">
             <div class="row gap-3 px-3">
                 <div class="col-md h-100 card">
                     <div class="card-body text-center">

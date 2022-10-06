@@ -6821,11 +6821,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   /*
       [ memo ]
@@ -35924,108 +35919,95 @@ var render = function () {
                 },
                 [_vm._m(5)]
               ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "offcanvas offcanvas-bottom",
-              staticStyle: { height: "10rem" },
-              attrs: {
-                tabindex: "-1",
-                id: "commentOffcanvas",
-                "aria-labelledby": "commentOffcanvasLabel",
-              },
-            },
-            [
-              _c(
-                "div",
-                { staticClass: "offcanvas-body small  position-relative" },
-                [
-                  _vm._m(6),
-                  _vm._v(" "),
-                  _vm._m(7),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "mx-auto",
-                      staticStyle: { "max-width": "1200px" },
-                    },
-                    [
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col p-0" }, [
-                          _c("textarea", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.inputs.body,
-                                expression: "inputs.body",
-                              },
-                            ],
-                            staticClass: "form-control bg-white border-0",
-                            attrs: {
-                              placeholder: "コメントを入力",
-                              name: "body",
-                              maxlength: _vm.body_maxlength,
-                            },
-                            domProps: { value: _vm.inputs.body },
-                            on: {
-                              input: function ($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.inputs,
-                                  "body",
-                                  $event.target.value
-                                )
-                              },
-                            },
-                          }),
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-auto" }, [
-                          _c("div", { staticClass: "text-center" }, [
-                            _c("label", { staticClass: "form-label" }, [
-                              _vm._v(
-                                _vm._s(
-                                  _vm.inputs.body.length +
-                                    "/" +
-                                    _vm.body_maxlength
-                                )
-                              ),
-                            ]),
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-success",
-                              attrs: {
-                                type: "button",
-                                "data-bs-dismiss": "offcanvas",
-                                "aria-label": "Close",
-                              },
-                              on: {
-                                click: function ($event) {
-                                  return _vm.comment_api()
-                                },
-                              },
-                            },
-                            [_vm._v("送信")]
-                          ),
-                        ]),
-                      ]),
-                    ]
-                  ),
-                ]
-              ),
-            ]
-          ),
         ]),
       ]),
     ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "offcanvas offcanvas-bottom",
+        staticStyle: { height: "10rem" },
+        attrs: {
+          tabindex: "-1",
+          id: "commentOffcanvas",
+          "aria-labelledby": "commentOffcanvasLabel",
+        },
+      },
+      [
+        _c("div", { staticClass: "offcanvas-body small  position-relative" }, [
+          _vm._m(6),
+          _vm._v(" "),
+          _vm._m(7),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "mx-auto", staticStyle: { "max-width": "1200px" } },
+            [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col p-0" }, [
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.inputs.body,
+                        expression: "inputs.body",
+                      },
+                    ],
+                    staticClass: "form-control bg-white border-0",
+                    attrs: {
+                      placeholder: "コメントを入力",
+                      name: "body",
+                      maxlength: _vm.body_maxlength,
+                    },
+                    domProps: { value: _vm.inputs.body },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.inputs, "body", $event.target.value)
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-auto" }, [
+                  _c("div", { staticClass: "text-center" }, [
+                    _c("label", { staticClass: "form-label" }, [
+                      _vm._v(
+                        _vm._s(
+                          _vm.inputs.body.length + "/" + _vm.body_maxlength
+                        )
+                      ),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      attrs: {
+                        type: "button",
+                        "data-bs-dismiss": "offcanvas",
+                        "aria-label": "Close",
+                      },
+                      on: {
+                        click: function ($event) {
+                          return _vm.comment_api()
+                        },
+                      },
+                    },
+                    [_vm._v("送信")]
+                  ),
+                ]),
+              ]),
+            ]
+          ),
+        ]),
+      ]
+    ),
   ])
 }
 var staticRenderFns = [
@@ -36033,7 +36015,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "list-group-item bg-light" }, [
+    return _c("li", { staticClass: "list-group-item" }, [
       _c("h5", { staticClass: "mb-0 text-secondary" }, [_vm._v("コメント")]),
     ])
   },

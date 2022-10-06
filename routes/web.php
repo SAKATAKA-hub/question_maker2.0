@@ -63,7 +63,7 @@ Route::middleware(['user_auth'])->group(function () {
     ->name('make_question_group.store');
 
     # 問題集の編集ヶ所選択ページの表示(select_edit)
-    Route::get('/make_question_group/select_edit/{question_group}', [Controllers\MakeQuestionGroupController::class, 'select_edit'])
+    Route::get('/make_question_group/select_edit/{question_group}/{tab_menu?}', [Controllers\MakeQuestionGroupController::class, 'select_edit'])
     ->middleware(['question_group_auth'])
     ->name('make_question_group.select_edit');
 

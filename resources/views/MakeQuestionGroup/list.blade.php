@@ -130,14 +130,16 @@
 
 
                                             <!-- サムネ画像 -->
-                                            <div class="ratio ratio-16x9" style="
-                                                background: no-repeat center center / cover;
-                                                background-image:url({{ asset('storage/'.$question_group->image_puth) }});
-                                                border-radius: .5rem;
-                                            "></div>
+                                            <div class="mx-auto" style="width:300px;">
+                                                <div class="ratio ratio-16x9 h-100" style="
+                                                    background: no-repeat center center / cover;
+                                                    background-image:url({{ asset('storage/'.$question_group->image_puth) }});
+                                                    border-radius: .5rem;
+                                                "></div>
+                                            </div>
 
                                             <!-- URLコピー -->
-                                            <div class="modal-body">
+                                            <div class="m-3">
                                                 <div class="d-flex align-items-center">
                                                     <span class="badge rounded-pill bg-success me-1">
                                                         <i class="bi bi-link-45deg"></i>
@@ -146,38 +148,35 @@
                                                 </div>
                                                 @php $param = ['question_group'=>$question_group->id,'key'=>$question_group->key,]; @endphp
                                                 <url-copy-component copy_url="{{ route('play_question', $param ) }}"></url-copy-component>
-
-                                                <div class="text-secondary fst-italic">
-                                                    <i class="bi bi-exclamation-circle me-1"></i>
-                                                    公開設定が『非公開』のときでも、受検用URLを教えた友達だけに自分の問題集にチャレンジしてもらうことができるよ！                                                </div>
                                             </div>
 
                                             <!-- 公開日等 -->
-                                            <div class="card-body">
+                                            <div class="m-3 card">
 
                                                 <div class="d-flex">
-                                                    <div class="col-4 ps-3 bg-light">公開日</div>
-                                                    <div class="col-8 ps-3">{{
+                                                    <div class="col-auto ps-3" style="width:5rem;">公開日：</div>
+                                                    <div class="col ps-3">{{
                                                     $question_group->published_at ?
                                                     \Carbon\Carbon::parse( $question_group->published_at )->format('Y年m月d日 H:i') :
                                                     '非公開'}}</div>
                                                 </div>
                                                 <div class="d-flex">
-                                                    <div class="col-4 ps-3 bg-light">作成日時</div>
-                                                    <div class="col-8 ps-3">
+                                                    <div class="col-auto ps-3" style="width:5rem;">作成日時：</div>
+                                                    <div class="col ps-3">
                                                         {{\Carbon\Carbon::parse($question_group->created_at)->format('Y年m月d日 H時i分')}}
                                                     </div>
                                                 </div>
                                                 <div class="d-flex">
-                                                    <div class="col-4 ps-3 bg-light">更新日時</div>
-                                                    <div class="col-8 ps-3">
+                                                    <div class="col-auto ps-3" style="width:5rem;">更新日時：</div>
+                                                    <div class="col ps-3">
                                                         {{\Carbon\Carbon::parse($question_group->updated_at)->format('Y年m月d日 H時i分')}}
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <!-- 基本情報 -->
-                                            <div class="card-body">
+                                            <div class="m-3">
+                                                <div class="card">
                                                 <div class="d-flex">
                                                     <div class="col-4 ps-3 bg-light">問題数</div>
                                                     <div class="col-8 ps-3">全{{$question_group->question_count}}問</div>
@@ -198,17 +197,18 @@
                                                     <div class="col-4 ps-3 bg-light">いいね数</div>
                                                     <div class="col-8 ps-3">{{$question_group->keep_question_groups->count()}}</div>
                                                 </div>
+                                                </div>
                                             </div>
 
                                             <!-- 問題集の説明 -->
-                                            @if ( $question_group->resume_text )
+                                            {{-- @if ( $question_group->resume_text )
                                                 <div class="modal-body">
                                                     <div class="card card-body border-0 bg-light-success">
                                                         {!! nl2br( e( $question_group->resume_text ) ) !!}
                                                     </div>
                                                 </div>
                                             @endif
-
+ --}}
                                             <!-- menu -->
                                             <div class="list-group mx-3 mb-5">
                                                 @php $param = ['question_group'=>$question_group->id,'key'=>$question_group->key,]; @endphp

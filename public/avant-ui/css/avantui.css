@@ -2003,20 +2003,20 @@ h6, .h6 {
 }
 
 .nav-tabs {
-  flex-direction: column;
+  /* flex-direction: column; */
   border-color: #ADB5BE
   ;
 }
 
 .nav-tabs .nav-item {
-  width: 100%;
+  /* width: 100%; */
   display: block;
 }
 
 .nav-tabs .nav-link {
   padding: .538rem 1.2rem;
-  border-color: #ADB5BE
-  ;
+  /* border-color: #ADB5BE; */
+  border-bottom-color: #ADB5BE;
   border-radius: 0;
   background-color: #fff;
   transition: background .3s, color .3s, border .3s;
@@ -2024,8 +2024,8 @@ h6, .h6 {
 
 .nav-tabs .nav-link.active {
   color: #406AFF;
-  border-color: #ADB5BE
-  ;
+  border-color: #ADB5BE;
+  border-bottom-color: transparent;
 }
 
 .nav-tabs .nav-item:first-child .nav-link {

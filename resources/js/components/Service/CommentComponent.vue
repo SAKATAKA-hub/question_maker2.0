@@ -12,7 +12,7 @@
         <div class="card">
             <ul class="list-group list-group-flush">
                 <!-- コメントHeader -->
-                <li class="list-group-item bg-light">
+                <li class="list-group-item">
                     <h5 class="mb-0 text-secondary">コメント</h5>
                 </li>
 
@@ -157,63 +157,58 @@
                     </a>
 
 
-                    <!-- Comment Offcanvas -->
-                    <div class="offcanvas offcanvas-bottom"  style="height:10rem;"
-                    tabindex="-1" id="commentOffcanvas" aria-labelledby="commentOffcanvasLabel">
-
-                        <div class="offcanvas-body small  position-relative">
-
-                            <!-- close btn -->
-                            <div class="p-3 position-absolute top-0 end-0">
-                                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                            </div>
-
-                            <!--title-->
-                            <div class="mx-auto mb-3" style="max-width:1200px;">
-                                <h5 class="offcanvas-title" id="commentOffcanvasLabel">
-                                    <i class="bi bi-chat-square-text"></i>
-                                    <span class="ms-2">コメントを書く</span>
-                                </h5>
-                            </div>
-
-                            <!--body-->
-                            <div class="mx-auto" style="max-width:1200px;">
-                                <div class="row">
-                                    <!--[コメント入力テキストエリア]-->
-                                    <div class="col p-0">
-                                        <textarea class="form-control bg-white border-0" placeholder="コメントを入力"
-                                        v-model="inputs.body" name="body" :maxlength="body_maxlength"></textarea>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="text-center">
-                                            <!--[入力中文字数の表示]-->
-                                            <label class="form-label">{{ inputs.body.length +'/'+ body_maxlength }}</label>
-                                        </div>
-
-                                        <button class="btn btn-success" type="button"
-                                        data-bs-dismiss="offcanvas" aria-label="Close"
-                                        @click="comment_api()"
-                                        >送信</button>
-
-
-                                        <!-- <form :action="route_comment_api" method="post">
-
-                                        </form> -->
-
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
                 </li>
 
             </ul>
 
         </div>
 
+
+
+        <!-- Comment Offcanvas -->
+        <div class="offcanvas offcanvas-bottom"  style="height:10rem;"
+        tabindex="-1" id="commentOffcanvas" aria-labelledby="commentOffcanvasLabel">
+            <div class="offcanvas-body small  position-relative">
+
+                <!-- close btn -->
+                <div class="p-3 position-absolute top-0 end-0">
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+
+                <!--title-->
+                <div class="mx-auto mb-3" style="max-width:1200px;">
+                    <h5 class="offcanvas-title" id="commentOffcanvasLabel">
+                        <i class="bi bi-chat-square-text"></i>
+                        <span class="ms-2">コメントを書く</span>
+                    </h5>
+                </div>
+
+                <!--body-->
+                <div class="mx-auto" style="max-width:1200px;">
+                    <div class="row">
+                        <!--[コメント入力テキストエリア]-->
+                        <div class="col p-0">
+                            <textarea class="form-control bg-white border-0" placeholder="コメントを入力"
+                            v-model="inputs.body" name="body" :maxlength="body_maxlength"></textarea>
+                        </div>
+                        <div class="col-auto">
+                            <div class="text-center">
+                                <!--[入力中文字数の表示]-->
+                                <label class="form-label">{{ inputs.body.length +'/'+ body_maxlength }}</label>
+                            </div>
+
+                            <button class="btn btn-success" type="button"
+                            data-bs-dismiss="offcanvas" aria-label="Close"
+                            @click="comment_api()"
+                            >送信</button>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
     </div>
 </template>
