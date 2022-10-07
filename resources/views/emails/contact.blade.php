@@ -37,7 +37,8 @@
     </div><br>
     <div>
         [本文]<br>
-        {!! nl2br( e( $inputs['body'] ) ) !!}<br>
+        {!! str_replace(["\r\n","\r","\n"],"<br>", e( $inputs['body'] ) )!!}<br>
+
     </div>
     ----------------------------------------------------<br>
 </div><br>

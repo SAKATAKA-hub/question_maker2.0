@@ -17,7 +17,6 @@ export default {
     props: {
         //制限時間
         btn_text: { type: String, default: '詳しく見る', },
-        class:    { type: String, default: 'text-decoration-none text-success', },
     },
     mounted() {
         this.text = this.btn_text;

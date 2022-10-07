@@ -31,7 +31,8 @@
     {{ $inputs['user_name'] }}　さん<br><br>
 
     [コメント内容]<br>
-    {!! nl2br( e( $inputs['body'] ) ) !!}<br><br>
+    {!! str_replace(["\r\n","\r","\n"],"<br>", e( $inputs['body'] ) )!!}<br><br>
+
 
     [マイページURL]<br>
     <a href="{{ route('mypage') }}">{{ route('mypage') }}</a><br>

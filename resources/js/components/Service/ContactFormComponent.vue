@@ -229,11 +229,13 @@
                 test : { form : false, data : false, },
 
                 /* token ( ログイン処理のページ遷移時に利用 )*/
-                token : document.querySelector('[name="csrf_token"]').content,
+                token       : document.querySelector('[name="csrf_token"]').content,
+                company_key : document.querySelector('[name="company_key"]').content,
 
                 /* ルート */
                 route : {
                     post_api        : document.querySelector('[name="route_post_api"]').content,        // ログイン
+                    admin_send_email : document.querySelector('[name="route_admin_send_email"]').content, // 管理者メール送信
                     privacy_policy  : document.querySelector('[name="route_privacy_policy"]').content,  //プライバシーポリシー
                     home  : document.querySelector('[name="route_home"]').content,                      //Home
                 },
@@ -270,7 +272,13 @@
             }
         },
         mounted() {
-            //~
+
+            // test data
+            if( this.test.data ){
+                this.inputs = {  name: 'テスト　太郎',  email: 'contact@next-arrow.co.jp',  body : 'テストテキスト',  };
+                this.card_num = 2;
+            }
+
         },
         methods:{
             /* ステップ01の次へメソッド */
@@ -298,7 +306,13 @@
                     return response.json();
                 })
                 .then(json => {
+
+                    // 次のページ
                     this.addCardNum();
+
+                    /* 管理者へメール送信 */
+                    this.SendAdminEmail();
+
                     // console.log( json );
                 })
                 .catch(err=>{
@@ -306,6 +320,32 @@
                     location.reload();
                 })
 
+
+
+            },
+            /* 管理者へメール送信 */
+            SendAdminEmail :function(){
+
+                // 新規会員情報の登録[ 非同期通信 ]
+                fetch( this.route.admin_send_email, {
+                    method: 'POST',
+                    body: new URLSearchParams({
+                        app_key: this.company_key, //app_key
+                        ...this.inputs,      //入力データ一式
+                    }),
+                })
+                .then(response => {
+                    if(!response.ok){ throw new Error('送信エラー'); }
+                    return response.json();
+                })
+                .then(json => {
+                    // this.addCardNum();
+                    console.log( json );
+                })
+                .catch(err=>{
+                    alert('データ送信エラーが発生しました。再読み込みします。');
+                    location.reload();
+                })
             },
 
             /*

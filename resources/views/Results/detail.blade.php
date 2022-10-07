@@ -15,6 +15,7 @@
 <!----- meta ----->
 @section('meta')
 <meta name="csrf_token"                  content="{{ csrf_token() }}">
+<meta name="company_key" content="{{ env('COMPANY_KEY') }}">
 <meta name="question_group_id"           content="{{ $question_group->id }}">
 <meta name="route_get_questions_api" content="{{ route('get_questions_api') }}">
 <meta name="route_scoring"           content="{{ route('scoring') }}">
@@ -90,7 +91,6 @@
                                         <div class="text-secondary" style="font-size:11px;">あなたの解答</div>
                                         {{ $answer->text ? $answer->text : '---' }}
                                     </div>
-                                    {{-- <div class="col-12 col-md-auto mb-3"> --}}
                                     <div class="col-auto">
                                         <div class="text-secondary" style="font-size:11px;">添削結果</div>
                                         @if ( $answer->is_correct )
@@ -333,10 +333,15 @@
 
 
 
+
                     <!-- 通報ボタン -->
                     <div>
-                        <violation-report-component user_id="{{$user_id}}" question_group_id="{{$question_group->id}}"
-                        route="{{route('violation_report.post.api')}}"></violation-report-component>
+                        <violation-report-component
+                        user_id="{{$user_id}}"
+                        question_group_id="{{$question_group->id}}"
+                        route="{{route('violation_report.post.api')}}"
+                        route_admin_send_email="{{ env('COMPANY_ROUTE_VIOLATION_REPORT_SEND_EMAIL') }}"
+                        ></violation-report-component>
                     </div>
                 </div>
 
@@ -420,17 +425,13 @@
                         <see-more-btn-component></see-more-btn-component>
 
                     </a>
-
-                    {{-- <see-more-btn-component
-                    data-bs-toggle="collapse" data-bs-target="#collapseQGInfo" aria-expanded="false" aria-controls="collapseQGInfo"
-                    ></see-more-btn-component> --}}
                 </div>
 
 
             </div>
 
             <!-- コメントリストコンポーネント -->
-            <div>
+            {{-- <div>
                 @php
                     $user_id = Auth::check() ? Auth::user()->id : '' ;
                 @endphp
@@ -439,7 +440,7 @@
                 route_comment_destory_api="{{route('comment.destroy.api')}}"
                 user_id="{{$user_id}}" question_group_id="{{$question_group->id}}"
                 ></comment-component>
-            </div>
+            </div> --}}
 
 
 

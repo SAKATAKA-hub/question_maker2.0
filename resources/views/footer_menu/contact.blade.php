@@ -15,9 +15,12 @@
 <!----- meta ----->
 @section('meta')
 <meta name="csrf_token" content="{{ csrf_token() }}">
+<meta name="company_key" content="{{ env('COMPANY_KEY') }}">
 <meta name="route_post_api"  content="{{route('contact.post.api')}}">
 <meta name="route_privacy_policy"  content="{{ route('footer_menu.privacy_policy') }}">
 <meta name="route_home"            content="{{ route('home') }}">
+<meta name="route_admin_send_email" content="{{ env('COMPANY_ROUTE_CONTACT_SEND_EMAIL') }}">
+
 @endsection
 
 

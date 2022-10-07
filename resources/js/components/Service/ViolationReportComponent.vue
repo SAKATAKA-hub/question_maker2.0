@@ -9,6 +9,16 @@
         </form> -->
 
 
+        <div v-if="fadein_alert" class="fadein-alert-box">
+            <div class="container-1200">
+                <p class="alert alert-warning alert-dismissible text-dark fade show" role="alert">
+                    報告内容を送信しました。
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </p>
+            </div>
+        </div>
+
+
         <!-- 報告済み -->
         <button v-if="reported" class="btn btn-sm"  disabled>
             <div class="fs-5">
@@ -37,6 +47,7 @@
             </div>
             <div style="font-size:.6rem;">報　告</div>
         </button>
+
 
 
 
@@ -104,9 +115,13 @@
                 // 入力できる最大文字数
                 body_maxlength: 140,
 
+                // アラートの表示
+                fadein_alert: false,
+
 
                 inputs:{
-                    _token: document.querySelector('[name="csrf_token"]').content,
+                    _token:  document.querySelector('[name="csrf_token"]').content,
+                    app_key: document.querySelector('[name="company_key"]').content,
                     user_id: '',
                     question_group_id: '',
                     body:'',
@@ -116,10 +131,11 @@
             }
         },
         props: {
-            route:           { type: String, default: '', },
-            user_id:           { type: String, default: '', },
-            question_group_id: { type: String, default: '', },
-            is_reported:       { type: String, default: '', },
+            route:                 { type: String, default: '', },
+            route_admin_send_email:{ type: String, default: '', },
+            user_id:               { type: String, default: '', },
+            question_group_id:     { type: String, default: '', },
+            is_reported:           { type: String, default: '', },
 
         },
         mounted() {
@@ -127,11 +143,13 @@
             this.inputs.user_id = this.user_id;
             this.inputs.question_group_id = this.question_group_id;
 
+            // this.SendAdminEmail();
+
         },
         methods:{
 
+            /* 報告内容の送信 */
             click: function(){
-
 
 
                 // [ 非同期通信 ]
@@ -146,15 +164,41 @@
                 .then(json => {
                     // 表示の切り替え
                     this.reported = true;
+
+                    // 管理者へメール送信
+                    this.SendAdminEmail();
+
+                    // 完了アラートの表示
+                    this.fadein_alert = true;
+
                     // console.log( json );
                 })
                 .catch(err=>{
                     alert('データ送信エラーが発生しました。');
                 })
 
-
-
             },
+            /* 管理者へメール送信 */
+            SendAdminEmail :function(){
+
+                // 新規会員情報の登録[ 非同期通信 ]
+                fetch( this.route_admin_send_email, {
+                    method: 'POST',
+                    body: new URLSearchParams( this.inputs ),
+                })
+                .then(response => {
+                    if(!response.ok){ throw new Error('送信エラー'); }
+                    return response.json();
+                })
+                .then(json => {
+                    console.log( json );
+                })
+                .catch(err=>{
+                    alert('データ送信エラーが発生しました。再読み込みします。');
+                    location.reload();
+                })
+            },
+
         }
     }
 </script>

@@ -284,7 +284,7 @@
                     // テキストエリアの入力をクリアする
                     this.inputs.body = '';
 
-                    console.log( this.inputs );
+                    // console.log( this.inputs );
                 })
 
             },

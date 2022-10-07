@@ -5396,10 +5396,6 @@ __webpack_require__.r(__webpack_exports__);
     btn_text: {
       type: String,
       "default": '詳しく見る'
-    },
-    "class": {
-      type: String,
-      "default": 'text-decoration-none text-success'
     }
   },
   mounted: function mounted() {
@@ -6891,8 +6887,7 @@ __webpack_require__.r(__webpack_exports__);
         // コメントデータの保存
         _this.comments = json.comments; // テキストエリアの入力をクリアする
 
-        _this.inputs.body = '';
-        console.log(_this.inputs);
+        _this.inputs.body = ''; // console.log( this.inputs );
       });
     },
 
@@ -7182,11 +7177,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       /* token ( ログイン処理のページ遷移時に利用 )*/
       token: document.querySelector('[name="csrf_token"]').content,
+      company_key: document.querySelector('[name="company_key"]').content,
 
       /* ルート */
       route: {
         post_api: document.querySelector('[name="route_post_api"]').content,
         // ログイン
+        admin_send_email: document.querySelector('[name="route_admin_send_email"]').content,
+        // 管理者メール送信
         privacy_policy: document.querySelector('[name="route_privacy_policy"]').content,
         //プライバシーポリシー
         home: document.querySelector('[name="route_home"]').content //Home
@@ -7217,7 +7215,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     };
   },
-  mounted: function mounted() {//~
+  mounted: function mounted() {
+    // test data
+    if (this.test.data) {
+      this.inputs = {
+        name: 'テスト　太郎',
+        email: 'contact@next-arrow.co.jp',
+        body: 'テストテキスト'
+      };
+      this.card_num = 2;
+    }
   },
   methods: {
     /* ステップ01の次へメソッド */
@@ -7244,8 +7251,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         return response.json();
       }).then(function (json) {
-        _this.addCardNum(); // console.log( json );
+        // 次のページ
+        _this.addCardNum();
+        /* 管理者へメール送信 */
 
+
+        _this.SendAdminEmail(); // console.log( json );
+
+      })["catch"](function (err) {
+        alert('データ送信エラーが発生しました。再読み込みします。');
+        location.reload();
+      });
+    },
+
+    /* 管理者へメール送信 */
+    SendAdminEmail: function SendAdminEmail() {
+      // 新規会員情報の登録[ 非同期通信 ]
+      fetch(this.route.admin_send_email, {
+        method: 'POST',
+        body: new URLSearchParams(_objectSpread({
+          app_key: this.company_key
+        }, this.inputs))
+      }).then(function (response) {
+        if (!response.ok) {
+          throw new Error('送信エラー');
+        }
+
+        return response.json();
+      }).then(function (json) {
+        // this.addCardNum();
+        console.log(json);
       })["catch"](function (err) {
         alert('データ送信エラーが発生しました。再読み込みします。');
         location.reload();
@@ -7979,6 +8014,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -7987,8 +8033,11 @@ __webpack_require__.r(__webpack_exports__);
       reported: false,
       // 入力できる最大文字数
       body_maxlength: 140,
+      // アラートの表示
+      fadein_alert: false,
       inputs: {
         _token: document.querySelector('[name="csrf_token"]').content,
+        app_key: document.querySelector('[name="company_key"]').content,
         user_id: '',
         question_group_id: '',
         body: ''
@@ -7997,6 +8046,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     route: {
+      type: String,
+      "default": ''
+    },
+    route_admin_send_email: {
       type: String,
       "default": ''
     },
@@ -8015,9 +8068,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.inputs.user_id = this.user_id;
-    this.inputs.question_group_id = this.question_group_id;
+    this.inputs.question_group_id = this.question_group_id; // this.SendAdminEmail();
   },
   methods: {
+    /* 報告内容の送信 */
     click: function click() {
       var _this = this;
 
@@ -8033,9 +8087,34 @@ __webpack_require__.r(__webpack_exports__);
         return response.json();
       }).then(function (json) {
         // 表示の切り替え
-        _this.reported = true; // console.log( json );
+        _this.reported = true; // 管理者へメール送信
+
+        _this.SendAdminEmail(); // 完了アラートの表示
+
+
+        _this.fadein_alert = true; // console.log( json );
       })["catch"](function (err) {
         alert('データ送信エラーが発生しました。');
+      });
+    },
+
+    /* 管理者へメール送信 */
+    SendAdminEmail: function SendAdminEmail() {
+      // 新規会員情報の登録[ 非同期通信 ]
+      fetch(this.route_admin_send_email, {
+        method: 'POST',
+        body: new URLSearchParams(this.inputs)
+      }).then(function (response) {
+        if (!response.ok) {
+          throw new Error('送信エラー');
+        }
+
+        return response.json();
+      }).then(function (json) {
+        console.log(json);
+      })["catch"](function (err) {
+        alert('データ送信エラーが発生しました。再読み込みします。');
+        location.reload();
       });
     }
   }
@@ -37397,9 +37476,13 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _vm.fadein_alert
+      ? _c("div", { staticClass: "fadein-alert-box" }, [_vm._m(0)])
+      : _vm._e(),
+    _vm._v(" "),
     _vm.reported
       ? _c("button", { staticClass: "btn btn-sm", attrs: { disabled: "" } }, [
-          _vm._m(0),
+          _vm._m(1),
           _vm._v(" "),
           _c("div", { staticStyle: { "font-size": ".6rem" } }, [
             _vm._v("報告済み"),
@@ -37417,7 +37500,7 @@ var render = function () {
             },
           },
           [
-            _vm._m(1),
+            _vm._m(2),
             _vm._v(" "),
             _c("div", { staticStyle: { "font-size": ".6rem" } }, [
               _vm._v("報　告"),
@@ -37434,7 +37517,7 @@ var render = function () {
             },
           },
           [
-            _vm._m(2),
+            _vm._m(3),
             _vm._v(" "),
             _c("div", { staticStyle: { "font-size": ".6rem" } }, [
               _vm._v("報　告"),
@@ -37454,9 +37537,9 @@ var render = function () {
       },
       [
         _c("div", { staticClass: "offcanvas-body small  position-relative" }, [
-          _vm._m(3),
-          _vm._v(" "),
           _vm._m(4),
+          _vm._v(" "),
+          _vm._m(5),
           _vm._v(" "),
           _c(
             "div",
@@ -37531,6 +37614,34 @@ var render = function () {
   ])
 }
 var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container-1200" }, [
+      _c(
+        "p",
+        {
+          staticClass:
+            "alert alert-warning alert-dismissible text-dark fade show",
+          attrs: { role: "alert" },
+        },
+        [
+          _vm._v(
+            "\n                報告内容を送信しました。\n                "
+          ),
+          _c("button", {
+            staticClass: "btn-close",
+            attrs: {
+              type: "button",
+              "data-bs-dismiss": "alert",
+              "aria-label": "Close",
+            },
+          }),
+        ]
+      ),
+    ])
+  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
