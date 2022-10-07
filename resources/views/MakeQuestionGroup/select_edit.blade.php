@@ -143,11 +143,10 @@
                 </div> --}}
 
 
-                <!-- タブメニュー -->
+                <!-- tabmenu -->
                 <div class="my-3">
 
-
-                    {{-- @php $tab_menu='tab01'; @endphp --}}
+                    <!-- tabmenu button -->
                     <div id="question-group-tabmenu" style="font-size:11px;">
                         <ul class="nav nav-tabs nav-fill" id="pills-tab" role="tablist">
                             <li class="nav-item" role="presentation">
@@ -199,7 +198,7 @@
                         </ul>
                     </div>
 
-
+                    <!-- tabmenu contents -->
                     <div class="tab-content bg-light card" id="pills-tabContent" style="border-top-color: transparent;">
                         <!-- tab01 -->
                         <div class="tab-pane fade card-body @if( $tab_menu === 'tab01' ) show active @endif" role="tabpane0l"
@@ -229,7 +228,7 @@
                                     </div>
 
                                     <!-- 公開日等 -->
-                                    <div class="mb-3">
+                                    <div class="mb-3 card">
                                         <div class="d-flex">
                                             <div class="col-auto ps-3" style="width:6rem;">公開日：</div>
                                             <div class="col ps-3">{{
@@ -566,9 +565,10 @@
                         id="tab-tab05" aria-labelledby="tab-info05-tab">
 
 
-                            <ul class="list-group">
+                            <div class="list-group">
                                 @forelse ($question_group->answer_groups as $key => $answer_group)
-                                    <li class="list-group-item" >
+                                    @php $param = [ 'answer_group'=>$answer_group, 'key'=>$answer_group->user->key ]; @endphp
+                                    <a href="{{route('results.detail', $param )}}" class="list-group-item list-group-item-action text-decoration-none text-secondary" >
                                         <div class="row">
                                             <!--[フォロワー画像]-->
                                             <div class="col">
@@ -591,10 +591,10 @@
                                                         <div class="d-flex align-items-center h-100">
                                                             <!--[フォロワー名前]-->
                                                             <h5 class="mb-0">
-                                                                @php $param = [ 'answer_group'=>$answer_group, 'key'=>$answer_group->user->key ]; @endphp
-                                                                <a href="{{route('results.detail', $param )}}" class="text-decoration-none text-success">
+                                                                {{-- @php $param = [ 'answer_group'=>$answer_group, 'key'=>$answer_group->user->key ]; @endphp
+                                                                <a href="{{route('results.detail', $param )}}" class="text-decoration-none text-success"> --}}
                                                                     {{$answer_group->user->name}}
-                                                                </a>
+                                                                {{-- </a> --}}
                                                             </h5>
                                                         </div>
                                                     </div>
@@ -615,16 +615,16 @@
                                             </div>
 
                                         </div>
-                                    </li>
+                                    </a>
 
                                 @empty
-                                    <li class="list-group-item  border-0">
+                                    <div class="list-group-item  border-0">
                                         <div class="h5 text-secondary text-center py-5">
                                             ここに受検したユーザーが表示されます。
                                         </div>
-                                    </li>
+                                    </div>
                                 @endforelse
-                            </ul>
+                            </div>
 
                         </div>
 

@@ -23,7 +23,7 @@
     作成した問題集
 </a></li>
 <li class="breadcrumb-item"><a href="{{ route('make_question_group.select_edit', $question_group ) }}" class="text-success">
-    {{'『'.$question_group->title.'』の編集'}}
+    {{'『'.$question_group->title.'』詳細情報'}}
 </a></li>
 
 <li class="breadcrumb-item" aria-current="page">

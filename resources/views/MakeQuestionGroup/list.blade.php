@@ -208,7 +208,7 @@
                                                     </div>
                                                 </div>
                                             @endif
- --}}
+                                            --}}
                                             <!-- menu -->
                                             <div class="list-group mx-3 mb-5">
                                                 @php $param = ['question_group'=>$question_group->id,'key'=>$question_group->key,]; @endphp
@@ -226,8 +226,62 @@
                                                 class="list-group-item list-group-item-action">
                                                     <div class="d-flex justify-content-between">
                                                         <p class="mb-0">
+                                                            <i class="bi bi-card-heading"></i>
+                                                            <span class="ms-3">詳細情報</span>
+                                                        </p>
+                                                        <i class="bi bi-chevron-right"></i>
+                                                    </div>
+                                                </a>
+                                                <a href="{{route('make_question_group.edit',$question_group)}}"
+                                                class="list-group-item list-group-item-action">
+                                                    <div class="d-flex justify-content-between">
+                                                        <p class="mb-0">
+                                                            <i class="bi bi-pencil-fill"></i>
+                                                            <span class="ms-3">基本情報の編集</span>
+                                                        </p>
+                                                        <i class="bi bi-chevron-right"></i>
+                                                    </div>
+                                                </a>
+                                                @php $param = ['question_group'=>$question_group->id,'tab_menu'=>'tab02',]; @endphp
+                                                <a href="{{ route('make_question_group.select_edit', $param ) }}"
+                                                class="list-group-item list-group-item-action">
+                                                    <div class="d-flex justify-content-between">
+                                                        <p class="mb-0">
                                                             <i class="bi bi-pencil"></i>
-                                                            <span class="ms-3">編集</span>
+                                                            <span class="ms-3">問題の編集</span>
+                                                        </p>
+                                                        <i class="bi bi-chevron-right"></i>
+                                                    </div>
+                                                </a>
+                                                @php $param = ['question_group'=>$question_group->id,'tab_menu'=>'tab03',]; @endphp
+                                                <a href="{{ route('make_question_group.select_edit', $param ) }}"
+                                                class="list-group-item list-group-item-action">
+                                                    <div class="d-flex justify-content-between">
+                                                        <p class="mb-0">
+                                                            <i class="bi bi-eye"></i>
+                                                            <span class="ms-3">公開設定</span>
+                                                        </p>
+                                                        <i class="bi bi-chevron-right"></i>
+                                                    </div>
+                                                </a>
+                                                @php $param = ['question_group'=>$question_group->id,'tab_menu'=>'tab04',]; @endphp
+                                                <a href="{{ route('make_question_group.select_edit', $param ) }}"
+                                                class="list-group-item list-group-item-action">
+                                                    <div class="d-flex justify-content-between">
+                                                        <p class="mb-0">
+                                                            <i class="bi bi-chat-square-text"></i>
+                                                            <span class="ms-3">コメント</span>
+                                                        </p>
+                                                        <i class="bi bi-chevron-right"></i>
+                                                    </div>
+                                                </a>
+                                                @php $param = ['question_group'=>$question_group->id,'tab_menu'=>'tab05',]; @endphp
+                                                <a href="{{ route('make_question_group.select_edit', $param ) }}"
+                                                class="list-group-item list-group-item-action">
+                                                    <div class="d-flex justify-content-between">
+                                                        <p class="mb-0">
+                                                            <i class="bi bi-people"></i>
+                                                            <span class="ms-3">受検ユーザー</span>
                                                         </p>
                                                         <i class="bi bi-chevron-right"></i>
                                                     </div>
@@ -258,7 +312,7 @@
                                         ><i class="bi bi-three-dots-vertical"></i></button>
 
                                         <!--dropdownMenu-->
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu{{ $i }}" style="width:160px;">
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu{{ $i }}" style="width:12rem;">
                                             @php $param = ['question_group'=>$question_group->id,'key'=>$question_group->key,]; @endphp
                                             <a href="{{ route('play_question', $param ) }}"
                                             class="list-group-item list-group-item-action border-0">
@@ -274,8 +328,57 @@
                                             class="list-group-item list-group-item-action border-0">
                                                 <div class="d-flex justify-content-between">
                                                     <p class="mb-0">
+                                                        <i class="bi bi-card-heading"></i>
+                                                        <span class="ms-3">詳細情報</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                            <a href="{{route('make_question_group.edit',$question_group)}}"
+                                            class="list-group-item list-group-item-action border-0">
+                                                <div class="d-flex justify-content-between">
+                                                    <p class="mb-0">
+                                                        <i class="bi bi-pencil-fill"></i>
+                                                        <span class="ms-3">基本情報の編集</span>
+                                                </p>
+                                                </div>
+                                            </a>
+                                            @php $param = ['question_group'=>$question_group->id,'tab_menu'=>'tab02',]; @endphp
+                                            <a href="{{ route('make_question_group.select_edit', $param ) }}"
+                                            class="list-group-item list-group-item-action border-0">
+                                                <div class="d-flex justify-content-between">
+                                                    <p class="mb-0">
                                                         <i class="bi bi-pencil"></i>
-                                                        <span class="ms-3">編集</span>
+                                                        <span class="ms-3">問題の編集</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                            @php $param = ['question_group'=>$question_group->id,'tab_menu'=>'tab03',]; @endphp
+                                            <a href="{{ route('make_question_group.select_edit', $param ) }}"
+                                            class="list-group-item list-group-item-action border-0">
+                                                <div class="d-flex justify-content-between">
+                                                    <p class="mb-0">
+                                                        <i class="bi bi-eye"></i>
+                                                        <span class="ms-3">公開設定</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                            @php $param = ['question_group'=>$question_group->id,'tab_menu'=>'tab04',]; @endphp
+                                            <a href="{{ route('make_question_group.select_edit', $param ) }}"
+                                            class="list-group-item list-group-item-action border-0">
+                                                <div class="d-flex justify-content-between">
+                                                    <p class="mb-0">
+                                                        <i class="bi bi-chat-square-text"></i>
+                                                        <span class="ms-3">コメント</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                            @php $param = ['question_group'=>$question_group->id,'tab_menu'=>'tab05',]; @endphp
+                                            <a href="{{ route('make_question_group.select_edit', $param ) }}"
+                                            class="list-group-item list-group-item-action border-0">
+                                                <div class="d-flex justify-content-between">
+                                                    <p class="mb-0">
+                                                        <i class="bi bi-people"></i>
+                                                        <span class="ms-3">受検ユーザー</span>
                                                     </p>
                                                 </div>
                                             </a>
