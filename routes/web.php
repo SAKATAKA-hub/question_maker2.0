@@ -320,6 +320,10 @@ Route::middleware(['user_auth'])->group(function () {
     Route::get('/contact', function () { return view('footer_menu.contact'); })
     ->name('footer_menu.contact');
 
+    # お知らせ(news)
+    Route::get('/news', function () { return view('footer_menu.news'); })
+    ->name('footer_menu.news');
+
     # よくある質問(faq)
     Route::get('/faq', function () { return view('footer_menu.faq'); })
     ->name('footer_menu.faq');

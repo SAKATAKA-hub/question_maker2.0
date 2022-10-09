@@ -165,7 +165,7 @@ style="z-index:10; background-color:rgb(255, 255, 255,.9);">
         </a>
     </li>
     <li class="nav-item" style="flex:1;">
-        <a class="nav-link text-reset" aria-current="page" href="#">
+        <a class="nav-link text-reset" aria-current="page" href="{{route('footer_menu.news')}}">
             <div class="fs-2"><i class="bi bi-bell"></i></div>
             <div class="text-secondary" style="font-size:10px;">お知らせ</div>
         </a>

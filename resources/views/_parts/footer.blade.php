@@ -22,12 +22,22 @@
         </li>
         <li class="d-none d-lg-block text-white ms-3 me-3 py-2">|</li>
 
+
         <li class="text-lg-center py-2" style="list-style:none;">
             <a href="{{route('footer_menu.trems')}}" class="text-white text-decoration-none">
             利用規約
             </a>
         </li>
         <li class="d-none d-lg-block text-white ms-3 me-3 py-2">|</li>
+
+
+        <li class="text-lg-center py-2" style="list-style:none;">
+            <a href="{{route('footer_menu.news')}}" class="text-white text-decoration-none">
+            お知らせ
+            </a>
+        </li>
+        <li class="d-none d-lg-block text-white ms-3 me-3 py-2">|</li>
+
 
         <li class="text-lg-center py-2" style="list-style:none;">
             <a href="{{route('footer_menu.contact')}}" class="text-white text-decoration-none">
@@ -43,6 +53,7 @@
             </a>
         </li>
         <li class="d-none d-lg-block text-white ms-3 me-3 py-2">|</li>
+
 
         <li class="text-lg-center py-2" style="list-style:none;">
             <a href="javascript:void(0)" onclick="window.open('{{route('footer_menu.operating_companiy')}}')"

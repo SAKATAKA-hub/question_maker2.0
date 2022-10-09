@@ -88,11 +88,60 @@
                 </div>
             </div>
         </section>
-        <section class="bg-light-success">
+        <section class="bg-secondary text-white">
             <div class="container-1200">
                 <p class="lead text-center mb-0" style="font-size:12px;">
                     このサイトではオリジナルの『問題集』を <strong class="fw-bold">DIYして（作って）</strong>公開したり、誰かが作った『問題集』に挑戦することができます。
                 </p>
+            </div>
+        </section>
+        <!-- [ news ] -->
+        <section class="" style="background: rgba(92, 240, 203, 0.5);">
+            <div class="container-600">
+                <h5 class="text-dark text-center">\ お知らせ /</h5>
+                @php
+                    $news_list = [
+                        [ 'date'=>'2022.10.10', 'title'=>'サイトをOPENしました！', 'blade'=>'20221010', ],
+                    ];
+                @endphp
+                <div class="list-group list-group-flush">
+                    @foreach ($news_list as $news)
+                        <a href="" class="list-group-item bg-transparent border-0"
+                        data-bs-toggle="modal" data-bs-target="#modal{{$news['blade']}}"
+                        >
+                            <div class="card card-body py-1 border-0">
+                                <div class="text-secondary">{{$news['date']}}</div>
+                                <span class="text-decoration-none text-dark fw-bold">{{$news['title']}}</span>
+                            </div>
+                        </a>
+                        <!-- Modal -->
+                        <div class="modal fade" id="modal{{$news['blade']}}" tabindex="-1" aria-labelledby="modal{{$news['blade']}}Label" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header border-success">
+                                        <div class="">
+                                            <!--[date]-->
+                                            <div class="text-success">{{$news['date']}}</div>
+                                            <!--[title]-->
+                                            <h5 class="modal-title" id="modal{{$news['blade']}}Label">{{$news['title']}}</h5>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-body">
+                                        @include('news.'.$news['blade'])
+                                    </div>
+                                    <div class="modal-footer border-0">
+                                        <button type="button" class="btn btn-sm fw-bold text-secondary" data-bs-dismiss="modal">閉じる</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>                {{-- </div> --}}
+                <div class="text-end py-3">
+                    <a href="{{route('footer_menu.news')}}" class="text-decoration-none text-secondary">一覧を見る</a>
+                </div>
+
             </div>
         </section>
         <!-- Please Login Modal -->
@@ -187,26 +236,29 @@
 
             </div>
         </section>
+        <!-- [ SNS ] -->
         <section>
-            <div class="container-1200 my-5">
-                <h5 class="text-center">\ 公式アカウント /</h5>
+            <div class="container-1200 my-5 text-center">
+                <h5 class="">\ 公式アカウント /</h5>
+                <p class="text-secondary">
+                    サイトの更新情報やお知らせを配信中！
+                </p>
                 <div class="d-flex justify-content-center gap-3 snss">
 
-                    <a href="{{env('LINE_URL')}}" class="badge rounded-pill fs-1 text-white p-3" style="background-color:#07b53b;">
+                    <a href="{{env('LINE_URL')}}" class="badge rounded-pill fs-3 text-white p-3" style="background-color:#07b53b;">
                         <!--LINE-->
                         <i class="bi bi-line"></i>
                     </a>
-                    <a href="{{env('TWIITER_URL')}}" class="badge rounded-pill fs-1 text-white p-3" style="background-color:#1DA1F2;">
+                    <a href="{{env('TWIITER_URL')}}" class="badge rounded-pill fs-3 text-white p-3" style="background-color:#1DA1F2;">
                         <!--twitter-->
                         <i class="bi bi-twitter"></i>
                     </a>
-                    <a href="{{env('INSTAGRAM_URL')}}" class="badge rounded-pill fs-1 text-white p-3" style="background-color:#CF2E92;">
+                    <a href="{{env('INSTAGRAM_URL')}}" class="badge rounded-pill fs-3 text-white p-3" style="background-color:#CF2E92;">
                         <!--instagram-->
                         <i class="bi bi-instagram"></i>
                     </a>
 
                 </div>
-
             </div>
         </section>
 
