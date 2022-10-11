@@ -92,55 +92,6 @@
                 </div>
 
 
-                {{-- <div class="card card-body my-3">
-                    <!-- URLコピー -->
-                    <div class="mb-3">
-                        <div class="d-flex align-items-center">
-                            <span class="badge rounded-pill bg-success me-1">
-                                <i class="bi bi-link-45deg"></i>
-                            </span>
-                            問題集のURLを友達に送ろう！
-                        </div>
-
-                        @php $param = ['question_group'=>$question_group->id,'key'=>$question_group->key,]; @endphp
-                        <url-copy-component copy_url="{{ route('play_question', $param ) }}"></url-copy-component>
-
-                        <div class="d-flex align-items-center" style="font-size:11px;">
-                            <span class="me-1">
-                                <i class="bi bi-exclamation-circle"></i>
-                            </span>
-                            公開設定が『非公開』のときでも、受検用URLを教えた友達だけに自分の問題集にチャレンジしてもらうことができるよ！
-                        </div>
-                    </div>
-                    <!-- その他情報 -->
-                    <div class="">
-                        <div class="card overflow-hidden">
-                            <div class="">
-                                <div class="d-flex">
-                                    <div class="col-4 ps-3 bg-light">問題数</div>
-                                    <div class="col-8 ps-3">全{{$question_group->question_count}}問</div>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="col-4 ps-3 bg-light">制限時間</div>
-                                    <div class="col-8 ps-3">{{$question_group->time_limit_text}}</div>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="col-4 ps-3 bg-light">受験回数</div>
-                                    <div class="col-8 ps-3">{{$question_group->answer_groups->count()}}回</div>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="col-4 ps-3 bg-light">平均点</div>
-                                    <div class="col-8 ps-3">{{sprintf('%.1f',$question_group->average_score)}}点</div>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="col-4 ps-3 bg-light">いいね数</div>
-                                    <div class="col-8 ps-3">{{$question_group->keep_question_groups->count()}}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div> --}}
 
 
                 <!-- tabmenu -->
@@ -206,79 +157,72 @@
 
 
                             <div class="mt-3">
+                                <!-- [ シェアボタン ] -->
                                 <div class="card card-body my-3">
-                                    <!-- URLコピー -->
-                                    <div class="mb-3">
-                                        <div class="d-flex align-items-center">
-                                            <span class="badge rounded-pill bg-success me-1">
-                                                <i class="bi bi-link-45deg"></i>
-                                            </span>
-                                            問題集のURLを友達に送ろう！
-                                        </div>
+                                    @include('_parts.share_group')
 
-                                        @php $param = ['question_group'=>$question_group->id,'key'=>$question_group->key,]; @endphp
-                                        <url-copy-component copy_url="{{ route('play_question', $param ) }}"></url-copy-component>
-
-                                        <div class="d-flex align-items-center" style="font-size:11px;">
-                                            <span class="me-1">
-                                                <i class="bi bi-exclamation-circle"></i>
-                                            </span>
-                                            公開設定が『非公開』のときでも、受検用URLを教えた友達だけに自分の問題集にチャレンジしてもらうことができるよ！
-                                        </div>
+                                    <div class="d-flex align-items-top mt-2" style="font-size:11px;">
+                                        <span class="me-1">
+                                            <i class="bi bi-exclamation-circle"></i>
+                                        </span>
+                                        公開設定が『非公開』のときでも、受検用URLを教えた友達だけに自分の問題集にチャレンジしてもらうことができます。
                                     </div>
+                                </div>
 
-                                    <!-- 公開日等 -->
-                                    <div class="mb-3 card">
+
+                                <!-- 公開日等 -->
+                                <div class="mb-3 card py-2">
+                                    @if ($question_group->published_at)
                                         <div class="d-flex">
-                                            <div class="col-auto ps-3" style="width:6rem;">公開日：</div>
+                                            <div class="col-auto ps-3">公開</div>
                                             <div class="col ps-3">{{
                                             $question_group->published_at ?
-                                            \Carbon\Carbon::parse( $question_group->published_at )->format('Y年m月d日 H:i') :
+                                            \Carbon\Carbon::parse( $question_group->published_at )->format('Y年m月d日 H時i分') :
                                             '非公開'}}</div>
                                         </div>
-                                        <div class="d-flex">
-                                            <div class="col-auto ps-3" style="width:6rem;">作成日時：</div>
-                                            <div class="col ps-3">
-                                                {{\Carbon\Carbon::parse($question_group->created_at)->format('Y年m月d日 H時i分')}}
-                                            </div>
-                                        </div>
-                                        <div class="d-flex">
-                                            <div class="col-auto ps-3" style="width:6rem;">更新日時：</div>
-                                            <div class="col ps-3">
-                                                {{\Carbon\Carbon::parse($question_group->updated_at)->format('Y年m月d日 H時i分')}}
-                                            </div>
+                                    @endif
+                                    <div class="d-flex">
+                                        <div class="col-auto ps-3">作成</div>
+                                        <div class="col ps-3">
+                                            {{\Carbon\Carbon::parse($question_group->created_at)->format('Y年m月d日 H時i分')}}
                                         </div>
                                     </div>
-
-                                    <!-- その他情報 -->
-                                    <div class="">
-                                        <div class="card overflow-hidden">
-                                            <div class="">
-                                                <div class="d-flex">
-                                                    <div class="col-4 ps-3 bg-light">問題数</div>
-                                                    <div class="col-8 ps-3">全{{$question_group->question_count}}問</div>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <div class="col-4 ps-3 bg-light">制限時間</div>
-                                                    <div class="col-8 ps-3">{{$question_group->time_limit_text}}</div>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <div class="col-4 ps-3 bg-light">受験回数</div>
-                                                    <div class="col-8 ps-3">{{$question_group->answer_groups->count()}}回</div>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <div class="col-4 ps-3 bg-light">平均点</div>
-                                                    <div class="col-8 ps-3">{{sprintf('%.1f',$question_group->average_score)}}点</div>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <div class="col-4 ps-3 bg-light">いいね数</div>
-                                                    <div class="col-8 ps-3">{{$question_group->keep_question_groups->count()}}</div>
-                                                </div>
-                                            </div>
+                                    <div class="d-flex">
+                                        <div class="col-auto ps-3">更新</div>
+                                        <div class="col ps-3">
+                                            {{\Carbon\Carbon::parse($question_group->updated_at)->format('Y年m月d日 H時i分')}}
                                         </div>
                                     </div>
-
                                 </div>
+
+                                <!-- その他情報 -->
+                                <div class="">
+                                    <div class="card overflow-hidden">
+                                        <div class="">
+                                            <div class="d-flex">
+                                                <div class="col-4 ps-3 bg-light">問題数</div>
+                                                <div class="col-8 ps-3">全{{$question_group->question_count}}問</div>
+                                            </div>
+                                            <div class="d-flex">
+                                                <div class="col-4 ps-3 bg-light">制限時間</div>
+                                                <div class="col-8 ps-3">{{$question_group->time_limit_text}}</div>
+                                            </div>
+                                            <div class="d-flex">
+                                                <div class="col-4 ps-3 bg-light">受験回数</div>
+                                                <div class="col-8 ps-3">{{$question_group->answer_groups->count()}}回</div>
+                                            </div>
+                                            <div class="d-flex">
+                                                <div class="col-4 ps-3 bg-light">平均点</div>
+                                                <div class="col-8 ps-3">{{sprintf('%.1f',$question_group->average_score)}}点</div>
+                                            </div>
+                                            <div class="d-flex">
+                                                <div class="col-4 ps-3 bg-light">いいね数</div>
+                                                <div class="col-8 ps-3">{{$question_group->keep_question_groups->count()}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
 
                                 <!-- 入力情報 -->
                                 <div class="mb-5">

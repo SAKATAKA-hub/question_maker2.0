@@ -122,6 +122,7 @@ class PlayQuestionController extends Controller
             $questions[ $i ][ 'option_answer_texts' ] = $question->option_answer_texts;
         }
 
+
         return response()->json([
             'question_group' => $question_group,
             'questions' => $question_group->questions,

@@ -149,16 +149,9 @@
                     </div>
                 </div>
 
-                <!-- [ URLコピー ] -->
+                <!-- [ シェアボタン ] -->
                 <div class="modal-body">
-                    <div class="d-flex align-items-center">
-                        <span class="badge rounded-pill bg-success me-1">
-                            <i class="bi bi-link-45deg"></i>
-                        </span>
-                        問題集のURLを友達に送ろう！
-                    </div>
-                    @php $param = ['question_group'=>$question_group->id,'key'=>$question_group->key,]; @endphp
-                    <url-copy-component copy_url="{{ route('play_question', $param ) }}"></url-copy-component>
+                    @include('_parts.share_group')
                 </div>
 
 

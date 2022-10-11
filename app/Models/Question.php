@@ -20,6 +20,7 @@ class Question extends Model
         'text',  //問題文
         'commentary_image', //説明画像
         'commentary_text',  //説明文
+        'random'// ランダム設定
     ];
 
 
@@ -109,6 +110,28 @@ class Question extends Model
          * @return Array
         */
         public function getOptionAnswerTextsAttribute(){
+
+            //選択肢のオブジェクトを取得
+            $question_options =
+            QuestionOption::where('question_id', $this->id)->get();
+
+            //選択肢のテキストのみを配列へ保存
+            $options_array = [];
+            foreach ($question_options as $question_option) {
+                $options_array[] = $question_option->answer_text;
+            }
+
+            return $options_array;
+        }
+
+
+
+
+        /**
+         * 問題の選択肢（ランダム解答用） $question->option_random_answer_texts
+         * @return Array
+        */
+        public function getOptionRandomAnswerTextsAttribute(){
 
             //選択肢のオブジェクトを取得
             $question_options =

@@ -67,7 +67,10 @@
 
                         @forelse ( $answer_groups as $key => $answer_group)
                             @php $question_group = $answer_group->question_group; @endphp
-                            <div class="card card-body border-0 shadow-sm mb-3">
+                            @php $param = [ 'answer_group'=>$answer_group, 'key'=>$answer_group->user->key ]; @endphp
+                            <a href="{{route('results.detail', $param )}}"
+                            class="card card-body border-0 shadow-sm mb-3 text-dark text-decoration-none list-group-item-action">
+
                                 <div class="row align-items-center">
                                     <!-- サムネイル -->
                                     <div class="col-auto  d-none d-sm-block">
@@ -84,11 +87,8 @@
                                         <div>
                                             受験日{{ \Carbon\Carbon::parse($answer_group->created_at)->format('Y-m-d') }}
                                         </div>
-                                        @php $param = [ 'answer_group'=>$answer_group, 'key'=>$answer_group->user->key ]; @endphp
-                                        <a href="{{route('results.detail', $param )}}"
-                                        class="fs-3 text-success" style="text-decoration:none;">
-                                            {{ $question_group->title }}
-                                        </a>
+                                        <span class="fs-3">{{ $question_group->title }}</span>
+
                                     </div>
                                     <!-- 成績 -->
                                     <div class="col-auto d-none d-sm-block text-secondary">
@@ -104,7 +104,8 @@
                                     </div>
 
                                 </div>
-                            </div>
+
+                            </a>
                         @empty
                             <div class="h2 text-secondary text-center py-5">
                                 受検した問題集はありません。

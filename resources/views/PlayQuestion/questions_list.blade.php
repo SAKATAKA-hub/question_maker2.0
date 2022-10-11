@@ -9,14 +9,14 @@
     <title>もんだいDIYパーク - mondai DIY park - オリジナル問題集が自由に作れる！無料の問題作成ツール</title>
 
 
-    {{-- <meta  name="description" content="誰でも簡単な操作で、自分の好きな問題集を作れる！作成した問題集のURLをコピーして友達に送れば、簡単に出題できる！『もんだいDIYパーク』は、もんだいを「作る」「答える」「出題する」ツールを揃えた、もんだいのDIY広場です。">
+    <meta  name="description" content="誰でも簡単な操作で、自分の好きな問題集を作れる！作成した問題集のURLをコピーして友達に送れば、簡単に出題できる！『もんだいDIYパーク』は、もんだいを「作る」「答える」「出題する」ツールを揃えた、もんだいのDIY広場です。">
     <meta property="og:title" content="もんだいDIYパーク - mondai DIY park - オリジナル問題集が自由に作れる！無料の問題作成ツール" />
     <meta property="og:description" content="誰でも簡単な操作で、自分の好きな問題集を作れる！作成した問題集のURLをコピーして友達に送れば、簡単に出題できる！『もんだいDIYパーク』は、もんだいを「作る」「答える」「出題する」ツールを揃えた、もんだいのDIY広場です。" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{route('home')}}" />
     <meta property="og:image" content="{{asset('storage/site/image/logo_lg.png')}}" />
     <meta property="og:site_name" content="もんだいDIYパーク" />
-    <meta property="og:locale" content="ja_JP"  /> --}}
+    <meta property="og:locale" content="ja_JP"  />
 
 
     <!-- ファビコン -->
@@ -245,18 +245,18 @@
                 </p>
                 <div class="d-flex justify-content-center gap-3 snss">
 
-                    <a href="{{env('LINE_URL')}}" class="badge rounded-pill fs-3 text-white p-3" style="background-color:#07b53b;">
+                    <a href="{{env('LINE_URL')}}" class="badge rounded-pill fs-3 text-white p-3" style="background-color:#07b53b;" target="_blank">
                         <!--LINE-->
                         <i class="bi bi-line"></i>
                     </a>
-                    <a href="{{env('TWIITER_URL')}}" class="badge rounded-pill fs-3 text-white p-3" style="background-color:#1DA1F2;">
+                    <a href="{{env('TWIITER_URL')}}" class="badge rounded-pill fs-3 text-white p-3" style="background-color:#1DA1F2;" target="_blank">
                         <!--twitter-->
                         <i class="bi bi-twitter"></i>
                     </a>
-                    <a href="{{env('INSTAGRAM_URL')}}" class="badge rounded-pill fs-3 text-white p-3" style="background-color:#CF2E92;">
+                    {{-- <a href="{{env('INSTAGRAM_URL')}}" class="badge rounded-pill fs-3 text-white p-3" style="background-color:#CF2E92;" target="_blank">
                         <!--instagram-->
                         <i class="bi bi-instagram"></i>
-                    </a>
+                    </a> --}}
 
                 </div>
             </div>

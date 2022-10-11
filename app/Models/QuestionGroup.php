@@ -16,9 +16,10 @@ class QuestionGroup extends Model
     public $timestamps = true;
     protected $fillable = [
         'title','resume','image','tags','time_limit','published_at','limited_published','key','user_id',
-        'accessed_count',    //'アクセス数'
-        'evaluation_points', //'評価ポイント'
-        'average_score',     //'平均点'
+        'random',            // ランダム設定
+        'accessed_count',    // アクセス数
+        'evaluation_points', // 評価ポイント
+        'average_score',     // 平均点
     ];
 
 

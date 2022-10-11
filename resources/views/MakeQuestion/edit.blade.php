@@ -55,7 +55,7 @@
 
 <!----- contents ----->
 @section('contents')
-<section>
+<section class="bg-light">
     <div class="container-1200 pt-5">
         @if ( empty($question) ){{-- 新規作成 --}}
         <form action="{{ route('make_question.store', $question_group ) }}"
@@ -73,20 +73,23 @@
 
             @if ( $question_group->questions->count() == 0 )
                 <!-- 最初の問題作成時の表示 -->
-                <div class="card  shadow border-success border-2 mb-5">
+                {{-- <div class="card  shadow border-info border-2 mb-5"> --}}
+                <div class="mb-5">
                     <div class="card-header bg-success text-white d-md-flex">
                         <h5 class="mb-0 card-title">『問題』を登録しよう！</h5>
                     </div>
                     <div class="card-body">
                         <p class="card-text text-secondary">
-                            『ひとつの答えを選ぶ』、『複数の答えを選ぶ』、『テキストで答えを入力する』の三種類から解答方法を選択して、問題をつくろう。
+                            『ひとつの答えを選ぶ』、『複数の答えを選ぶ』、『テキストで答えを入力する』の三種類から解答方法を選択してください。
                         </p>
                     </div>
                 </div>
             @endif
 
 
-            <div class="card mb-5 card-body border-0 shadow">
+            {{-- <div class="card mb-5 card-body border-0 shadow"> --}}
+            <div class="mb-5">
+
                 <!-- 出題順 -->
                 <div class="form-group mb-4 card card-body border-info">
                     <label for="order_input" class="form-check-label fs-5 mb-2 fw-bold"
@@ -155,12 +158,12 @@
 
 
                 <!-- 解説 -->
-                <div class="form-group mb-4 card card-body border-success bg-light-success">
+                <div class="form-group mb-4 card card-body border-info bg-light-success">
 
                     <label for="exampleFormControlInput1" class="form-check-label fs-5 mb-2 fw-bold"
                     >解説</label>
 
-                    <p class="callout callout-success">
+                    <p class="callout callout-info">
                         問題集の受検後の成績発表時に、『解説』を表示させることができます。
                     </p>
 

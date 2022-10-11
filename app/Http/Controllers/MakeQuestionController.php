@@ -143,7 +143,8 @@ class MakeQuestionController extends Controller
 
 
         # 問題集の編集ヶ所選択ページへリダイレクト
-        return redirect()->route('make_question_group.select_edit', $question_group)
+        $param = ['question_group'=> $question_group->id, 'tab_menu'=>'tab02',];
+        return redirect()->route('make_question_group.select_edit', $param)
         ->with('alert-info','問題を1件登録しました。');
     }
 
@@ -222,6 +223,7 @@ class MakeQuestionController extends Controller
     */
     public function update( Request $request, \App\Models\Question $question )
     {
+
         # 問題集データ
         $question_group = $question->question_group;
 
@@ -412,7 +414,8 @@ class MakeQuestionController extends Controller
 
 
         # 問題集の編集ヶ所選択ページへリダイレクト
-        return redirect()->route('make_question_group.select_edit', $question_group)
+        $param = ['question_group'=> $question_group->id, 'tab_menu'=>'tab02',];
+        return redirect()->route('make_question_group.select_edit', $param)
         ->with('alert-warning','問題を1件修正しました。');
     }
 

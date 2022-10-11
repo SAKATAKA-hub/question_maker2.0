@@ -23,6 +23,7 @@ class CreateQuestionsTable extends Migration
             $table->integer('answer_type')->comment('回答の種類');
             $table->integer('order'      )->comment('出題順位');
             $table->string('image',150   )->comment('問題画像パス')->nullable()->default(null);
+            $table->boolean('random')->comment('解答選択のランダム設定')->default(0);
 
             $table->string('commentary_text',150 )->comment('解説文')->nullable()->default(null);
             $table->string('commentary_image',150)->comment('解説画像パス')->nullable()->default(null);

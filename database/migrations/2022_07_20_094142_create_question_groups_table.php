@@ -26,6 +26,7 @@ class CreateQuestionGroupsTable extends Migration
             $table->time('time_limit'  )->comment('制限時間')->nullable()->default(null);
             $table->dateTime('published_at'    )->comment('公開日')->nullable()->default(null);
             $table->boolean('limited_published')->comment('限定公開か否か')->default(0);
+            $table->boolean('random')->comment('出題順のランダム設定')->default(0);
             $table->string('key',150  )->comment('認証キー');
 
             $table->integer('accessed_count' )->comment('アクセス数')->default(0);

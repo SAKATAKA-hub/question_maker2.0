@@ -61,8 +61,10 @@
 
 
                     <!--[ 選択肢テキストの入力 ]-->
+                    <!-- <input type="text" name="answer_texts[]" class="form-control" maxlength="50"
+                    v-model="options[0].answer_text" required> -->
                     <input type="text" name="answer_texts[]" class="form-control" maxlength="50"
-                    v-model="options[0].answer_text" required>
+                    v-model="answer_text" required>
 
 
                 </div>
@@ -80,11 +82,15 @@
 
                     <!--[ 正解ボタン ]-->
                     <div class="input-group-text overflow-hidden p-0">
-                        <input type="checkbox" class="btn-check" name="answer_booleans[]" :id="'answer_booleans'+key" autocomplete="off"
-                        disabled  :value="key" :checked="option.only"
+                        <input type="radio" class="btn-check" name="answer_booleans[]" :id="'answer_booleans'+key" autocomplete="off"
+                        :value="key" v-model="answer_radio"
                         >
-                        <label class="btn btn-outline-info border-0" :for="'answer_booleans'+key" style="border-radius:0;">
-                            <span v-if="option.only">正　解</span>
+
+                        <label class="btn btn-outline-info border-0" :for="'answer_booleans'+key" style="border-radius:0;"
+                            @click="changeRadioButton( answer_radio, key )"
+                        >
+                            <!-- <span v-if="option.only">正　解</span> -->
+                            <span v-if="answer_radio==key">正　解</span>
                             <span v-else            >不正解</span>
                         </label>
                     </div>
@@ -100,9 +106,9 @@
 
 
                     <!--[ 削除ボタン ]-->
-                    <div class="input-group-text" v-if="key != 0">
-                        <a href="" class="disabled text-danger" style="text-decoration:none;"
-                        @click.prevent="deleteInput(key)"
+                    <div class="input-group-text">
+                        <a href="" class="btn p-0 text-danger" style="text-decoration:none;"
+                        :class="{'disabled': answer_radio == key}"
                         >削除</a>
                     </div>
                 </div>
@@ -113,8 +119,10 @@
             <div v-if="answer_type == 2">
 
 
-                <!-- 最初のinput(key==0)は正解 -->
-                <input name="answer_booleans[]" type="hidden" value="0">
+                <!-- inputがdisableのとき -->
+                <div  v-if="answer_booleans.length<2">
+                    <input name="answer_booleans[]" type="hidden" :value="answer_booleans[0]">
+                </div>
 
 
                 複数の答えを選ぶ （50文字以内）
@@ -123,8 +131,11 @@
                     <div class="input-group-text  overflow-hidden  p-0">
 
                         <input type="checkbox" class="btn-check" name="answer_booleans[]" :id="'answer_booleans'+key" autocomplete="off"
-                        :disabled="option.only"  :value="key" v-model="answer_booleans"
+                        :disabled="(answer_booleans.length<2) && answer_booleans.includes(key)"
+                        @change="refreshRadiioChack(), refreshInputText()"
+                        :value="key" v-model="answer_booleans"
                         >
+
                         <label class="btn btn-outline-info border-0" :for="'answer_booleans'+key" style="border-radius:0;"
                             @click="changeButtonText(key)">
                             {{ option.button_text }}
@@ -142,11 +153,18 @@
 
 
                     <!--[ 削除ボタン ]-->
-                    <div class="input-group-text" v-if="key != 0">
+                    <!-- <div class="input-group-text" v-if="key != 0">
                         <a href="" class="disabled text-danger" style="text-decoration:none;"
                         @click.prevent="deleteInput(key)"
                         >削除</a>
+                    </div> -->
+                    <div class="input-group-text">
+                        <a href="" class="btn p-0 text-danger" style="text-decoration:none;"
+                        :class="{'disabled': (answer_booleans.length<2) && answer_booleans.includes(key)}"
+                        @click.prevent="deleteInput(key)"
+                        >削除</a>
                     </div>
+
                 </div>
                 <button type="button" class="btn btn-light border" @click="addInput">+ 選択肢の追加</button>
 
@@ -183,7 +201,9 @@
                     // { answer_text: '', only: false, button_text: '不正解', id: null},
                 ],
 
-                /* 正解ID */
+                /*各 正解ID */
+                answer_text: '',
+                answer_radio: 0,
                 answer_booleans: [0,],
 
             }
@@ -221,16 +241,29 @@
                 })
                 // [ 非同期通信・成功処理 ]
                 .then(json => {
+
                     /* 回答選択肢データのコピー */
                     this.options = json.options;
 
                     /* 正解IDデータのコピー */
                     this.answer_booleans = json.answer_booleans;
 
+
+
+                    // ラジオボタンの更新
+                    this.refreshRadiioChack();
+
+                    // テキスト入力の値を更新
+                    if(this.answer_type==0){
+                        this.refreshInputText();
+                    }
+
                 })
 
 
             }else{
+
+                this.answer_radio = 0;
 
                 this.options = [
                     { answer_text: '', only: true , button_text: '正　解', option_id: null},
@@ -244,27 +277,19 @@
         },
         methods:{
 
-            //選択肢の追加
+            /* 選択肢の追加 */
             addInput: function(){
 
                 this.options.push( { answer_boolean: false, answer_text: '', only: false, button_text: '不正解'} );
 
             },
 
-            //ボタンテキストの変更
-            changeButtonText: function(key){
-                const button_text = this.options[key].button_text;
-                if( button_text == '不正解' ){
-                    this.options[key].button_text    = '正　解';
-                    // this.options[key].answer_boolean = true;
-                }else{
-                    this.options[key].button_text    = '不正解';
-                    // this.options[key].answer_boolean = false;
-                }
-            },
-
-            //削除ボタン
+            /* 削除ボタン */
             deleteInput: function(key){
+
+                //answer_booleansの修正処理
+                if(this.answer_radio > key){ this.answer_radio -= 1; }
+
 
                 //optionsの削除処理
                 this.options.splice(key,1);
@@ -283,7 +308,67 @@
                     }
                 }
                 this.answer_booleans = array;
-            }
+
+            },
+
+            /* ボタンテキストの変更 */
+            changeButtonText: function(key){
+                const button_text = this.options[key].button_text;
+                if( button_text == '不正解' ){
+                    this.options[key].button_text    = '正　解';
+                    // this.options[key].answer_boolean = true;
+                }else{
+                    this.options[key].button_text    = '不正解';
+                    // this.options[key].answer_boolean = false;
+                }
+
+                // // ラジオボタンの更新
+                // this.refreshRadiioChack();
+
+            },
+
+
+            /* ラジオボタンの変更 */
+            changeRadioButton: function( old_key, key ){
+
+                // 前の正解を、不正解に変更
+                this.changeButtonText( old_key );
+                this.answer_booleans = this.answer_booleans.filter( val => { return val!=old_key } );
+
+
+                // 選択したラジオボタンが、チェックボックスでは選択されていないとき => 正解の追加
+                let cheack = this.answer_booleans.filter( val => { return val==key } );
+                // console.log( cheack.length );
+                if( cheack.length==0 ){
+                    this.changeButtonText( key );
+                    this.answer_booleans.push( key );
+                }
+
+            },
+
+
+
+            /* ラジオボタンの値を更新（チェックボックスの変更時等） */
+            refreshRadiioChack: function(){
+                // チェックオックスの並び替え
+                this.answer_booleans.sort((a,b) => (a < b ? -1 : 1));
+                // チェックボックスの最初の正解
+                this.answer_radio = this.answer_booleans[0];
+            },
+
+            /* テキスト入力の値を更新 */
+            refreshInputText: function(){
+                let key = this.answer_radio;
+                this.answer_text = this.options[key].answer_text;
+            },
+
+
         }
     }
 </script>
+<style>
+    .btn:hover{
+        background: #fff;
+        color: #28abbd;
+    }
+</style>

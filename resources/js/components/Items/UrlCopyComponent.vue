@@ -1,22 +1,25 @@
 <template>
     <div>
-        <div class="input-group border" style=" border-radius:5px;">
-            <input type="text" class="form-control border-0" style="font-size:11px;"
-            :value="copy_url"  disabled >
+        <div class="">
+            <!-- <input type="text" class="form-control border-0" style="font-size:11px;"
+            :value="copy_url"  disabled > -->
 
 
 
 
             <button v-if=" !disabled "
-            class="btn bg-white btn-sm border-white" type="button" style="font-size:11px;"
+            class="btn bg-white btn-sm border-secondary w-100 text-secondary" type="button" style="font-size:11px;"
             data-bs-toggle="tooltip" data-bs-placement="bottom" title="URLのコピー"
             @click="copy(copy_url)"
-            ><i class="bi bi-files"></i>コピー
+            >
+                <!-- <i class="bi bi-link-45deg"></i> -->
+                URLコピー
+
             </button>
 
 
             <button v-else disabled
-            class="btn bg-white btn-sm border-success text-success" type="button" style="font-size:11px;"
+            class="btn bg-white btn-sm border-success text-success w-100" type="button" style="font-size:11px;"
             ><i class="bi bi-check"></i>　完了
             </button>
         </div>
@@ -24,16 +27,6 @@
 </template>
 
 <script>
-    /*
-    --------------------------------------------------------------------------
-        [ 使い方 ]
-        <submit-button-component
-            style_class="btn btn-danger" // スタイルクラスの指定
-            text="確定"                  // ボタンテキストの指定
-        />
-    --------------------------------------------------------------------------
-    */
-
     export default {
         data : function() {
             return{

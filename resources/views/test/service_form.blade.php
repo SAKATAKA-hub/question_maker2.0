@@ -243,12 +243,12 @@
 
 
             お問い合わせコンポーネント
-            <contact-list-component
+            {{-- <contact-list-component
             route_list="{{     route('contact.list.api')}}"
             route_responsed="{{route('contact.responsed.api')}}"
             rote_destoroy="{{  route('contact.destory.api')}}"
             app_key="{{env('APP_KEY')}}"
-            ></contact-list-component>
+            ></contact-list-component> --}}
 
             route_list: {{     route('contact.list.api')}} <br>
             route_responsed: {{route('contact.responsed.api')}} <br>
@@ -321,6 +321,34 @@
 
                     tab04
                 </div>
+
+            </div>
+        </div>
+
+
+        <div class="card card-body mb-3">
+            <h5>シェアボタン</h5>
+            @php
+                $url = 'https://www.google.com/';
+                $title ='グーグルテスト';
+            @endphp
+            <div class="d-flex gap-2">
+
+                <a href="http://www.facebook.com/share.php?u={{$url}}" target="_blank"
+                class="btn btn-sm flex-fill" style="color:#3578E5; border-color:#3578E5;"
+                >Facebook</a>
+
+                <a href="http://twitter.com/share?text={{$title}}&url={{$url}}" rel="nofollow"
+                class="btn btn-sm flex-fill" style="color:#1DA1F2; border-color:#1DA1F2;"
+                >Twitter</a>
+
+                <a href="http://b.hatena.ne.jp/add?mode=confirm&url={{$url}}" rel="nofollow" target="_blank"
+                class="btn btn-sm flex-fill" style="color:#009fd7; border-color:#009fd7;"
+                >はてブ</a>
+
+                <a href="https://social-plugins.line.me/lineit/share?url=http://twitter.com/share?text={{$title}}" target="_blank"
+                class="btn btn-sm flex-fill" style="color:#01ba01; border-color:#01ba01;"
+                >Line</a>
 
             </div>
         </div>

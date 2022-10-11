@@ -53,7 +53,7 @@
 
 <!----- contents ----->
 @section('contents')
-<section>
+<section class="bg-light">
     <div class="container-1200 pt-5">
 
 
@@ -61,7 +61,9 @@
         <form action="{{ route('make_question_group.store' ) }}"
         method="POST" enctype="multipart/form-data" onsubmit="stopOnbeforeunload()">
             @csrf
-            <div class="card  shadow border-success border-2 mb-5">
+            {{-- <div class="card  shadow border-success border-2 mb-5"> --}}
+            <div class="mb-5">
+
                 <div class="card-header bg-success text-white d-md-flex">
                     <h5 class="mb-0 card-title">『基本情報』を登録しよう！</h5>
                 </div>
@@ -81,7 +83,8 @@
 
         @endif
 
-            <div class="card mb-5 card-body border-0 shadow">
+            {{-- <div class="card  card-body border-0 shadow mb-5"> --}}
+            <div class="mb-5">
 
                 <!-- タイトル -->
                 <div class="form-group mb-4 card card-body border-success">

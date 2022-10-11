@@ -148,7 +148,7 @@ id="seachOffcanvas" aria-labelledby="seachOffcanvasLabel">
 
 
 <!-- Bottom menu(mobile) -->
-<ul class="nav justify-content-between  d-sm-none text-center text-success w-100 position-fixed bottom-0"
+<ul class="nav justify-content-between  d-sm-none text-center text-info w-100 position-fixed bottom-0"
 style="z-index:10; background-color:rgb(255, 255, 255,.9);">
     <li class="nav-item" style="flex:1;">
         <a class="nav-link text-reset" aria-current="page" href="{{ route('home')}}">
