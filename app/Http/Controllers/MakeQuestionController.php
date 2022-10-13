@@ -103,7 +103,7 @@ class MakeQuestionController extends Controller
             'commentary_text' => $request->commentary_text,
         ]);
         $question->save();
-
+        $request->session()->regenerateToken(); //二重投稿防止
 
 
         # 解答選択肢の新規作成
@@ -235,9 +235,17 @@ class MakeQuestionController extends Controller
             $input_file_name = 'image';             //インプットファイルのname
             $old_image_path = $question->image;
             $image_path = null;
+            $delete = $request->image_dalete;
 
+            /* 画像削除の時 */
+            if( isset($delete) )
+            {
+                $delete_path = $old_image_path;
+                if( Storage::exists( $delete_path ) ){ storage::delete( $delete_path ); }
+                $image_path = null;
+            }
             /* アップロードする画像があるとき、画像のアップロード*/
-            if( $request_file = $request->file( $input_file_name ) )
+            elseif( $request_file = $request->file( $input_file_name ) )
             {
                 // ファイルのアップロード
                 $image_path =  $request->file( $input_file_name )->store($dir);
@@ -265,9 +273,17 @@ class MakeQuestionController extends Controller
             $input_file_name = 'commentary_image';             //インプットファイルのname
             $old_commentary_image_path = $question->commentary_image;
             $commentary_image_path = null;
+            $delete = $request->commentary_image_dalete;
 
+            /* 画像削除の時 (解説画像削除 or 解説文==null)*/
+            if( isset($delete) || empty($request->commentary_text)   )
+            {
+                $delete_path = $old_image_path;
+                if( Storage::exists( $delete_path ) ){ storage::delete( $delete_path ); }
+                $image_path = null;
+            }
             /* アップロードする画像があるとき、画像のアップロード*/
-            if( $request_file = $request->file( $input_file_name ) )
+            elseif( $request_file = $request->file( $input_file_name ) )
             {
                 // ファイルのアップロード
                 $commentary_image_path =  $request->file( $input_file_name )->store($dir);
@@ -484,8 +500,10 @@ class MakeQuestionController extends Controller
 
 
         # 問題集の編集ヶ所選択ページへリダイレクト
-        return redirect()->route('make_question_group.select_edit', $question_group)
+        $param = ['question_group'=> $question_group->id, 'tab_menu'=>'tab02',];
+        return redirect()->route('make_question_group.select_edit', $param)
         ->with('alert-danger','問題を1件削除しました。');
+
     }
 
 

@@ -56,7 +56,7 @@ class Question extends Model
         public function getImagePuthAttribute(){
 
             //画像無し時の画像パス
-            $no_image = 'site/image/no_image.png';
+            $no_image = 'site/image/no_image2.png';
 
             return Storage::exists( $this->image ) ? $this->image : $no_image;
         }
@@ -84,7 +84,8 @@ class Question extends Model
         public function getCommentaryImagePuthAttribute(){
 
             //画像無し時の画像パス
-            $no_image = 'site/image/no_image.png';
+            $no_image = 'site/image/no_image2.png';
+
 
             return Storage::exists( $this->commentary_image ) ? $this->commentary_image : $no_image;
         }

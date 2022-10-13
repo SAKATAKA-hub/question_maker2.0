@@ -8,6 +8,15 @@
 
     <title>{{$question_group->title}}</title>
 
+    <meta  name="description" content="{{$question_group->title}}">
+    <meta property="og:title" content="{{$question_group->title}}" />
+    <meta property="og:description" content="{{$question_group->resume_text}}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content=" {{url()->current()}}" />
+    <meta property="og:image" content="{{ asset('storage/'.$question_group->image_puth) }}" />
+    <meta property="og:site_name" content="もんだいDIYパーク" />
+    <meta property="og:locale" content="ja_JP"  />
+
 
     <!-- 基本CSS -->
     @include('_parts.meta_css')

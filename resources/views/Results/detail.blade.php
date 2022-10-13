@@ -384,7 +384,7 @@
                                 </div>
                                 <div class="d-flex">
                                     <div class="col-4 ps-3 bg-light">受験回数</div>
-                                    <div class="col-8 ps-3">{{$question_group->answer_groups->count()}}回</div>
+                                    <div class="col-8 ps-3">{{$question_group->accessed_count}}回</div>
                                 </div>
                                 <div class="d-flex">
                                     <div class="col-4 ps-3 bg-light">平均点</div>

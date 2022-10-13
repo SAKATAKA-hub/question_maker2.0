@@ -8,19 +8,19 @@
 
 
             <button v-if=" !disabled "
-            class="btn bg-white btn-sm border-secondary w-100 text-secondary" type="button" style="font-size:11px;"
+            class="btn bg-light btn-sm border-secondary w-100 text-secondary" type="button" style="font-size:11px;"
             data-bs-toggle="tooltip" data-bs-placement="bottom" title="URLのコピー"
             @click="copy(copy_url)"
             >
-                <!-- <i class="bi bi-link-45deg"></i> -->
+                <i class="bi bi-link-45deg me-2"></i>
                 URLコピー
 
             </button>
 
 
             <button v-else disabled
-            class="btn bg-white btn-sm border-success text-success w-100" type="button" style="font-size:11px;"
-            ><i class="bi bi-check"></i>　完了
+            class="btn text-white btn-sm border-success bg-success w-100" type="button" style="font-size:11px;"
+            ><i class="bi bi-check me-2"></i>完　了
             </button>
         </div>
     </div>

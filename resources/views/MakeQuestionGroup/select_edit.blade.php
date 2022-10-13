@@ -209,9 +209,9 @@
                                             </div>
                                             <div class="d-flex">
                                                 <div class="col-4 ps-3 bg-light">受験回数</div>
-                                                <div class="col-8 ps-3">{{$question_group->answer_groups->count()}}回</div>
+                                                <div class="col-8 ps-3">{{$question_group->accessed_count}}回</div>
                                             </div>
-                                            <div class="d-flex">
+                                                    <div class="d-flex">
                                                 <div class="col-4 ps-3 bg-light">平均点</div>
                                                 <div class="col-8 ps-3">{{sprintf('%.1f',$question_group->average_score)}}点</div>
                                             </div>
@@ -228,7 +228,6 @@
                                 <div class="mb-5">
                                     <div class="row">
                                         <!-- サムネ画像 -->
-                                        @if ($question_group->image)
                                         <div class="col-md-4 order-md-2">
                                             <div class="my-3">
                                                 <span class="text-success fw-bold">サムネ画像</span>
@@ -241,7 +240,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        @endif
 
                                         <div class="col-md-8">
                                             <!-- 問題集のタイトル -->
@@ -417,7 +415,7 @@
                                             <div class="modal-body">
                                                 <strong>問題 {{sprintf('%02d', $question->order )}}</strong>を削除します。<br>
                                                 <strong>本当に、削除してもよろしいですか？</strong><br>
-                                                ※公開中の問題集の問題数が<strong>"0問"</strong>になると、自動的に公開設定が<strong>”非公開”</strong>となります。<br>
+                                                {{-- ※公開中の問題集の問題数が<strong>"0問"</strong>になると、自動的に公開設定が<strong>”非公開”</strong>となります。<br> --}}
 
                                             </div>
                                             <div class="modal-footer">
@@ -575,8 +573,17 @@
                     </div>
                 </div>
 
+                <div class="mt-5 mb-5">
+                    <div class="d-grid gap-2 col-md-4 mx-auto">
 
-            </div>
+                        <!-- 問題集一覧へ戻る -->
+                        <a href="{{ route('make_question_group.list') }}"
+                        class="btn btn-secondary btn-lg rounded-pill fs-5 w-100">作成した問題集一覧</a>
+
+                    </div>
+                </div>
+
+            </div><!-- end 中央コンテンツ -->
         </div>
 
 

@@ -171,18 +171,20 @@ class QuestionGroup extends Model
         }
 
 
-        /**
-         * 平均点 $question_group->average_score
-         * @return String
-        */
-        public function getAverageScoreAttribute(){
+        // /**
+        //  * 平均点 $question_group->average_score
+        //  * @return String
+        // */
+        // public function getAverageScoreAttribute(){
 
-            $total_score = $this->answer_groups->sum('score'); //合計点
-            $count = $this->answer_groups->count(); //受検者数
+        //     return $this->average_score ? $this->average_score : '---';
 
-            // 受検者数0のときは、'---'を表示、それ以外は'平均点'を表示
-            return  $count ? round( $total_score / $count , 1 ) : '---';
-        }
+        //     // $total_score = $this->answer_groups->sum('score'); //合計点
+        //     // $count = $this->answer_groups->count(); //受検者数
+
+        //     // // 受検者数0のときは、'---'を表示、それ以外は'平均点'を表示
+        //     // return  $count ? round( $total_score / $count , 1 ) : '---';
+        // }
 
 
     //

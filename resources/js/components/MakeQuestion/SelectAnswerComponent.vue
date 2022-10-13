@@ -50,7 +50,7 @@
                         <input type="checkbox" class="btn-check" name="answer_booleans[]" id="answer_booleans0" autocomplete="off"
                         disabled  value="0" checked
                         >
-                        <label class="btn btn-outline-info border-0" for="answer_booleans0" style="border-radius:0;">
+                        <label class="btn action-btn btn-outline-info border-0" for="answer_booleans0" style="border-radius:0;">
                             <span>正　解</span>
                         </label>
                     </div>
@@ -75,7 +75,7 @@
 
 
                 <!-- 最初のinput(key==0)は正解 -->
-                <input name="answer_booleans[]" type="hidden" value="0">
+                <!-- <input name="answer_booleans[]" type="hidden" value="0"> -->
 
                 ひとつの答えを選ぶ （50文字以内）
                 <div class="input-group mb-2" v-for="(option, key) in options" :key="key">
@@ -86,7 +86,7 @@
                         :value="key" v-model="answer_radio"
                         >
 
-                        <label class="btn btn-outline-info border-0" :for="'answer_booleans'+key" style="border-radius:0;"
+                        <label class="btn action-btn btn-outline-info border-0" :for="'answer_booleans'+key" style="border-radius:0;"
                             @click="changeRadioButton( answer_radio, key )"
                         >
                             <!-- <span v-if="option.only">正　解</span> -->
@@ -109,8 +109,10 @@
                     <div class="input-group-text">
                         <a href="" class="btn p-0 text-danger" style="text-decoration:none;"
                         :class="{'disabled': answer_radio == key}"
+                        @click.prevent="deleteInput(key)"
                         >削除</a>
                     </div>
+
                 </div>
                 <button type="button" class="btn btn-light border" @click="addInput">+ 選択肢の追加</button>
 
@@ -136,7 +138,7 @@
                         :value="key" v-model="answer_booleans"
                         >
 
-                        <label class="btn btn-outline-info border-0" :for="'answer_booleans'+key" style="border-radius:0;"
+                        <label class="btn action-btn btn-outline-info border-0" :for="'answer_booleans'+key" style="border-radius:0;"
                             @click="changeButtonText(key)">
                             {{ option.button_text }}
                         </label>
@@ -153,11 +155,6 @@
 
 
                     <!--[ 削除ボタン ]-->
-                    <!-- <div class="input-group-text" v-if="key != 0">
-                        <a href="" class="disabled text-danger" style="text-decoration:none;"
-                        @click.prevent="deleteInput(key)"
-                        >削除</a>
-                    </div> -->
                     <div class="input-group-text">
                         <a href="" class="btn p-0 text-danger" style="text-decoration:none;"
                         :class="{'disabled': (answer_booleans.length<2) && answer_booleans.includes(key)}"
@@ -367,7 +364,7 @@
     }
 </script>
 <style>
-    .btn:hover{
+    .action-btn:hover{
         background: #fff;
         color: #28abbd;
     }

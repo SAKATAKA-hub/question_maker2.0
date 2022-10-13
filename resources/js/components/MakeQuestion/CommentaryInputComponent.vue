@@ -13,7 +13,7 @@
 
 
                 <label for="commentary_image" class="form-check-label mb-2 fw-bold">解説画像</label>
-                <read-image-file-component :img_path="img_path" alt="解説画像" name="commentary_image"></read-image-file-component>
+                <read-image-file-component :img_path="img_path" :noimg_path="noimg_path" alt="解説画像" name="commentary_image"></read-image-file-component>
                 <div class="form-text">※ファイルは10Mバイト以内で、jpeg・jpg・pngのいずれかの形式を選択してください。</div>
 
             </div>
@@ -45,6 +45,7 @@
 
             display_switch: { type: String, default: '', },
             img_path:       { type: String, default: '', }, //表示画像のパス
+            noimg_path:       { type: String, default: '', }, //表示画像のパス
             text:           { type: String, default: '', },
 
         },

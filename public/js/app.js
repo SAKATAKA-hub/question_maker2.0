@@ -5603,6 +5603,11 @@ __webpack_require__.r(__webpack_exports__);
       "default": ''
     },
     //表示画像のパス
+    noimg_path: {
+      type: String,
+      "default": ''
+    },
+    //表示画像のパス
     text: {
       type: String,
       "default": ''
@@ -5615,6 +5620,468 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     change: function change() {
       console.log(this.inputs.display_switch);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MakeQuestion/MakeQuestionFormComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MakeQuestion/MakeQuestionFormComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      // 送信の制御
+      submit_disabled: false,
+      question: {
+        count: 0,
+        num: 0
+      },
+      inputs: {
+        text: ''
+      }
+    };
+  },
+  props: {
+    // 送信形式：　新規作成(stoer),更新(update)
+    form_style: {
+      type: String,
+      "default": 'store'
+    },
+    token: {
+      type: String,
+      "default": ''
+    },
+    url_action: {
+      type: String,
+      "default": ''
+    },
+    //表示画像のパス
+    url_back: {
+      type: String,
+      "default": ''
+    },
+    //表示画像のパス
+    questions_count: {
+      type: String,
+      "default": ''
+    },
+    //問題数
+    question_num: {
+      type: String,
+      "default": ''
+    },
+    //問題番号
+    input_text: {
+      type: String,
+      "default": ''
+    },
+    //問題文
+    img_path: {
+      type: String,
+      "default": ''
+    },
+    //画像パス
+    noimg_path: {
+      type: String,
+      "default": ''
+    },
+    //画像なし画像パス
+    commentary_img_path: {
+      type: String,
+      "default": ''
+    },
+    //解説画像
+    commentary_text: {
+      type: String,
+      "default": ''
+    },
+    //解説文
+    // 解答選択肢
+    select_answer_type_num: {
+      type: String,
+      "default": '1'
+    },
+    select_answer_question_id: {
+      type: String,
+      "default": ''
+    },
+    select_answer_api_route: {
+      type: String,
+      "default": ''
+    }
+  },
+  mounted: function mounted() {
+    this.question.count = this.questions_count;
+    this.question.num = this.question_num;
+    this.inputs.text = this.input_text;
+  },
+  methods: {
+    /* 送信ボタンを押したとき */
+    submit: function submit() {
+      this.submit_disabled = true;
+      console.log('submit');
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MakeQuestion/MakeQuestionGroupFormComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MakeQuestion/MakeQuestionGroupFormComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      // 送信の制御
+      submit_disabled: false,
+      inputs: {
+        title: '',
+        resume: '',
+        tags: '',
+        time_h: '',
+        time_m: '',
+        time_s: ''
+      }
+    };
+  },
+  props: {
+    // 送信形式：　新規作成(stoer),更新(update)
+    form_style: {
+      type: String,
+      "default": 'store'
+    },
+    token: {
+      type: String,
+      "default": ''
+    },
+    url_action: {
+      type: String,
+      "default": ''
+    },
+    //表示画像のパス
+    url_back: {
+      type: String,
+      "default": ''
+    },
+    //表示画像のパス
+    input_title: {
+      type: String,
+      "default": ''
+    },
+    //問題集のタイトル
+    input_resume: {
+      type: String,
+      "default": ''
+    },
+    //説明文
+    input_tags: {
+      type: String,
+      "default": ''
+    },
+    //タグ
+    img_path: {
+      type: String,
+      "default": ''
+    },
+    //画像パス
+    noimg_path: {
+      type: String,
+      "default": ''
+    },
+    //画像なし画像パス
+    input_time_h: {
+      type: String,
+      "default": ''
+    },
+    //制限時間[時]
+    input_time_m: {
+      type: String,
+      "default": ''
+    },
+    //制限時間[分}
+    input_time_s: {
+      type: String,
+      "default": ''
+    } //制限時間[秒]
+
+  },
+  mounted: function mounted() {
+    this.inputs.title = this.input_title;
+    this.inputs.resume = this.input_resume;
+    this.inputs.time_h = this.input_time_h;
+    this.inputs.time_m = this.input_time_m;
+    this.inputs.time_s = this.input_time_s;
+    this.inputs.tags = this.input_tags;
+  },
+  methods: {
+    /* 送信ボタンを押したとき */
+    submit: function submit() {
+      this.submit_disabled = true;
+      console.log('submit');
     }
   }
 });
@@ -5647,6 +6114,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -5654,7 +6139,10 @@ __webpack_require__.r(__webpack_exports__);
       src: null,
 
       /* エラーメッセージ */
-      err_message: ''
+      err_message: '',
+
+      /* 削除 */
+      delete_radio: null
     };
   },
   props: {
@@ -5663,11 +6151,15 @@ __webpack_require__.r(__webpack_exports__);
       "default": ''
     },
     //表示画像のパス
+    noimg_path: {
+      type: String,
+      "default": ''
+    },
+    //画像無しのパス
     alt: {
       type: String,
       "default": 'サムネ画像'
     },
-    //表示画像のパス
     name: {
       type: String,
       "default": 'image'
@@ -5677,24 +6169,31 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     //プロップの値をデータに保存 ※プロップの値は直接変更できないので、データに保存
     this.src = this.img_path;
+    this.delete_radio = this.img_path == this.noimg_path ? 'delete' : null;
   },
   methods: {
     onChange: function onChange(event) {
       var file = event.target.files[0];
-      var input_file = document.getElementById('file_input'); // console.log( input_file.value );
-      // this.src = URL.createObjectURL(file);
+      var input_file = document.getElementById('file_input' + this.name);
 
       if ( //ファイル形式
       (file.type === 'image/jpeg' || file.type === 'image/png') && //ファイルサイズ
       file.size < 10 * 1000 * 1000) {
         this.src = URL.createObjectURL(file); //表示画像の変更
 
-        this.err_message = '';
+        this.err_message = ''; // 削除チェックを外す
+
+        this.delete_radio = null;
       } else {
         this.src = this.img_path;
         this.err_message = '※エラー：ファイルサイズか形式が異なります。';
         input_file.value = ''; //インプット要素内を空にする。
       }
+    },
+    delete_image: function delete_image() {
+      this.src = this.noimg_path;
+      var input_file = document.getElementById('file_input' + this.name);
+      input_file.value = ''; //インプット要素内を空にする。
     }
   }
 });
@@ -5712,9 +6211,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
 //
 //
 //
@@ -9358,6 +9854,8 @@ Vue.component('count-down-timer-component', (__webpack_require__(/*! ./component
 Vue.component('count-up-timer-component', (__webpack_require__(/*! ./components/PlayQuestion/CountUpTimerComponent.vue */ "./resources/js/components/PlayQuestion/CountUpTimerComponent.vue")["default"]));
 /* 問題作成 */
 
+Vue.component('make-question-group-form-component', (__webpack_require__(/*! ./components/MakeQuestion/MakeQuestionGroupFormComponent.vue */ "./resources/js/components/MakeQuestion/MakeQuestionGroupFormComponent.vue")["default"]));
+Vue.component('make-question-form-component', (__webpack_require__(/*! ./components/MakeQuestion/MakeQuestionFormComponent.vue */ "./resources/js/components/MakeQuestion/MakeQuestionFormComponent.vue")["default"]));
 Vue.component('commentary-input-component', (__webpack_require__(/*! ./components/MakeQuestion/CommentaryInputComponent.vue */ "./resources/js/components/MakeQuestion/CommentaryInputComponent.vue")["default"]));
 Vue.component('read-image-file-component', (__webpack_require__(/*! ./components/MakeQuestion/ReadImageFileComponent.vue */ "./resources/js/components/MakeQuestion/ReadImageFileComponent.vue")["default"]));
 Vue.component('select-answer-component', (__webpack_require__(/*! ./components/MakeQuestion/SelectAnswerComponent.vue */ "./resources/js/components/MakeQuestion/SelectAnswerComponent.vue")["default"]));
@@ -14474,7 +14972,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn:hover{\n    background: #fff;\n    color: #28abbd;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.action-btn:hover{\n    background: #fff;\n    color: #28abbd;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -32681,6 +33179,84 @@ component.options.__file = "resources/js/components/MakeQuestion/CommentaryInput
 
 /***/ }),
 
+/***/ "./resources/js/components/MakeQuestion/MakeQuestionFormComponent.vue":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/MakeQuestion/MakeQuestionFormComponent.vue ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _MakeQuestionFormComponent_vue_vue_type_template_id_fa0fa096___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MakeQuestionFormComponent.vue?vue&type=template&id=fa0fa096& */ "./resources/js/components/MakeQuestion/MakeQuestionFormComponent.vue?vue&type=template&id=fa0fa096&");
+/* harmony import */ var _MakeQuestionFormComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MakeQuestionFormComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/MakeQuestion/MakeQuestionFormComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _MakeQuestionFormComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _MakeQuestionFormComponent_vue_vue_type_template_id_fa0fa096___WEBPACK_IMPORTED_MODULE_0__.render,
+  _MakeQuestionFormComponent_vue_vue_type_template_id_fa0fa096___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/MakeQuestion/MakeQuestionFormComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/MakeQuestion/MakeQuestionGroupFormComponent.vue":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/MakeQuestion/MakeQuestionGroupFormComponent.vue ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _MakeQuestionGroupFormComponent_vue_vue_type_template_id_84b8c124___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MakeQuestionGroupFormComponent.vue?vue&type=template&id=84b8c124& */ "./resources/js/components/MakeQuestion/MakeQuestionGroupFormComponent.vue?vue&type=template&id=84b8c124&");
+/* harmony import */ var _MakeQuestionGroupFormComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MakeQuestionGroupFormComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/MakeQuestion/MakeQuestionGroupFormComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _MakeQuestionGroupFormComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _MakeQuestionGroupFormComponent_vue_vue_type_template_id_84b8c124___WEBPACK_IMPORTED_MODULE_0__.render,
+  _MakeQuestionGroupFormComponent_vue_vue_type_template_id_84b8c124___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/MakeQuestion/MakeQuestionGroupFormComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/MakeQuestion/ReadImageFileComponent.vue":
 /*!*************************************************************************!*\
   !*** ./resources/js/components/MakeQuestion/ReadImageFileComponent.vue ***!
@@ -33370,6 +33946,38 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/MakeQuestion/MakeQuestionFormComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/MakeQuestion/MakeQuestionFormComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MakeQuestionFormComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MakeQuestionFormComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MakeQuestion/MakeQuestionFormComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MakeQuestionFormComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/MakeQuestion/MakeQuestionGroupFormComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/js/components/MakeQuestion/MakeQuestionGroupFormComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MakeQuestionGroupFormComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MakeQuestionGroupFormComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MakeQuestion/MakeQuestionGroupFormComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MakeQuestionGroupFormComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/MakeQuestion/ReadImageFileComponent.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************!*\
   !*** ./resources/js/components/MakeQuestion/ReadImageFileComponent.vue?vue&type=script&lang=js& ***!
@@ -33760,6 +34368,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CommentaryInputComponent_vue_vue_type_template_id_1c2f6148___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CommentaryInputComponent_vue_vue_type_template_id_1c2f6148___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CommentaryInputComponent.vue?vue&type=template&id=1c2f6148& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MakeQuestion/CommentaryInputComponent.vue?vue&type=template&id=1c2f6148&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/MakeQuestion/MakeQuestionFormComponent.vue?vue&type=template&id=fa0fa096&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/components/MakeQuestion/MakeQuestionFormComponent.vue?vue&type=template&id=fa0fa096& ***!
+  \***********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MakeQuestionFormComponent_vue_vue_type_template_id_fa0fa096___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MakeQuestionFormComponent_vue_vue_type_template_id_fa0fa096___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MakeQuestionFormComponent_vue_vue_type_template_id_fa0fa096___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MakeQuestionFormComponent.vue?vue&type=template&id=fa0fa096& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MakeQuestion/MakeQuestionFormComponent.vue?vue&type=template&id=fa0fa096&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/MakeQuestion/MakeQuestionGroupFormComponent.vue?vue&type=template&id=84b8c124&":
+/*!****************************************************************************************************************!*\
+  !*** ./resources/js/components/MakeQuestion/MakeQuestionGroupFormComponent.vue?vue&type=template&id=84b8c124& ***!
+  \****************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MakeQuestionGroupFormComponent_vue_vue_type_template_id_84b8c124___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MakeQuestionGroupFormComponent_vue_vue_type_template_id_84b8c124___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MakeQuestionGroupFormComponent_vue_vue_type_template_id_84b8c124___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MakeQuestionGroupFormComponent.vue?vue&type=template&id=84b8c124& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MakeQuestion/MakeQuestionGroupFormComponent.vue?vue&type=template&id=84b8c124&");
 
 
 /***/ }),
@@ -34261,7 +34903,7 @@ var render = function () {
             "button",
             {
               staticClass:
-                "btn bg-white btn-sm border-secondary w-100 text-secondary",
+                "btn bg-light btn-sm border-secondary w-100 text-secondary",
               staticStyle: { "font-size": "11px" },
               attrs: {
                 type: "button",
@@ -34275,19 +34917,22 @@ var render = function () {
                 },
               },
             },
-            [_vm._v("\n            URLコピー\n\n        ")]
+            [
+              _c("i", { staticClass: "bi bi-link-45deg me-2" }),
+              _vm._v("\n            URLコピー\n\n        "),
+            ]
           )
         : _c(
             "button",
             {
               staticClass:
-                "btn bg-white btn-sm border-success text-success w-100",
+                "btn text-white btn-sm border-success bg-success w-100",
               staticStyle: { "font-size": "11px" },
               attrs: { disabled: "", type: "button" },
             },
             [
-              _c("i", { staticClass: "bi bi-check" }),
-              _vm._v("　完了\n        "),
+              _c("i", { staticClass: "bi bi-check me-2" }),
+              _vm._v("完　了\n        "),
             ]
           ),
     ]),
@@ -34392,6 +35037,7 @@ var render = function () {
               _c("read-image-file-component", {
                 attrs: {
                   img_path: _vm.img_path,
+                  noimg_path: _vm.noimg_path,
                   alt: "解説画像",
                   name: "commentary_image",
                 },
@@ -34471,6 +35117,701 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MakeQuestion/MakeQuestionFormComponent.vue?vue&type=template&id=fa0fa096&":
+/*!**************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MakeQuestion/MakeQuestionFormComponent.vue?vue&type=template&id=fa0fa096& ***!
+  \**************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "form",
+      {
+        attrs: {
+          action: _vm.url_action,
+          method: "POST",
+          enctype: "multipart/form-data",
+          onsubmit: "stopOnbeforeunload()",
+        },
+        on: { submit: _vm.submit },
+      },
+      [
+        _c("input", {
+          attrs: { type: "hidden", name: "_token" },
+          domProps: { value: _vm.token },
+        }),
+        _vm._v(" "),
+        _vm.form_style == "update"
+          ? _c("input", {
+              attrs: { type: "hidden", name: "_method", value: "patch" },
+            })
+          : _vm._e(),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group mb-4 card card-body border-info" },
+          [
+            _c(
+              "label",
+              {
+                staticClass: "form-check-label fs-5 mb-2 fw-bold",
+                attrs: { for: "order_input" },
+              },
+              [_vm._v("出題の順番")]
+            ),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                staticClass: "form-select",
+                attrs: { name: "order", id: "order_input" },
+              },
+              [
+                _vm._l(Number(_vm.question.count), function (index) {
+                  return _c(
+                    "option",
+                    {
+                      key: index,
+                      domProps: {
+                        value: index,
+                        selected: _vm.question.num == index,
+                      },
+                    },
+                    [_vm._v(_vm._s(index + "問目"))]
+                  )
+                }),
+                _vm._v("{}\n\n            "),
+              ],
+              2
+            ),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group mb-4 card card-body border-info" },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inputs.text,
+                  expression: "inputs.text",
+                },
+              ],
+              staticClass: "form-control",
+              attrs: {
+                name: "text",
+                id: "text",
+                rows: "8",
+                placeholder: "問題文を入力してください。",
+                required: "",
+              },
+              domProps: { value: _vm.inputs.text },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.inputs, "text", $event.target.value)
+                },
+              },
+            }),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group mb-4 card card-body border-info" },
+          [
+            _c("select-answer-component", {
+              attrs: {
+                answer_type_num: _vm.select_answer_type_num,
+                question_id: _vm.select_answer_question_id,
+                token: _vm.token,
+                api_route: _vm.select_answer_api_route,
+              },
+            }),
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group mb-4 card card-body border-info" },
+          [
+            _c(
+              "label",
+              {
+                staticClass: "form-check-label fs-5 mb-2 fw-bold",
+                attrs: { for: "exampleFormControlInput1" },
+              },
+              [_vm._v("問題画像")]
+            ),
+            _vm._v(" "),
+            _c("read-image-file-component", {
+              attrs: {
+                img_path: _vm.img_path,
+                noimg_path: _vm.noimg_path,
+                alt: "問題画像",
+              },
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-text" }, [
+              _vm._v(
+                "※ファイルは10Mバイト以内で、jpeg・jpg・pngのいずれかの形式を選択してください。"
+              ),
+            ]),
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "form-group mb-4 card card-body border-info bg-light-success",
+          },
+          [
+            _c(
+              "label",
+              {
+                staticClass: "form-check-label fs-5 mb-2 fw-bold",
+                attrs: { for: "exampleFormControlInput1" },
+              },
+              [_vm._v("解説")]
+            ),
+            _vm._v(" "),
+            _c("p", { staticClass: "callout callout-info" }, [
+              _vm._v(
+                "\n                問題集の受検後の成績発表時に、『解説』を表示させることができます。\n            "
+              ),
+            ]),
+            _vm._v(" "),
+            _c("commentary-input-component", {
+              attrs: {
+                img_path: _vm.commentary_img_path,
+                noimg_path: _vm.noimg_path,
+                text: _vm.commentary_text,
+              },
+            }),
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "my-5" }, [
+          _c("div", { staticClass: "d-grid gap-2 col-md-4 mx-auto" }, [
+            !_vm.submit_disabled
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-info btn-lg rounded-pill fs-5 w-100",
+                    attrs: { type: "submit" },
+                  },
+                  [_vm._v("登録・更新")]
+                )
+              : _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-info btn-lg rounded-pill fs-5 w-100",
+                    attrs: { type: "submit", disabled: "" },
+                  },
+                  [_vm._v("送信中・・・")]
+                ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-secondary btn-lg rounded-pill fs-5 w-100",
+                attrs: { href: _vm.url_back },
+              },
+              [_vm._v("戻る")]
+            ),
+          ]),
+        ]),
+      ]
+    ),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "text" } }, [
+      _c("span", { staticClass: "form-check-label fs-5 mb-2 fw-bold" }, [
+        _vm._v("問題文"),
+      ]),
+      _vm._v(" "),
+      _c(
+        "span",
+        {
+          staticClass: "badge bg-danger",
+          staticStyle: { transform: "translateY(-3px)" },
+        },
+        [_vm._v("必須")]
+      ),
+    ])
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MakeQuestion/MakeQuestionGroupFormComponent.vue?vue&type=template&id=84b8c124&":
+/*!*******************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MakeQuestion/MakeQuestionGroupFormComponent.vue?vue&type=template&id=84b8c124& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.form_style == "store"
+      ? _c("div", { staticClass: "mb-5" }, [_vm._m(0), _vm._v(" "), _vm._m(1)])
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "form",
+      {
+        attrs: {
+          action: _vm.url_action,
+          method: "POST",
+          enctype: "multipart/form-data",
+          onsubmit: "stopOnbeforeunload()",
+        },
+        on: { submit: _vm.submit },
+      },
+      [
+        _c("input", {
+          attrs: { type: "hidden", name: "_token" },
+          domProps: { value: _vm.token },
+        }),
+        _vm._v(" "),
+        _vm.form_style == "update"
+          ? _c("input", {
+              attrs: { type: "hidden", name: "_method", value: "patch" },
+            })
+          : _vm._e(),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group mb-4 card card-body border-success" },
+          [
+            _vm._m(2),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inputs.title,
+                  expression: "inputs.title",
+                },
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                name: "title",
+                id: "title_input",
+                placeholder: "問題集のタイトル",
+                required: "",
+                maxlength: "150",
+              },
+              domProps: { value: _vm.inputs.title },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.inputs, "title", $event.target.value)
+                },
+              },
+            }),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group mb-4 card card-body border-success" },
+          [
+            _vm._m(3),
+            _vm._v(" "),
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inputs.resume,
+                  expression: "inputs.resume",
+                },
+              ],
+              staticClass: "form-control",
+              attrs: {
+                name: "resume",
+                id: "resume_input1",
+                rows: "10",
+                placeholder: "問題集の簡単な説明を書きましょう！",
+                required: "",
+              },
+              domProps: { value: _vm.inputs.resume },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.inputs, "resume", $event.target.value)
+                },
+              },
+            }),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group mb-4 card card-body border-success" },
+          [
+            _c(
+              "label",
+              {
+                staticClass: "form-check-label fs-5 mb-2 fw-bold",
+                attrs: { for: "exampleFormControlInput1" },
+              },
+              [_vm._v("サムネ画像")]
+            ),
+            _vm._v(" "),
+            _c("read-image-file-component", {
+              attrs: { img_path: _vm.img_path, noimg_path: _vm.noimg_path },
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-text" }, [
+              _vm._v(
+                "※ファイルは10Mバイト以内で、jpeg・jpg・pngのいずれかの形式を選択してください。"
+              ),
+            ]),
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group mb-4 card card-body border-success" },
+          [
+            _c(
+              "label",
+              {
+                staticClass: "form-check-label fs-5 mb-2 fw-bold",
+                attrs: { for: "time_limit_h_input" },
+              },
+              [_vm._v("制限時間")]
+            ),
+            _vm._v(" "),
+            _c("p", { staticClass: "callout callout-success" }, [
+              _vm._v(
+                "\n                制限時間を設定したくないときは、『00時間00分00秒』に時間を合せてください。\n            "
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row align-items-center" }, [
+              _c("div", { staticClass: "col-auto" }, [
+                _c(
+                  "select",
+                  {
+                    staticClass: "form-select ",
+                    attrs: {
+                      name: "time_limit[]",
+                      "aria-label": "Default select example",
+                      id: "time_limit_h_input",
+                    },
+                  },
+                  _vm._l(24, function (num_h) {
+                    return _c(
+                      "option",
+                      {
+                        key: num_h,
+                        domProps: {
+                          value:
+                            10 >= num_h - 1 ? "0" + (num_h - 1) : num_h - 1,
+                          selected:
+                            (10 > num_h - 1 ? "0" + (num_h - 1) : num_h - 1) ==
+                            _vm.inputs.time_h,
+                        },
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(
+                            10 >= num_h - 1 ? "0" + (num_h - 1) : num_h - 1
+                          )
+                        ),
+                      ]
+                    )
+                  }),
+                  0
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-auto" }, [_vm._v("時間")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-auto" }, [
+                _c(
+                  "select",
+                  {
+                    staticClass: "form-select",
+                    attrs: {
+                      name: "time_limit[]",
+                      "aria-label": "Default select example",
+                    },
+                  },
+                  _vm._l(60, function (num_m) {
+                    return _c(
+                      "option",
+                      {
+                        key: num_m,
+                        domProps: {
+                          value:
+                            10 >= num_m - 1 ? "0" + (num_m - 1) : num_m - 1,
+                          selected:
+                            (10 > num_m - 1 ? "0" + (num_m - 1) : num_m - 1) ==
+                            _vm.inputs.time_m,
+                        },
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(
+                            10 >= num_m - 1 ? "0" + (num_m - 1) : num_m - 1
+                          )
+                        ),
+                      ]
+                    )
+                  }),
+                  0
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-auto" }, [_vm._v("分")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-auto" }, [
+                _c(
+                  "select",
+                  {
+                    staticClass: "form-select",
+                    attrs: {
+                      name: "time_limit[]",
+                      "aria-label": "Default select example",
+                    },
+                  },
+                  _vm._l(60, function (num_s) {
+                    return _c(
+                      "option",
+                      {
+                        key: num_s,
+                        domProps: {
+                          value:
+                            10 >= num_s - 1 ? "0" + (num_s - 1) : num_s - 1,
+                          selected:
+                            (10 > num_s - 1 ? "0" + (num_s - 1) : num_s - 1) ==
+                            _vm.inputs.time_s,
+                        },
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(
+                            10 >= num_s - 1 ? "0" + (num_s - 1) : num_s - 1
+                          )
+                        ),
+                      ]
+                    )
+                  }),
+                  0
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-auto" }, [_vm._v("秒")]),
+            ]),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group mb-4 card card-body border-success" },
+          [
+            _c(
+              "label",
+              {
+                staticClass: "form-check-label fs-5 mb-2 fw-bold",
+                attrs: { for: "tags_input" },
+              },
+              [_vm._v("タグ")]
+            ),
+            _vm._v(" "),
+            _c("p", { staticClass: "callout callout-success" }, [
+              _vm._v(
+                "\n                タグが複数あるときは、全角または半角スペースで区切ってください。\n            "
+              ),
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inputs.tags,
+                  expression: "inputs.tags",
+                },
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                name: "tags",
+                id: "tags_input",
+                placeholder: "タグ",
+                maxlength: "150",
+              },
+              domProps: { value: _vm.inputs.tags },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.inputs, "tags", $event.target.value)
+                },
+              },
+            }),
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "my-5" }, [
+          _c("div", { staticClass: "d-grid gap-2 col-md-4 mx-auto" }, [
+            !_vm.submit_disabled
+              ? _c(
+                  "button",
+                  {
+                    staticClass:
+                      "btn btn-success btn-lg rounded-pill fs-5 w-100",
+                    attrs: { type: "submit" },
+                  },
+                  [_vm._v("登録・更新")]
+                )
+              : _c(
+                  "button",
+                  {
+                    staticClass:
+                      "btn btn-success btn-lg rounded-pill fs-5 w-100",
+                    attrs: { type: "submit", disabled: "" },
+                  },
+                  [_vm._v("送信中・・・")]
+                ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-secondary btn-lg rounded-pill fs-5 w-100",
+                attrs: { href: _vm.url_back },
+              },
+              [_vm._v("戻る")]
+            ),
+          ]),
+        ]),
+      ]
+    ),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header bg-success text-white d-md-flex" },
+      [
+        _c("h5", { staticClass: "mb-0 card-title" }, [
+          _vm._v("『基本情報』を登録しよう！"),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-body" }, [
+      _c("p", { staticClass: "card-text text-secondary" }, [
+        _vm._v(
+          "\n                問題一覧に表示される『基本情報』を登録しましよう！"
+        ),
+        _c("br"),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-flex align-items-center" }, [
+      _c(
+        "label",
+        {
+          staticClass: "form-check-label fs-5 mb-2 fw-bold",
+          attrs: { for: "title_input" },
+        },
+        [_vm._v("問題集のタイトル")]
+      ),
+      _vm._v(" "),
+      _c("span", { staticClass: "badge bg-danger ms-2 mb-2" }, [
+        _vm._v("必須"),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-flex align-items-center" }, [
+      _c(
+        "label",
+        {
+          staticClass: "form-check-label fs-5 mb-2 fw-bold",
+          attrs: { for: "resume_input1" },
+        },
+        [_vm._v("説明文")]
+      ),
+      _vm._v(" "),
+      _c("span", { staticClass: "badge bg-danger ms-2 mb-2" }, [
+        _vm._v("必須"),
+      ]),
+    ])
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MakeQuestion/ReadImageFileComponent.vue?vue&type=template&id=a1c1b308&":
 /*!***********************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MakeQuestion/ReadImageFileComponent.vue?vue&type=template&id=a1c1b308& ***!
@@ -34493,12 +35834,58 @@ var render = function () {
         _c("img", { attrs: { src: _vm.src, alt: _vm.alt } }),
       ]),
       _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        staticStyle: { padding: ".4rem" },
-        attrs: { type: "file", name: _vm.name, id: "file_input" },
-        on: { change: _vm.onChange },
-      }),
+      _c("div", { staticClass: "input-group mb-3" }, [
+        _c("input", {
+          staticClass: "form-control",
+          staticStyle: { padding: ".4rem" },
+          attrs: { type: "file", name: _vm.name, id: "file_input" + _vm.name },
+          on: { change: _vm.onChange },
+        }),
+        _vm._v(" "),
+        _c(
+          "label",
+          {
+            staticClass: "input-group-text text-white",
+            class: { "bg-danger": _vm.delete_radio == null },
+            attrs: {
+              "data-bs-toggle": "tooltip",
+              "data-bs-placement": "bottom",
+              title: "画像の削除",
+              for: _vm.name + "_dalete",
+            },
+          },
+          [_c("i", { staticClass: "bi bi-x-lg" })]
+        ),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-check d-none" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.delete_radio,
+              expression: "delete_radio",
+            },
+          ],
+          staticClass: "form-check-input",
+          attrs: {
+            type: "radio",
+            name: _vm.name + "_dalete",
+            id: _vm.name + "_dalete",
+            value: "delete",
+          },
+          domProps: { checked: _vm._q(_vm.delete_radio, "delete") },
+          on: {
+            change: [
+              function ($event) {
+                _vm.delete_radio = "delete"
+              },
+              _vm.delete_image,
+            ],
+          },
+        }),
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-text text-danger" }, [
         _vm._v(_vm._s(_vm.err_message)),
@@ -34717,13 +36104,6 @@ var render = function () {
           ? _c(
               "div",
               [
-                _c("input", {
-                  attrs: {
-                    name: "answer_booleans[]",
-                    type: "hidden",
-                    value: "0",
-                  },
-                }),
                 _vm._v(
                   "\n\n                ひとつの答えを選ぶ （50文字以内）\n                "
                 ),
@@ -34766,7 +36146,8 @@ var render = function () {
                           _c(
                             "label",
                             {
-                              staticClass: "btn btn-outline-info border-0",
+                              staticClass:
+                                "btn action-btn btn-outline-info border-0",
                               staticStyle: { "border-radius": "0" },
                               attrs: { for: "answer_booleans" + key },
                               on: {
@@ -34827,6 +36208,12 @@ var render = function () {
                             class: { disabled: _vm.answer_radio == key },
                             staticStyle: { "text-decoration": "none" },
                             attrs: { href: "" },
+                            on: {
+                              click: function ($event) {
+                                $event.preventDefault()
+                                return _vm.deleteInput(key)
+                              },
+                            },
                           },
                           [_vm._v("削除")]
                         ),
@@ -34935,7 +36322,8 @@ var render = function () {
                           _c(
                             "label",
                             {
-                              staticClass: "btn btn-outline-info border-0",
+                              staticClass:
+                                "btn action-btn btn-outline-info border-0",
                               staticStyle: { "border-radius": "0" },
                               attrs: { for: "answer_booleans" + key },
                               on: {
@@ -35071,7 +36459,7 @@ var staticRenderFns = [
       _c(
         "label",
         {
-          staticClass: "btn btn-outline-info border-0",
+          staticClass: "btn action-btn btn-outline-info border-0",
           staticStyle: { "border-radius": "0" },
           attrs: { for: "answer_booleans0" },
         },

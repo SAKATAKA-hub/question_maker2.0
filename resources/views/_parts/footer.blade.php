@@ -1,4 +1,30 @@
-<div class="bg-success px-3">
+<!-- [ SNS ] -->
+<section>
+    <div class="container-1200 my-5 text-center">
+        <h5 class="">\ 公式アカウント /</h5>
+        <p class="text-secondary">
+            サイトの更新情報やお知らせを配信中！
+        </p>
+        <div class="d-flex justify-content-center gap-3 snss">
+
+            <a href="{{env('LINE_URL')}}" class="badge bg-white rounded-pill fs-1 p-2" style="color:#07b53b;" target="_blank">
+                <!--LINE-->
+                <i class="bi bi-line"></i>
+            </a>
+            <a href="{{env('TWIITER_URL')}}" class="badge bg-white rounded-pill fs-1 p-2" style="color:#1DA1F2;" target="_blank">
+                <!--twitter-->
+                <i class="bi bi-twitter"></i>
+            </a>
+            <a href="{{env('INSTAGRAM_URL')}}" class="badge bg-white rounded-pill fs-1 p-2" style="color:#CF2E92;" target="_blank">
+                <!--instagram-->
+                <i class="bi bi-instagram"></i>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<section class="bg-success px-3">
     <ul class="d-lg-flex justify-content-center mb-0 p-0">
         <li class="text-lg-center py-2" style="list-style:none;">
             <a href="{{route('footer_menu.how_use')}}" class="text-white text-decoration-none">
@@ -63,7 +89,7 @@
 
         </li>
     </ul>
-</div>
+</section>
 
 <section class="bg-dark">
     <div class="section_container text-white text-center py-2" style="font-size:.8rem;">

@@ -144,6 +144,7 @@ class PlayQuestionController extends Controller
         // 問題集情報
         $question_group = \App\Models\QuestionGroup::find( $request->question_group_id );
 
+
         // 問題情報
         $questions = $question_group->questions;
 
@@ -234,9 +235,18 @@ class PlayQuestionController extends Controller
 
 
         # 平均点の計算
-        $score_answer_groups =
-        \App\Models\AnswerGroup::where('question_group_id',$question_group->id)->get();
-        $question_group->average_score = round( $score_answer_groups->sum('score') / $score_answer_groups->count() ,1 );
+        // $score_answer_groups =
+        // \App\Models\AnswerGroup::where('question_group_id',$question_group->id)->get();
+        // $question_group->average_score = round( $score_answer_groups->sum('score') / $score_answer_groups->count() ,1 );
+
+        /*
+        |  平均点の計算
+        | { (平均点×アクセス数)＋今回の点数 } ÷ アクセス数+1
+        */
+        $question_group->average_score =
+        ( ( $question_group->average_score * $question_group->accessed_count ) + $score )
+        / ($question_group->accessed_count+1);
+
         $question_group->save();
 
 

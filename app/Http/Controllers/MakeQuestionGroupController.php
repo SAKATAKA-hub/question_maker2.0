@@ -63,6 +63,7 @@ class MakeQuestionGroupController extends Controller
     */
     public function store(Request $request)
     {
+        // dd($request->all());
         # ユーザー情報
         $user = Auth::user();
 
@@ -146,6 +147,9 @@ class MakeQuestionGroupController extends Controller
     */
     public function update(Request $request, \App\Models\QuestionGroup $question_group )
     {
+        // dd('update');
+        // dd($request->all());
+
         # 入力内容の加工
         $input = $request->all();
         $input['tags'] = str_replace(' ','　',$request->tags);//タグの空文字を大文字に統一
@@ -170,9 +174,17 @@ class MakeQuestionGroupController extends Controller
             $input_file_name = 'image';             //インプットファイルのname
             $old_image_path = $question_group->image;
             $image_path = null;
+            $delete = $request->image_dalete;
 
+            /* 画像削除の時 */
+            if( isset($delete) )
+            {
+                $delete_path = $old_image_path;
+                if( Storage::exists( $delete_path ) ){ storage::delete( $delete_path ); }
+                $image_path = null;
+            }
             /* アップロードする画像があるとき、画像のアップロード*/
-            if( $request_file = $request->file( $input_file_name ) )
+            elseif( $request_file = $request->file( $input_file_name ) )
             {
                 // ファイルのアップロード
                 $image_path =  $request->file( $input_file_name )->store($dir);
@@ -258,18 +270,26 @@ class MakeQuestionGroupController extends Controller
     */
     public function update_published(Request $request, \App\Models\QuestionGroup $question_group)
     {
-
         # 公開日の登録
         $request->published_at =  $question_group->published_at;
         if( $request->is_public && empty(  $question_group->published_at ) ){
+
             $request->published_at = \Carbon\Carbon::parse('now')->format('Y-m-d H:i:s');
+            $key = $question_group->key;
+
         }
         # 非公開の登録
-        if( !$request->is_public ){ $request->published_at = null; }
+        if( !$request->is_public ){
+
+            $request->published_at = null;
+            $key = \Illuminate\Support\Str::random(40); //認証キー更新
+
+        }
 
 
         $question_group->update([
-            'published_at'      => $request->published_at,     //公開日
+            'published_at' => $request->published_at, //公開日
+            'key' => $key, //認証キ
         ]);
 
 

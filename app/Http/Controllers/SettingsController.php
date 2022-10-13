@@ -32,9 +32,17 @@ class SettingsController extends Controller
             $input_file_name = 'image';             //インプットファイルのname
             $old_image_path = $user->image;
             $image_path = null;
+            $delete = $request->image_dalete;
 
+            /* 画像削除の時 */
+            if( isset($delete) )
+            {
+                $delete_path = $old_image_path;
+                if( Storage::exists( $delete_path ) ){ storage::delete( $delete_path ); }
+                $image_path = null;
+            }
             /* アップロードする画像があるとき、画像のアップロード*/
-            if( $request_file = $request->file( $input_file_name ) )
+            elseif( $request_file = $request->file( $input_file_name ) )
             {
                 // ファイルのアップロード
                 $image_path =  $request->file( $input_file_name )->store($dir);

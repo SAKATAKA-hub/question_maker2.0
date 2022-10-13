@@ -155,8 +155,8 @@
 
 
         </section>
-        <!-- [ 人気な問題集トップ５！ ] -->
-        <section>
+        <!-- [ 人気問題集トップ５！ ] -->
+        {{-- <section>
             <div class="container-1200 my-5">
 
 
@@ -169,7 +169,7 @@
                             <p class="fw-bold text-success">
                                 Most popular handmade questions
                             </p>
-                            <h3>人気な問題集トップ５！</h3>
+                            <h3>人気問題集トップ５！</h3>
                             <p class="my-4 text-secondary">
                                 もっとも受検されている問題集をピックアップしました。<br>
                                 問題を解いて、お気に入りの問題集をフォローしましょう！！
@@ -197,7 +197,7 @@
 
             </div>
         </section>
-        <div class="container-1200 divider divider-dashed my-5"></div><!---- Divider ---->
+        <div class="container-1200 divider divider-dashed my-5"></div><!---- Divider ----> --}}
         <!-- [ 新着問題集トップ１０！ ] -->
         <section>
             <div class="container-1200 my-5">
@@ -211,7 +211,7 @@
                             <p class="fw-bold text-success">
                                New handmade questions!
                             </p>
-                            <h3>新着問題集トップ１０！</h3>
+                            <h3>新着問題集</h3>
                             <p class="my-4 text-secondary">
                                 新着の問題集にチャレンジしよう！
                             </p>
@@ -234,31 +234,6 @@
 
                 </div>
 
-            </div>
-        </section>
-        <!-- [ SNS ] -->
-        <section>
-            <div class="container-1200 my-5 text-center">
-                <h5 class="">\ 公式アカウント /</h5>
-                <p class="text-secondary">
-                    サイトの更新情報やお知らせを配信中！
-                </p>
-                <div class="d-flex justify-content-center gap-3 snss">
-
-                    <a href="{{env('LINE_URL')}}" class="badge rounded-pill fs-3 text-white p-3" style="background-color:#07b53b;" target="_blank">
-                        <!--LINE-->
-                        <i class="bi bi-line"></i>
-                    </a>
-                    <a href="{{env('TWIITER_URL')}}" class="badge rounded-pill fs-3 text-white p-3" style="background-color:#1DA1F2;" target="_blank">
-                        <!--twitter-->
-                        <i class="bi bi-twitter"></i>
-                    </a>
-                    {{-- <a href="{{env('INSTAGRAM_URL')}}" class="badge rounded-pill fs-3 text-white p-3" style="background-color:#CF2E92;" target="_blank">
-                        <!--instagram-->
-                        <i class="bi bi-instagram"></i>
-                    </a> --}}
-
-                </div>
             </div>
         </section>
 

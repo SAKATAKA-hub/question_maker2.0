@@ -28,6 +28,9 @@ Vue.component('count-down-timer-component', require('./components/PlayQuestion/C
 Vue.component('count-up-timer-component', require('./components/PlayQuestion/CountUpTimerComponent.vue').default);
 
 /* 問題作成 */
+Vue.component('make-question-group-form-component', require('./components/MakeQuestion/MakeQuestionGroupFormComponent.vue').default);
+Vue.component('make-question-form-component', require('./components/MakeQuestion/MakeQuestionFormComponent.vue').default);
+
 Vue.component('commentary-input-component', require('./components/MakeQuestion/CommentaryInputComponent.vue').default);
 Vue.component('read-image-file-component', require('./components/MakeQuestion/ReadImageFileComponent.vue').default);
 Vue.component('select-answer-component',   require('./components/MakeQuestion/SelectAnswerComponent.vue').default);

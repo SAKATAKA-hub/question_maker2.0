@@ -122,7 +122,7 @@
                 <!-- [ 作成者情報 ] -->
                 <div class=" border-bottom">
                     <div class="d-flex px-3">
-                        <div class="col">
+                        <div class="col text-truncate">
                             <a href="{{route('creater',$question_group->user->id)}}" class="btn ps-0 w-100 list-group-item-action">
                                 <div class="d-flex align-items-center">
                                     <div class="user-image border ratio ratio-1x1 me-2" style="

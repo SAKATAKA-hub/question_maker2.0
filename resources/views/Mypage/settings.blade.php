@@ -67,7 +67,7 @@
                                 <div class="accordion-item border">
                                     <h2 class="accordion-header" id="profile01AccoHeadingOne">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#profile01AccoOne" aria-expanded="false" aria-controls="profile01AccoOne">
-                                            <h5 class="mb-0">プロフィールの変更</h5>
+                                            <div class="mb-0">プロフィールの変更</div>
                                         </button>
                                     </h2>
                                     <div id="profile01AccoOne" class="accordion-collapse collapse" aria-labelledby="profile01AccoHeadingOne" data-bs-parent="#profile01Acco">
@@ -93,7 +93,8 @@
                                                 <div class="mb-4">
                                                     <label class="form-label">問題画像</label>
                                                     <div class="" style="max-width:200px">
-                                                        <read-image-file-component img_path="{{asset('storage/'.Auth::user()->image_puth)}}" alt="問題画像"/>
+                                                        <read-image-file-component img_path="{{asset('storage/'.Auth::user()->image_puth)}}"
+                                                        noimg_path="{{asset('storage/'.'site/image/user_no_image.png')}}" alt="ユーザー画像"/>
                                                     </div>
                                                     <div class="form-text">※ファイルは10Mバイト以内で、jpeg・jpg・pngのいずれかの形式を選択してください。</div>
                                                 </div>
@@ -125,7 +126,7 @@
                                 <div class="accordion-item border">
                                     <h2 class="accordion-header" id="profile02AccoHeadingOne">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#profile02AccoOne" aria-expanded="false" aria-controls="profile02AccoOne">
-                                            <h5 class="mb-0">アカウント情報の変更</h5>
+                                            <div class="mb-0">アカウント情報の変更</div>
                                         </button>
                                     </h2>
                                     <div id="profile02AccoOne" class="accordion-collapse collapse" aria-labelledby="profile02AccoHeadingOne" data-bs-parent="#profile02Acco">
@@ -166,7 +167,7 @@
                                     <div class="accordion-item border">
                                         <h2 class="accordion-header" id="profile03AccoHeadingOne">
                                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#profile03AccoOne" aria-expanded="false" aria-controls="profile03AccoOne">
-                                                <h5 class="mb-0">メール受信設定</h5>
+                                                <div class="mb-0">メール受信設定</div>
                                             </button>
                                         </h2>
                                         <div id="profile03AccoOne" class="accordion-collapse collapse" aria-labelledby="profile03AccoHeadingOne" data-bs-parent="#profile03Acco">
@@ -252,7 +253,7 @@
                                 <div class="accordion-item border">
                                     <h2 class="accordion-header" id="profile04AccoHeadingOne">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#profile04AccoOne" aria-expanded="false" aria-controls="profile04AccoOne">
-                                            <h5 class="mb-0">退会の手続き</h5>
+                                            <div class="mb-0">退会の手続き</div>
                                         </button>
                                     </h2>
                                     <div id="profile04AccoOne" class="accordion-collapse collapse" aria-labelledby="profile04AccoHeadingOne" data-bs-parent="#profile04Acco">

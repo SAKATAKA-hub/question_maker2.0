@@ -2,7 +2,7 @@
 
 
 <!----- title ----->
-@section('title', '作成した問題集リスト' )
+@section('title', '作成した問題集' )
 
 <!----- breadcrumb ----->
 @section('breadcrumb')
@@ -150,12 +150,12 @@
                                 <div class="m-3">
                                     @include('_parts.share_group')
 
-                                    <div class="mt-2">
+                                    {{-- <div class="mt-2" style="font-size:11px;">
                                         <span class="me-1">
-                                            <i class="bi bi-exclamation-circle"></i>
+                                            <i class="bi bi-exclamation-circle me-1"></i>
                                         </span>
                                         公開設定が『非公開』のときでも、受検用URLを教えた友達だけに自分の問題集にチャレンジしてもらうことができます。
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                                 <!-- 公開日等 -->
@@ -196,7 +196,7 @@
                                     </div>
                                     <div class="d-flex">
                                         <div class="col-4 ps-3 bg-light">受験回数</div>
-                                        <div class="col-8 ps-3">{{$question_group->answer_groups->count()}}回</div>
+                                        <div class="col-8 ps-3">{{$question_group->accessed_count}}回</div>
                                     </div>
                                     <div class="d-flex">
                                         <div class="col-4 ps-3 bg-light">平均点</div>
@@ -241,7 +241,7 @@
                                             <i class="bi bi-chevron-right"></i>
                                         </div>
                                     </a>
-                                    {{-- <a href="{{route('make_question_group.edit',$question_group)}}"
+                                    <a href="{{route('make_question_group.edit',$question_group)}}"
                                     class="list-group-item list-group-item-action">
                                         <div class="d-flex justify-content-between">
                                             <p class="mb-0">
@@ -294,7 +294,7 @@
                                             </p>
                                             <i class="bi bi-chevron-right"></i>
                                         </div>
-                                    </a> --}}
+                                    </a>
                                     <a href="#"
                                     data-bs-toggle="modal" data-bs-target="#deleteQuestionGroupModal{{$i}}"
                                     class="list-group-item list-group-item-action">
