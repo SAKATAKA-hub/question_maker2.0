@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form :action="route_comment_api" v-show="test" method="POST">
+        <form :action="route_comment_api" v-if="test" method="POST">
             <input v-for="(input, key) in inputs" :key="key"
             type="text" :name="key" :value="input"
             >

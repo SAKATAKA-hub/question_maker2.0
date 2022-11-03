@@ -6780,6 +6780,80 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PlayQuestion/PieChartComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PlayQuestion/PieChartComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      strokeDashoffset: 0,
+      stroke: '',
+      point: 0
+    };
+  },
+  props: {
+    //最初に表示する画像のパス
+    percent_value: {
+      type: String,
+      "default": '100'
+    },
+    line_color: {
+      type: String,
+      "default": '#406AFF'
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.strokeDashoffset = 440 - 440 * (this.percent_value / 100);
+    this.stroke = this.percent_value != '0' ? this.line_color : '';
+    var intervalId = setInterval(function () {
+      _this.point += 1;
+
+      if (_this.point + 1 > _this.percent_value) {
+        _this.point = _this.percent_value;
+        clearInterval(intervalId);
+      }
+    }, 10);
+  },
+  methods: {
+    click: function click() {
+      this.disabled = true;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PlayQuestion/PlayQuestionComponent.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PlayQuestion/PlayQuestionComponent.vue?vue&type=script&lang=js& ***!
@@ -9852,6 +9926,7 @@ Vue.component('example-component', (__webpack_require__(/*! ./components/Example
 Vue.component('play-question-component', (__webpack_require__(/*! ./components/PlayQuestion/PlayQuestionComponent.vue */ "./resources/js/components/PlayQuestion/PlayQuestionComponent.vue")["default"]));
 Vue.component('count-down-timer-component', (__webpack_require__(/*! ./components/PlayQuestion/CountDownTimerComponent.vue */ "./resources/js/components/PlayQuestion/CountDownTimerComponent.vue")["default"]));
 Vue.component('count-up-timer-component', (__webpack_require__(/*! ./components/PlayQuestion/CountUpTimerComponent.vue */ "./resources/js/components/PlayQuestion/CountUpTimerComponent.vue")["default"]));
+Vue.component('pie-chart-component', (__webpack_require__(/*! ./components/PlayQuestion/PieChartComponent.vue */ "./resources/js/components/PlayQuestion/PieChartComponent.vue")["default"]));
 /* 問題作成 */
 
 Vue.component('make-question-group-form-component', (__webpack_require__(/*! ./components/MakeQuestion/MakeQuestionGroupFormComponent.vue */ "./resources/js/components/MakeQuestion/MakeQuestionGroupFormComponent.vue")["default"]));
@@ -14973,6 +15048,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.action-btn:hover{\n    background: #fff;\n    color: #28abbd;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PlayQuestion/PieChartComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PlayQuestion/PieChartComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.pie-chart-box .percent {\n    position: relative;\n    width: 150px;\n    height: 150px;\n}\n.pie-chart-box .percent svg {\n    position: relative;\n    width: 150px;\n    height: 150px;\n    transform: rotate(-90deg);\n}\n.pie-chart-box .percent svg circle {\n    position: relative;\n    fill: none;\n    stroke-width: 10;\n    stroke: #f3f3f3;\n    stroke-dasharray: 440;\n    stroke-dashoffset: 0;\n    stroke-linecap: round;\n}\n.pie-chart-box .percent .number {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    color: #111;\n}\n.pie-chart-box .percent .number .title {\n    font-size: 50px;\n}\n.pie-chart-box .percent .number .title span {\n    font-size: 22px;\n}\n.pie-chart-box .text {\n    padding: 10px 0 0;\n    text-align: center;\n    font-weight: bold;\n    font-size: 14px;\n}\n.pie-chart-box .percent .line {\n    -webkit-animation: circleAnim 1s forwards;\n            animation: circleAnim 1s forwards;\n}\n@-webkit-keyframes circleAnim {\n0% {\n        stroke-dasharray: 0 440;\n}\n99.9%, to {\n        stroke-dasharray: 440 440;\n}\n}\n@keyframes circleAnim {\n0% {\n        stroke-dasharray: 0 440;\n}\n99.9%, to {\n        stroke-dasharray: 440 440;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -32576,6 +32675,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PlayQuestion/PieChartComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PlayQuestion/PieChartComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PieChartComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PieChartComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PlayQuestion/PieChartComponent.vue?vue&type=style&index=0&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PieChartComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PieChartComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PlayQuestion/PlayQuestionComponent.vue?vue&type=style&index=0&lang=css&":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PlayQuestion/PlayQuestionComponent.vue?vue&type=style&index=0&lang=css& ***!
@@ -33415,6 +33544,47 @@ component.options.__file = "resources/js/components/PlayQuestion/CountUpTimerCom
 
 /***/ }),
 
+/***/ "./resources/js/components/PlayQuestion/PieChartComponent.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/PlayQuestion/PieChartComponent.vue ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _PieChartComponent_vue_vue_type_template_id_53979c3e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PieChartComponent.vue?vue&type=template&id=53979c3e& */ "./resources/js/components/PlayQuestion/PieChartComponent.vue?vue&type=template&id=53979c3e&");
+/* harmony import */ var _PieChartComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PieChartComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/PlayQuestion/PieChartComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _PieChartComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PieChartComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/PlayQuestion/PieChartComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _PieChartComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PieChartComponent_vue_vue_type_template_id_53979c3e___WEBPACK_IMPORTED_MODULE_0__.render,
+  _PieChartComponent_vue_vue_type_template_id_53979c3e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/PlayQuestion/PieChartComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/PlayQuestion/PlayQuestionComponent.vue":
 /*!************************************************************************!*\
   !*** ./resources/js/components/PlayQuestion/PlayQuestionComponent.vue ***!
@@ -34042,6 +34212,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/PlayQuestion/PieChartComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/PlayQuestion/PieChartComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PieChartComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PieChartComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PlayQuestion/PieChartComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PieChartComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/PlayQuestion/PlayQuestionComponent.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************!*\
   !*** ./resources/js/components/PlayQuestion/PlayQuestionComponent.vue?vue&type=script&lang=js& ***!
@@ -34227,6 +34413,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectAnswerComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SelectAnswerComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MakeQuestion/SelectAnswerComponent.vue?vue&type=style&index=0&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/PlayQuestion/PieChartComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/PlayQuestion/PieChartComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PieChartComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PieChartComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PlayQuestion/PieChartComponent.vue?vue&type=style&index=0&lang=css&");
 
 
 /***/ }),
@@ -34470,6 +34669,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CountUpTimerComponent_vue_vue_type_template_id_c2883c50___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CountUpTimerComponent_vue_vue_type_template_id_c2883c50___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CountUpTimerComponent.vue?vue&type=template&id=c2883c50& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PlayQuestion/CountUpTimerComponent.vue?vue&type=template&id=c2883c50&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/PlayQuestion/PieChartComponent.vue?vue&type=template&id=53979c3e&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/PlayQuestion/PieChartComponent.vue?vue&type=template&id=53979c3e& ***!
+  \***************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PieChartComponent_vue_vue_type_template_id_53979c3e___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PieChartComponent_vue_vue_type_template_id_53979c3e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PieChartComponent_vue_vue_type_template_id_53979c3e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PieChartComponent.vue?vue&type=template&id=53979c3e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PlayQuestion/PieChartComponent.vue?vue&type=template&id=53979c3e&");
 
 
 /***/ }),
@@ -36528,6 +36744,61 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PlayQuestion/PieChartComponent.vue?vue&type=template&id=53979c3e&":
+/*!******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PlayQuestion/PieChartComponent.vue?vue&type=template&id=53979c3e& ***!
+  \******************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "pie-chart-box" }, [
+      _c("div", { staticClass: "percent" }, [
+        _c("svg", [
+          _c("circle", {
+            staticClass: "base",
+            attrs: { cx: "75", cy: "75", r: "70" },
+          }),
+          _vm._v(" "),
+          _c("circle", {
+            staticClass: "line",
+            style:
+              "stroke-dashoffset:" +
+              _vm.strokeDashoffset +
+              ";" +
+              "stroke:" +
+              _vm.stroke +
+              ";",
+            attrs: { cx: "75", cy: "75", r: "70" },
+          }),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "number" }, [
+          _c("h3", { staticClass: "title" }, [
+            _vm._v(_vm._s(_vm.point)),
+            _c("span", [_vm._v("%")]),
+          ]),
+        ]),
+      ]),
+    ]),
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PlayQuestion/PlayQuestionComponent.vue?vue&type=template&id=7bd3a659&":
 /*!**********************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PlayQuestion/PlayQuestionComponent.vue?vue&type=template&id=7bd3a659& ***!
@@ -37240,36 +37511,31 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "form",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.test,
-            expression: "test",
-          },
-        ],
-        attrs: { action: _vm.route_comment_api, method: "POST" },
-      },
-      [
-        _vm._l(_vm.inputs, function (input, key) {
-          return _c("input", {
-            key: key,
-            attrs: { type: "text", name: key },
-            domProps: { value: input },
-          })
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-primary btn-sm", attrs: { type: "submit" } },
-          [_vm._v(_vm._s("コメントリスト"))]
-        ),
-      ],
-      2
-    ),
+    _vm.test
+      ? _c(
+          "form",
+          { attrs: { action: _vm.route_comment_api, method: "POST" } },
+          [
+            _vm._l(_vm.inputs, function (input, key) {
+              return _c("input", {
+                key: key,
+                attrs: { type: "text", name: key },
+                domProps: { value: input },
+              })
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary btn-sm",
+                attrs: { type: "submit" },
+              },
+              [_vm._v(_vm._s("コメントリスト"))]
+            ),
+          ],
+          2
+        )
+      : _vm._e(),
     _vm._v(" "),
     _c("div", { staticClass: "card" }, [
       _c("ul", { staticClass: "list-group list-group-flush" }, [
@@ -38307,36 +38573,31 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "form",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.test,
-            expression: "test",
-          },
-        ],
-        attrs: { action: _vm.route_list, method: "POST" },
-      },
-      [
-        _vm._l(_vm.inputs, function (input, key) {
-          return _c("input", {
-            key: key,
-            attrs: { type: "hidden", name: key },
-            domProps: { value: input },
-          })
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-primary btn-sm", attrs: { type: "submit" } },
-          [_vm._v("テスト")]
-        ),
-      ],
-      2
-    ),
+    _vm.test
+      ? _c(
+          "form",
+          { attrs: { action: _vm.route_list, method: "POST" } },
+          [
+            _vm._l(_vm.inputs, function (input, key) {
+              return _c("input", {
+                key: key,
+                attrs: { type: "hidden", name: key },
+                domProps: { value: input },
+              })
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary btn-sm",
+                attrs: { type: "submit" },
+              },
+              [_vm._v("テスト")]
+            ),
+          ],
+          2
+        )
+      : _vm._e(),
     _vm._v(" "),
     _c("div", [
       _vm.loading
@@ -38719,36 +38980,31 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "form",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.test,
-            expression: "test",
-          },
-        ],
-        attrs: { action: _vm.route, method: "POST" },
-      },
-      [
-        _vm._l(_vm.inputs, function (input, key) {
-          return _c("input", {
-            key: key,
-            attrs: { type: "text", name: key },
-            domProps: { value: input },
-          })
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-primary btn-sm", attrs: { type: "submit" } },
-          [_vm._v(_vm._s(_vm.btn_text))]
-        ),
-      ],
-      2
-    ),
+    _vm.test
+      ? _c(
+          "form",
+          { attrs: { action: _vm.route, method: "POST" } },
+          [
+            _vm._l(_vm.inputs, function (input, key) {
+              return _c("input", {
+                key: key,
+                attrs: { type: "text", name: key },
+                domProps: { value: input },
+              })
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary btn-sm",
+                attrs: { type: "submit" },
+              },
+              [_vm._v(_vm._s(_vm.btn_text))]
+            ),
+          ],
+          2
+        )
+      : _vm._e(),
     _vm._v(" "),
     _vm.user_id
       ? _c(
@@ -38808,36 +39064,31 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "form",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.test,
-            expression: "test",
-          },
-        ],
-        attrs: { action: _vm.route, method: "POST" },
-      },
-      [
-        _vm._l(_vm.inputs, function (input, key) {
-          return _c("input", {
-            key: key,
-            attrs: { type: "text", name: key },
-            domProps: { value: input },
-          })
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-primary btn-sm", attrs: { type: "submit" } },
-          [_vm._v("お気に入り")]
-        ),
-      ],
-      2
-    ),
+    _vm.test
+      ? _c(
+          "form",
+          { attrs: { action: _vm.route, method: "POST" } },
+          [
+            _vm._l(_vm.inputs, function (input, key) {
+              return _c("input", {
+                key: key,
+                attrs: { type: "text", name: key },
+                domProps: { value: input },
+              })
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary btn-sm",
+                attrs: { type: "submit" },
+              },
+              [_vm._v("お気に入り")]
+            ),
+          ],
+          2
+        )
+      : _vm._e(),
     _vm._v(" "),
     _vm.user_id
       ? _c(
@@ -39261,36 +39512,31 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "form",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.test,
-            expression: "test",
-          },
-        ],
-        attrs: { action: _vm.route_list, method: "POST" },
-      },
-      [
-        _vm._l(_vm.inputs, function (input, key) {
-          return _c("input", {
-            key: key,
-            attrs: { type: "hidden", name: key },
-            domProps: { value: input },
-          })
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-primary btn-sm", attrs: { type: "submit" } },
-          [_vm._v("テスト")]
-        ),
-      ],
-      2
-    ),
+    _vm.test
+      ? _c(
+          "form",
+          { attrs: { action: _vm.route_list, method: "POST" } },
+          [
+            _vm._l(_vm.inputs, function (input, key) {
+              return _c("input", {
+                key: key,
+                attrs: { type: "hidden", name: key },
+                domProps: { value: input },
+              })
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary btn-sm",
+                attrs: { type: "submit" },
+              },
+              [_vm._v("テスト")]
+            ),
+          ],
+          2
+        )
+      : _vm._e(),
     _vm._v(" "),
     _c("div", [
       _vm.loading

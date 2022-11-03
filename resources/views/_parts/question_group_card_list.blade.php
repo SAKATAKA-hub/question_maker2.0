@@ -1,5 +1,5 @@
 <div class="">
-    <div class="question_group_card card card-body list-group-item-action border-0 shadow mb-3" style="cursor:pointer;"
+    <div class="question_group_card card card-body list-group-item-action border-0 shadow mb-3 " style="cursor:pointer;"
     data-bs-toggle="modal" data-bs-target="#questionModal{{ $question_group->id +1 }}"
     >
         <div class="row">
@@ -64,6 +64,7 @@
             </div>
         </div>
     </div>
+</div>
 
 
 
@@ -217,4 +218,5 @@
         </div>
     </div>
 
-</div>
+
+

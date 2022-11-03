@@ -1,6 +1,6 @@
 <!-- [ SNS ] -->
 <section>
-    <div class="container-1200 my-5 text-center">
+    <div class="container-1200 my-5 text-center  anm_scale_s01">
         <h5 class="">\ 公式アカウント /</h5>
         <p class="text-secondary">
             サイトの更新情報やお知らせを配信中！
@@ -93,8 +93,7 @@
 
 <section class="bg-dark">
     <div class="section_container text-white text-center py-2" style="font-size:.8rem;">
-        <p class="d-inline-block m-0">Copyright &copy; Next Arrow Inc.</p>
-        <p class="d-inline-block m-0">All Rights Reserved.</p>
+        <p class="d-inline-block m-0">&copy; TOSUMA Co.,Ltd.</p>
     </div>
     <!-- bottom menu分の余白 -->
     <div class="d-sm-none" style="height:5rem;"></div>

@@ -1,0 +1,183 @@
+/*
+* ====================================================
+*  フェードインアニメーション
+* <-- アニメーションを実行したい要素にクラスを付ける -->
+*
+* 上からフェードイン {.anm_top_s01,.anm_top_s02}
+* 左からフェードイン {.anm_left_s01,.anm_left_s02}
+* 下からフェードイン {.anm_bottom_s01,.anm_bottom_s02, .anm_left_s03}
+* 斜め上からフェードイン {anm_uphill_s01,,.anm_uphill_s02}
+* 拡大フェードイン {.anm_scale_s01,,.anm_scale_s02}
+*
+* =====================================================
+*/
+/* 上からフェードイン */
+.anm_top_s01, .anm_top_s02{
+    opacity: 0;
+    transform: translateY(-3rem);
+}
+.anm_top_e01{
+    animation: topAnimation 0.5s forwards;
+    animation-delay: 0ms;
+}
+.anm_top_e02{
+    animation: topAnimation 0.5s forwards;
+    animation-delay: 250ms;
+}
+@keyframes topAnimation{
+    100%{
+        opacity: 10;
+        transform: translateY(0);
+    }
+}
+
+
+/* 斜め上からフェードイン */
+.anm_uphill_s01, .anm_uphill_s02{
+    opacity: 0;
+    transform: translateY(-3rem) rotate(30deg);
+
+}
+.anm_uphill_e01{
+    animation: uphillAnimation 0.5s forwards;
+    animation-delay: 0ms;
+}
+.anm_uphill_e02{
+    animation: uphillAnimation 0.5s forwards;
+    animation-delay: 250ms;
+}
+@keyframes uphillAnimation{
+    100%{
+        opacity: 10;
+        transform: translateY(0);
+    }
+}
+
+
+
+/* 左からフェードイン */
+.anm_left_s01, .anm_left_s02{
+    opacity: 0;
+    transform: translateX(-3rem);
+}
+.anm_left_e01{
+    animation: leftAnimation 0.5s forwards;
+    animation-delay: 0ms;
+}
+.anm_left_e02{
+    animation: leftAnimation 0.5s forwards;
+    animation-delay: 250ms;
+}
+@keyframes leftAnimation{
+    100%{
+        opacity: 10;
+        transform: translateX(0);
+    }
+}
+
+
+
+
+/* 下からフェードイン */
+.anm_bottom_s01, .anm_bottom_s02, .anm_bottom_s03{
+    opacity: 0;
+    transform: translateY(3rem);
+}
+.anm_bottom_e01{
+    animation: bottomAnimation 0.5s forwards;
+    animation-delay: 0ms;
+}
+.anm_bottom_e02{
+    animation: bottomAnimation 0.5s forwards;
+    animation-delay: 200ms;
+}
+.anm_bottom_e03{
+    animation: bottomAnimation 0.5s forwards;
+    animation-delay: 300ms;
+}
+
+@keyframes bottomAnimation{
+    100%{
+        opacity: 10;
+        transform: translateY(0);
+    }
+}
+
+
+
+/* 拡大フェードイン */
+.anm_scale_s01, .anm_scale_s02{
+    opacity: 0;
+    transform: scale(0.9, 0.9);
+}
+.anm_scale_e01{
+    animation: scaleAnimation 0.5s forwards;
+    animation-delay: 0ms;
+}
+.anm_scale_e02{
+    animation: scaleAnimation 1.0s forwards;
+    animation-delay: 0ms;
+}
+@keyframes scaleAnimation{
+    100%{
+        opacity: 10;
+        transform: scale(1, 1);
+    }
+}
+
+
+
+
+/*========= LoadingのためのCSS ===============*/
+/* Loading背景画面設定　*/
+#splash {
+    /*fixedで全面に固定*/
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    text-align:center;
+    /* background:#333; */
+    /* color:#fff; */
+}
+
+/* Loading画像中央配置　*/
+#splash_logo ,#splash_box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+}
+
+
+/* ハンマーアニメーション */
+.anm_hammer{
+    animation: hammer .5s forwards;
+    animation-iteration-count: infinite;
+}
+@keyframes hammer{
+     0%{rotate: 0deg;}
+    49%{rotate: 0deg;}
+    50%{ rotate: -30deg;}
+    100%{rotate: -30deg;}
+}
+
+
+
+/* fadeOutするアニメーション */
+.anm_fadeUOut{
+    animation: fadeUOut .5s forwards;
+}
+
+@keyframes fadeUOut{
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    z-index: -100;
+  }
+}
+

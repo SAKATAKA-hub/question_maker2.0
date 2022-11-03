@@ -23,9 +23,11 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 
 /* 問題を解く */
-Vue.component('play-question-component',  require('./components/PlayQuestion/PlayQuestionComponent.vue').default);
+Vue.component('play-question-component',    require('./components/PlayQuestion/PlayQuestionComponent.vue').default);
 Vue.component('count-down-timer-component', require('./components/PlayQuestion/CountDownTimerComponent.vue').default);
-Vue.component('count-up-timer-component', require('./components/PlayQuestion/CountUpTimerComponent.vue').default);
+Vue.component('count-up-timer-component',   require('./components/PlayQuestion/CountUpTimerComponent.vue').default);
+Vue.component('pie-chart-component',        require('./components/PlayQuestion/PieChartComponent.vue').default);
+
 
 /* 問題作成 */
 Vue.component('make-question-group-form-component', require('./components/MakeQuestion/MakeQuestionGroupFormComponent.vue').default);

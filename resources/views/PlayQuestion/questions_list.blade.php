@@ -6,17 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 
-    <title>もんだいDIYパーク - mondai DIY park - オリジナル問題集が自由に作れる！無料の問題作成ツール</title>
+    <title>もんだいDIY - mondai DIY - オリジナル問題集が自由に作れる！無料の問題作成ツール</title>
 
 
-    <meta  name="description" content="誰でも簡単な操作で、自分の好きな問題集を作れる！作成した問題集のURLをコピーして友達に送れば、簡単に出題できる！『もんだいDIYパーク』は、もんだいを「作る」「答える」「出題する」ツールを揃えた、もんだいのDIY広場です。">
-    <meta property="og:title" content="もんだいDIYパーク - mondai DIY park - オリジナル問題集が自由に作れる！無料の問題作成ツール" />
-    <meta property="og:description" content="誰でも簡単な操作で、自分の好きな問題集を作れる！作成した問題集のURLをコピーして友達に送れば、簡単に出題できる！『もんだいDIYパーク』は、もんだいを「作る」「答える」「出題する」ツールを揃えた、もんだいのDIY広場です。" />
+    <meta  name="description" content="誰でも簡単な操作で、自分の好きな問題集を作れる！作成した問題集のURLをコピーして友達に送れば、簡単に出題できる！『もんだいDIY』は、もんだいを「作る」「答える」「出題する」ツールを揃えた、もんだいのDIY広場です。">
+    <meta property="og:title" content="もんだいDIY - mondai DIY - オリジナル問題集が自由に作れる！無料の問題作成ツール" />
+    <meta property="og:description" content="誰でも簡単な操作で、自分の好きな問題集を作れる！作成した問題集のURLをコピーして友達に送れば、簡単に出題できる！『もんだいDIY』は、もんだいを「作る」「答える」「出題する」ツールを揃えた、もんだいのDIY広場です。" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{route('home')}}" />
     <meta property="og:image" content="{{asset('storage/site/image/logo_lg.png')}}" />
-    <meta property="og:site_name" content="もんだいDIYパーク" />
+    <meta property="og:site_name" content="もんだいDIY" />
     <meta property="og:locale" content="ja_JP"  />
+
+    <meta name="csrf_token" content="{{ csrf_token() }}">
 
 
     <!-- ファビコン -->
@@ -26,21 +28,49 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <link href="{{ asset('avant-ui/css/avantui.css') }}" rel="stylesheet">
     <link href="{{ asset('css/index.css') }}" rel="stylesheet">
-    <meta name="csrf_token" content="{{ csrf_token() }}">
+    <link href="{{ asset('css/animation.css') }}" rel="stylesheet">
+
 
     <style> .snss>a:hover{opacity: .8;} </style>
 
     <!-- Google tag (gtag.js) -->
     @include('_parts.google_tag')
 
+    <style>
+    /*無料アイコン*/
+    .free_icon{
+        position: absolute;
+        top: -50%; left: -68px;
+        transform: translateY(-50%);
+        z-index: 2;
+        width:68px;
+        rotate: -30deg;
+    }
+    @media screen and (max-width: 576px) {
+        .free_icon{
+            left: -48px;
+            width:48px;
+            top: -20%;
+            transform: translateY(-20%);
+        }
+    }
+
+    </style>
+
 
 </head>
-<body class="bg-white ">
-    <header>
+<body class="bg-white">
+    <header class="">
         @include('_parts.header')
     </header>
+    <!-- [ ページローディング ] -->
+    <div id="splash" class="fadeUOut bg-warning">
+        <div id="splash_box">
+            <img src="{{asset('storage/site/image/splash_icon.png')}}" alt="" class="anm_hammer">
+            <p class="mt-2 text-dark">loading…</p>
+        </div>
+    </div>
     <main id="app" class="">
-
 
         <!-- [ ページトップ ] -->
         <section class="top">
@@ -55,17 +85,23 @@
 
             <div class="container-1200">
                 <div class="px-4 py-3 py-md-5 text-center">
-                    <div class="col-12 col-md-6 mx-auto  position-relative">
-                        <h5 class="fw-bold  position-absolute top-0 start-50 translate-middle-x w-100"
-                        >\オリジナル問題集をDIYできる！/</h5>
+                    <div class="col-12 col-md-6 mx-auto mb-5 text-center">
 
-                        <img src="{{asset('storage/site/image/logo_lg.png')}}" alt="サイトロゴ" class="d-block w-100">
+
+                        <h5 class="fw-bold d-inline-block position-relative  anm_top_s01">
+                            \オリジナル問題集をDIYできる！/
+                            <img src="{{asset('storage/site/image/free.png')}}" alt="無料" class="free_icon anm_scale_s01">
+                        </h5>
+
+                        <img src="{{asset('storage/site/image/logo_lg.png')}}" alt="サイトロゴ" class="d-block w-100  anm_scale_s01">
+
+                        <h5 class="bg-success text-white  anm_bottom_s01">もんだい DIY</h5>
                     </div>
                     <div class="col-md-6 mx-auto">
                         <div class="mt-3">
                             <!-- 検索フォーム -->
                             <form action="{{ route('questions_search_list') }}">
-                                <div  class="input-group overflow-hidden shadow" style="border-radius:2rem;">
+                                <div  class="input-group overflow-hidden shadow   anm_bottom_s02" style="border-radius:2rem;">
                                     {{-- <span class="input-group-text bg-white border-0 ms-3 text-secondary" id="basic-addon1">
                                         問題集の検索：
                                     </span> --}}
@@ -79,7 +115,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="mt-5">
+                        <div class="mt-5  anm_bottom_s03">
                             <a href="{{ route('make_question_group.list') }}" class="btn rounded-pill btn-outline-success btn-lg fw-bold w-100"
                             >問題集を作る</a>
                         </div>
@@ -98,7 +134,7 @@
         <!-- [ news ] -->
         <section class="" style="background: rgba(92, 240, 203, 0.5);">
             <div class="container-600">
-                <h5 class="text-dark text-center">\ お知らせ /</h5>
+                <h5 class="text-dark text-center  anm_bottom_s01">\ お知らせ /</h5>
                 @php
                     $news_list = [
                         [ 'date'=>'2022.10.10', 'title'=>'サイトをOPENしました！', 'blade'=>'20221010', ],
@@ -109,7 +145,7 @@
                         <a href="" class="list-group-item bg-transparent border-0"
                         data-bs-toggle="modal" data-bs-target="#modal{{$news['blade']}}"
                         >
-                            <div class="card card-body py-1 border-0">
+                            <div class="card card-body py-1 border-0  anm_bottom_s01">
                                 <div class="text-secondary">{{$news['date']}}</div>
                                 <span class="text-decoration-none text-dark fw-bold">{{$news['title']}}</span>
                             </div>
@@ -137,7 +173,7 @@
                             </div>
                         </div>
                     @endforeach
-                </div>                {{-- </div> --}}
+                </div>
                 <div class="text-end py-3">
                     <a href="{{route('footer_menu.news')}}" class="text-decoration-none text-secondary">一覧を見る</a>
                 </div>
@@ -162,10 +198,10 @@
 
                 <div class="row mx-3">
                     <div class="col-md-6 order-md-2" >
-                        <img src="{{ asset('storage/site/image/22901978.jpg') }}" class="d-block w-100" alt="人気の問題集">
+                        <img src="{{ asset('storage/site/image/22901978.jpg') }}" class="d-block w-100  anm_scale_s01" alt="人気の問題集">
                     </div>
                     <div class="col-md-6 d-flex align-items-center">
-                        <div>
+                        <div class="  anm_bottom_s01">
                             <p class="fw-bold text-success">
                                 Most popular handmade questions
                             </p>
@@ -204,10 +240,10 @@
 
                 <div class="row mx-3">
                     <div class="col-md-6" >
-                        <img src="{{ asset('storage/site/image/23020196.jpg') }}" class="d-block w-100" alt="人気の問題集">
+                        <img src="{{ asset('storage/site/image/23020196.jpg') }}" class="d-block w-100 anm_scale_s01" alt="人気の問題集">
                     </div>
-                    <div class="col-md-6 d-flex align-items-center">
-                        <div>
+                    <div class="col-md-6 d-flex align-items-center anm_bottom_e01">
+                        <div class="  anm_bottom_s01">
                             <p class="fw-bold text-success">
                                New handmade questions!
                             </p>
@@ -245,7 +281,7 @@
 
     <!-- JavaScript -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <script src="{{ asset('js/animation.js') }}" defer></script>
 
 </body>
 </html>

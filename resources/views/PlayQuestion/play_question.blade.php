@@ -14,7 +14,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content=" {{url()->current()}}" />
     <meta property="og:image" content="{{ asset('storage/'.$question_group->image_puth) }}" />
-    <meta property="og:site_name" content="もんだいDIYパーク" />
+    <meta property="og:site_name" content="もんだいDIY" />
     <meta property="og:locale" content="ja_JP"  />
 
 

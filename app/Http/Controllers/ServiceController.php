@@ -413,7 +413,6 @@ class ServiceController extends Controller
             }
 
 
-
             # JSONを返す(報告一覧データ)
             return response()->json([ 'data_list' => \App\Models\Contact::dataList() ]);
         }

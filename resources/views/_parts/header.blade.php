@@ -1,16 +1,17 @@
 <nav class="navbar navbar-expand navbar-light mx-auto" style="max-width:1200px;">
     <div class="container-fluid">
 
+
         <!--PC-->
-        <div class="d-none d-md-block">
+        <div class="d-none d-md-block   anm_top_s01">
             <a class="navbar-brand" href="{{ route('home')}} ">
-                <img src="{{asset('storage/site/image/header_logo.png')}}" alt="サイトロゴ" style="height:3rem;">
+                <img src="{{asset('storage/site/image/logo_lg.png')}}" alt="サイトロゴ" style="height:3rem;">
             </a>
         </div>
         <!--movile-->
-        <div class="d-md-none">
+        <div class="d-md-none   anm_top_s01">
             <a class="navbar-brand" href="{{ route('home')}} ">
-                <img src="{{asset('storage/site/image/header_logo.png')}}" alt="サイトロゴ" style="width:6rem;">
+                <img src="{{asset('storage/site/image/logo_lg.png')}}" alt="サイトロゴ" style="width:3rem;">
             </a>
         </div>
 
@@ -18,7 +19,7 @@
 
         <ul class="navbar-nav ms-auto p-0 gap-2 my-2">
 
-            <li class="nav-item">
+            <li class="nav-item anm_top_s01">
                 <a class="btn border fw-bold" style="font-size:.6rem; border-radius: 1.1rem; padding:.5rem 11px;"
                 data-bs-toggle="offcanvas" data-bs-target="#seachOffcanvas" aria-controls="seachOffcanvas"
                 >

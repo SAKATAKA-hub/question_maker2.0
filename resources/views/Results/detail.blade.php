@@ -39,17 +39,39 @@
 
 <!----- contents ----->
 @section('contents')
+
     <!-- 受検結果 -->
     <section class="bg-light">
         <div class="container-1200 py-3">
 
-            <div class="card card-body shadow border border-success mb-3">
-                <div class="row">
-                    <h5 class="fs-5 mb-0">
-                        <a href="{{route('creater',$answer_group->user->id)}}" class="text-success fw-bold fs-5 text-decoration-none">
+            <div class="card card-body  mb-3">
+
+                <div class="text-center my-5">
+                    <div class="fs-5">
+                        {{\Carbon\Carbon::parse($answer_group->created_at)->format('Y年m月d日')}}
+                    </div>
+                    <h5>
+                        <a href="{{route('creater',$answer_group->user->id)}}" class="text-success fw-bold fs-3 text-decoration-none">
                             {{$answer_group->user->name}}
                         </a>さんの受検結果
                     </h5>
+                </div>
+
+
+                <!-- 成績円グラフ -->
+                <div class="d-flex justify-content-center">
+                    <pie-chart-component percent_value="{{$answer_group->score}}"></pie-chart-component>
+                </div>
+
+
+                <div class="text-center my-5">
+                    解答時間 {{$answer_group->elapsed_time}}
+                </div>
+
+
+                {{-- <div class="row">
+
+
                     <div class="col"></div>
                     <div class="col-auto">
                         <div class="fs-5 text-end">
@@ -66,7 +88,7 @@
                             解答時間 {{$answer_group->elapsed_time}}
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="card">
                 <ul class="list-group list-group-flush">
@@ -423,8 +445,206 @@
 
             </div>
 
+
+        </div>
+    </section>
+
+
+    <section class="bg-light">
+        <div class="container-1200 py-3">
+
+            <!--
+                // Please Login Modal //
+                利用：フォローボタン・いいねボタン・通報ボタン・コメントコンポーネント
+            -->
+            {{-- <please-login-modal-component login_form_route="{{ route('user_auth.login_form') }}"
+            ></please-login-modal-component>
+            @php $user_id = Auth::check() ? Auth::user()->id : '' ; @endphp --}}
+
+
+            <!-- [ 作成者情報 ] -->
+            {{-- <div class="">
+                <div class="d-flex justify-content-between w-100">
+                    <div class="col-auto">
+                        <a href="{{route('creater',$question_group->user->id)}}" class="btn ps-0">
+                            <div class="d-flex align-items-center">
+                                <div class="user-image border ratio ratio-1x1 me-2" style="
+                                background: no-repeat center center / cover;
+                                background-image:url({{ asset('storage/'.$question_group->user->image_puth) }});
+                                width:1.8rem; border-radius:50%;
+                                "></div>
+                                <span class="text-truncate m-0">
+                                    {{$question_group->user->name}}
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-auto h-100">
+                        <div class="py-2">
+
+                            <!-- フォローボタン -->
+                            <keep-creator-user-component user_id="{{$user_id}}" creater_user_id="{{$question_group->user->id}}"
+                            keep="{{\App\Models\KeepCreatorUser::isKeep($user_id, $question_group->user->id)}}"
+                            route="{{route('keep_creator_user.api')}}"></keep-creator-user-component>
+
+                        </div>
+                    </div>
+                </div>
+            </div> --}}
+
+
+            {{-- <!-- [ 問題集の情報 ] -->
+            <div class="card card-body mb-3">
+
+
+                <!-- タイトル -->
+                <h5 class="">{{ $question_group->title }}</h5>
+
+                <!-- タグ -->
+                <div class="mb-3">
+                    @if ($question_group->tags)
+                    <div class="d-flex gap-1 align-items-center">
+                        @foreach ( explode('　',$question_group->tags) as $tag )
+                        <form action="{{ route('questions_search_list') }}">
+                            <input type="hidden" name="seach_keywords" value="{{$tag}}">
+
+                            <button type="submit" class="btn p-0 px-1 border text-muted" style="font-size:.8rem;">{{ $tag }}</button>
+                        </form>
+                        @endforeach
+                    </div>
+                    @endif
+                </div>
+
+
+                <!-- 3ボタン -->
+                <div class="d-flex align-items-center gap-3">
+                    <!-- お気に入りボタン -->
+                    <div>
+                        <keep-question-group-component
+                        user_id="{{$user_id}}" question_group_id="{{$question_group->id}}"
+                        keep="{{\App\Models\KeepQuestionGroup::isKeep($user_id, $question_group->id)}}"
+                        route="{{route('keep_question_group.api')}}"
+                        ></keep-question-group-component>
+                    </div>
+
+                    <!-- コメントボタン -->
+                    @if( $user_id )
+                        <div>
+                            <button class="btn btn-sm"
+                            data-bs-toggle="offcanvas" data-bs-target="#commentOffcanvas" aria-controls="commentOffcanvas"
+                            >
+                                <div class="fs-5">
+                                    <i class="bi bi-chat-square-text"></i>
+                                </div>
+                                <div style="font-size:.6rem;">コメント</div>
+                            </button>
+                        </div>
+                    @else
+                        <div>
+                            <button class="btn btn-sm"
+                            data-bs-toggle="modal" data-bs-target="#PleaseLoginModal"                        >
+                                <div class="fs-5">
+                                    <i class="bi bi-chat-square-text"></i>
+                                </div>
+                                <div style="font-size:.6rem;">コメント</div>
+                            </button>
+                        </div>
+                    @endif
+
+
+
+
+                    <!-- 通報ボタン -->
+                    <div>
+                        <violation-report-component
+                        user_id="{{$user_id}}"
+                        question_group_id="{{$question_group->id}}"
+                        route="{{route('violation_report.post.api')}}"
+                        route_admin_send_email="{{ env('COMPANY_ROUTE_VIOLATION_REPORT_SEND_EMAIL') }}"
+                        ></violation-report-component>
+                    </div>
+                </div>
+
+
+                <!-- [ シェアボタン ] -->
+                <div class="py-2">
+                    @include('_parts.share_group')
+                </div>
+
+
+                <div id="collapseQGInfo" class="collapse mt-3">
+                    <div class="d-md-flex">
+                        <div class="col-md-6 order-2 p-3">
+
+
+                            <!-- サムネ画像 -->
+                            <div class="ratio ratio-16x9" style="
+                                background: no-repeat center center / cover;
+                                background-image:url({{ asset('storage/'.$question_group->image_puth) }});
+                                border-radius: .5rem;
+                            "></div>
+
+
+                        </div>
+                        <div class="col-md-6 order-1">
+
+                            <!-- [ 基本情報 ] -->
+                            <div class="mb-3">
+                                <div class="d-flex">
+                                    <div class="col-4 ps-3 bg-light">公開日</div>
+                                    <div class="col-8 ps-3">{{\Carbon\Carbon::parse( $question_group->published_at )->format('Y年m月d日 H:i')}}</div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="col-4 ps-3 bg-light">問題数</div>
+                                    <div class="col-8 ps-3">全{{$question_group->question_count}}問</div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="col-4 ps-3 bg-light">制限時間</div>
+                                    <div class="col-8 ps-3">{{$question_group->time_limit_text}}</div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="col-4 ps-3 bg-light">受験回数</div>
+                                    <div class="col-8 ps-3">{{$question_group->accessed_count}}回</div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="col-4 ps-3 bg-light">平均点</div>
+                                    <div class="col-8 ps-3">{{sprintf('%.1f',$question_group->average_score)}}点</div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="col-4 ps-3 bg-light">いいね数</div>
+                                    <div class="col-8 ps-3">{{$question_group->keep_question_groups->count()}}</div>
+                                </div>
+                            </div>
+
+                            <!-- [ 問題集の説明 ] -->
+                            @if ( $question_group->resume_text )
+                                <div class="modal-body">
+                                    <div class="card card-body border-0 bg-light-success">
+                                        {!! nl2br( e( $question_group->resume_text ) ) !!}
+                                    </div>
+                                </div>
+                            @endif
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--詳しく見るボタン-->
+                <div class="py-2 text-end">
+                    <a href="" class="text-decoration-none"
+                    data-bs-toggle="collapse" data-bs-target="#collapseQGInfo" aria-expanded="false" aria-controls="collapseQGInfo"
+                    >
+                        <see-more-btn-component></see-more-btn-component>
+
+                    </a>
+                </div>
+
+
+            </div> --}}
+
             <!-- コメントリストコンポーネント -->
-            {{-- <div>
+            <div>
                 @php
                     $user_id = Auth::check() ? Auth::user()->id : '' ;
                 @endphp
@@ -433,7 +653,7 @@
                 route_comment_destory_api="{{route('comment.destroy.api')}}"
                 user_id="{{$user_id}}" question_group_id="{{$question_group->id}}"
                 ></comment-component>
-            </div> --}}
+            </div>
 
 
 

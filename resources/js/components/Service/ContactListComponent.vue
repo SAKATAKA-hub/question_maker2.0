@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <form :action="route_list" v-show="test" method="POST">
+        <form :action="route_list" v-if="test" method="POST">
             <input v-for="(input, key) in inputs" :key="key"
             type="hidden" :name="key" :value="input"
             >
