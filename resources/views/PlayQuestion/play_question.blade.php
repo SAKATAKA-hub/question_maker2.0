@@ -40,10 +40,10 @@
 
         <!-- contents -->
         <div id="app">
-            <section class="bg-light-success">
-                <div class="container-1200">
+            <section class="">
+                <div class="container-1200 mt-5 bg-light border-start border-5 border-success">
 
-                    <h2 class="p-3">{{$question_group->title}}</h2>
+                    <h2 class="">{{$question_group->title}}</h2>
 
                 </div>
             </section>

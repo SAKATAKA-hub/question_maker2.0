@@ -59,7 +59,7 @@
                 <ul class="ps-0" style="list-style:none;">
 
                     <li v-for="( question, q_num ) in questions" :key="q_num">
-                        <div v-show="question_num == q_num" class="card">
+                        <div v-show="question_num == q_num" class="card border-0 shadow">
 
                             <!-- 問題文 -->
                             <div class="card-body">
@@ -138,7 +138,7 @@
                         </div><!-- end card -->
                     </li>
                     <li v-if="questions.length == 0">
-                        <div class="card card-body py-5">
+                        <div class="card border-0 shadow card-body py-5">
                             <div class="d-flex justify-content-center">
                                 <div class="spinner-border" role="status">
                                     <span class="visually-hidden">Loading...</span>
@@ -148,7 +148,7 @@
                         </div>
                     </li>
                     <li v-else-if="question_num == questions.length">
-                        <div class="card card-body text-center py-5">
+                        <div class="card border-0 shadow card-body text-center py-5">
 
 
                             <i class="bi bi-hourglass-split mb-3" style="font-size:3rem;"></i>
@@ -362,5 +362,8 @@
     .btn-outline-success:hover{
         background: #fff;
         color: #12b88e;
+    }
+    .btn-outline-success, .btn-outline-success.disabled, .btn-outline-success:disabled {
+        color: #495057;
     }
 </style>

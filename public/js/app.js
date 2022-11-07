@@ -15095,7 +15095,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-outline-success:hover{\n    background: #fff;\n    color: #12b88e;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-outline-success:hover{\n    background: #fff;\n    color: #12b88e;\n}\n.btn-outline-success, .btn-outline-success.disabled, .btn-outline-success:disabled {\n    color: #495057;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -36952,7 +36952,7 @@ var render = function () {
                               expression: "question_num == q_num",
                             },
                           ],
-                          staticClass: "card",
+                          staticClass: "card border-0 shadow",
                         },
                         [
                           _c("div", { staticClass: "card-body" }, [
@@ -37170,7 +37170,10 @@ var render = function () {
                     ? _c("li", [
                         _c(
                           "div",
-                          { staticClass: "card card-body text-center py-5" },
+                          {
+                            staticClass:
+                              "card border-0 shadow card-body text-center py-5",
+                          },
                           [
                             _c("i", {
                               staticClass: "bi bi-hourglass-split mb-3",
@@ -37456,7 +37459,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card card-body py-5" }, [
+    return _c("div", { staticClass: "card border-0 shadow card-body py-5" }, [
       _c("div", { staticClass: "d-flex justify-content-center" }, [
         _c(
           "div",
