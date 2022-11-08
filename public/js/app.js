@@ -5993,6 +5993,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -35756,11 +35757,38 @@ var render = function () {
                 _c(
                   "select",
                   {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.inputs.time_h,
+                        expression: "inputs.time_h",
+                      },
+                    ],
                     staticClass: "form-select ",
                     attrs: {
                       name: "time_limit[]",
                       "aria-label": "Default select example",
                       id: "time_limit_h_input",
+                    },
+                    on: {
+                      change: function ($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function (o) {
+                            return o.selected
+                          })
+                          .map(function (o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.inputs,
+                          "time_h",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      },
                     },
                   },
                   _vm._l(24, function (num_h) {
@@ -35769,18 +35797,12 @@ var render = function () {
                       {
                         key: num_h,
                         domProps: {
-                          value:
-                            10 >= num_h - 1 ? "0" + (num_h - 1) : num_h - 1,
-                          selected:
-                            (10 > num_h - 1 ? "0" + (num_h - 1) : num_h - 1) ==
-                            _vm.inputs.time_h,
+                          value: 10 > num_h - 1 ? "0" + (num_h - 1) : num_h - 1,
                         },
                       },
                       [
                         _vm._v(
-                          _vm._s(
-                            10 >= num_h - 1 ? "0" + (num_h - 1) : num_h - 1
-                          )
+                          _vm._s(10 > num_h - 1 ? "0" + (num_h - 1) : num_h - 1)
                         ),
                       ]
                     )
@@ -35795,10 +35817,37 @@ var render = function () {
                 _c(
                   "select",
                   {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.inputs.time_m,
+                        expression: "inputs.time_m",
+                      },
+                    ],
                     staticClass: "form-select",
                     attrs: {
                       name: "time_limit[]",
                       "aria-label": "Default select example",
+                    },
+                    on: {
+                      change: function ($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function (o) {
+                            return o.selected
+                          })
+                          .map(function (o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.inputs,
+                          "time_m",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      },
                     },
                   },
                   _vm._l(60, function (num_m) {
@@ -35807,18 +35856,12 @@ var render = function () {
                       {
                         key: num_m,
                         domProps: {
-                          value:
-                            10 >= num_m - 1 ? "0" + (num_m - 1) : num_m - 1,
-                          selected:
-                            (10 > num_m - 1 ? "0" + (num_m - 1) : num_m - 1) ==
-                            _vm.inputs.time_m,
+                          value: 10 > num_m - 1 ? "0" + (num_m - 1) : num_m - 1,
                         },
                       },
                       [
                         _vm._v(
-                          _vm._s(
-                            10 >= num_m - 1 ? "0" + (num_m - 1) : num_m - 1
-                          )
+                          _vm._s(10 > num_m - 1 ? "0" + (num_m - 1) : num_m - 1)
                         ),
                       ]
                     )
@@ -35833,10 +35876,37 @@ var render = function () {
                 _c(
                   "select",
                   {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.inputs.time_s,
+                        expression: "inputs.time_s",
+                      },
+                    ],
                     staticClass: "form-select",
                     attrs: {
                       name: "time_limit[]",
                       "aria-label": "Default select example",
+                    },
+                    on: {
+                      change: function ($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function (o) {
+                            return o.selected
+                          })
+                          .map(function (o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.inputs,
+                          "time_s",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      },
                     },
                   },
                   _vm._l(60, function (num_s) {
@@ -35845,8 +35915,7 @@ var render = function () {
                       {
                         key: num_s,
                         domProps: {
-                          value:
-                            10 >= num_s - 1 ? "0" + (num_s - 1) : num_s - 1,
+                          value: 10 > num_s - 1 ? "0" + (num_s - 1) : num_s - 1,
                           selected:
                             (10 > num_s - 1 ? "0" + (num_s - 1) : num_s - 1) ==
                             _vm.inputs.time_s,
@@ -35854,9 +35923,7 @@ var render = function () {
                       },
                       [
                         _vm._v(
-                          _vm._s(
-                            10 >= num_s - 1 ? "0" + (num_s - 1) : num_s - 1
-                          )
+                          _vm._s(10 > num_s - 1 ? "0" + (num_s - 1) : num_s - 1)
                         ),
                       ]
                     )

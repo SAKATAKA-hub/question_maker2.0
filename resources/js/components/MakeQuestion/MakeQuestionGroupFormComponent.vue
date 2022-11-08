@@ -73,36 +73,37 @@
                 <div class="row align-items-center">
                     <!--時間-->
                     <div class="col-auto">
-                        <select name="time_limit[]" class="form-select " aria-label="Default select example" id="time_limit_h_input">
+                        <select v-model="inputs.time_h"
+                        name="time_limit[]" class="form-select " aria-label="Default select example" id="time_limit_h_input">
 
                             <option v-for="num_h in 24" :key="num_h"
-                            :value=" 10 >= num_h-1  ? '0'+(num_h-1) : num_h-1"
-                            :selected="( 10 > num_h-1  ? '0'+(num_h-1) : num_h-1 ) == inputs.time_h"
-                            >{{ 10 >= num_h-1 ? '0'+(num_h-1) : num_h-1}}</option>
+                            :value=" 10 > num_h-1  ? '0'+(num_h-1) : num_h-1"
+                            >{{ 10 > num_h-1 ? '0'+(num_h-1) : num_h-1}}</option>
 
                         </select>
                     </div>
                     <div class="col-auto">時間</div>
                     <!--分-->
                     <div class="col-auto">
-                        <select name="time_limit[]" class="form-select" aria-label="Default select example">
+                        <select v-model="inputs.time_m"
+                        name="time_limit[]" class="form-select" aria-label="Default select example">
 
                             <option v-for="num_m in 60" :key="num_m"
-                            :value=" 10 >= num_m-1  ? '0'+(num_m-1) : num_m-1"
-                            :selected="( 10 > num_m-1  ? '0'+(num_m-1) : num_m-1 ) == inputs.time_m"
-                            >{{ 10 >= num_m-1 ? '0'+(num_m-1) : num_m-1}}</option>
+                            :value=" 10 > num_m-1  ? '0'+(num_m-1) : num_m-1"
+                            >{{ 10 > num_m-1 ? '0'+(num_m-1) : num_m-1}}</option>
 
                         </select>
                     </div>
                     <div class="col-auto">分</div>
                     <!--秒-->
                     <div class="col-auto">
-                        <select name="time_limit[]" class="form-select" aria-label="Default select example">
+                        <select v-model="inputs.time_s"
+                        name="time_limit[]" class="form-select" aria-label="Default select example">
 
                             <option v-for="num_s in 60" :key="num_s"
-                            :value=" 10 >= num_s-1  ? '0'+(num_s-1) : num_s-1"
+                            :value=" 10 > num_s-1  ? '0'+(num_s-1) : num_s-1"
                             :selected="( 10 > num_s-1  ? '0'+(num_s-1) : num_s-1 ) == inputs.time_s"
-                            >{{ 10 >= num_s-1 ? '0'+(num_s-1) : num_s-1}}</option>
+                            >{{ 10 > num_s-1 ? '0'+(num_s-1) : num_s-1}}</option>
 
                         </select>
                     </div>
