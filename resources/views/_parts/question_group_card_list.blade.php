@@ -21,7 +21,7 @@
 
                 </div>
             </div>
-            <div class="col-9 py-2" style="font-size:11px;">
+            <div class="col-9 py-2 pe-5" style="font-size:11px;">
 
                 <!-- タイトル -->
                 <h5 class="d-none d-md-block text-truncate fw-bold">{{ $question_group->title }}</h5>

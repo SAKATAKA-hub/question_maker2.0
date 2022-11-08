@@ -106,7 +106,7 @@
                                                 <input type="radio" class="btn-check"
                                                 :name="'answer_'+q_num" :id="'answer_'+q_num +o_num" :value="option_answer_text"
                                                 >
-                                                <label class="btn btn-outline-success text-start w-100" :for="'answer_'+q_num +o_num"
+                                                <label class="btn btn-outline-success btn-select-ans text-start w-100" :for="'answer_'+q_num +o_num"
                                                 >{{option_answer_text}}</label>
                                             </div>
 
@@ -124,7 +124,7 @@
                                                 <input type="checkbox" class="btn-check"
                                                 :name="'answer_'+q_num+'[]'" :id="'answer_'+q_num +o_num" :value="option_answer_text"
                                                 >
-                                                <label class="btn btn-outline-success text-start w-100" :for="'answer_'+q_num +o_num"
+                                                <label class="btn btn-outline-success btn-select-ans text-start w-100" :for="'answer_'+q_num +o_num"
                                                 >{{option_answer_text}}</label>
                                             </div>
 
@@ -359,11 +359,11 @@
     }
 </script>
 <style>
-    .btn-outline-success:hover{
+    .btn-select-ans:hover{
         background: #fff;
         color: #12b88e;
     }
-    .btn-outline-success, .btn-outline-success.disabled, .btn-outline-success:disabled {
+    .btn-select-ans, .btn-select-ans.disabled, .btn-select-ans:disabled {
         color: #495057;
     }
 </style>

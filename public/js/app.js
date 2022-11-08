@@ -15096,7 +15096,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-outline-success:hover{\n    background: #fff;\n    color: #12b88e;\n}\n.btn-outline-success, .btn-outline-success.disabled, .btn-outline-success:disabled {\n    color: #495057;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-select-ans:hover{\n    background: #fff;\n    color: #12b88e;\n}\n.btn-select-ans, .btn-select-ans.disabled, .btn-select-ans:disabled {\n    color: #495057;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -37139,7 +37139,7 @@ var render = function () {
                                                   "label",
                                                   {
                                                     staticClass:
-                                                      "btn btn-outline-success text-start w-100",
+                                                      "btn btn-outline-success btn-select-ans text-start w-100",
                                                     attrs: {
                                                       for:
                                                         "answer_" +
@@ -37201,7 +37201,7 @@ var render = function () {
                                                   "label",
                                                   {
                                                     staticClass:
-                                                      "btn btn-outline-success text-start w-100",
+                                                      "btn btn-outline-success btn-select-ans text-start w-100",
                                                     attrs: {
                                                       for:
                                                         "answer_" +
