@@ -2,12 +2,13 @@
     <div class="question_group_card card p-1 overflow-hidden list-group-item-action border-0 shadow mb-3 " style="cursor:pointer;"
     data-bs-toggle="modal" data-bs-target="#questionModal{{ $question_group->id +1 }}"
     >
-        <div class="row">
+        <div class="d-flex gap-3">
             <div class="col-3">
                 <div class="d-flex  align-items-center h-100">
 
                     <!-- サムネ画像 -->
-                    <div class="ratio h-100 d-none d-sm-block" style="
+                    <div class="ratio d-none d-sm-block" style="
+                        height:150px;
                         background: no-repeat center center / cover;
                         background-image:url({{ asset('storage/'.$question_group->image_puth) }});
                         border-radius:.25rem;
@@ -23,7 +24,8 @@
             <div class="col-9 py-2" style="font-size:11px;">
 
                 <!-- タイトル -->
-                <div class="comment-author text-truncate fw-bold">{{ $question_group->title }}</div>
+                <h5 class="d-none d-md-block text-truncate fw-bold">{{ $question_group->title }}</h5>
+                <div class="d-md-none text-truncate fw-bold">{{ $question_group->title }}</div>
 
                 <!-- 作成者情報 -->
                 <div class="">
@@ -47,11 +49,11 @@
                     <span class="text-muted">-受験回数{{$question_group->accessed_count}}</span>
 
                     <!-- 問題数 -->
-                    <span class="text-muted d-none d-md-inline">-全{{$question_group->question_count}}問</span>
+                    <span class="text-muted">-全{{$question_group->question_count}}問</span>
                     <!-- 制限時間 -->
                     <span class="text-muted d-none d-md-inline">-<i class="bi bi-stopwatch"></i>{{$question_group->time_limit_text}}</span>
                     <!-- 平均点 -->
-                    <span class="text-muted d-none d-md-inline">-平均{{$question_group->average_score}}点</span>
+                    <span class="text-muted">-平均{{$question_group->average_score}}点</span>
                 </div>
 
                 <!-- 説明文 -->
