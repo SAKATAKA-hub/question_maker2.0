@@ -29,7 +29,7 @@ class Method
         {
 
             //1. $st_countより多い文字数・ストレージを利用中
-            $file_path = str_replace(["\r\n", "\r", "\n"], '', $old_text);
+            $file_path = str_replace(["\r\n", "\r", "\n", "\t","\v"], '', $old_text);
             if(
                 ( mb_strlen( $new_text ) > $st_count ) &&
                 Storage::exists( $file_path )
@@ -82,7 +82,7 @@ class Method
          */
          public static function deleteStorageText($text)
         {
-            $file_path = str_replace(["\r\n", "\r", "\n"], '', $text);
+            $file_path = str_replace(["\r\n", "\r", "\n", "\t","\v"], '', $text);
             if( Storage::exists( $file_path ) ){ storage::delete( $file_path ); }
         }
 

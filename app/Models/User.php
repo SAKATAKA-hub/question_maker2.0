@@ -231,7 +231,7 @@ class User extends Authenticatable
         {
             // パスから改行を取り除く
             $text = $this->profile;
-            $path = str_replace(["\r\n", "\r", "\n"], '', $text);
+            $path = str_replace(["\r\n", "\r", "\n", "\t","\v"], '', $text);
 
             return \Illuminate\Support\Facades\Storage::exists($path) ?
             \Illuminate\Support\Facades\Storage::get($path) : $text;
