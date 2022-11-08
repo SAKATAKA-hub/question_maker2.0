@@ -65,6 +65,9 @@
         <p class="text-secondary" style="font-size:.6rem">自己紹介</p>
         <p>
             {!! nl2br( e($creater_user->profile_text) ) !!}
+
+
+            {{-- あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ --}}
         </p>
     </div>
 

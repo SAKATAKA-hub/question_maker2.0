@@ -49,7 +49,7 @@
 
                 <!-- サイドコンテンツ -->
                 <!--PC-->
-                <div class="d-none d-md-block pe-3" style="min-width:300px;">
+                <div class="d-none d-md-block pe-3" style="min-width:300px; width:300px;">
                     @include('_parts.creater_info')
                 </div>
                 <!--movile-->
@@ -62,11 +62,11 @@
 
 
                 <!-- 中央コンテンツ -->
-                <div class="flex-fill">
-
+                <div class="flex-fill overflow-hidden px-3">
 
                     <ul class="list-group">
                         @forelse ($creater_user->follower_users as $follower_user)
+
                             <li class="list-group-item" >
                                 <div class="row">
                                     <!--[フォロワー画像]-->

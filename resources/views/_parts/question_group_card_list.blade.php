@@ -1,5 +1,5 @@
 <div class="">
-    <div class="question_group_card card card-body list-group-item-action border-0 shadow mb-3 " style="cursor:pointer;"
+    <div class="question_group_card card p-1 overflow-hidden list-group-item-action border-0 shadow mb-3 " style="cursor:pointer;"
     data-bs-toggle="modal" data-bs-target="#questionModal{{ $question_group->id +1 }}"
     >
         <div class="row">
@@ -7,23 +7,23 @@
                 <div class="d-flex  align-items-center h-100">
 
                     <!-- サムネ画像 -->
-                    <div class="ratio ratio-16x9 d-none d-sm-block" style="
+                    <div class="ratio h-100 d-none d-sm-block" style="
                         background: no-repeat center center / cover;
                         background-image:url({{ asset('storage/'.$question_group->image_puth) }});
-                        border-radius: .5rem;
+                        border-radius:.25rem;
                     "></div>
-                    <div class="ratio ratio-4x3 d-sm-none" style="
+                    <div class="ratio h-100 d-sm-none" style="
                         background: no-repeat center center / cover;
                         background-image:url({{ asset('storage/'.$question_group->image_puth) }});
-                        border-radius: .5rem;
+                        border-radius:.25rem;
                     "></div>
 
                 </div>
             </div>
-            <div class="col-9" style="font-size:11px;">
+            <div class="col-9 py-2" style="font-size:11px;">
 
                 <!-- タイトル -->
-                <h5 class="comment-author text-truncate">{{ $question_group->title }}</h5>
+                <div class="comment-author text-truncate fw-bold">{{ $question_group->title }}</div>
 
                 <!-- 作成者情報 -->
                 <div class="">
