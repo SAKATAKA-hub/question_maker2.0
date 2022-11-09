@@ -55,11 +55,6 @@
 <section class="bg-light">
     <div class="container-1200 pt-5">
 
-        input_timetime_h="{{substr( $question_group->time_limit,0,2 )}}"
-        input_timetime_m="{{substr( $question_group->time_limit,3,2 )}}"
-        input_timetime_s="{{substr( $question_group->time_limit,6,2 )}}"
-
-
         @php
             $noimage_path = 'site/image/no_image.png';
             $img_path = isset($question_group) ? $question_group->image_puth : $noimage_path ;
