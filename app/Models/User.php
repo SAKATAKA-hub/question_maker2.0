@@ -26,6 +26,10 @@ class User extends Authenticatable
         'profile',
         'error_count',
         'key',
+
+        //2022_11_11追加
+        'google_id',
+        'line_id',
     ];
 
     /**

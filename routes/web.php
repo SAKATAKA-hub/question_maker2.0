@@ -338,7 +338,13 @@ Route::middleware(['user_auth'])->group(function () {
 | 認証・登録・パスワード変更　(UserAuthController)
 |--------------------------------------------------------------------------
 */
+
     /* ユーザー認証 */
+
+        # ログイン方法選択ページ(login_form)
+        Route::get('/user_auth/login_method_choosing', function () { return view('user_auth.login_method_choosing'); })
+        ->name('user_auth.login_method_choosing');
+
 
         # ログイン画面の表示(login_form)
         Route::get('/user_auth/login_form', function () { return view('user_auth.login_form'); })
@@ -355,6 +361,24 @@ Route::middleware(['user_auth'])->group(function () {
         # ログインが必要ですページ(require_login)　※ログイン前にログインが必要なページにアクセスした際に表示されるページ
         Route::get('/user_auth/require_login', function () { return view('user_auth.require_login'); })
         ->name('user_auth.require_login');
+
+
+
+    /* google ユーザー認証 */
+
+
+        # テスト
+        Route::get('/user_auth/google', function(){ return view('test.sns_auth'); })
+        ->name('user_auth.google');
+
+        # Googleログインページリダイレクト(google_redirect)
+        Route::get('/user_auth/google/redirect', [ \App\Http\Controllers\UserSnsAuthController::class, 'google_redirect'])
+        ->name('user_auth.google.redirect');
+
+        # Googleログイン処理(google_callback)
+        Route::get('/user_auth/google/callback', [ \App\Http\Controllers\UserSnsAuthController::class, 'google_callback'])
+        ->name('user_auth.google.callback');
+
 
 
     /* ユーザー登録 */

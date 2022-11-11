@@ -65,7 +65,7 @@
                     </a>
                 </li>
             @else
-                <li class="nav-item"><a class="btn btn-warning" style="font-size:.6rem; " href="{{ route('user_auth.register_form') }}"
+                <li class="nav-item"><a class="btn btn-warning" style="font-size:.6rem; " href="{{ route('user_auth.login_method_choosing') }}"
                 >会員登録</a></li>
                 <li class="nav-item"><a class="btn btn-success" style="font-size:.6rem; text-decoration:none;" href="{{ route('user_auth.login_form') }}"
                 >ログイン</a></li>

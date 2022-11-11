@@ -85,7 +85,7 @@
                     </div>
                 </div>
 
-                <div class="mb-0">
+                {{-- <div class="mb-0">
                     <div class="col-md-8 offset-md-2 text-center">
                         <a class="btn btn-link"  style="text-decoration:none;"
                         href="{{ route('user_auth.reset_pass_form') }}">
@@ -97,12 +97,42 @@
                         href="{{ route('user_auth.register_form') }}" style="text-decoration:none;">
                             {{ __('無料会員登録はこちら') }}
                         </a>
+                        <a class="btn btn-warning text-white w-100"  style="text-decoration:none;"
+                        href="{{ route('user_auth.register_form') }}" style="text-decoration:none;">
+                            {{ __('無料会員登録はこちら') }}
+                        </a>
+                        <a class="btn btn-warning text-white w-100"  style="text-decoration:none;"
+                        href="{{ route('user_auth.register_form') }}" style="text-decoration:none;">
+                            {{ __('無料会員登録はこちら') }}
+                        </a>
+
                     </div>
-                </div>
+                </div> --}}
 
 
 
             </form>
+        </div>
+    </div><!-- end card -->
+
+    <div class="my-5">
+        <div class="col-md-8 offset-md-2 text-center">
+            <a class="btn btn-link mb-4"  style="text-decoration:none;"
+            href="{{ route('user_auth.reset_pass_form') }}">
+                {{ __('パスワードをお忘れの方はこちら') }}
+            </a>
+
+            <a class="btn d-flex border w-100 mb-4"  style="text-decoration:none;"
+            href="{{ route('user_auth.google.redirect') }}">
+                <div class="col-auto"><img src="{{asset('storage/site/image/g-logo.png')}}"
+                alt="googleロゴ" class="d-block" style="height:1.5rem;"></div>
+                <div class="col">Googleでログイン</div>
+            </a>
+
+            <a class="btn btn-warning text-white w-100 mb-4"  style="text-decoration:none;"
+            href="{{ route('user_auth.register_form') }}">
+                {{ __('メールアドレスから　無料会員登録') }}
+            </a>
         </div>
     </div>
 @endsection

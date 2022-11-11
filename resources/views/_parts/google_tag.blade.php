@@ -1,3 +1,5 @@
+@if( !env('APP_DEBUG') )
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S6BSV70R9J"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -6,3 +8,5 @@
 
   gtag('config', 'G-S6BSV70R9J');
 </script>
+
+@endif
