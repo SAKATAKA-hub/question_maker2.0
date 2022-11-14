@@ -20,9 +20,10 @@
 
 </head>
 <body class="bg-white">
-    <header class="container-600">
-        <h1 class="m-0"><a href="{{ route('home')}}" class="navbar-brand fs-2 fw-bold text-success">
-            {{ env('APP_NAME') }}
+    <header class="">
+        <h1 class="container-600"><a href="{{ route('home')}}" class="navbar-brand fs-2 fw-bold text-success">
+            {{-- {{ env('APP_NAME') }} --}}
+            <img src="{{asset('storage/site/image/logo_lg.png')}}" alt="サイトロゴ" style="width:3rem;">
         </a></h1>
     </header>
     <main class="container-600">
@@ -35,8 +36,9 @@
 
     </main>
     <footer class="container-600">
-        <p class="m-0 ">&copy; Next Arrow Inc. All Rights Reserved.</p>
+        <p class="m-0">&copy; TOSUMA Co.,Ltd.</p>
     </footer>
+
 
     <!-- bootstrap JavaScript -->
     <script src="{{ asset('js/app.js') }}" defer></script>

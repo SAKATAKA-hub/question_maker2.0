@@ -35,6 +35,7 @@
 @section('contents')
 @php
 $news_list = [
+    [ 'date'=>'2022.11.11', 'title'=>'Googleログイン機能を追加しました。', 'blade'=>'20221111', ],
     [ 'date'=>'2022.10.10', 'title'=>'サイトをOPENしました！', 'blade'=>'20221010', ],
 ];
 @endphp

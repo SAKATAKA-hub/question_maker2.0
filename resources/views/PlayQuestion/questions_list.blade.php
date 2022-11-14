@@ -133,10 +133,11 @@
         </section>
         <!-- [ news ] -->
         <section class="" style="background: rgba(92, 240, 203, 0.5);">
-            <div class="container-600">
+            <div class="container-600 py-5">
                 <h5 class="text-dark text-center  anm_bottom_s01">\ お知らせ /</h5>
                 @php
                     $news_list = [
+                        [ 'date'=>'2022.11.11', 'title'=>'Googleログイン機能を追加しました。', 'blade'=>'20221111', ],
                         [ 'date'=>'2022.10.10', 'title'=>'サイトをOPENしました！', 'blade'=>'20221010', ],
                     ];
                 @endphp
@@ -191,8 +192,19 @@
 
 
         </section>
+
+        <!-- [ 使い方スライダー ] -->
+        @if( !env('APP_DEBUG') )
+        <section>
+            <div class="container-1200 my-5">
+            </div>
+        </section>
+        @endif
+
+
+
         <!-- [ 人気問題集トップ５！ ] -->
-        {{-- <section>
+        <section>
             <div class="container-1200 my-5">
 
 
@@ -233,7 +245,7 @@
 
             </div>
         </section>
-        <div class="container-1200 divider divider-dashed my-5"></div><!---- Divider ----> --}}
+        <div class="container-1200 divider divider-dashed my-5"></div><!---- Divider ---->
         <!-- [ 新着問題集トップ１０！ ] -->
         <section>
             <div class="container-1200 my-5">
