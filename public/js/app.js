@@ -6003,9 +6003,9 @@ __webpack_require__.r(__webpack_exports__);
         title: '',
         resume: '',
         tags: '',
-        time_h: '',
-        time_m: '',
-        time_s: ''
+        time_h: '00',
+        time_m: '00',
+        time_s: '00'
       }
     };
   },
@@ -6056,17 +6056,17 @@ __webpack_require__.r(__webpack_exports__);
     //画像なし画像パス
     input_time_h: {
       type: String,
-      "default": ''
+      "default": '00'
     },
     //制限時間[時]
     input_time_m: {
       type: String,
-      "default": ''
+      "default": '00'
     },
     //制限時間[分}
     input_time_s: {
       type: String,
-      "default": ''
+      "default": '00'
     } //制限時間[秒]
 
   },

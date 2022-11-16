@@ -90,18 +90,21 @@ main{
         max-width: 1200px;
         margin: 0 auto;
         padding: 1rem;
+        overflow: hidden;
     }
 
     .container-900{
         max-width: 900px;
         margin: 0 auto;
         padding: 1rem;
+        overflow: hidden;
     }
 
     .container-600{
         max-width: 600px;
         margin: 0 auto;
         padding: 1rem;
+        overflow: hidden;
     }
 
 

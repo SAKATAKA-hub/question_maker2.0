@@ -158,7 +158,7 @@
                     title: '',
                     resume: '',
                     tags: '',
-                    time_h: '',time_m: '',time_s: '',
+                    time_h: '00',time_m: '00',time_s: '00',
                 },
             }
         },
@@ -177,9 +177,9 @@
             img_path:     { type: String, default: '', }, //画像パス
             noimg_path:   { type: String, default: '', }, //画像なし画像パス
 
-            input_time_h:       { type: String, default: '', }, //制限時間[時]
-            input_time_m:       { type: String, default: '', }, //制限時間[分}
-            input_time_s:       { type: String, default: '', }, //制限時間[秒]
+            input_time_h:       { type: String, default: '00', }, //制限時間[時]
+            input_time_m:       { type: String, default: '00', }, //制限時間[分}
+            input_time_s:       { type: String, default: '00', }, //制限時間[秒]
 
         },
         mounted() {

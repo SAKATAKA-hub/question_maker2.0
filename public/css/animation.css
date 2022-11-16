@@ -3,18 +3,18 @@
 *  フェードインアニメーション
 * <-- アニメーションを実行したい要素にクラスを付ける -->
 *
-* 上からフェードイン {.anm_top_s01,.anm_top_s02}
-* 左からフェードイン {.anm_left_s01,.anm_left_s02}
-* 下からフェードイン {.anm_bottom_s01,.anm_bottom_s02, .anm_left_s03}
-* 斜め上からフェードイン {anm_uphill_s01,,.anm_uphill_s02}
-* 拡大フェードイン {.anm_scale_s01,,.anm_scale_s02}
+* 上からフェードイン {.anm_top_01,.anm_top_02}
+* 左からフェードイン {.anm_left_01,.anm_left_02}
+* 下からフェードイン {.anm_bottom_01,.anm_bottom_02, .anm_left_03}
+* 斜め上からフェードイン {anm_uphill_01,,.anm_uphill_02}
+* 拡大フェードイン {.anm_scale_01,,.anm_scale_02}
 *
 * =====================================================
 */
 /* 上からフェードイン */
-.anm_top_s01, .anm_top_s02{
+.anm_top_01, .anm_top_02{
     opacity: 0;
-    transform: translateY(-3rem);
+    transform: translateY(-100px);
 }
 .anm_top_e01{
     animation: topAnimation 0.5s forwards;
@@ -25,28 +25,10 @@
     animation-delay: 250ms;
 }
 @keyframes topAnimation{
-    100%{
-        opacity: 10;
-        transform: translateY(0);
+    0%{
+        opacity: 0;
+        transform: translateY(-100px);
     }
-}
-
-
-/* 斜め上からフェードイン */
-.anm_uphill_s01, .anm_uphill_s02{
-    opacity: 0;
-    transform: translateY(-3rem) rotate(30deg);
-
-}
-.anm_uphill_e01{
-    animation: uphillAnimation 0.5s forwards;
-    animation-delay: 0ms;
-}
-.anm_uphill_e02{
-    animation: uphillAnimation 0.5s forwards;
-    animation-delay: 250ms;
-}
-@keyframes uphillAnimation{
     100%{
         opacity: 10;
         transform: translateY(0);
@@ -56,9 +38,9 @@
 
 
 /* 左からフェードイン */
-.anm_left_s01, .anm_left_s02{
+.anm_left_01, .anm_left_02{
     opacity: 0;
-    transform: translateX(-3rem);
+    transform: translateX(-100px);
 }
 .anm_left_e01{
     animation: leftAnimation 0.5s forwards;
@@ -69,6 +51,10 @@
     animation-delay: 250ms;
 }
 @keyframes leftAnimation{
+    0%{
+        opacity: 0;
+        transform: translateX(-100px);
+    }
     100%{
         opacity: 10;
         transform: translateX(0);
@@ -77,11 +63,36 @@
 
 
 
+/* 右からフェードイン */
+.anm_right_01, .anm_right_02{
+    opacity: 0;
+    transform: translateX(100px);
+}
+.anm_right_e01{
+    animation: rightAnimation 0.5s forwards;
+    animation-delay: 0ms;
+}
+.anm_right_e02{
+    animation: rightAnimation 0.5s forwards;
+    animation-delay: 250ms;
+}
+@keyframes rightAnimation{
+    0%{
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    100%{
+        opacity: 10;
+        transform: translateX(0);
+    }
+}
+
+
 
 /* 下からフェードイン */
-.anm_bottom_s01, .anm_bottom_s02, .anm_bottom_s03{
+.anm_bottom_01, .anm_bottom_02, .anm_bottom_03{
     opacity: 0;
-    transform: translateY(3rem);
+    transform: translateY(100px);
 }
 .anm_bottom_e01{
     animation: bottomAnimation 0.5s forwards;
@@ -97,6 +108,10 @@
 }
 
 @keyframes bottomAnimation{
+    0%{
+        opacity: 0;
+        transform: translateY(100px);
+    }
     100%{
         opacity: 10;
         transform: translateY(0);
@@ -106,7 +121,7 @@
 
 
 /* 拡大フェードイン */
-.anm_scale_s01, .anm_scale_s02{
+.anm_scale_01, .anm_scale_02{
     opacity: 0;
     transform: scale(0.9, 0.9);
 }
@@ -119,6 +134,10 @@
     animation-delay: 0ms;
 }
 @keyframes scaleAnimation{
+    0%{
+        opacity: 0;
+        transform: scale(0.9, 0.9);
+    }
     100%{
         opacity: 10;
         transform: scale(1, 1);

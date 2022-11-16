@@ -18,42 +18,39 @@
     <meta property="og:site_name" content="もんだいDIY" />
     <meta property="og:locale" content="ja_JP"  />
 
+
     <meta name="csrf_token" content="{{ csrf_token() }}">
-
-
-    <!-- ファビコン -->
-    <link rel="icon" href="{{asset('storage/site/image/fabicon.png')}}">
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-    <link href="{{ asset('avant-ui/css/avantui.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/index.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/animation.css') }}" rel="stylesheet">
-
-
-    <style> .snss>a:hover{opacity: .8;} </style>
 
     <!-- Google tag (gtag.js) -->
     @include('_parts.google_tag')
 
+    @include('_parts.meta_css')
+    <link href="{{asset('css/animation.css')}}"  rel="stylesheet" type="text/css" >
+    <link href="{{asset('css/bootstrap_carousel.css')}}"  rel="stylesheet" type="text/css" >
+
+
+    <!-- slider -->
     <style>
-    /*無料アイコン*/
-    .free_icon{
-        position: absolute;
-        top: -50%; left: -68px;
-        transform: translateY(-50%);
-        z-index: 2;
-        width:68px;
-        rotate: -30deg;
-    }
-    @media screen and (max-width: 576px) {
+        .snss>a:hover{opacity: .8;}
+
+        /*無料アイコン*/
         .free_icon{
-            left: -48px;
-            width:48px;
-            top: -20%;
-            transform: translateY(-20%);
+            position: absolute;
+            top: -50%; left: -68px;
+            transform: translateY(-50%);
+            z-index: 2;
+            width:68px;
+            rotate: -30deg;
         }
-    }
+        @media screen and (max-width: 576px) {
+            .free_icon{
+                left: -48px;
+                width:48px;
+                top: -20%;
+                transform: translateY(-20%);
+            }
+        }
+
 
     </style>
 
@@ -63,14 +60,15 @@
     <header class="">
         @include('_parts.header')
     </header>
-    <!-- [ ページローディング ] -->
-    <div id="splash" class="fadeUOut bg-warning">
-        <div id="splash_box">
-            <img src="{{asset('storage/site/image/splash_icon.png')}}" alt="" class="anm_hammer">
-            <p class="mt-2 text-dark">loading…</p>
-        </div>
-    </div>
     <main id="app" class="">
+
+        <!-- [ ページローディング ] -->
+        <div id="splash" class="fadeUOut bg-warning">
+            <div id="splash_box">
+                <img src="{{asset('storage/site/image/splash_icon.png')}}" alt="" class="anm_hammer">
+                <p class="mt-2 text-dark">loading…</p>
+            </div>
+        </div>
 
         <!-- [ ページトップ ] -->
         <section class="top">
@@ -88,20 +86,20 @@
                     <div class="col-12 col-md-6 mx-auto mb-5 text-center">
 
 
-                        <h5 class="fw-bold d-inline-block position-relative  anm_top_s01">
+                        <h5 class="fw-bold d-inline-block position-relative  anm_top_01">
                             \オリジナル問題集をDIYできる！/
-                            <img src="{{asset('storage/site/image/free.png')}}" alt="無料" class="free_icon anm_scale_s01">
+                            <img src="{{asset('storage/site/image/free.png')}}" alt="無料" class="free_icon anm_scale_01">
                         </h5>
 
-                        <img src="{{asset('storage/site/image/logo_lg.png')}}" alt="サイトロゴ" class="d-block w-100  anm_scale_s01">
+                        <img src="{{asset('storage/site/image/logo_lg.png')}}" alt="サイトロゴ" class="d-block w-100  anm_scale_01">
 
-                        <h5 class="bg-success text-white  anm_bottom_s01">もんだい DIY</h5>
+                        <h5 class="bg-success text-white  anm_bottom_01">もんだい DIY</h5>
                     </div>
                     <div class="col-md-6 mx-auto">
                         <div class="mt-3">
                             <!-- 検索フォーム -->
                             <form action="{{ route('questions_search_list') }}">
-                                <div  class="input-group overflow-hidden shadow   anm_bottom_s02" style="border-radius:2rem;">
+                                <div  class="input-group overflow-hidden shadow   anm_bottom_02" style="border-radius:2rem;">
                                     {{-- <span class="input-group-text bg-white border-0 ms-3 text-secondary" id="basic-addon1">
                                         問題集の検索：
                                     </span> --}}
@@ -115,7 +113,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="mt-5  anm_bottom_s03">
+                        <div class="mt-5  anm_bottom_03">
                             <a href="{{ route('make_question_group.list') }}" class="btn rounded-pill btn-outline-success btn-lg fw-bold w-100"
                             >問題集を作る</a>
                         </div>
@@ -131,23 +129,102 @@
                 </p>
             </div>
         </section>
+        <!-- Please Login Modal -->
+        <section>
+
+
+            <!-- Please Login Modal -->
+            <please-login-modal-component login_form_route="{{ route('user_auth.login_form') }}"
+            ></please-login-modal-component>
+            @php $user_id = Auth::check() ? Auth::user()->id : '' ; @endphp
+
+
+        </section>
+
+
+
+
+
+        <!-- [ 使い方スライダー ] -->
+        {{-- @if( env('APP_DEBUG') ) --}}
+        <section>
+            <div class="container-1200 my-5">
+                <div class="text-center mb-3  anm_bottom_01">
+                    <p class="fw-bold text-success mb-2">
+                        About this site
+                    </p>
+                    <h3>このサイトについて</h3>
+                </div>
+                @php
+                    $slider_items = [
+                        asset('storage/site/image/about01.png'),
+                        asset('storage/site/image/about02.png'),
+                        asset('storage/site/image/about03.png'),
+                        asset('storage/site/image/about04.png'),
+                    ];
+                @endphp
+
+                <div id="carouselIndicators" class="carousel slide w-100  anm_scale_02" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+
+                        @php $num = 0; @endphp
+                        <div class="carousel-item {{$num===0? 'active' : ''}}">
+                            <img src="{{$slider_items[$num]}}" class="d-block w-100" alt="このサイトについて">
+                        </div>
+                        @php $num = 1; @endphp
+                        <div class="carousel-item {{$num===0? 'active' : ''}}">
+                            <img src="{{$slider_items[$num]}}" class="d-block w-100" alt="このサイトについて">
+                        </div>
+                        @php $num = 2; @endphp
+                        <div class="carousel-item {{$num===0? 'active' : ''}}">
+                            <img src="{{$slider_items[$num]}}" class="d-block w-100" alt="このサイトについて">
+                        </div>
+                        @php $num = 3; @endphp
+                        <div class="carousel-item {{$num===0? 'active' : ''}}">
+                            <img src="{{$slider_items[$num]}}" class="d-block w-100" alt="このサイトについて">
+                        </div>
+
+                    </div>
+                    <!--画像ボタン-->
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselIndicators" data-bs-slide-to="0" aria-label="Slide 1" class="active" aria-current="true"></button>
+                        <button type="button" data-bs-target="#carouselIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#carouselIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselIndicators" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselIndicators" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+        {{-- @endif --}}
+
+
         <!-- [ news ] -->
-        <section class="" style="background: rgba(92, 240, 203, 0.5);">
+        {{-- <section class="" style="background: rgba(92, 240, 203, 0.5);"> --}}
+        <section class="bg-light">
             <div class="container-600 py-5">
-                <h5 class="text-dark text-center  anm_bottom_s01">\ お知らせ /</h5>
+                <h5 class="text-dark text-center  anm_bottom_01">\ お知らせ /</h5>
                 @php
                     $news_list = [
                         [ 'date'=>'2022.11.11', 'title'=>'Googleログイン機能を追加しました。', 'blade'=>'20221111', ],
                         [ 'date'=>'2022.10.10', 'title'=>'サイトをOPENしました！', 'blade'=>'20221010', ],
                     ];
                 @endphp
-                <div class="list-group list-group-flush">
+                <div class="list-group list-group-flush  anm_right_02">
                     @foreach ($news_list as $news)
                         <a href="" class="list-group-item bg-transparent border-0"
                         data-bs-toggle="modal" data-bs-target="#modal{{$news['blade']}}"
                         >
-                            <div class="card card-body py-1 border-0  anm_bottom_s01">
-                                <div class="text-secondary">{{$news['date']}}</div>
+                            <div class="card card-body py-1 border-0">
+                                <div class="text-success">{{$news['date']}}</div>
                                 <span class="text-decoration-none text-dark fw-bold">{{$news['title']}}</span>
                             </div>
                         </a>
@@ -175,33 +252,12 @@
                         </div>
                     @endforeach
                 </div>
-                <div class="text-end py-3">
+                <div class="text-end py-3 anm_scale_02">
                     <a href="{{route('footer_menu.news')}}" class="text-decoration-none text-secondary">一覧を見る</a>
                 </div>
 
             </div>
         </section>
-        <!-- Please Login Modal -->
-        <section>
-
-
-            <!-- Please Login Modal -->
-            <please-login-modal-component login_form_route="{{ route('user_auth.login_form') }}"
-            ></please-login-modal-component>
-            @php $user_id = Auth::check() ? Auth::user()->id : '' ; @endphp
-
-
-        </section>
-
-        <!-- [ 使い方スライダー ] -->
-        @if( !env('APP_DEBUG') )
-        <section>
-            <div class="container-1200 my-5">
-            </div>
-        </section>
-        @endif
-
-
 
         <!-- [ 人気問題集トップ５！ ] -->
         <section>
@@ -210,15 +266,15 @@
 
                 <div class="row mx-3">
                     <div class="col-md-6 order-md-2" >
-                        <img src="{{ asset('storage/site/image/22901978.jpg') }}" class="d-block w-100  anm_scale_s01" alt="人気の問題集">
+                        <img src="{{ asset('storage/site/image/22901978.jpg') }}" class="d-block w-100  anm_scale_01" alt="人気の問題集">
                     </div>
                     <div class="col-md-6 d-flex align-items-center">
-                        <div class="  anm_bottom_s01">
-                            <p class="fw-bold text-success">
+                        <div class="  anm_left_01">
+                            <p class="fw-bold text-success mb-2">
                                 Most popular handmade questions
                             </p>
-                            <h3>人気問題集トップ５！</h3>
-                            <p class="my-4 text-secondary">
+                            <h3 class="mb-2">人気問題集トップ５！</h3>
+                            <p class="text-secondary">
                                 もっとも受検されている問題集をピックアップしました。<br>
                                 問題を解いて、お気に入りの問題集をフォローしましょう！！
                             </p>
@@ -252,15 +308,15 @@
 
                 <div class="row mx-3">
                     <div class="col-md-6" >
-                        <img src="{{ asset('storage/site/image/23020196.jpg') }}" class="d-block w-100 anm_scale_s01" alt="人気の問題集">
+                        <img src="{{ asset('storage/site/image/23020196.jpg') }}" class="d-block w-100 anm_scale_01" alt="人気の問題集">
                     </div>
-                    <div class="col-md-6 d-flex align-items-center anm_bottom_e01">
-                        <div class="  anm_bottom_s01">
-                            <p class="fw-bold text-success">
+                    <div class="col-md-6 d-flex align-items-center">
+                        <div class="  anm_right_01">
+                            <p class="fw-bold text-success mb-2">
                                New handmade questions!
                             </p>
-                            <h3>新着問題集</h3>
-                            <p class="my-4 text-secondary">
+                            <h3 class="mb-2">新着問題集</h3>
+                            <p class="text-secondary">
                                 新着の問題集にチャレンジしよう！
                             </p>
                         </div>

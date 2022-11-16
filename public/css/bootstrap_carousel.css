@@ -1,0 +1,22 @@
+/*PC表示時のの左右ボタン大きさ*/
+@media screen and (min-width: 576px) {
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+/*carousel-indicators(下メニュー)のスペース*/
+.carousel{
+    padding-bottom: 56px;
+}
+/*carousel-indicators(下メニュー)のアイコン*/
+.carousel-indicators [data-bs-target] {
+    background-color: #495057;
+}
+.carousel-control-next-icon {
+    background-image: url(../storage/site/image/carousel-control-next-icon.png);
+}
+.carousel-control-prev-icon {
+    background-image: url(../storage/site/image/carousel-control-prev-icon.png);
+}

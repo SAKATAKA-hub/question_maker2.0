@@ -1,6 +1,6 @@
 <!-- [ SNS ] -->
 <section>
-    <div class="container-1200 my-5 text-center  anm_scale_s01">
+    <div class="container-1200 my-5 text-center  anm_scale_01">
         <h5 class="">\ 公式アカウント /</h5>
         <p class="text-secondary">
             サイトの更新情報やお知らせを配信中！
