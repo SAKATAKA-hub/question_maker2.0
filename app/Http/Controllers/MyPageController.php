@@ -18,8 +18,10 @@ class MyPageController extends Controller
 
         $keep_question_groups =
         \App\Models\KeepQuestionGroup::where('user_id', $user->id)
+        ->where('keep',1)
         ->orderBy('created_at','desc') //いいねが新しい順
         ->paginate( env('APP_PAGENATE_COUNT') );
+
 
 
         return view('Mypage.like_list',compact('keep_question_groups'));
