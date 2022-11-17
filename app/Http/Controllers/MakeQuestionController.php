@@ -228,6 +228,8 @@ class MakeQuestionController extends Controller
         $question_group = $question->question_group;
 
 
+        // dd($question_group);
+
         # 画像のアップロード
 
             /* 基本設定 */
@@ -258,6 +260,7 @@ class MakeQuestionController extends Controller
                 $image_path = $old_image_path;
             }
 
+
         //end 画像のアップロード
 
 
@@ -278,9 +281,9 @@ class MakeQuestionController extends Controller
             /* 画像削除の時 (解説画像削除 or 解説文==null)*/
             if( isset($delete) || empty($request->commentary_text)   )
             {
-                $delete_path = $old_image_path;
+                $delete_path = $old_commentary_image_path;
                 if( Storage::exists( $delete_path ) ){ storage::delete( $delete_path ); }
-                $image_path = null;
+                $commentary_image_path = null;
             }
             /* アップロードする画像があるとき、画像のアップロード*/
             elseif( $request_file = $request->file( $input_file_name ) )
@@ -297,6 +300,7 @@ class MakeQuestionController extends Controller
             }
 
         //end 画像のアップロード
+
 
 
         # テキストのストレージ保存
@@ -344,7 +348,6 @@ class MakeQuestionController extends Controller
             }
 
         //end 問題順の入替え
-
 
 
         # 問題情報の保存

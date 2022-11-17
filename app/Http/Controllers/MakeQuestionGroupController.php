@@ -271,6 +271,7 @@ class MakeQuestionGroupController extends Controller
     */
     public function update_published(Request $request, \App\Models\QuestionGroup $question_group)
     {
+
         # 公開日の登録
         $request->published_at =  $question_group->published_at;
         if( $request->is_public && empty(  $question_group->published_at ) ){
@@ -280,11 +281,15 @@ class MakeQuestionGroupController extends Controller
 
         }
         # 非公開の登録
-        if( !$request->is_public ){
+        elseif( !$request->is_public && isset(  $question_group->published_at ) ){
 
             $request->published_at = null;
             $key = \Illuminate\Support\Str::random(40); //認証キー更新
 
+        # 変更なし=>元のページへリダイレクト
+        }else{
+            $param = ['question_group'=> $question_group->id, 'tab_menu'=>'tab03',];
+            return redirect()->route('make_question_group.select_edit', $param);
         }
 
 
@@ -294,9 +299,14 @@ class MakeQuestionGroupController extends Controller
         ]);
 
 
+        # アラートメッセージ
+        $message = $request->published_at? '公開設定を"公開"に更新しました。' : '公開設定を"非公開"に更新しました。';
+
+
         # 問題集の編集ヶ所選択ページへリダイレクト
-        return redirect()->route('make_question_group.select_edit', $question_group)
-        ->with('alert-primary','問題集の公開設公開設定を更新しました。');
+        $param = ['question_group'=> $question_group->id, 'tab_menu'=>'tab03',];
+        return redirect()->route('make_question_group.select_edit', $param)
+        ->with('alert-primary',$message);
     }
 
 

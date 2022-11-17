@@ -228,33 +228,37 @@
                                 <span class="text-decoration-none text-dark fw-bold">{{$news['title']}}</span>
                             </div>
                         </a>
-                        <!-- Modal -->
-                        <div class="modal fade" id="modal{{$news['blade']}}" tabindex="-1" aria-labelledby="modal{{$news['blade']}}Label" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header border-success">
-                                        <div class="">
-                                            <!--[date]-->
-                                            <div class="text-success">{{$news['date']}}</div>
-                                            <!--[title]-->
-                                            <h5 class="modal-title" id="modal{{$news['blade']}}Label">{{$news['title']}}</h5>
-                                        </div>
-
-                                    </div>
-                                    <div class="modal-body">
-                                        @include('news.'.$news['blade'])
-                                    </div>
-                                    <div class="modal-footer border-0">
-                                        <button type="button" class="btn btn-sm fw-bold text-secondary" data-bs-dismiss="modal">閉じる</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     @endforeach
                 </div>
                 <div class="text-end py-3 anm_scale_02">
                     <a href="{{route('footer_menu.news')}}" class="text-decoration-none text-secondary">一覧を見る</a>
                 </div>
+
+                <!-- Modal -->
+                @foreach ($news_list as $news)
+                <div class="modal fade" id="modal{{$news['blade']}}" tabindex="-1" aria-labelledby="modal{{$news['blade']}}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header border-success">
+                                <div class="">
+                                    <!--[date]-->
+                                    <div class="text-success">{{$news['date']}}</div>
+                                    <!--[title]-->
+                                    <h5 class="modal-title" id="modal{{$news['blade']}}Label">{{$news['title']}}</h5>
+                                </div>
+
+                            </div>
+                            <div class="modal-body">
+                                @include('news.'.$news['blade'])
+                            </div>
+                            <div class="modal-footer border-0">
+                                <button type="button" class="btn btn-sm fw-bold text-secondary" data-bs-dismiss="modal">閉じる</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+
 
             </div>
         </section>
