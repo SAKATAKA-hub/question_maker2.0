@@ -96,26 +96,25 @@
                         <h5 class="bg-success text-white  anm_bottom_01">もんだい DIY</h5>
                     </div>
                     <div class="col-md-6 mx-auto">
-                        <div class="mt-3">
-                            <!-- 検索フォーム -->
-                            <form action="{{ route('questions_search_list') }}">
-                                <div  class="input-group overflow-hidden shadow   anm_bottom_02" style="border-radius:2rem;">
-                                    {{-- <span class="input-group-text bg-white border-0 ms-3 text-secondary" id="basic-addon1">
-                                        問題集の検索：
-                                    </span> --}}
+                        <div class="anm_bottom_02">
+                            <div class="mt-3">
+                                <!-- 検索フォーム -->
+                                <form action="{{ route('questions_search_list') }}">
+                                    <div  class="input-group overflow-hidden shadow" style="border-radius:2rem;">
 
-                                    <input type="text" name="seach_keywords" class="form-control bg-white border-0 ps-3"
-                                    value="@if ( isset($keywords) ){{  $keywords.' '  }}@endif" placeholder="問題集の検索" aria-label="SeachKeywords" aria-describedby="basic-addon1">
+                                        <input type="text" name="seach_keywords" class="form-control bg-white border-0 ps-3"
+                                        value="@if ( isset($keywords) ){{  $keywords.' '  }}@endif" placeholder="問題集の検索" aria-label="SeachKeywords" aria-describedby="basic-addon1">
 
-                                    <span class="input-group-text bg-white border-0" id="basic-addon1">
-                                        <button type="submit" class="btn"><i class="bi bi-search"></i></button>
-                                    </span>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="mt-5  anm_bottom_03">
-                            <a href="{{ route('make_question_group.list') }}" class="btn rounded-pill btn-outline-success btn-lg fw-bold w-100"
-                            >問題集を作る</a>
+                                        <span class="input-group-text bg-white border-0" id="basic-addon1">
+                                            <button type="submit" class="btn"><i class="bi bi-search"></i></button>
+                                        </span>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="mt-5">
+                                <a href="{{ route('make_question_group.list') }}" class="btn rounded-pill btn-outline-success btn-lg fw-bold w-100"
+                                >問題集を作る</a>
+                            </div>
                         </div>
                     </div>
 

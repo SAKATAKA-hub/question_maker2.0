@@ -45,7 +45,7 @@
                             氏名<small class="text-danger ms-3">※必須</small>
                         </label>
                         <input type="text" name="name" class="form-control" id="contact_name"
-                        @change="changeInputName" :class="{'border-danger' : errors.name!=''}" v-model="inputs.name"
+                        @input="changeInputName" :class="{'border-danger' : errors.name!=''}" v-model="inputs.name"
                         placeholder="山田　太郎" maxlength="50" required>
 
                         <div v-if="errors.name.length">
@@ -60,7 +60,7 @@
                             メールアドレス<small class="text-danger ms-3">※必須</small>
                         </label>
                         <input type="email" name="email" class="form-control" id="contact_email"
-                        @change="changeInputEmail" :class="{'border-danger' : errors.email!=''}" v-model="inputs.email"
+                        @input="changeInputEmail" :class="{'border-danger' : errors.email!=''}" v-model="inputs.email"
                         placeholder="yamada@mail.co.jp" maxlength="50" required>
 
                         <div v-if="errors.email.length">
@@ -76,7 +76,7 @@
                         </label>
 
                         <textarea class="form-control" name="body" id="contact_body" rows="6"
-                        @change="changeInputBody" :class="{'border-danger' : errors.body!=''}" v-model="inputs.body"
+                        @input="changeInputBody" :class="{'border-danger' : errors.body!=''}" v-model="inputs.body"
                         placeholder="お問い合わせ内容をご入力ください。" required></textarea>
 
                         <div v-if="errors.body.length">

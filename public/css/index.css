@@ -248,3 +248,12 @@ main{
     .bg-light-success{
         background: rgba(92, 240, 203, 0.3);
     }
+
+    /* 問題集カードのテキストの大きさ */
+    @media screen and (max-width: 576px) {
+        .question-card-text{
+            font-size: 11px;
+        }
+    }
+
+

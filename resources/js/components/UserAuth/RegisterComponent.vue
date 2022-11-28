@@ -70,7 +70,7 @@
                             <span class="badge bg-danger ms-1" style="transform:translateY(-2px);">必須</span>
                         </label>
                         <input id="email" type="email" class="form-control" v-model="inputs.email" maxlength="150"
-                        @change="changeInputEmail" :class="{'border-danger' : errors.email!=''}"
+                        @input="changeInputEmail" :class="{'border-danger' : errors.email!=''}"
                         name="email" required  placeholder="yamada@email.co.jp">
 
                         <div v-if="errors.email.length">
@@ -88,7 +88,7 @@
 
                         <input id="password" class="form-control" name="password"
                         :type="input_password.type"
-                        @change="changeInputPassword" :class="{'border-danger' : errors.password!=''}"
+                        @input="changeInputPassword" :class="{'border-danger' : errors.password!=''}"
                         v-model="inputs.password" required autocomplete="current-password">
 
                         <div v-if="errors.password.length">
@@ -110,7 +110,7 @@
 
                         <input id="password_confirmation" class="form-control" name="password_confirmation"
                         :type="input_password.type"
-                        @change="changeInputPasswordConfirmation" :class="{'border-danger' : errors.password_confirmation!=''}"
+                        @input="changeInputPasswordConfirmation" :class="{'border-danger' : errors.password_confirmation!=''}"
                         v-model="inputs.password_confirmation" required autocomplete="current-password_confirmation">
 
                         <div v-if="errors.password_confirmation.length">

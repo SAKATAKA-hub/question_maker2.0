@@ -83,7 +83,7 @@
         @if ( empty($question) )
 
 
-            <!-- 新規作成 -->>
+            <!-- 新規作成 -->
             <make-question-form-component
             form_style="store"
             token="{{ csrf_token() }}"

@@ -21,7 +21,7 @@
 
                 </div>
             </div>
-            <div class="col-9 py-2 pe-5" style="font-size:11px;">
+            <div class="col-9 py-2 pe-5 question-card-text">
 
                 <!-- タイトル -->
                 <h5 class="d-none d-md-block text-truncate fw-bold">{{ $question_group->title }}</h5>
@@ -45,8 +45,7 @@
                     <!-- 公開日(0日前) -->
                     <span class="text-muted">{{$question_group->befor_datetime_text}}</span>
                     <!-- 受験回数 -->
-                    {{-- <span class="text-muted">-受験回数{{$question_group->answer_groups->count()}}</span> --}}
-                    <span class="text-muted">-受験回数{{$question_group->accessed_count}}</span>
+                    <span class="text-muted">-回数{{$question_group->accessed_count}}</span>
 
                     <!-- 問題数 -->
                     <span class="text-muted">-全{{$question_group->question_count}}問</span>

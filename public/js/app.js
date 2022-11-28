@@ -5735,6 +5735,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -38178,13 +38179,15 @@ var render = function () {
                   },
                   domProps: { value: _vm.inputs.name },
                   on: {
-                    change: _vm.changeInputName,
-                    input: function ($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.inputs, "name", $event.target.value)
-                    },
+                    input: [
+                      function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.inputs, "name", $event.target.value)
+                      },
+                      _vm.changeInputName,
+                    ],
                   },
                 }),
                 _vm._v(" "),
@@ -38221,13 +38224,15 @@ var render = function () {
                   },
                   domProps: { value: _vm.inputs.email },
                   on: {
-                    change: _vm.changeInputEmail,
-                    input: function ($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.inputs, "email", $event.target.value)
-                    },
+                    input: [
+                      function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.inputs, "email", $event.target.value)
+                      },
+                      _vm.changeInputEmail,
+                    ],
                   },
                 }),
                 _vm._v(" "),
@@ -38263,13 +38268,15 @@ var render = function () {
                   },
                   domProps: { value: _vm.inputs.body },
                   on: {
-                    change: _vm.changeInputBody,
-                    input: function ($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.inputs, "body", $event.target.value)
-                    },
+                    input: [
+                      function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.inputs, "body", $event.target.value)
+                      },
+                      _vm.changeInputBody,
+                    ],
                   },
                 }),
                 _vm._v(" "),
@@ -40229,13 +40236,15 @@ var render = function () {
                   },
                   domProps: { value: _vm.inputs.email },
                   on: {
-                    change: _vm.changeInputEmail,
-                    input: function ($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.inputs, "email", $event.target.value)
-                    },
+                    input: [
+                      function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.inputs, "email", $event.target.value)
+                      },
+                      _vm.changeInputEmail,
+                    ],
                   },
                 }),
                 _vm._v(" "),
@@ -40299,35 +40308,33 @@ var render = function () {
                           : _vm.inputs.password,
                       },
                       on: {
-                        change: [
-                          function ($event) {
-                            var $$a = _vm.inputs.password,
-                              $$el = $event.target,
-                              $$c = $$el.checked ? true : false
-                            if (Array.isArray($$a)) {
-                              var $$v = null,
-                                $$i = _vm._i($$a, $$v)
-                              if ($$el.checked) {
-                                $$i < 0 &&
-                                  _vm.$set(
-                                    _vm.inputs,
-                                    "password",
-                                    $$a.concat([$$v])
-                                  )
-                              } else {
-                                $$i > -1 &&
-                                  _vm.$set(
-                                    _vm.inputs,
-                                    "password",
-                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                                  )
-                              }
+                        input: _vm.changeInputPassword,
+                        change: function ($event) {
+                          var $$a = _vm.inputs.password,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = null,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                _vm.$set(
+                                  _vm.inputs,
+                                  "password",
+                                  $$a.concat([$$v])
+                                )
                             } else {
-                              _vm.$set(_vm.inputs, "password", $$c)
+                              $$i > -1 &&
+                                _vm.$set(
+                                  _vm.inputs,
+                                  "password",
+                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                )
                             }
-                          },
-                          _vm.changeInputPassword,
-                        ],
+                          } else {
+                            _vm.$set(_vm.inputs, "password", $$c)
+                          }
+                        },
                       },
                     })
                   : _vm.input_password.type === "radio"
@@ -40351,12 +40358,10 @@ var render = function () {
                       },
                       domProps: { checked: _vm._q(_vm.inputs.password, null) },
                       on: {
-                        change: [
-                          function ($event) {
-                            return _vm.$set(_vm.inputs, "password", null)
-                          },
-                          _vm.changeInputPassword,
-                        ],
+                        input: _vm.changeInputPassword,
+                        change: function ($event) {
+                          return _vm.$set(_vm.inputs, "password", null)
+                        },
                       },
                     })
                   : _c("input", {
@@ -40379,13 +40384,19 @@ var render = function () {
                       },
                       domProps: { value: _vm.inputs.password },
                       on: {
-                        change: _vm.changeInputPassword,
-                        input: function ($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.inputs, "password", $event.target.value)
-                        },
+                        input: [
+                          function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.inputs,
+                              "password",
+                              $event.target.value
+                            )
+                          },
+                          _vm.changeInputPassword,
+                        ],
                       },
                     }),
                 _vm._v(" "),
@@ -40469,35 +40480,33 @@ var render = function () {
                           : _vm.inputs.password_confirmation,
                       },
                       on: {
-                        change: [
-                          function ($event) {
-                            var $$a = _vm.inputs.password_confirmation,
-                              $$el = $event.target,
-                              $$c = $$el.checked ? true : false
-                            if (Array.isArray($$a)) {
-                              var $$v = null,
-                                $$i = _vm._i($$a, $$v)
-                              if ($$el.checked) {
-                                $$i < 0 &&
-                                  _vm.$set(
-                                    _vm.inputs,
-                                    "password_confirmation",
-                                    $$a.concat([$$v])
-                                  )
-                              } else {
-                                $$i > -1 &&
-                                  _vm.$set(
-                                    _vm.inputs,
-                                    "password_confirmation",
-                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                                  )
-                              }
+                        input: _vm.changeInputPasswordConfirmation,
+                        change: function ($event) {
+                          var $$a = _vm.inputs.password_confirmation,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = null,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                _vm.$set(
+                                  _vm.inputs,
+                                  "password_confirmation",
+                                  $$a.concat([$$v])
+                                )
                             } else {
-                              _vm.$set(_vm.inputs, "password_confirmation", $$c)
+                              $$i > -1 &&
+                                _vm.$set(
+                                  _vm.inputs,
+                                  "password_confirmation",
+                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                )
                             }
-                          },
-                          _vm.changeInputPasswordConfirmation,
-                        ],
+                          } else {
+                            _vm.$set(_vm.inputs, "password_confirmation", $$c)
+                          }
+                        },
                       },
                     })
                   : _vm.input_password.type === "radio"
@@ -40525,16 +40534,14 @@ var render = function () {
                         checked: _vm._q(_vm.inputs.password_confirmation, null),
                       },
                       on: {
-                        change: [
-                          function ($event) {
-                            return _vm.$set(
-                              _vm.inputs,
-                              "password_confirmation",
-                              null
-                            )
-                          },
-                          _vm.changeInputPasswordConfirmation,
-                        ],
+                        input: _vm.changeInputPasswordConfirmation,
+                        change: function ($event) {
+                          return _vm.$set(
+                            _vm.inputs,
+                            "password_confirmation",
+                            null
+                          )
+                        },
                       },
                     })
                   : _c("input", {
@@ -40559,17 +40566,19 @@ var render = function () {
                       },
                       domProps: { value: _vm.inputs.password_confirmation },
                       on: {
-                        change: _vm.changeInputPasswordConfirmation,
-                        input: function ($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.inputs,
-                            "password_confirmation",
-                            $event.target.value
-                          )
-                        },
+                        input: [
+                          function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.inputs,
+                              "password_confirmation",
+                              $event.target.value
+                            )
+                          },
+                          _vm.changeInputPasswordConfirmation,
+                        ],
                       },
                     }),
                 _vm._v(" "),
