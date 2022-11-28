@@ -207,7 +207,6 @@
 
 
         <!-- [ news ] -->
-        {{-- <section class="" style="background: rgba(92, 240, 203, 0.5);"> --}}
         <section class="bg-light">
             <div class="container-600 py-5">
                 <h5 class="text-dark text-center  anm_bottom_01">\ お知らせ /</h5>
@@ -343,6 +342,17 @@
 
             </div>
         </section>
+
+
+        <!-- [ 広告リンク ] -->
+        <section>
+            <div class="container-1200 my-5">
+
+                @include('_parts.advertisement')
+
+            </div>
+        </section>
+
 
     </main>
     <footer>
