@@ -298,7 +298,7 @@ class ServiceController extends Controller
         public function violation_report_list_api(Request $request)
         {
             # APP_KEY認証チェック
-            if( $request->app_key != env('APP_KEY')){
+            if( $request->api_key != config('app.api_key')){
                 return \App::abort(404);
             }
 
@@ -318,7 +318,7 @@ class ServiceController extends Controller
         public function violation_report_responsed_api(Request $request)
         {
             # APP_KEY認証チェック
-            if( $request->app_key != env('APP_KEY')){
+            if( $request->api_key != config('app.api_key')){
                 return \App::abort(404);
             }
 
@@ -341,7 +341,7 @@ class ServiceController extends Controller
         public function violation_report_destory_api(Request $request)
         {
             # APP_KEY認証チェック
-            if( $request->app_key != env('APP_KEY')){
+            if( $request->api_key != config('app.api_key')){
                 return \App::abort(404);
             }
 
@@ -408,9 +408,10 @@ class ServiceController extends Controller
         public function contact_list_api(Request $request)
         {
             # APP_KEY認証チェック
-            if( $request->app_key != env('APP_KEY')){
+            if( $request->api_key != config('app.api_key')){
                 return \App::abort(404);
             }
+
 
 
             # JSONを返す(報告一覧データ)
@@ -428,7 +429,7 @@ class ServiceController extends Controller
         public function contact_responsed_api(Request $request)
         {
             # APP_KEY認証チェック
-            if( $request->app_key != env('APP_KEY')){
+            if( $request->api_key != config('app.api_key')){
                 return \App::abort(404);
             }
 
@@ -457,7 +458,7 @@ class ServiceController extends Controller
         public function contact_destory_api(Request $request)
         {
             # APP_KEY認証チェック
-            if( $request->app_key != env('APP_KEY')){
+            if( $request->api_key != config('app.api_key')){
                 return \App::abort(404);
             }
 

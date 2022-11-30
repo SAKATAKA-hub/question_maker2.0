@@ -19,6 +19,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+/*
+|--------------------------------------------------------------------------
+| 登録ユーザー　UserListAPIController
+|--------------------------------------------------------------------------
+*/
+    # 登録ユーザー[一覧](user/list/api)
+    Route::post('/user/list/api', [Controllers\UserListAPIController::class, 'user_list_api'])
+    ->name('user.list.api');
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +47,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
         Route::delete('/violation_report/destory/api', [Controllers\ServiceController::class, 'violation_report_destory_api'])
         ->name('violation_report.destory.api');
 
+
     # お問い合わせ
 
         # お問い合わせ[一覧](contact/list/api)
@@ -52,6 +61,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
         # お問い合わせ[削除](contact/destory/api)
         Route::delete('/contact/destory/api', [Controllers\ServiceController::class, 'contact_destory_api'])
         ->name('contact.destory.api');
+
 
     //
 

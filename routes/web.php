@@ -434,50 +434,58 @@ Route::middleware(['user_auth'])->group(function () {
 |
 */
 
-
-# 問題一覧
-Route::get('/test/', function () { return view('test.questions_list'); })
-->name('test.questions_list');
-
-# 問題
-Route::get('/test/question/{id}/{num}', function ($id,$num) { return view( 'test.question.'.$num,compact('id','num') ); })
-->name('question');
-
-# フォームのページ離脱防止アラート
-Route::get('/test/page_exit_prevention_alert', function(){ return view( 'test.page_exit_prevention_alert' ); })
-->name('test.page_exit_prevention_alert');
+if( env('APP_DEBUG') ){
 
 
-# カウントアップタイマー
-Route::get('/test/timer', function(){ return view( 'test.timer' ); })
-->name('test.timer');
+    # 問題一覧
+    Route::get('/test/', function () { return view('test.questions_list'); })
+    ->name('test.questions_list');
+
+    # 問題
+    Route::get('/test/question/{id}/{num}', function ($id,$num) { return view( 'test.question.'.$num,compact('id','num') ); })
+    ->name('question');
+
+    # フォームのページ離脱防止アラート
+    Route::get('/test/page_exit_prevention_alert', function(){ return view( 'test.page_exit_prevention_alert' ); })
+    ->name('test.page_exit_prevention_alert');
 
 
-# 問題の詳細
-Route::get('/test/question_detail', function(){ return view( 'test.question_detail' ); })
-->name('test.question_detail');
-
-# その他サービスのテスト
-Route::get('/test/service_form', function(){
-    return view( 'test.service_form');
-})->name('test.service_form');
-
-# 問題一覧
-Route::get('/test/question_group_card', function () {
-    return view('test.question_group_card');
-})
-->name('test.question_group_card');
+    # カウントアップタイマー
+    Route::get('/test/timer', function(){ return view( 'test.timer' ); })
+    ->name('test.timer');
 
 
-# 送信メール一覧
-Route::get('/test/emails', function () {return view('test.emails');})
-->name('test.emails');
+    # 問題の詳細
+    Route::get('/test/question_detail', function(){ return view( 'test.question_detail' ); })
+    ->name('test.question_detail');
 
-# メール内容の確認
-Route::get('/test/emails/{mail}', function($mail){ return view( 'emails.'.$mail ); })
-->name('test.emails.mail');
+    # その他サービスのテスト
+    Route::get('/test/service_form', function(){
+        return view( 'test.service_form');
+    })->name('test.service_form');
 
-    # パスワード変更確認メール /test/emails/reset_pass01_verification
-    # パスワード変更完了メール /test/emails/reset_pass02_completion
+    # 問題一覧
+    Route::get('/test/question_group_card', function () {
+        return view('test.question_group_card');
+    })
+    ->name('test.question_group_card');
 
-//
+
+    # 送信メール一覧
+    Route::get('/test/emails', function () {return view('test.emails');})
+    ->name('test.emails');
+
+    # メール内容の確認
+    Route::get('/test/emails/{mail}', function($mail){ return view( 'emails.'.$mail ); })
+    ->name('test.emails.mail');
+
+        # パスワード変更確認メール /test/emails/reset_pass01_verification
+        # パスワード変更完了メール /test/emails/reset_pass02_completion
+
+    //
+
+    # ユーザー一覧
+    Route::get('/test/users', function () {return view('test.users');})
+    ->name('test.users');
+
+}
