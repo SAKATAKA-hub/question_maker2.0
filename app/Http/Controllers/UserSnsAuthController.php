@@ -98,7 +98,6 @@ class UserSnsAuthController extends Controller
         # ログイン
         Auth::Login($user);
 
-
         # リダイレクト
         if(session('before_url'))
         {

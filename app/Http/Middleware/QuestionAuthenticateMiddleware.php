@@ -25,4 +25,5 @@ class QuestionAuthenticateMiddleware
 
         return $next($request);
     }
+
 }

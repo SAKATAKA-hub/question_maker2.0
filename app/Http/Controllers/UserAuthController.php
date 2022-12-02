@@ -57,7 +57,8 @@ class UserAuthController extends Controller
 
 
                 # ログイン成功処理（求職者のアカウントが照合された時）
-                Auth::attempt( $request->only('email','password'), $request->remember );
+                $remember = true; //$request->remember(ログイン状態の維持)
+                Auth::attempt( $request->only('email','password'), $remember );
 
 
                 if( Auth::check() )
@@ -185,7 +186,8 @@ class UserAuthController extends Controller
             # ログイン成功処理
 
                 //（求職者のアカウントが照合された時）
-                Auth::attempt( $request->only('email','password'), $request->remember );
+                $remember = true; //$request->remember(ログイン状態の維持)
+                Auth::attempt( $request->only('email','password'), $remember );
                 // ユーザー情報をセッションに保存
                 $request->session()->regenerate();
                 // ログイン履歴の保存
@@ -415,6 +417,7 @@ class UserAuthController extends Controller
             'view' => 'emails.user_destroy' , //テンプレート
             'subject' => '【'.env('APP_NAME').'】退会手続き完了のお知らせ' , //件名
         ]) );
+
 
 
 
