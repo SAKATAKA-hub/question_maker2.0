@@ -309,7 +309,9 @@ Route::middleware(['user_auth'])->group(function () {
     // ->name('footer_menu.important');
 
     # プライバシーポリシー(privacy_policy)
-    Route::get('/privacy_policy', function () { return view('footer_menu.privacy_policy'); })
+    //$revision_date 改定日
+    Route::get('/privacy_policy/{revision_date?}',
+    function ($revision_date='20221212') { return view('footer_menu.privacy_policy.'.$revision_date); })
     ->name('footer_menu.privacy_policy');
 
     # 利用規約(trems)
