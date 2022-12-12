@@ -440,7 +440,17 @@ if( env('APP_DEBUG') ){
 
 
     # 問題一覧
-    Route::get('/test/', function () { return view('test.questions_list'); })
+    Route::get('/test/', function () {
+
+        $news_list = config('news.list');
+        dd($news_list);
+
+
+        return view('test.questions_list');
+
+
+
+    })
     ->name('test.questions_list');
 
     # 問題

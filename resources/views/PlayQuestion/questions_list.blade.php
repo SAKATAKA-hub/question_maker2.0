@@ -210,14 +210,10 @@
         <section class="bg-light">
             <div class="container-600 py-5">
                 <h5 class="text-dark text-center  anm_bottom_01">\ お知らせ /</h5>
-                @php
-                    $news_list = [
-                        [ 'date'=>'2022.11.11', 'title'=>'Googleログイン機能を追加しました。', 'blade'=>'20221111', ],
-                        [ 'date'=>'2022.10.10', 'title'=>'サイトをOPENしました！', 'blade'=>'20221010', ],
-                    ];
-                @endphp
+
+                @php $news_list = config('news.list'); @endphp
                 <div class="list-group list-group-flush  anm_right_02">
-                    @foreach ($news_list as $news)
+                    @foreach ( $news_list as $news)
                         <a href="" class="list-group-item bg-transparent border-0"
                         data-bs-toggle="modal" data-bs-target="#modal{{$news['blade']}}"
                         >
