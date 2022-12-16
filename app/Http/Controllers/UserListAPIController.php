@@ -20,7 +20,7 @@ class UserListAPIController extends Controller
 
 
         # 求職者情報の取得
-        $users = \App\Models\User::all();
+        $users = \App\Models\User::orderBy('id','desc')->get();
 
 
         # JSONレスポンス
