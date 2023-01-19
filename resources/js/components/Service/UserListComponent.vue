@@ -27,7 +27,8 @@
 
                         <!--チェックボックス-->
                         <th scope="row" class="text-warning text-center">
-                            <input :value="user.id" v-model="list_checkes.user_ids" class="form-check-input m-0" type="checkbox" >
+                            <input :value="user.id" v-model="list_checkes.user_ids"
+                            name="user_ids[]" class="form-check-input m-0" type="checkbox" >
                         </th>
                         <th scope="row" class="p-0">
                             {{user.name}}
@@ -38,18 +39,19 @@
                         <td class="text-start">
                             {{user.created_at.substring(0,10)}}
                         </td>
-                        <td class="text-start">
+                        <td class="text-center">
+                            {{ user.question_groups_count }}
                         </td>
 
                     </tr>
                     <!-- footer -->
-                    <tr class="bg-white">
+                    <!-- <tr class="bg-white">
                         <th scope="col" colspan="6" class="border-0">
                             <div class="row g-3">
                                 <button class="col-auto btn btn-link text-decoration-none">メールアドレス一括表示 ></button>
                             </div>
                         </th>
-                    </tr>
+                    </tr> -->
 
                 </tbody>
             </table>

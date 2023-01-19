@@ -35,7 +35,6 @@
         ></user-list-component>
 
         route_user_list="{{route('user.list.api')}}"
-
     </div>
 </section>
 

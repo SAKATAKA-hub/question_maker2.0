@@ -54,7 +54,6 @@ class User extends Authenticatable
 
 
 
-
     /*
     |--------------------------------------------------------------------------
     | リレーション
@@ -89,6 +88,49 @@ class User extends Authenticatable
         # MailSettingとのリレーション(メール設定)
         public function mail_setting(){
             return $this->hasOne(MailSetting::class);
+        }
+
+        # QuestionGroupテーブルとのリレーション
+        public function question_groups()
+        {
+            return $this->hasMany(QuestionGroup::class);
+        }
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | ローカルスコープ
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+        /**
+         * 求職者リスト情報（API用） user::getApiData()
+         * @param Model   $query
+         * @param Array   $id_array
+         * @return Object
+        */
+        public function scopeGetApiData( $query, $id_array=null )
+        {
+            $users = $id_array === null
+            ? $query->orderBy('id','desc')->where('email','<>','contact@next-arrow.co.jp')->get()
+            : $query->orderBy('id','desc')->find($id_array) ;
+
+
+            # 追加データの登録
+            for ($i=0; $i < $users->count() ; $i++) {
+                $user = $users[ $i ];
+
+                // 作成した問題数
+                $user->question_groups_count = $user->question_groups->count();
+
+
+                $users[ $i ] = $user;
+            }
+
+
+            return $users;
         }
 
 

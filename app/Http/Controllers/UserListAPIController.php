@@ -18,10 +18,8 @@ class UserListAPIController extends Controller
             return \App::abort(404);
         }
 
-
-        # 求職者情報の取得
-        $users = \App\Models\User::orderBy('id','desc')->get();
-
+        # ユーザー情報の取得
+        $users = \App\Models\User::getApiData();
 
         # JSONレスポンス
         return response()->json([

@@ -8617,6 +8617,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -39590,7 +39592,7 @@ var render = function () {
                                 },
                               ],
                               staticClass: "form-check-input m-0",
-                              attrs: { type: "checkbox" },
+                              attrs: { name: "user_ids[]", type: "checkbox" },
                               domProps: {
                                 value: user.id,
                                 checked: Array.isArray(
@@ -39662,11 +39664,15 @@ var render = function () {
                           ),
                         ]),
                         _vm._v(" "),
-                        _c("td", { staticClass: "text-start" }),
+                        _c("td", { staticClass: "text-center" }, [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(user.question_groups_count) +
+                              "\n                    "
+                          ),
+                        ]),
                       ])
                     }),
-                    _vm._v(" "),
-                    _vm._m(2),
                   ],
                   2
                 ),
@@ -39704,26 +39710,6 @@ var staticRenderFns = [
       _c("th", { attrs: { scope: "col" } }, [_vm._v("入会日")]),
       _vm._v(" "),
       _c("th", { attrs: { scope: "col" } }, [_vm._v("問題作成数")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", { staticClass: "bg-white" }, [
-      _c(
-        "th",
-        { staticClass: "border-0", attrs: { scope: "col", colspan: "6" } },
-        [
-          _c("div", { staticClass: "row g-3" }, [
-            _c(
-              "button",
-              { staticClass: "col-auto btn btn-link text-decoration-none" },
-              [_vm._v("メールアドレス一括表示 >")]
-            ),
-          ]),
-        ]
-      ),
     ])
   },
 ]

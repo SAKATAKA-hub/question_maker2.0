@@ -423,7 +423,31 @@ Route::middleware(['user_auth'])->group(function () {
 //
 
 
+/*
+|--------------------------------------------------------------------------
+| 管理者(admin) メニュー
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['admin_auth'])->group(function () {
 
+    # ユーザー一覧
+    Route::get('/test/users', function () {return view('test.users');})
+    ->name('test.users');
+
+    # お知らせメール送信フォーム(info_mail_form)
+    Route::get('/admin/info_mail/form', function(){
+
+        // $users = \App\Models\user::getApiData();
+        // dd( $users[1]->question_groups_count );
+
+        return view('Admin.info_mail_form'); })
+    ->name('admin.info_mail.form');
+
+    # お知らせメール送信処理(info_mail_send)
+    Route::post('/admin/info_mail/send', [Controllers\AdminController::class, 'info_mail_send'])
+    ->name('admin.info_mail.send');
+
+});//end middleware
 
 /*
 |--------------------------------------------------------------------------
@@ -484,7 +508,7 @@ if( env('APP_DEBUG') ){
 
 
     # 送信メール一覧
-    Route::get('/test/emails', function () {return view('test.emails');})
+    Route::get('/test/emails', function () { return view('test.emails');})
     ->name('test.emails');
 
     # メール内容の確認
@@ -493,11 +517,8 @@ if( env('APP_DEBUG') ){
 
         # パスワード変更確認メール /test/emails/reset_pass01_verification
         # パスワード変更完了メール /test/emails/reset_pass02_completion
-
+        // /test/emails/info.html2023123
     //
 
-    # ユーザー一覧
-    Route::get('/test/users', function () {return view('test.users');})
-    ->name('test.users');
 
 }

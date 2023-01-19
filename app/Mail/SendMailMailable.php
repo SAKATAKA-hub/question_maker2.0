@@ -22,9 +22,10 @@ class SendMailMailable extends Mailable
      */
     public function __construct($data)
     {
-        $this->inputs = $data['inputs'];
-        $this->view = $data['view'];
         $this->subject = $data['subject'];
+        $this->view = $data['view'];
+        $this->inputs = $data['inputs'];
+
     }
 
 
@@ -35,9 +36,11 @@ class SendMailMailable extends Mailable
      */
     public function build()
     {
-        return $this->view($this->view) //テンプレートファイルの読み込み
+        return $this
+        ->view($this->view) //HTMLテンプレートの読み込み
         ->with(['inputs' => $this->inputs,])
-        ->subject($this->subject);// 件名
+        ->subject($this->subject)// 件名
+        ;
     }
 
 }

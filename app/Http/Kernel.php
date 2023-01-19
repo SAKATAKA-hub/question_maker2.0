@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'user_auth'           => \App\Http\Middleware\UserAuthenticate::class,
         'question_group_auth' => \App\Http\Middleware\QuestionGroupAuthenticateMiddleware::class,
         'question_auth'       => \App\Http\Middleware\QuestionAuthenticateMiddleware::class,
+        'admin_auth'          => \App\Http\Middleware\AdminAuth::class,
     ];
 }
