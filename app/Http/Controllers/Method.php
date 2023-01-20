@@ -20,7 +20,7 @@ class Method
      *
      * @return String $file_path  //ファイルパス、または$st_count文字以下のテキスト
      */
-    public static function uploadStorageText( $dir, $new_text, $old_text='', $st_count=150)
+    public static function uploadStorageText( $dir, $new_text, $old_text='', $st_count=140)
     {
 
         //1. $st_countより多い文字数・ストレージを利用中

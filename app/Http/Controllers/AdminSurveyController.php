@@ -11,91 +11,77 @@ use Illuminate\Http\Request;
 class AdminSurveyController extends Controller
 {
     /**
-     * アンケート一覧の表示(survey_form_list)
+     * アンケート一覧の表示(form_list)
      *
      * @return \Illuminate\View\View
     */
-    public function survey_form_list()
+    public function form_list()
     {
-        $survey_groups = [];
-
-        // $survey_groups = \App\Models\SurveyQuestionsGroup::get();
+        $survey_groups = \App\Models\SurveyQuestionsGroup::get();
         return view('Admin.survey.form_list', compact( 'survey_groups' ) );
     }
 
 
     /**
-     * アンケート回答一覧の表示(survey_list)
+     * アンケート解答一覧の表示(answer_listlist)
      *
+     * @param \App\Models\SurveyQuestionsGroup $survey_question_group (アンケート情報)
+     * @param String $column_name
+     * @param String $order
      * @return \Illuminate\View\View
     */
-    public function survey_list( $column_name='', $order='' )
-    {
-        //全顧客情報の取得
-        $surveys = \App\Models\SurveyAnswersGroup::orderBy('id','desc')->get();
-
+    public function answer_list(
+        \App\Models\SurveyQuestionsGroup $survey_question_group, $column_name='', $order=''
+    ){
 
         # 並び替え
         switch ($column_name) {
-            //1. 回答日順
+            //1. 解答日順
             case 'date':
-                $surveys = \App\Models\SurveyAnswersGroup::orderBy('created_at', $order)->get();
+                $answers_groups =
+                \App\Models\SurveyAnswersGroup::where('survey_questions_group_id',$survey_question_group->id)
+                ->orderBy('created_at', $order)->get();
                 break;
 
-            //2. タイトル順
-            case 'title':
-                $surveys = \App\Models\SurveyAnswersGroup::orderBy('title', $order)
-                ->orderBy('created_at', 'desc' )->get();;
-                break;
-
-            //3. 回答者名
-            case 'respondent':
-                $surveys = \App\Models\SurveyAnswersGroup::orderBy('respondent', $order)
-                ->orderBy('created_at', 'desc' )->get();;
-                break;
-
-            //4. 会社名
-            case 'company':
-                $surveys = \App\Models\SurveyAnswersGroup::orderBy('company', $order)
-                ->orderBy('created_at', 'desc' )->get();;
-                break;
-
+            default:
+                $answers_groups =
+                \App\Models\SurveyAnswersGroup::where('survey_questions_group_id',$survey_question_group->id)
+                ->orderBy('id','desc')->get();
             //
-
         }
 
 
-        return view('admin.survey_list', compact( 'surveys' ) );
+        return view('Admin.survey.answer_list', compact(
+            'survey_question_group', 'answers_groups',
+        ) );
     }
 
 
 
 
     /**
-     * アンケート回答詳細情報の表示(survey_ditails)
+     * アンケート解答詳細情報の表示(answers_ditail)
      *
-     * @param \App\Models\SurveyAnswersGroup $survey (顧客情報)
+     * @param \App\Models\SurveyAnswersGroup $answers_group (顧客情報)
      * @return \Illuminate\View\View
     */
-    public function survey_ditails(\App\Models\SurveyAnswersGroup $survey)
+    public function answer_ditail(\App\Models\SurveyAnswersGroup $answer_group)
     {
-        // dd($survey->survey_answers[0]->survey_question);
-
-
-        return view( 'admin.survey_ditails', compact( 'survey' ) );
+        return view( 'Admin.survey.answers_ditail', compact( 'answer_group' ) );
     }
 
 
 
 
     /**
-     * アンケート情報の削除(survey_destroy)
+     * アンケート情報の削除(destroy)
      *
-     * @param \App\Models\SurveyAnswersGroup $survey (アンケート情報)
+     * @param \App\Models\SurveyAnswersGroup $answers_group (アンケート情報)
      * @return \Illuminate\View\View
     */
-    public function survey_destroy(\App\Models\SurveyAnswersGroup $survey)
+    public function answer_destroy(\App\Models\SurveyAnswersGroup $answers_group)
     {
+        dd($answers_group);
 
         # ストレージファイルの削除
         foreach ($survey->survey_answers as $answer)
@@ -119,12 +105,12 @@ class AdminSurveyController extends Controller
 
 
     /**
-     * アンケート情報の新規作成(survey_store)
+     * アンケート情報の新規作成(store)
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\View\View
     */
-    public function survey_store(Request $request)
+    public function store(Request $request)
     {
         // return \Database\Seeders\SurveyQuestionsTableSeeder03::test();
         # アンケートの挿入

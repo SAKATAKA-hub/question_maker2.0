@@ -40,7 +40,7 @@ class SurveyQuestionsGroup extends Model
 
 
     /**
-     * survey_answerテーブルとのリレーション($survey_group->survey_answers_groups)
+     * survey_answers_groupsテーブルとのリレーション($survey_group->survey_answers_groups)
      */
     public function survey_answers_groups()
     {

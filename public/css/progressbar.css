@@ -1,0 +1,60 @@
+.progressbar {
+    display: flex;
+    flex-wrap: wrap;
+}
+.progressbar .item {
+    position: relative;
+    width: 33%;
+    text-align: center;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 0;
+    line-height: 1.5;
+    background: #F5F5F5;
+    color: #999999;
+}
+.progressbar .item:not(:last-child)::before,
+.progressbar .item:not(:last-child)::after {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    bottom: 0;
+    left: 100%;
+    content: '';
+    border: 35px solid transparent;
+    border-left: 20px solid #F5F5F5;
+    margin: auto;
+}
+.progressbar .item:not(:last-child)::before {
+    margin-left: 1px;
+    border-left-color: #FFF;
+}
+
+@media screen and (max-width: 767px) {
+.progressbar .item {
+    font-size: 11px;
+    line-height: 1.4;
+    padding: 10px 0;
+}
+.progressbar .item:not(:last-child)::before,
+.progressbar .item:not(:last-child)::after {
+    border-width: 25px;
+    border-left-width: 12px;
+}
+}
+
+/* active */
+
+.progressbar .item.active {
+    z-index: 1;
+    background: #14CFA0;
+    color: #FFF;
+}
+.progressbar .item.active:not(:last-child)::after {
+    border-left-color: #14CFA0;
+}
+.progressbar .item.active:not(:last-child)::before {
+    border-left: none;
+}
+

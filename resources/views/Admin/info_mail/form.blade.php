@@ -6,6 +6,13 @@
 
 <!----- breadcrumb ----->
 @section('breadcrumb')
+<li class="breadcrumb-item"><a href="{{route('admin.top')}}" class="text-success">
+    管理者画面
+</a></li>
+<li class="breadcrumb-item" aria-current="page">
+    お知らせメール送信フォーム
+</li>
+
 @endsection
 
 

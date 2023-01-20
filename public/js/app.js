@@ -5541,6 +5541,84 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/UrlInputCopyComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/UrlInputCopyComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/*
+--------------------------------------------------------------------------
+    [ 使い方 ]
+    <submit-button-component
+        style_class="btn btn-danger" // スタイルクラスの指定
+        text="確定"                  // ボタンテキストの指定
+    />
+--------------------------------------------------------------------------
+*/
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      disabled: false
+    };
+  },
+  props: {
+    // ボタンのスタイルクラス
+    copy_url: {
+      type: String,
+      "default": 'http://---'
+    }
+  },
+  methods: {
+    copy: function copy(text) {
+      var _this = this;
+
+      navigator.clipboard.writeText(text).then(function () {
+        _this.disabled = true;
+        window.setTimeout(_this.disabled_false, 2000);
+      })["catch"](function (e) {
+        console.error(e);
+      });
+    },
+    disabled_false: function disabled_false() {
+      this.disabled = false;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MakeQuestion/CommentaryInputComponent.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MakeQuestion/CommentaryInputComponent.vue?vue&type=script&lang=js& ***!
@@ -10081,9 +10159,11 @@ Vue.component('select-answer-component', (__webpack_require__(/*! ./components/M
 
 Vue.component('seach-box-component', (__webpack_require__(/*! ./components/Items/SeachBoxComponent.vue */ "./resources/js/components/Items/SeachBoxComponent.vue")["default"]));
 Vue.component('see-more-btn-component', (__webpack_require__(/*! ./components/Items/SeeMoreBtnComponebt.vue */ "./resources/js/components/Items/SeeMoreBtnComponebt.vue")["default"]));
-Vue.component('submit-button-component', (__webpack_require__(/*! ./components/Items/SubmitButtonComponent.vue */ "./resources/js/components/Items/SubmitButtonComponent.vue")["default"])); // Vue.component('count-up-timer-component', require('./components/Items/CountUpTimerComponent.vue').default);
+Vue.component('submit-button-component', (__webpack_require__(/*! ./components/Items/SubmitButtonComponent.vue */ "./resources/js/components/Items/SubmitButtonComponent.vue")["default"])); // コピーボタン
 
-Vue.component('url-copy-component', (__webpack_require__(/*! ./components/Items/UrlCopyComponent.vue */ "./resources/js/components/Items/UrlCopyComponent.vue")["default"]));
+Vue.component('url-copy-component', (__webpack_require__(/*! ./components/Items/UrlCopyComponent.vue */ "./resources/js/components/Items/UrlCopyComponent.vue")["default"])); // テキスト付きコピーボタン
+
+Vue.component('url-input-copy-component', (__webpack_require__(/*! ./components/Items/UrlInputCopyComponent.vue */ "./resources/js/components/Items/UrlInputCopyComponent.vue")["default"]));
 /* 認証 */
 
 Vue.component('reset-pass-component', (__webpack_require__(/*! ./components/UserAuth/ResetPassComponent.vue */ "./resources/js/components/UserAuth/ResetPassComponent.vue")["default"]));
@@ -33413,6 +33493,45 @@ component.options.__file = "resources/js/components/Items/UrlCopyComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/Items/UrlInputCopyComponent.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/Items/UrlInputCopyComponent.vue ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _UrlInputCopyComponent_vue_vue_type_template_id_12d7d1e3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UrlInputCopyComponent.vue?vue&type=template&id=12d7d1e3& */ "./resources/js/components/Items/UrlInputCopyComponent.vue?vue&type=template&id=12d7d1e3&");
+/* harmony import */ var _UrlInputCopyComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UrlInputCopyComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/Items/UrlInputCopyComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _UrlInputCopyComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _UrlInputCopyComponent_vue_vue_type_template_id_12d7d1e3___WEBPACK_IMPORTED_MODULE_0__.render,
+  _UrlInputCopyComponent_vue_vue_type_template_id_12d7d1e3___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Items/UrlInputCopyComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/MakeQuestion/CommentaryInputComponent.vue":
 /*!***************************************************************************!*\
   !*** ./resources/js/components/MakeQuestion/CommentaryInputComponent.vue ***!
@@ -34283,6 +34402,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Items/UrlInputCopyComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/Items/UrlInputCopyComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UrlInputCopyComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./UrlInputCopyComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/UrlInputCopyComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UrlInputCopyComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/MakeQuestion/CommentaryInputComponent.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************!*\
   !*** ./resources/js/components/MakeQuestion/CommentaryInputComponent.vue?vue&type=script&lang=js& ***!
@@ -34749,6 +34884,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UrlCopyComponent_vue_vue_type_template_id_bebd3ada___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UrlCopyComponent_vue_vue_type_template_id_bebd3ada___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./UrlCopyComponent.vue?vue&type=template&id=bebd3ada& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/UrlCopyComponent.vue?vue&type=template&id=bebd3ada&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Items/UrlInputCopyComponent.vue?vue&type=template&id=12d7d1e3&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/components/Items/UrlInputCopyComponent.vue?vue&type=template&id=12d7d1e3& ***!
+  \************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UrlInputCopyComponent_vue_vue_type_template_id_12d7d1e3___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UrlInputCopyComponent_vue_vue_type_template_id_12d7d1e3___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UrlInputCopyComponent_vue_vue_type_template_id_12d7d1e3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./UrlInputCopyComponent.vue?vue&type=template&id=12d7d1e3& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/UrlInputCopyComponent.vue?vue&type=template&id=12d7d1e3&");
 
 
 /***/ }),
@@ -35368,6 +35520,83 @@ var render = function () {
             ]
           ),
     ]),
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/UrlInputCopyComponent.vue?vue&type=template&id=12d7d1e3&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/UrlInputCopyComponent.vue?vue&type=template&id=12d7d1e3& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "input-group border",
+        staticStyle: { "border-radius": "5px" },
+      },
+      [
+        _c("input", {
+          staticClass: "form-control border-0",
+          staticStyle: { "font-size": "11px" },
+          attrs: { type: "text", disabled: "" },
+          domProps: { value: _vm.copy_url },
+        }),
+        _vm._v(" "),
+        !_vm.disabled
+          ? _c(
+              "button",
+              {
+                staticClass: "btn bg-white btn-sm border-white",
+                staticStyle: { "font-size": "11px" },
+                attrs: {
+                  type: "button",
+                  "data-bs-toggle": "tooltip",
+                  "data-bs-placement": "bottom",
+                  title: "URLのコピー",
+                },
+                on: {
+                  click: function ($event) {
+                    return _vm.copy(_vm.copy_url)
+                  },
+                },
+              },
+              [
+                _c("i", { staticClass: "bi bi-files" }),
+                _vm._v("コピー\n        "),
+              ]
+            )
+          : _c(
+              "button",
+              {
+                staticClass: "btn bg-white btn-sm border-success text-success",
+                staticStyle: { "font-size": "11px" },
+                attrs: { disabled: "", type: "button" },
+              },
+              [
+                _c("i", { staticClass: "bi bi-check" }),
+                _vm._v("　完了\n        "),
+              ]
+            ),
+      ]
+    ),
   ])
 }
 var staticRenderFns = []

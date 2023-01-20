@@ -42,12 +42,16 @@ Vue.component('select-answer-component',   require('./components/MakeQuestion/Se
 Vue.component('seach-box-component',      require('./components/Items/SeachBoxComponent.vue').default);
 Vue.component('see-more-btn-component',   require('./components/Items/SeeMoreBtnComponebt.vue').default);
 Vue.component('submit-button-component',  require('./components/Items/SubmitButtonComponent.vue').default);
-// Vue.component('count-up-timer-component', require('./components/Items/CountUpTimerComponent.vue').default);
+// コピーボタン
 Vue.component('url-copy-component',       require('./components/Items/UrlCopyComponent.vue').default);
+// テキスト付きコピーボタン
+Vue.component('url-input-copy-component', require('./components/Items/UrlInputCopyComponent.vue').default);
+
 
 /* 認証 */
 Vue.component('reset-pass-component', require('./components/UserAuth/ResetPassComponent.vue').default);
 Vue.component('register-component',   require('./components/UserAuth/RegisterComponent.vue').default);
+
 
 /* その他のサービス */
 Vue.component('please-login-modal-component',  require('./components/Service/PleaseLoginModalComponebt.vue').default);
