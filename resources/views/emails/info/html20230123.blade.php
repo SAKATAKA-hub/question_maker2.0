@@ -27,7 +27,8 @@
         .border-bottom{ border-bottom: 1px solid #a3b6c2; }
         .text-end{ text-align: right; }
         .mail-container{
-            width: 600px;
+            max-width: 600px;
+            padding: 0 1rem;
             margin: 32px auto;
         }
         .bg-light-text{
@@ -50,7 +51,7 @@
             color: #fff;
             background-color: #14CFA0;
             /* width: 100%; */
-            margin: 16px 0;
+            /* margin: 16px 0; */
         }
     </style>
 </head>
