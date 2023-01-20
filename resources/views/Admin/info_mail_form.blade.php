@@ -31,20 +31,35 @@
 
         <form action="{{route('admin.info_mail.send')}}" method="POST">
             @csrf
+            @php
+                $mail_num = '20230123';
+                $subject  = 'サービス向上アンケートのお願い';
+            @endphp
+
 
             <div class="card card-body mb-3">
                 <div class="row mb-3">
                     <div class="col-auto" style="width:10rem;">お知らせメール番号</div>
                     <div class="col-auto">
                         <input type="text" class="form-controll"
-                        name="mail_num" value="20230123">
+                        name="mail_num" value="{{$mail_num}}">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-auto" style="width:10rem;">件名</div>
-                    <div class="col-auto">
-                        <input type="text" class="form-controll"
-                        name="subject" value="サービス向上アンケートのお願い">
+                    <div class="col">
+                        <input type="text" class="form-controll w-100"
+                        name="subject" value="{{$subject}}">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-auto" style="width:10rem;">プレビュー</div>
+                    <div class="col">
+                        {{-- <a href="{{route('admin.info_mail.preview',$mail_num)}}"
+                        class="btn btn-sm btn-outline-secondary">表示</a> --}}
+                        <a href="javascript:void(0)" class="btn btn-sm btn-outline-secondary"
+                        onclick="window.open('{{ route('admin.info_mail.preview',$mail_num) }}','_blank')" style="text-decoration:none;"
+                        >表示</a>
                     </div>
                 </div>
             </div>

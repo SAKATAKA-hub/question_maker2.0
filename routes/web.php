@@ -430,22 +430,64 @@ Route::middleware(['user_auth'])->group(function () {
 */
 Route::middleware(['admin_auth'])->group(function () {
 
-    # ユーザー一覧
-    Route::get('/test/users', function () {return view('test.users');})
-    ->name('test.users');
+    # 管理者トップ
+    Route::get('/admin', function(){ return view('Admin.top'); })
+    ->name('admin.top');
 
-    # お知らせメール送信フォーム(info_mail_form)
-    Route::get('/admin/info_mail/form', function(){
+    /**
+     * ----------------------------------
+     *  お知らせメール　処理
+     * ----------------------------------
+    */
 
-        // $users = \App\Models\user::getApiData();
-        // dd( $users[1]->question_groups_count );
+        # お知らせメール送信フォーム(info_mail_form)
+        Route::get('/admin/info_mail', function(){ return view('Admin.info_mail_form'); })
+        ->name('admin.info_mail.form');
 
-        return view('Admin.info_mail_form'); })
-    ->name('admin.info_mail.form');
 
-    # お知らせメール送信処理(info_mail_send)
-    Route::post('/admin/info_mail/send', [Controllers\AdminController::class, 'info_mail_send'])
-    ->name('admin.info_mail.send');
+        # お知らせメール送信処理(info_mail_send)
+        Route::post('/admin/info_mail/send', [Controllers\AdminInfoController::class, 'info_mail_send'])
+        ->name('admin.info_mail.send');
+
+
+        # お知らせメール内容の確認
+        Route::get('/admin/info_mail/preview/{mail}', function($mail_num){ return view( 'emails.info.html'.$mail_num ); })
+        ->name('admin.info_mail.preview');
+
+
+    /**
+     * ----------------------------------
+     *  アンケート　処理
+     * ----------------------------------
+    */
+        # アンケートフォーム一覧の表示(survey_form_list)
+        Route::get('admin/survey_form_list', [Controllers\AdminSurveyController::class, 'survey_form_list'])
+        ->name('admin.survey_form_list');
+
+
+        # アンケート回答一覧の表示(survey_list)
+        Route::get('admin/survey_list/{column_name?}/{order?}', [Controllers\AdminSurveyController::class, 'survey_list'])
+        ->name('admin.survey_list');
+
+
+        #アンケート回答詳細情報の表示(survey_ditails)
+        Route::get('admin/survey_ditails/{survey}', [Controllers\AdminSurveyController::class, 'survey_ditails'])
+        ->name('admin.survey_ditails');
+
+
+        #アンケート回答情報の削除(survey_destroy)
+        Route::delete('admin/survey_destroy/{survey}', [Controllers\AdminSurveyController::class, 'survey_destroy'])
+        ->name('admin.survey_destroy');
+
+
+        #アンケートの新規作成ページ(survey_create)
+        Route::get('admin/survey_create', function(){ return view('admin.survey_create'); })
+        ->name('admin.survey_create');
+
+
+        #アンケートの新規作成(survey_store)
+        Route::post('admin/survey_store', [Controllers\AdminSurveyController::class, 'survey_store'])
+        ->name('admin.survey_store');
 
 });//end middleware
 
@@ -464,17 +506,7 @@ if( env('APP_DEBUG') ){
 
 
     # 問題一覧
-    Route::get('/test/', function () {
-
-        $news_list = config('news.list');
-        dd($news_list);
-
-
-        return view('test.questions_list');
-
-
-
-    })
+    Route::get('/test/', function () { return view('test.questions_list'); })
     ->name('test.questions_list');
 
     # 問題
