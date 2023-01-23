@@ -428,6 +428,7 @@ class ServiceController extends Controller
         */
         public function contact_responsed_api(Request $request)
         {
+
             # APP_KEY認証チェック
             if( $request->api_key != config('app.api_key')){
                 return \App::abort(404);

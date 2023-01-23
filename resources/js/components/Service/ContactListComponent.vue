@@ -5,11 +5,13 @@
             <input v-for="(input, key) in inputs" :key="key"
             type="hidden" :name="key" :value="input"
             >
+            {{route_list}}
             <button type="submit" class="btn btn-primary btn-sm">テスト</button>
         </form>
 
 
-        <!-- 通報リスト -->
+
+        <!-- お問い合わせリスト -->
         <div>
             <div v-if="loading" class="card card-body py-5">
                 <div class="d-flex justify-content-center">
@@ -23,13 +25,7 @@
             <div v-else-if="!data_list.length" class="card card-body py-5">
                 <h5 class="text-center">お問い合わせ情報はありません</h5>
             </div>
-
             <div v-else class="list-group">
-
-                <h5 v-if="!data_list.length" class="my-5 text-center">
-                    お問い合わせ情報はありません。
-                </h5>
-
 
                 <div v-for=" (data, dKey) in data_list " :key="dKey"
                 class="list-group-item list-group-item-action p-0 d-flex"
@@ -81,6 +77,7 @@
                     </div>
 
 
+
                     <!-- offcanvas -->
                     <div class="offcanvas offcanvas-end" tabindex="-1" style="width:600px;"
                     :id="'contactListOffcanvas'+dKey " :aria-labelledby="'contactListOffcanvasLabel'+dKey "
@@ -104,7 +101,7 @@
                                                 <span v-else
                                                 class="text-danger">未対応</span>
                                             </div>
-                                            <!--button-->
+
                                             <div class="col-auto">
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input" type="checkbox" @change="changeResponsed(dKey)"
@@ -132,6 +129,7 @@
                             </div>
 
                         </div>
+
                     </div>
 
 
@@ -151,7 +149,7 @@
         data : function() {
             return{
 
-                test: true,
+                test: false,
 
                 loading: true,
 
@@ -169,7 +167,7 @@
                 ] ,
 
 
-                inputs:{ app_key: '', },
+                inputs:{ api_key: '', },
 
 
             }
@@ -180,41 +178,51 @@
             route_responsed: { type: String, default: '', }, //対応済変更
             rote_destoroy:   { type: String, default: '', }, //削除
 
-            app_key: { type: String, default: '', },
+            api_key: { type: String, default: '', },
 
         },
         mounted() {
 
-            this.inputs.app_key = this.app_key;
+            this.inputs.api_key = this.api_key;
 
-
-            // [ 非同期通信 ]
-            fetch( this.route_list, {
-                method: 'POST',
-                body: new URLSearchParams( this.inputs ),
-            })
-            .then(response => {
-                if(!response.ok){ throw new Error('送信エラー'); }
-                return response.json();
-            })
-            .then(json => {
-
-                // データの保存
-                this.data_list = json.data_list;
-
-
-                // ローディング表示->非表示
-                this.loading = false;
-                console.log( json );
-            })
-            .catch(err=>{
-                alert('通信エラーが発生しました。再読みを行います。');
-                location.reload();
-            })
-
+            /* 一覧の取得 */
+            this.getList();
 
         },
         methods:{
+
+            /* 一覧の取得 */
+            getList: function(){
+
+                // [ 非同期通信 ]
+                fetch( this.route_list, {
+                    method: 'POST',
+                    body: new URLSearchParams( this.inputs ),
+                })
+                .then(response => {
+                    if(!response.ok){ throw new Error('送信エラー'); }
+                    return response.json();
+                })
+                .then(json => {
+
+                    // データの保存
+                    this.data_list = json.data_list;
+
+
+                    // ローディング表示->非表示
+                    this.loading = false;
+                    console.log( json );
+                })
+                .catch(err=>{
+
+                    // this.getList();
+
+                    alert('通信エラーが発生しました。再読みを行います。');
+                    location.reload();
+                })
+
+            },
+
 
             /* 対応状況の変更 */
             changeResponsed: function(dKey){
@@ -222,7 +230,7 @@
                 // params
                 const inputs = {
                     _method: 'patch',
-                    app_key: this.app_key,
+                    api_key: this.api_key,
                     id:        this.data_list[dKey].contact.id,
                     responsed: this.data_list[dKey].contact.responsed,
                 };
@@ -256,7 +264,7 @@
                 // params
                 const inputs = {
                     _method: 'delete',
-                    app_key: this.app_key,
+                    api_key: this.api_key,
                     id: id,
                 };
 

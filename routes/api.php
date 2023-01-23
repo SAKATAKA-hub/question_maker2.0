@@ -33,6 +33,25 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 | その他のサービス　ServiceController
 |--------------------------------------------------------------------------
 */
+    # アンケート
+
+        # アンケート[一覧]  (list_api)
+        Route::post('/survey/list/api', [Controllers\AdminSurveyController::class, 'list_api'])
+        ->name('survey.list.api');
+
+        # アンケート回答[一覧]  (answer_list_api)
+        Route::post('/survey/answer_list/api', [Controllers\AdminSurveyController::class, 'answer_list_api'])
+        ->name('survey.answer_list.api');
+
+        # アンケート回(answer_api)
+        Route::post('/survey/answer/api', [Controllers\AdminSurveyController::class, 'answer_api'])
+        ->name('survey.answer.api');
+
+        # アンケート回[削除](answer_destory_api)
+        Route::delete('/survey/answer/destory/api', [Controllers\AdminSurveyController::class, 'answer_destory_api'])
+        ->name('survey.answer.destory.api');
+
+
     # 規約違反問題集の通報
 
         # 規約違反問題集の通報[一覧]  (violation_report/list/api)

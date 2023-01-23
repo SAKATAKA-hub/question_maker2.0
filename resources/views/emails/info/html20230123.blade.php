@@ -85,7 +85,7 @@
     <div class="mail-container">
         <p class="text-center">
             <a class="btn btn-primary btn-lg"
-            href="https://nextarrow.heteml.net/hr/survey/input/3/1K6ljOnJABKxwIOkRBbesqa38zjpqx8AGGj7QZmP"
+            href="https://mondai-diy.com/survey/input/1/jrWqkak7wr2QnmaKfPdj6vK6AD1uaX4nCJnJgBC0"
             >アンケートはこちら</a>
         </p>
     </div>

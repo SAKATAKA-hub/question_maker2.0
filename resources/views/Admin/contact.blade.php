@@ -2,23 +2,15 @@
 
 
 <!----- title ----->
-@section('title', $answer_group->title.'解答詳細')
+@section('title','お問い合わせ一覧')
 
 <!----- breadcrumb ----->
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="{{route('admin.top')}}" class="text-success">
     管理者画面
 </a></li>
-<li class="breadcrumb-item"><a href="{{route('admin.survey.form_list')}}" class="text-success">
-    アンケート一覧
-</a></li>
-<li class="breadcrumb-item"><a
-href="{{route('admin.survey.answer_list',$answer_group->survey_questions_group_id)}}"
-class="text-success">
-    解答一覧
-</a></li>
 <li class="breadcrumb-item" aria-current="page">
-    詳細
+    お問い合わせ一覧
 </li>
 
 @endsection
@@ -44,6 +36,13 @@ class="text-success">
 <section>
     <div class="container-1200 my-5">
 
+
+        <contact-list-component
+        route_list="{{      route('contact.list.api')}}"
+        route_responsed="{{ route('contact.responsed.api')}}"
+        rote_destoroy="{{   route('contact.destory.api')}}"
+        api_key="{{config('app.api_key')}}"
+        ></contact-list-component>
 
 
     </div>

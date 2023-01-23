@@ -8222,12 +8222,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      test: true,
+      test: false,
       loading: true,
       // データリスト
       data_list: [
@@ -8239,7 +8237,7 @@ __webpack_require__.r(__webpack_exports__);
          */
       ],
       inputs: {
-        app_key: ''
+        api_key: ''
       }
     };
   },
@@ -8259,37 +8257,45 @@ __webpack_require__.r(__webpack_exports__);
       "default": ''
     },
     //削除
-    app_key: {
+    api_key: {
       type: String,
       "default": ''
     }
   },
   mounted: function mounted() {
-    var _this = this;
+    this.inputs.api_key = this.api_key;
+    /* 一覧の取得 */
 
-    this.inputs.app_key = this.app_key; // [ 非同期通信 ]
-
-    fetch(this.route_list, {
-      method: 'POST',
-      body: new URLSearchParams(this.inputs)
-    }).then(function (response) {
-      if (!response.ok) {
-        throw new Error('送信エラー');
-      }
-
-      return response.json();
-    }).then(function (json) {
-      // データの保存
-      _this.data_list = json.data_list; // ローディング表示->非表示
-
-      _this.loading = false;
-      console.log(json);
-    })["catch"](function (err) {
-      alert('通信エラーが発生しました。再読みを行います。');
-      location.reload();
-    });
+    this.getList();
   },
   methods: {
+    /* 一覧の取得 */
+    getList: function getList() {
+      var _this = this;
+
+      // [ 非同期通信 ]
+      fetch(this.route_list, {
+        method: 'POST',
+        body: new URLSearchParams(this.inputs)
+      }).then(function (response) {
+        if (!response.ok) {
+          throw new Error('送信エラー');
+        }
+
+        return response.json();
+      }).then(function (json) {
+        // データの保存
+        _this.data_list = json.data_list; // ローディング表示->非表示
+
+        _this.loading = false;
+        console.log(json);
+      })["catch"](function (err) {
+        // this.getList();
+        alert('通信エラーが発生しました。再読みを行います。');
+        location.reload();
+      });
+    },
+
     /* 対応状況の変更 */
     changeResponsed: function changeResponsed(dKey) {
       var _this2 = this;
@@ -8297,7 +8303,7 @@ __webpack_require__.r(__webpack_exports__);
       // params
       var inputs = {
         _method: 'patch',
-        app_key: this.app_key,
+        api_key: this.api_key,
         id: this.data_list[dKey].contact.id,
         responsed: this.data_list[dKey].contact.responsed
       }; // [ 非同期通信 ]
@@ -8327,7 +8333,7 @@ __webpack_require__.r(__webpack_exports__);
       // params
       var inputs = {
         _method: 'delete',
-        app_key: this.app_key,
+        api_key: this.api_key,
         id: id
       }; // [ 非同期通信 ]
 
@@ -8619,6 +8625,372 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {// ~
   },
   methods: {// ~
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Service/SurveyListtComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Service/SurveyListtComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    route_list: {
+      type: String,
+      "default": ''
+    },
+    route_answer_list: {
+      type: String,
+      "default": ''
+    },
+    route_answer: {
+      type: String,
+      "default": ''
+    },
+    route_answer_destory: {
+      type: String,
+      "default": ''
+    },
+    api_key: {
+      type: String,
+      "default": ''
+    }
+  },
+  data: function data() {
+    return {
+      test: false,
+      loading: true,
+      // アンケートリスト
+      survey_list: [],
+      // アンケート回答リスト
+      survey_answers_group_list: null,
+      // 回答詳細
+      survey_answers_group: null,
+      survey_answers: null,
+      inputs: {}
+    };
+  },
+  mounted: function mounted() {
+    /* 一覧の取得 */
+    this.getList();
+  },
+  methods: {
+    /* 一覧の取得 */
+    getList: function getList() {
+      var _this = this;
+
+      // [ 非同期通信 ]
+      fetch(this.route_list, {
+        method: 'POST',
+        body: new URLSearchParams({
+          api_key: this.api_key
+        })
+      }).then(function (response) {
+        if (!response.ok) {
+          throw new Error('送信エラー');
+        }
+
+        return response.json();
+      }).then(function (json) {
+        // データの保存 survey_groups
+        _this.survey_list = json.survey_groups; // ローディング表示->非表示
+
+        _this.loading = false; // console.log( json );
+      })["catch"](function (err) {
+        _this.getList(); // alert('通信エラーが発生しました。再読みを行います。');
+        // location.reload();
+
+      });
+    },
+
+    /* 回答一覧の取得 */
+    answerList: function answerList(answers_id) {
+      var _this2 = this;
+
+      // ローディング表示
+      this.loading = true; // return console.log({ api_key: this.api_key, answers_id: answers_id});
+
+      fetch(this.route_answer_list, {
+        method: 'POST',
+        body: new URLSearchParams({
+          api_key: this.api_key,
+          answers_id: answers_id
+        })
+      }).then(function (response) {
+        if (!response.ok) {
+          throw new Error('送信エラー');
+        }
+
+        return response.json();
+      }).then(function (json) {
+        // データの保存 answers_groups
+        _this2.survey_answers_group_list = json.answers_groups; // ローディング表示->非表示
+
+        _this2.loading = false; // console.log( json );
+      })["catch"](function (err) {
+        _this2.getList(); // alert('通信エラーが発生しました。再読みを行います。');
+        // location.reload();
+
+      });
+    },
+
+    /* 回答情報の取得 */
+    answerDitail: function answerDitail(answers_id) {
+      var _this3 = this;
+
+      // this.survey_answers_group = [1];
+      // return console.log(answers_id);
+      // ローディング表示
+      this.loading = true;
+      fetch(this.route_answer, {
+        method: 'POST',
+        body: new URLSearchParams({
+          api_key: this.api_key,
+          answers_id: answers_id
+        })
+      }).then(function (response) {
+        if (!response.ok) {
+          throw new Error('送信エラー');
+        }
+
+        return response.json();
+      }).then(function (json) {
+        // データの保存 answers_groups
+        _this3.survey_answers_group = _this3.survey_answers_group_list[answers_id];
+        _this3.survey_answers = json.answers; // ローディング表示->非表示
+
+        _this3.loading = false;
+        console.log(json);
+      })["catch"](function (err) {
+        _this3.getList(); // alert('通信エラーが発生しました。再読みを行います。');
+        // location.reload();
+
+      });
+    },
+
+    /* 回答情報の削除 */
+    answerDestory: function answerDestory(answers_id) {
+      var _this4 = this;
+
+      // params
+      var inputs = {
+        _method: 'delete',
+        api_key: this.api_key,
+        answers_id: answers_id
+      }; // [ 非同期通信 ]
+
+      fetch(this.route_answer_destory, {
+        method: 'POST',
+        body: new URLSearchParams(inputs)
+      }).then(function (response) {
+        if (!response.ok) {
+          throw new Error('送信エラー');
+        }
+
+        return response.json();
+      }).then(function (json) {
+        // データの保存
+        _this4.survey_answers_group_list = json.answers_groups; // console.log( json );
+      })["catch"](function (err) {
+        alert('通信エラーが発生しました。');
+      });
+    },
+
+    /* 回答一覧のリセット */
+    resetAnswerList: function resetAnswerList() {
+      this.survey_answers_group_list = null;
+    },
+
+    /* 回答詳細のリセット */
+    resetAnswer: function resetAnswer() {
+      this.survey_answers_group = null;
+      this.survey_answers = null;
+    },
+
+    /* 別タブでリンクを開く */
+    windowOpen: function windowOpen(url) {
+      window.open(url, '_blank');
+    }
   }
 });
 
@@ -9159,8 +9531,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -9182,7 +9552,7 @@ __webpack_require__.r(__webpack_exports__);
          */
       ],
       inputs: {
-        app_key: ''
+        api_key: ''
       }
     };
   },
@@ -9202,36 +9572,44 @@ __webpack_require__.r(__webpack_exports__);
       "default": ''
     },
     //削除
-    app_key: {
+    api_key: {
       type: String,
       "default": ''
     }
   },
   mounted: function mounted() {
-    var _this = this;
+    this.inputs.api_key = this.api_key;
+    /* 一覧の取得 */
 
-    this.inputs.app_key = this.app_key; // [ 非同期通信 ]
-
-    fetch(this.route_list, {
-      method: 'POST',
-      body: new URLSearchParams(this.inputs)
-    }).then(function (response) {
-      if (!response.ok) {
-        throw new Error('送信エラー');
-      }
-
-      return response.json();
-    }).then(function (json) {
-      // データの保存
-      _this.data_list = json.data_list; // ローディング表示->非表示
-
-      _this.loading = false; // console.log( json );
-    })["catch"](function (err) {
-      alert('通信エラーが発生しました。再読みを行います。');
-      location.reload();
-    });
+    this.getList();
   },
   methods: {
+    /* 一覧の取得 */
+    getList: function getList() {
+      var _this = this;
+
+      // [ 非同期通信 ]
+      fetch(this.route_list, {
+        method: 'POST',
+        body: new URLSearchParams(this.inputs)
+      }).then(function (response) {
+        if (!response.ok) {
+          throw new Error('送信エラー');
+        }
+
+        return response.json();
+      }).then(function (json) {
+        // データの保存
+        _this.data_list = json.data_list; // ローディング表示->非表示
+
+        _this.loading = false; // console.log( json );
+      })["catch"](function (err) {
+        _this.getList(); // alert('通信エラーが発生しました。再読みを行います。');
+        // location.reload();
+
+      });
+    },
+
     /* 対応状況の変更 */
     changeResponsed: function changeResponsed(dKey) {
       var _this2 = this;
@@ -9239,7 +9617,7 @@ __webpack_require__.r(__webpack_exports__);
       // params
       var inputs = {
         _method: 'patch',
-        app_key: this.app_key,
+        api_key: this.api_key,
         id: this.data_list[dKey].report.id,
         responsed: this.data_list[dKey].report.responsed
       }; // [ 非同期通信 ]
@@ -9268,7 +9646,7 @@ __webpack_require__.r(__webpack_exports__);
       // params
       var inputs = {
         _method: 'delete',
-        app_key: this.app_key,
+        api_key: this.api_key,
         id: id
       }; // [ 非同期通信 ]
 
@@ -10174,6 +10552,7 @@ Vue.component('please-login-modal-component', (__webpack_require__(/*! ./compone
 Vue.component('keep-question-group-component', (__webpack_require__(/*! ./components/Service/KeepQuestionGroupComponent.vue */ "./resources/js/components/Service/KeepQuestionGroupComponent.vue")["default"]));
 Vue.component('keep-creator-user-component', (__webpack_require__(/*! ./components/Service/KeepCreatorUserComponent.vue */ "./resources/js/components/Service/KeepCreatorUserComponent.vue")["default"]));
 Vue.component('comment-component', (__webpack_require__(/*! ./components/Service/CommentComponent.vue */ "./resources/js/components/Service/CommentComponent.vue")["default"]));
+Vue.component('survey-list-component', (__webpack_require__(/*! ./components/Service/SurveyListtComponent.vue */ "./resources/js/components/Service/SurveyListtComponent.vue")["default"]));
 Vue.component('violation-report-component', (__webpack_require__(/*! ./components/Service/ViolationReportComponent.vue */ "./resources/js/components/Service/ViolationReportComponent.vue")["default"]));
 Vue.component('violation-report-list-component', (__webpack_require__(/*! ./components/Service/ViolationReportListComponent.vue */ "./resources/js/components/Service/ViolationReportListComponent.vue")["default"]));
 Vue.component('contact-form-component', (__webpack_require__(/*! ./components/Service/ContactFormComponent.vue */ "./resources/js/components/Service/ContactFormComponent.vue")["default"]));
@@ -34127,6 +34506,45 @@ component.options.__file = "resources/js/components/Service/PleaseLoginModalComp
 
 /***/ }),
 
+/***/ "./resources/js/components/Service/SurveyListtComponent.vue":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/Service/SurveyListtComponent.vue ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _SurveyListtComponent_vue_vue_type_template_id_75889ba6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SurveyListtComponent.vue?vue&type=template&id=75889ba6& */ "./resources/js/components/Service/SurveyListtComponent.vue?vue&type=template&id=75889ba6&");
+/* harmony import */ var _SurveyListtComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SurveyListtComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/Service/SurveyListtComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SurveyListtComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SurveyListtComponent_vue_vue_type_template_id_75889ba6___WEBPACK_IMPORTED_MODULE_0__.render,
+  _SurveyListtComponent_vue_vue_type_template_id_75889ba6___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Service/SurveyListtComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Service/UserListComponent.vue":
 /*!***************************************************************!*\
   !*** ./resources/js/components/Service/UserListComponent.vue ***!
@@ -34658,6 +35076,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Service/SurveyListtComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/Service/SurveyListtComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SurveyListtComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SurveyListtComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Service/SurveyListtComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SurveyListtComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Service/UserListComponent.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************!*\
   !*** ./resources/js/components/Service/UserListComponent.vue?vue&type=script&lang=js& ***!
@@ -35156,6 +35590,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PleaseLoginModalComponebt_vue_vue_type_template_id_7182c686___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PleaseLoginModalComponebt_vue_vue_type_template_id_7182c686___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PleaseLoginModalComponebt.vue?vue&type=template&id=7182c686& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Service/PleaseLoginModalComponebt.vue?vue&type=template&id=7182c686&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Service/SurveyListtComponent.vue?vue&type=template&id=75889ba6&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/Service/SurveyListtComponent.vue?vue&type=template&id=75889ba6& ***!
+  \*************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SurveyListtComponent_vue_vue_type_template_id_75889ba6___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SurveyListtComponent_vue_vue_type_template_id_75889ba6___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SurveyListtComponent_vue_vue_type_template_id_75889ba6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SurveyListtComponent.vue?vue&type=template&id=75889ba6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Service/SurveyListtComponent.vue?vue&type=template&id=75889ba6&");
 
 
 /***/ }),
@@ -39105,7 +39556,7 @@ var render = function () {
                 domProps: { value: input },
               })
             }),
-            _vm._v(" "),
+            _vm._v("\n        " + _vm._s(_vm.route_list) + "\n        "),
             _c(
               "button",
               {
@@ -39135,324 +39586,308 @@ var render = function () {
         : _c(
             "div",
             { staticClass: "list-group" },
-            [
-              !_vm.data_list.length
-                ? _c("h5", { staticClass: "my-5 text-center" }, [
-                    _vm._v(
-                      "\n                お問い合わせ情報はありません。\n            "
-                    ),
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm._l(_vm.data_list, function (data, dKey) {
-                return _c(
-                  "div",
-                  {
-                    key: dKey,
-                    staticClass:
-                      "list-group-item list-group-item-action p-0 d-flex",
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "d-block p-3 py-2 col text-dark text-decoration-none",
-                        attrs: {
-                          href: "#",
-                          "data-bs-toggle": "offcanvas",
-                          "data-bs-target": "#contactListOffcanvas" + dKey,
-                          "aria-controls": "contactListOffcanvas" + dKey,
-                        },
+            _vm._l(_vm.data_list, function (data, dKey) {
+              return _c(
+                "div",
+                {
+                  key: dKey,
+                  staticClass:
+                    "list-group-item list-group-item-action p-0 d-flex",
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass:
+                        "d-block p-3 py-2 col text-dark text-decoration-none",
+                      attrs: {
+                        href: "#",
+                        "data-bs-toggle": "offcanvas",
+                        "data-bs-target": "#contactListOffcanvas" + dKey,
+                        "aria-controls": "contactListOffcanvas" + dKey,
                       },
-                      [
-                        _c("div", { staticClass: "row" }, [
-                          _c("div", { staticClass: "col-auto" }, [
-                            data.contact.responsed
-                              ? _c(
-                                  "span",
-                                  { staticClass: "badge text-secondary" },
-                                  [_vm._v("対応済")]
-                                )
-                              : _c("span", { staticClass: "badge bg-danger" }, [
-                                  _vm._v("未対応"),
-                                ]),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-auto" }, [
-                            _vm._v(_vm._s(data.date)),
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "col d-none d-md-block overflow-hidden",
-                            },
-                            [
-                              _c(
+                    },
+                    [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-auto" }, [
+                          data.contact.responsed
+                            ? _c(
                                 "span",
-                                {
-                                  staticClass: "d-inline-block text-truncate",
-                                  staticStyle: { width: "200px" },
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(data.contact.name) +
-                                      "様\n                            "
-                                  ),
-                                ]
-                              ),
-                            ]
-                          ),
+                                { staticClass: "badge text-secondary" },
+                                [_vm._v("対応済")]
+                              )
+                            : _c("span", { staticClass: "badge bg-danger" }, [
+                                _vm._v("未対応"),
+                              ]),
                         ]),
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-auto" }, [
-                      _c("div", { staticClass: "dropdown" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn",
-                            attrs: {
-                              type: "button",
-                              id: "contactDropdownMenuButton" + dKey,
-                              "data-bs-toggle": "dropdown",
-                              "aria-expanded": "false",
-                            },
-                          },
-                          [_vm._m(1, true)]
-                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-auto" }, [
+                          _vm._v(_vm._s(data.date)),
+                        ]),
                         _vm._v(" "),
                         _c(
-                          "ul",
+                          "div",
                           {
-                            staticClass: "dropdown-menu",
-                            attrs: {
-                              "aria-labelledby":
-                                "contactDropdownMenuButton" + dKey,
-                            },
+                            staticClass:
+                              "col d-none d-md-block overflow-hidden",
                           },
                           [
-                            _c("li", [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "dropdown-item",
-                                  attrs: {
-                                    "data-bs-toggle": "modal",
-                                    "data-bs-target": "#deleteModal" + dKey,
-                                    href: "#",
-                                  },
-                                  on: {
-                                    click: function ($event) {
-                                      return _vm.destory(data.contact.id)
-                                    },
-                                  },
-                                },
-                                [_vm._v("削除")]
-                              ),
-                            ]),
+                            _c(
+                              "span",
+                              {
+                                staticClass: "d-inline-block text-truncate",
+                                staticStyle: { width: "200px" },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(data.contact.name) +
+                                    "様\n                            "
+                                ),
+                              ]
+                            ),
                           ]
                         ),
                       ]),
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "offcanvas offcanvas-end",
-                        staticStyle: { width: "600px" },
-                        attrs: {
-                          tabindex: "-1",
-                          id: "contactListOffcanvas" + dKey,
-                          "aria-labelledby": "contactListOffcanvasLabel" + dKey,
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-auto" }, [
+                    _c("div", { staticClass: "dropdown" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn",
+                          attrs: {
+                            type: "button",
+                            id: "contactDropdownMenuButton" + dKey,
+                            "data-bs-toggle": "dropdown",
+                            "aria-expanded": "false",
+                          },
                         },
+                        [_vm._m(1, true)]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "ul",
+                        {
+                          staticClass: "dropdown-menu",
+                          attrs: {
+                            "aria-labelledby":
+                              "contactDropdownMenuButton" + dKey,
+                          },
+                        },
+                        [
+                          _c("li", [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "dropdown-item",
+                                attrs: {
+                                  "data-bs-toggle": "modal",
+                                  "data-bs-target": "#deleteModal" + dKey,
+                                  href: "#",
+                                },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.destory(data.contact.id)
+                                  },
+                                },
+                              },
+                              [_vm._v("削除")]
+                            ),
+                          ]),
+                        ]
+                      ),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "offcanvas offcanvas-end",
+                      staticStyle: { width: "600px" },
+                      attrs: {
+                        tabindex: "-1",
+                        id: "contactListOffcanvas" + dKey,
+                        "aria-labelledby": "contactListOffcanvasLabel" + dKey,
                       },
-                      [
-                        _c("div", { staticClass: "offcanvas-header" }, [
-                          _c(
-                            "h5",
-                            {
-                              attrs: { id: "contactListOffcanvasLabel" + dKey },
-                            },
-                            [_vm._v("お問い合わせ内容")]
-                          ),
-                          _vm._v(" "),
-                          _c("button", {
-                            staticClass: "btn-close text-reset",
-                            attrs: {
-                              type: "button",
-                              "data-bs-dismiss": "offcanvas",
-                              "aria-label": "Close",
-                            },
-                          }),
-                        ]),
+                    },
+                    [
+                      _c("div", { staticClass: "offcanvas-header" }, [
+                        _c(
+                          "h5",
+                          { attrs: { id: "contactListOffcanvasLabel" + dKey } },
+                          [_vm._v("お問い合わせ内容")]
+                        ),
                         _vm._v(" "),
-                        _c("div", { staticClass: "offcanvas-body" }, [
-                          _c("div", { staticClass: "card card-body mb-3" }, [
-                            _c("strong", [_vm._v("お問い合わせ者情報")]),
+                        _c("button", {
+                          staticClass: "btn-close text-reset",
+                          attrs: {
+                            type: "button",
+                            "data-bs-dismiss": "offcanvas",
+                            "aria-label": "Close",
+                          },
+                        }),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "offcanvas-body" }, [
+                        _c("div", { staticClass: "card card-body mb-3" }, [
+                          _c("strong", [_vm._v("お問い合わせ者情報")]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "row py-2 border-top" }, [
+                            _c("div", { staticClass: "col-4" }, [
+                              _vm._v("対応状況"),
+                            ]),
                             _vm._v(" "),
-                            _c("div", { staticClass: "row py-2 border-top" }, [
-                              _c("div", { staticClass: "col-4" }, [
-                                _vm._v("対応状況"),
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "col-8" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "row align-items-center" },
-                                  [
-                                    _c("div", { staticClass: "col" }, [
-                                      data.contact.responsed
-                                        ? _c(
-                                            "span",
-                                            { staticClass: "text-success" },
-                                            [_vm._v("対応済")]
-                                          )
-                                        : _c(
-                                            "span",
-                                            { staticClass: "text-danger" },
-                                            [_vm._v("未対応")]
-                                          ),
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "col-auto" }, [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass: "form-check form-switch",
-                                        },
-                                        [
-                                          _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value: data.contact.responsed,
-                                                expression:
-                                                  "data.contact.responsed",
+                            _c("div", { staticClass: "col-8" }, [
+                              _c(
+                                "div",
+                                { staticClass: "row align-items-center" },
+                                [
+                                  _c("div", { staticClass: "col" }, [
+                                    data.contact.responsed
+                                      ? _c(
+                                          "span",
+                                          { staticClass: "text-success" },
+                                          [_vm._v("対応済")]
+                                        )
+                                      : _c(
+                                          "span",
+                                          { staticClass: "text-danger" },
+                                          [_vm._v("未対応")]
+                                        ),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "col-auto" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "form-check form-switch" },
+                                      [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: data.contact.responsed,
+                                              expression:
+                                                "data.contact.responsed",
+                                            },
+                                          ],
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "checkbox",
+                                            id: "flexSwitchResponsed" + dKey,
+                                          },
+                                          domProps: {
+                                            checked: Array.isArray(
+                                              data.contact.responsed
+                                            )
+                                              ? _vm._i(
+                                                  data.contact.responsed,
+                                                  null
+                                                ) > -1
+                                              : data.contact.responsed,
+                                          },
+                                          on: {
+                                            change: [
+                                              function ($event) {
+                                                var $$a =
+                                                    data.contact.responsed,
+                                                  $$el = $event.target,
+                                                  $$c = $$el.checked
+                                                    ? true
+                                                    : false
+                                                if (Array.isArray($$a)) {
+                                                  var $$v = null,
+                                                    $$i = _vm._i($$a, $$v)
+                                                  if ($$el.checked) {
+                                                    $$i < 0 &&
+                                                      _vm.$set(
+                                                        data.contact,
+                                                        "responsed",
+                                                        $$a.concat([$$v])
+                                                      )
+                                                  } else {
+                                                    $$i > -1 &&
+                                                      _vm.$set(
+                                                        data.contact,
+                                                        "responsed",
+                                                        $$a
+                                                          .slice(0, $$i)
+                                                          .concat(
+                                                            $$a.slice($$i + 1)
+                                                          )
+                                                      )
+                                                  }
+                                                } else {
+                                                  _vm.$set(
+                                                    data.contact,
+                                                    "responsed",
+                                                    $$c
+                                                  )
+                                                }
+                                              },
+                                              function ($event) {
+                                                return _vm.changeResponsed(dKey)
                                               },
                                             ],
-                                            staticClass: "form-check-input",
-                                            attrs: {
-                                              type: "checkbox",
-                                              id: "flexSwitchResponsed" + dKey,
-                                            },
-                                            domProps: {
-                                              checked: Array.isArray(
-                                                data.contact.responsed
-                                              )
-                                                ? _vm._i(
-                                                    data.contact.responsed,
-                                                    null
-                                                  ) > -1
-                                                : data.contact.responsed,
-                                            },
-                                            on: {
-                                              change: [
-                                                function ($event) {
-                                                  var $$a =
-                                                      data.contact.responsed,
-                                                    $$el = $event.target,
-                                                    $$c = $$el.checked
-                                                      ? true
-                                                      : false
-                                                  if (Array.isArray($$a)) {
-                                                    var $$v = null,
-                                                      $$i = _vm._i($$a, $$v)
-                                                    if ($$el.checked) {
-                                                      $$i < 0 &&
-                                                        _vm.$set(
-                                                          data.contact,
-                                                          "responsed",
-                                                          $$a.concat([$$v])
-                                                        )
-                                                    } else {
-                                                      $$i > -1 &&
-                                                        _vm.$set(
-                                                          data.contact,
-                                                          "responsed",
-                                                          $$a
-                                                            .slice(0, $$i)
-                                                            .concat(
-                                                              $$a.slice($$i + 1)
-                                                            )
-                                                        )
-                                                    }
-                                                  } else {
-                                                    _vm.$set(
-                                                      data.contact,
-                                                      "responsed",
-                                                      $$c
-                                                    )
-                                                  }
-                                                },
-                                                function ($event) {
-                                                  return _vm.changeResponsed(
-                                                    dKey
-                                                  )
-                                                },
-                                              ],
-                                            },
-                                          }),
-                                        ]
-                                      ),
-                                    ]),
-                                  ]
-                                ),
-                              ]),
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "row py-2 border-top" }, [
-                              _c("div", { staticClass: "col-4" }, [
-                                _vm._v("日時"),
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "col-8" }, [
-                                _vm._v(_vm._s(data.date)),
-                              ]),
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "row py-2 border-top" }, [
-                              _c("div", { staticClass: "col-4" }, [
-                                _vm._v("氏名"),
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "col-8" }, [
-                                _vm._v(_vm._s(data.contact.name)),
-                              ]),
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "row py-2 border-top" }, [
-                              _c("div", { staticClass: "col-12 col-md-4" }, [
-                                _vm._v("お問い合わせ内容"),
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "col-12 col-md-8" }, [
-                                _c("div", {
-                                  domProps: {
-                                    innerHTML: _vm._s(
-                                      data.contact.body_text.replace(
-                                        /\r?\n/g,
-                                        "<br>"
-                                      )
+                                          },
+                                        }),
+                                      ]
                                     ),
-                                  },
-                                }),
-                              ]),
+                                  ]),
+                                ]
+                              ),
+                            ]),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "row py-2 border-top" }, [
+                            _c("div", { staticClass: "col-4" }, [
+                              _vm._v("日時"),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-8" }, [
+                              _vm._v(_vm._s(data.date)),
+                            ]),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "row py-2 border-top" }, [
+                            _c("div", { staticClass: "col-4" }, [
+                              _vm._v("氏名"),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-8" }, [
+                              _vm._v(_vm._s(data.contact.name)),
+                            ]),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "row py-2 border-top" }, [
+                            _c("div", { staticClass: "col-12 col-md-4" }, [
+                              _vm._v("お問い合わせ内容"),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-12 col-md-8" }, [
+                              _c("div", {
+                                domProps: {
+                                  innerHTML: _vm._s(
+                                    data.contact.body_text.replace(
+                                      /\r?\n/g,
+                                      "<br>"
+                                    )
+                                  ),
+                                },
+                              }),
                             ]),
                           ]),
                         ]),
-                      ]
-                    ),
-                  ]
-                )
-              }),
-            ],
-            2
+                      ]),
+                    ]
+                  ),
+                ]
+              )
+            }),
+            0
           ),
     ]),
   ])
@@ -39753,6 +40188,478 @@ var staticRenderFns = [
           "aria-label": "Close",
         },
       }),
+    ])
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Service/SurveyListtComponent.vue?vue&type=template&id=75889ba6&":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Service/SurveyListtComponent.vue?vue&type=template&id=75889ba6& ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "d-flex gap-3 mb-3" }, [
+      _vm.test
+        ? _c(
+            "form",
+            { attrs: { action: _vm.route_list, method: "POST" } },
+            [
+              _vm._l({ api_key: this.api_key }, function (input, key) {
+                return _c("input", {
+                  key: key,
+                  attrs: { type: "hidden", name: key },
+                  domProps: { value: input },
+                })
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary btn-sm",
+                  attrs: { type: "submit" },
+                },
+                [_vm._v("アンケート一覧")]
+              ),
+            ],
+            2
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.test
+        ? _c(
+            "form",
+            { attrs: { action: _vm.route_answer_list, method: "POST" } },
+            [
+              _vm._l(
+                { api_key: this.api_key, survey_id: 1 },
+                function (input, key) {
+                  return _c("input", {
+                    key: key,
+                    attrs: { type: "hidden", name: key },
+                    domProps: { value: input },
+                  })
+                }
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary btn-sm",
+                  attrs: { type: "submit" },
+                },
+                [_vm._v("回答一覧")]
+              ),
+            ],
+            2
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.test
+        ? _c(
+            "form",
+            { attrs: { action: _vm.route_answer, method: "POST" } },
+            [
+              _vm._l(
+                { api_key: this.api_key, answers_id: 1 },
+                function (input, key) {
+                  return _c("input", {
+                    key: key,
+                    attrs: { type: "hidden", name: key },
+                    domProps: { value: input },
+                  })
+                }
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary btn-sm",
+                  attrs: { type: "submit" },
+                },
+                [_vm._v("回答詳細")]
+              ),
+            ],
+            2
+          )
+        : _vm._e(),
+    ]),
+    _vm._v(" "),
+    _c("div", {}, [
+      _vm.loading
+        ? _c("div", { staticClass: "py-5" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("h2", { staticClass: "text-center" }, [_vm._v("読み込み中")]),
+          ])
+        : _c("div", {}, [
+            _vm.survey_answers !== null
+              ? _c("div", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-sm btn-outline-secondary mb-3",
+                      on: {
+                        click: function ($event) {
+                          return _vm.resetAnswer()
+                        },
+                      },
+                    },
+                    [_vm._v("回答一覧")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "card w-100 mb-5",
+                      staticStyle: {
+                        overflow: "hidden",
+                        "font-size": "1.2rem",
+                      },
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "card-body" },
+                        _vm._l(_vm.survey_answers, function (answer, key) {
+                          return _c("div", { key: key, staticClass: "mb-3" }, [
+                            _c("div", { staticClass: "fw-bold" }, [
+                              _vm._v(_vm._s(key + 1 + ". " + answer.question)),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", {
+                              staticClass: "ms-3",
+                              domProps: {
+                                innerHTML: _vm._s(
+                                  answer.value_text.replace(/\r?\n/g, "<br>")
+                                ),
+                              },
+                            }),
+                          ])
+                        }),
+                        0
+                      ),
+                    ]
+                  ),
+                ])
+              : _vm.survey_answers_group_list !== null &&
+                !_vm.survey_answers_group_list.length
+              ? _c("div", { staticClass: "py-5" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-sm btn-outline-secondary mb-3",
+                      on: {
+                        click: function ($event) {
+                          return _vm.resetAnswerList()
+                        },
+                      },
+                    },
+                    [_vm._v("アンケート一覧")]
+                  ),
+                  _vm._v(" "),
+                  _c("h5", { staticClass: "text-center" }, [
+                    _vm._v("アンケートの回答はありません"),
+                  ]),
+                ])
+              : _vm.survey_answers_group_list !== null
+              ? _c("div", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-sm btn-outline-secondary mb-3",
+                      on: {
+                        click: function ($event) {
+                          return _vm.resetAnswerList()
+                        },
+                      },
+                    },
+                    [_vm._v("アンケート一覧")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "card w-100 border-bottom-0 overflow-auto" },
+                    [
+                      _c(
+                        "table",
+                        {
+                          staticClass: "table table-striped mb-0",
+                          staticStyle: { "min-width": "900px" },
+                        },
+                        [
+                          _c(
+                            "tbody",
+                            [
+                              _vm._m(1),
+                              _vm._v(" "),
+                              _vm._l(
+                                _vm.survey_answers_group_list,
+                                function (survey_answers_group, key) {
+                                  return _c("tr", { key: key }, [
+                                    _c("td", { attrs: { scope: "row" } }, [
+                                      _vm._v(_vm._s(survey_answers_group.date)),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "d-flex justify-content-end gap-3",
+                                        },
+                                        [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-outline-secondary",
+                                              on: {
+                                                click: function ($event) {
+                                                  $event.preventDefault()
+                                                  return _vm.answerDitail(
+                                                    survey_answers_group.id
+                                                  )
+                                                },
+                                              },
+                                            },
+                                            [_vm._v("詳細")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-outline-secondary",
+                                              attrs: {
+                                                href: "#",
+                                                "data-bs-toggle": "modal",
+                                                "data-bs-target":
+                                                  "#deleteModal" + key,
+                                              },
+                                            },
+                                            [_vm._v("削除")]
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "modal fade",
+                                          attrs: {
+                                            id: "deleteModal" + key,
+                                            tabindex: "-1",
+                                            "aria-labelledby":
+                                              "deleteModal".key + "Label",
+                                            "aria-hidden": "true",
+                                          },
+                                        },
+                                        [
+                                          _c(
+                                            "div",
+                                            { staticClass: "modal-dialog" },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass: "modal-content",
+                                                },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass: "modal-body",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                                                " +
+                                                          _vm._s(
+                                                            survey_answers_group.date
+                                                          ) +
+                                                          "のアンケートを削除します。"
+                                                      ),
+                                                      _c("br"),
+                                                      _vm._v(
+                                                        "よろしいですか？\n                                            "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "modal-footer",
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "button",
+                                                        {
+                                                          staticClass: "btn",
+                                                          attrs: {
+                                                            type: "button",
+                                                            "data-bs-dismiss":
+                                                              "modal",
+                                                          },
+                                                        },
+                                                        [_vm._v("閉じる")]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "button",
+                                                        {
+                                                          staticClass:
+                                                            "btn btn-danger text-white",
+                                                          attrs: {
+                                                            type: "submit",
+                                                            "data-bs-dismiss":
+                                                              "modal",
+                                                          },
+                                                          on: {
+                                                            click: function (
+                                                              $event
+                                                            ) {
+                                                              return _vm.answerDestory(
+                                                                survey_answers_group.id
+                                                              )
+                                                            },
+                                                          },
+                                                        },
+                                                        [_vm._v("削除")]
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]
+                                              ),
+                                            ]
+                                          ),
+                                        ]
+                                      ),
+                                    ]),
+                                  ])
+                                }
+                              ),
+                            ],
+                            2
+                          ),
+                        ]
+                      ),
+                    ]
+                  ),
+                ])
+              : !_vm.survey_list.length
+              ? _c("div", { staticClass: "py-5" }, [
+                  _c("h5", { staticClass: "text-center" }, [
+                    _vm._v("アンケートはありません"),
+                  ]),
+                ])
+              : _c(
+                  "ul",
+                  {
+                    staticClass: "ps-0",
+                    staticStyle: { "list-style": "none" },
+                  },
+                  _vm._l(_vm.survey_list, function (survey, key) {
+                    return _c("li", { key: key, staticClass: "card mb-3" }, [
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("h5", { staticClass: "mb-3" }, [
+                          _c("strong", [_vm._v(_vm._s(survey.title))]),
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "row g-2 align-items-center mb-3" },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "col" },
+                              [
+                                _c("url-input-copy-component", {
+                                  attrs: { copy_url: survey.url },
+                                }),
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-auto" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "btn btn-sm btn-outline-secondary",
+                                  on: {
+                                    click: function ($event) {
+                                      $event.preventDefault()
+                                      return _vm.windowOpen(survey.url)
+                                    },
+                                  },
+                                },
+                                [_vm._v("開く")]
+                              ),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-auto" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "btn btn-sm btn-outline-secondary",
+                                  on: {
+                                    click: function ($event) {
+                                      $event.preventDefault()
+                                      return _vm.answerList(survey.id)
+                                    },
+                                  },
+                                },
+                                [_vm._v("回答一覧")]
+                              ),
+                            ]),
+                          ]
+                        ),
+                      ]),
+                    ])
+                  }),
+                  0
+                ),
+          ]),
+    ]),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-flex justify-content-center" }, [
+      _c("div", { staticClass: "spinner-border", attrs: { role: "status" } }, [
+        _c("span", { staticClass: "visually-hidden" }, [_vm._v("Loading...")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", { attrs: { scope: "col" } }, [_vm._v("回答日")]),
+      _vm._v(" "),
+      _c("th", { attrs: { scope: "col" } }),
     ])
   },
 ]

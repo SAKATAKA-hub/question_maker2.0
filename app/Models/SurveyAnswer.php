@@ -34,17 +34,14 @@ class SurveyAnswer extends Model
     |
     */
 
-    /**
-     * survey_questionテーブルとのリレーション($answer->survey_question)
-     */
+        /**
+         * survey_questionテーブルとのリレーション($answer->survey_question)
+         */
 
-    public function survey_question()
-    {
-        return $this->belongsTo(SurveyQuestion::class);
-    }
-
-
-
+        public function survey_question()
+        {
+            return $this->belongsTo(SurveyQuestion::class);
+        }
 
     /*
     |--------------------------------------------------------------------------
@@ -54,18 +51,21 @@ class SurveyAnswer extends Model
     |
     */
 
-    /**
-     * ストレージ保存された文章を含む'回答'($answer->storage_value)
-     * @return String
-     */
-    public function getStorageValueAttribute()
-    {
-        // パスから改行を取り除く
-        $path = str_replace(["\r\n", "\r", "\n"], '', $this->value);
+        /**
+         * ストレージ保存された文章を含む'回答'($answer->storage_value)
+         * @return String
+         */
+        public function getStorageValueAttribute()
+        {
+            // パスから改行を取り除く
+            $path = str_replace(["\r\n", "\r", "\n"], '', $this->value);
 
 
-        return \Illuminate\Support\Facades\Storage::exists($path) ?
-        \Illuminate\Support\Facades\Storage::get($this->value) : $this->value;
-    }
+            return \Illuminate\Support\Facades\Storage::exists($path) ?
+            \Illuminate\Support\Facades\Storage::get($this->value) : $this->value;
+        }
+
+
+
 
 }

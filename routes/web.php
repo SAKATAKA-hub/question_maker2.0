@@ -453,6 +453,17 @@ Route::middleware(['admin_auth'])->group(function () {
     Route::get('/admin', function(){ return view('Admin.top'); })
     ->name('admin.top');
 
+
+    # お問い合わせ一覧の表示(contact)
+    Route::get('admin/contact',function(){ return view('Admin.contact'); } )
+    ->name('admin.contact');
+
+
+    # 規約違反報告一覧の表示(violation_report)
+    Route::get('admin/violation_report',  function(){ return view('Admin.violation_report'); } )
+    ->name('admin.violation_report');
+
+
     /**
      * ----------------------------------
      *  お知らせメール　処理
@@ -479,25 +490,9 @@ Route::middleware(['admin_auth'])->group(function () {
      *  アンケート　処理
      * ----------------------------------
     */
-        # アンケートフォーム一覧の表示(form_list)
-        Route::get('admin/survey/form_list', [Controllers\AdminSurveyController::class, 'form_list'])
-        ->name('admin.survey.form_list');
-
-
-        # アンケート解答一覧の表示(answer_list)
-        Route::get('admin/survey/answer_list/{survey_question_group}/{column_name?}/{order?}',
-        [Controllers\AdminSurveyController::class, 'answer_list']
-        )->name('admin.survey.answer_list');
-
-
-        #アンケート解答の詳細の表示(answer_ditail)
-        Route::get('admin/survey/answer_ditail/{answer_group}', [Controllers\AdminSurveyController::class, 'answer_ditail'])
-        ->name('admin.survey.answer_ditail');
-
-
-        #アンケート解答の削除(answer_destroy)
-        Route::delete('admin/survey/answer_destroy/{answer_group}', [Controllers\AdminSurveyController::class, 'answer_destroy'])
-        ->name('admin.survey.answer_destroy');
+        # アンケートフォーム一覧の表示
+        Route::get('admin/survey', function(){ return view('Admin.survey'); })
+        ->name('admin.survey');
 
 
         #アンケートの新規作成ページ(create)

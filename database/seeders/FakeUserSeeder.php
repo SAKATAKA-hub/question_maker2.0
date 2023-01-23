@@ -36,7 +36,7 @@ class FakeUserSeeder extends Seeder
         $user = new \App\Models\User([
             'name'     => 'さかい　たかひろ',
             'email'    => 't.sakai@tosuma.ltd',
-            'password' => Hash::make('Msb369_pl_sa555'),
+            'password' => Hash::make('password'),
             'image'    => 'site/image/sakai.png',
             'key'      =>\Illuminate\Support\Str::random(40)
         ]);

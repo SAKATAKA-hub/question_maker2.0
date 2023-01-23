@@ -39,10 +39,13 @@
         <div class="list-group">
             <a href="{{(route('admin.info_mail.form'))}}" class="list-group-item list-group-item-action"
             > > お知らせメール手動送信</a>
-            <a href="{{route('admin.survey.form_list')}}" class="list-group-item list-group-item-action"
+            <a href="{{route('admin.survey')}}" class="list-group-item list-group-item-action"
             > > アンケートフォーム一覧</a>
-            <a href="#" class="list-group-item list-group-item-action"
-            > > A fourth link item</a>
+            <a href="{{(route('admin.contact'))}}" class="list-group-item list-group-item-action"
+            > > お問い合わせ一覧</a>
+            <a href="{{(route('admin.violation_report'))}}" class="list-group-item list-group-item-action"
+            > > 規約違反報告一覧</a>
+
         </div>
 
     </div>

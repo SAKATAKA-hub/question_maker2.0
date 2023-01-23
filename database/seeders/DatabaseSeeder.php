@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(FakeQuestinonSeeder::class);   // フェイク問題
         // $this->call(ViolationReportTypesSeeder::class);   // 通報の種類
 
-        $this->call(SurveyInputTypesTableSeeder::class); //質問内容登録用の入力フォームの種類
+        $this->call(SurveyInputTypesTableSeeder::class);  //質問内容登録用の入力フォームの種類
+        $this->call(SurveyQuestionsTableSeeder03::class); //質問内容登録用の入力フォームの種類
     }
 }

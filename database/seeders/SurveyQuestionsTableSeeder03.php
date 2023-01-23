@@ -236,7 +236,10 @@ class SurveyQuestionsTableSeeder03 extends Seeder
         ];
         // ------------------------------------------------------
         # 質問グループの保存
-        $question_group = new  \App\Models\SurveyQuestionsGroup([ 'title' => $title ]);
+        $question_group = new  \App\Models\SurveyQuestionsGroup([
+            'title' => $title,
+            'access_key' => \Illuminate\Support\Str::random(40),
+        ]);
         $question_group->save();
 
         # 質問項目の保存

@@ -5,7 +5,7 @@
 5分ほどの簡単なアンケートですので、是非ともご協力頂けますよう、よろしくお願い致します。<br>
 <br>
 
-<a href="https://nextarrow.heteml.net/hr/survey/input/3/1K6ljOnJABKxwIOkRBbesqa38zjpqx8AGGj7QZmP"
+<a href="https://mondai-diy.com/survey/input/1/jrWqkak7wr2QnmaKfPdj6vK6AD1uaX4nCJnJgBC0"
 >アンケートはこちら</a><br>
 <br>
 

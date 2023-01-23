@@ -6,9 +6,8 @@
         詳細については、求人応募アンケートサイト管理者ページよりご確認ください。
     </p>
     <p>
-        <a href="{{ route('admin.survey.form_list'); }}">{{ route('admin.survey.form_list' ); }}</a>
+        <a href="{{ route('admin.survey'); }}">{{ route('admin.survey' ); }}</a>
     </p>
-
     <br>
     <br>
 

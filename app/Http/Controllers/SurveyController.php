@@ -127,24 +127,6 @@ class SurveyController extends Controller
             $dir = 'upload/survey/';
             $value = Method::uploadStorageText( $dir, $value );
 
-            // 入力値が150文字以上の時、ストレージへファイル保存する
-            // if( mb_strlen($value) > 150 )
-            // {
-            //     $dir = 'upload/survey/';
-
-            //     // 採番の取得($num)
-            //     $num_file = $dir.'file_num.txt';
-            //     $num = Storage::exists($num_file) ? (int) Storage::get($num_file) : 0;
-            //     $num = $num + 1;
-            //     storage::put( $num_file, $num );
-
-
-            //     // ストレージにファイル保存・DBにパスの値を渡す
-            //     $file = $dir.sprintf('%06d.txt', $num);
-            //     storage::put( $file, $value );
-            //     $value = $file;
-            // }
-
 
             // DB保存
             $answer = new \App\Models\SurveyAnswer([
@@ -153,6 +135,9 @@ class SurveyController extends Controller
                 'value' => $value, //回答内容
             ]);
             $answer->save();
+            // 二重送信防止
+            $request->session()->regenerateToken();
+
         }
 
 
@@ -165,10 +150,6 @@ class SurveyController extends Controller
             Mail::to( $email )
             ->send( new \App\Mail\SurveyAdminMailable( compact( 'subject', 'questions' ) ) );
         }
-
-
-        // 二重送信防止
-        $request->session()->regenerateToken();
 
 
         # アンケートページの表示
