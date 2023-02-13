@@ -120,6 +120,10 @@
                                     <div class="col-8">{{data.contact.name}}</div>
                                 </div>
                                 <div class="row py-2 border-top">
+                                    <div class="col-4">メールアドレス</div>
+                                    <div class="col-8">{{data.contact.email}}</div>
+                                </div>
+                                <div class="row py-2 border-top">
                                     <div class="col-12 col-md-4">お問い合わせ内容</div>
                                     <div class="col-12 col-md-8">
                                         <div v-html="data.contact.body_text.replace(/\r?\n/g, '<br>')"></div>

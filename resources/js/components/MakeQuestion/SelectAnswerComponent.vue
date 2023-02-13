@@ -42,7 +42,7 @@
                 <!-- 最初のinput(key==0)は正解 -->
                 <input name="answer_booleans[]" type="hidden" value="0">
 
-                テキストで答えを入力する （50文字以内）
+                テキストで答えを入力する （140文字以内）
                 <div class="input-group mb-2">
 
                     <!--[ 正解ボタン ]-->
@@ -61,9 +61,9 @@
 
 
                     <!--[ 選択肢テキストの入力 ]-->
-                    <!-- <input type="text" name="answer_texts[]" class="form-control" maxlength="50"
+                    <!-- <input type="text" name="answer_texts[]" class="form-control" maxlength="140"
                     v-model="options[0].answer_text" required> -->
-                    <input type="text" name="answer_texts[]" class="form-control" maxlength="50"
+                    <input type="text" name="answer_texts[]" class="form-control" maxlength="140"
                     v-model="answer_text" required>
 
 
@@ -77,7 +77,7 @@
                 <!-- 最初のinput(key==0)は正解 -->
                 <!-- <input name="answer_booleans[]" type="hidden" value="0"> -->
 
-                ひとつの答えを選ぶ （50文字以内）
+                ひとつの答えを選ぶ （140文字以内）
                 <div class="input-group mb-2" v-for="(option, key) in options" :key="key">
 
                     <!--[ 正解ボタン ]-->
@@ -101,7 +101,7 @@
 
 
                     <!--[ 選択肢テキストの入力 ]-->
-                    <input type="text" name="answer_texts[]" class="form-control" maxlength="50"
+                    <input type="text" name="answer_texts[]" class="form-control" maxlength="140"
                     v-model="option.answer_text" :required="option.only">
 
 
@@ -127,7 +127,7 @@
                 </div>
 
 
-                複数の答えを選ぶ （50文字以内）
+                複数の答えを選ぶ （140文字以内）
                 <div class="input-group mb-2" v-for="(option, key) in options" :key="key">
                     <!--[ 正解ボタン ]-->
                     <div class="input-group-text  overflow-hidden  p-0">
@@ -150,7 +150,7 @@
 
 
                     <!--[ 選択肢テキストの入力 ]-->
-                    <input type="text" name="answer_texts[]" class="form-control" maxlength="50"
+                    <input type="text" name="answer_texts[]" class="form-control" maxlength="140"
                     v-model="option.answer_text" :required="option.only">
 
 

@@ -213,7 +213,8 @@
 
                 @php $news_list = config('news.list'); @endphp
                 <div class="list-group list-group-flush  anm_right_02">
-                    @foreach ( $news_list as $news)
+                    @foreach ( $news_list as $num => $news)
+                        @if($num<3)
                         <a href="" class="list-group-item bg-transparent border-0"
                         data-bs-toggle="modal" data-bs-target="#modal{{$news['blade']}}"
                         >
@@ -222,6 +223,7 @@
                                 <span class="text-decoration-none text-dark fw-bold">{{$news['title']}}</span>
                             </div>
                         </a>
+                        @endif
                     @endforeach
                 </div>
                 <div class="text-end py-3 anm_scale_02">
@@ -257,8 +259,47 @@
             </div>
         </section>
 
+        <!-- [ 新着問題集トップ５！ ] -->
+        <section>
+            <div class="container-1200 my-5">
+
+                <div class="row mx-3">
+                    <div class="col-md-6" >
+                        <img src="{{ asset('storage/site/image/23020196.jpg') }}" class="d-block w-100 anm_scale_01" alt="人気の問題集">
+                    </div>
+                    <div class="col-md-6 d-flex align-items-center">
+                        <div class="  anm_right_01">
+                            <p class="fw-bold text-success mb-2">
+                               New handmade questions!
+                            </p>
+                            <h3 class="mb-2">新着問題集</h3>
+                            <p class="text-secondary">
+                                新着の問題集にチャレンジしよう！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="my-5">
+
+                    <!-- 問題集リスト -->
+                    @foreach ($new_question_groups as $question_group)
+
+                        @include('_parts.question_group_card_list')
+
+                    @endforeach
+
+                    <div class="mt-5 text-center">
+                        <a href="{{ route('questions_search_list') }}" class="btn rounded-pill btn-outline-success"
+                        >もっと表示する</a>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <div class="container-1200 divider divider-dashed my-5"></div><!---- Divider ---->
         <!-- [ 人気問題集トップ５！ ] -->
-        {{-- <section>
+        <section>
             <div class="container-1200 my-5">
 
 
@@ -296,45 +337,6 @@
 
                 </div>
 
-
-            </div>
-        </section> --}}
-        <div class="container-1200 divider divider-dashed my-5"></div><!---- Divider ---->
-        <!-- [ 新着問題集トップ１０！ ] -->
-        <section>
-            <div class="container-1200 my-5">
-
-                <div class="row mx-3">
-                    <div class="col-md-6" >
-                        <img src="{{ asset('storage/site/image/23020196.jpg') }}" class="d-block w-100 anm_scale_01" alt="人気の問題集">
-                    </div>
-                    <div class="col-md-6 d-flex align-items-center">
-                        <div class="  anm_right_01">
-                            <p class="fw-bold text-success mb-2">
-                               New handmade questions!
-                            </p>
-                            <h3 class="mb-2">新着問題集</h3>
-                            <p class="text-secondary">
-                                新着の問題集にチャレンジしよう！
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="my-5">
-
-                    <!-- 問題集リスト -->
-                    @foreach ($new_question_groups as $question_group)
-
-                        @include('_parts.question_group_card_list')
-
-                    @endforeach
-
-                    <div class="mt-5 text-center">
-                        <a href="{{ route('questions_search_list') }}" class="btn rounded-pill btn-outline-success"
-                        >もっと表示する</a>
-                    </div>
-
-                </div>
 
             </div>
         </section>

@@ -26,11 +26,11 @@ class PlayQuestionController extends Controller
         ->limit(5)->get();
 
 
-        # 新着問題集トップ１０
+        # 新着問題集トップ５
         $new_question_groups =
         \App\Models\QuestionGroup::orderBy('published_at','desc') //公開順
         ->where('published_at', '<>', null) //非公開は除く
-        ->limit(10)->get();
+        ->limit(5)->get();
 
 
 

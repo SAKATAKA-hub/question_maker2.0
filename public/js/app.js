@@ -8222,6 +8222,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -37238,7 +37242,7 @@ var render = function () {
                 },
               }),
               _vm._v(
-                "\n\n                テキストで答えを入力する （50文字以内）\n                "
+                "\n\n                テキストで答えを入力する （140文字以内）\n                "
               ),
               _c("div", { staticClass: "input-group mb-2" }, [
                 _vm._m(1),
@@ -37261,7 +37265,7 @@ var render = function () {
                   attrs: {
                     type: "text",
                     name: "answer_texts[]",
-                    maxlength: "50",
+                    maxlength: "140",
                     required: "",
                   },
                   domProps: { value: _vm.answer_text },
@@ -37283,7 +37287,7 @@ var render = function () {
               "div",
               [
                 _vm._v(
-                  "\n\n                ひとつの答えを選ぶ （50文字以内）\n                "
+                  "\n\n                ひとつの答えを選ぶ （140文字以内）\n                "
                 ),
                 _vm._l(_vm.options, function (option, key) {
                   return _c(
@@ -37364,7 +37368,7 @@ var render = function () {
                         attrs: {
                           type: "text",
                           name: "answer_texts[]",
-                          maxlength: "50",
+                          maxlength: "140",
                           required: option.only,
                         },
                         domProps: { value: option.answer_text },
@@ -37427,7 +37431,7 @@ var render = function () {
                     ])
                   : _vm._e(),
                 _vm._v(
-                  "\n\n\n                複数の答えを選ぶ （50文字以内）\n                "
+                  "\n\n\n                複数の答えを選ぶ （140文字以内）\n                "
                 ),
                 _vm._l(_vm.options, function (option, key) {
                   return _c(
@@ -37539,7 +37543,7 @@ var render = function () {
                         attrs: {
                           type: "text",
                           name: "answer_texts[]",
-                          maxlength: "50",
+                          maxlength: "140",
                           required: option.only,
                         },
                         domProps: { value: option.answer_text },
@@ -39859,6 +39863,16 @@ var render = function () {
                             _vm._v(" "),
                             _c("div", { staticClass: "col-8" }, [
                               _vm._v(_vm._s(data.contact.name)),
+                            ]),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "row py-2 border-top" }, [
+                            _c("div", { staticClass: "col-4" }, [
+                              _vm._v("メールアドレス"),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-8" }, [
+                              _vm._v(_vm._s(data.contact.email)),
                             ]),
                           ]),
                           _vm._v(" "),
