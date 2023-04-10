@@ -442,6 +442,7 @@
 
 
 
+
     <!-- 問題追加ボタン -->
     <a id="addQuestion" href="{{route('make_question_group.create')}}" class="d-block text-decoration-none">
         <div class="icon text-white bg-success shadow">

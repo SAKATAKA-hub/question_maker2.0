@@ -118,7 +118,6 @@ class MakeQuestionGroupController extends Controller
     */
     public function select_edit(\App\Models\QuestionGroup $question_group, $tab_menu='tab01')
     {
-
         return view('MakeQuestionGroup.select_edit', compact(
             'question_group','tab_menu'
         ) );

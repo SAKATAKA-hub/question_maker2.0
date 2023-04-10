@@ -175,11 +175,12 @@ class Question extends Model
                     $question_options =
                     QuestionOption::where('question_id', $this->id)->where('answer_boolean', 1 )->get();
 
-                    $answer = [];
+                    $array = [];
                     foreach ($question_options as $question_option) {
-                        $answer[] = $question_option->answer_text;
+                        $array[] = $question_option->answer_text;
                     }
-                    $answer = implode(' ',$answer);
+                    // $answer = implode(' ',$array);
+                    $answer = $array;
                     break;
 
                 /* それ以外の時 */
@@ -202,22 +203,26 @@ class Question extends Model
     |
     |
     */
-    /**
-     * キーワード検索結果のオブジェクトを返す( seach )
-     * @param  String $seach_keywords
-     * @return Object $query
-    */
-    public function scopeSearch( $query, $seach_keywords )
-    {
-        # キーワード文字列を配列へ変換
-        $keywords_array = explode( ' ', $seach_keywords );
-
-        # 問題文(text)から検索
-        foreach ($keywords_array as $keyword)
+        /**
+         * キーワード検索結果のオブジェクトを返す( seach )
+         * @param  String $seach_keywords
+         * @return Object $query
+        */
+        public function scopeSearch( $query, $seach_keywords )
         {
-            $query->where('text','like','%'.$keyword.'%');
+            # キーワード文字列を配列へ変換
+            $keywords_array = explode( ' ', $seach_keywords );
+
+            # 問題文(text)から検索
+            foreach ($keywords_array as $keyword)
+            {
+                $query->where('text','like','%'.$keyword.'%');
+            }
+
+            return $query;
         }
 
-        return $query;
-    }
+
+
+
 }

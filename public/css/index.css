@@ -46,6 +46,7 @@ main{
     /*パンクズリスト*/
     .breadcrumb{ font-size: 11px; }
 
+
     /* 問題追加ボタンのスタイル */
     #addQuestion{
         position: fixed;

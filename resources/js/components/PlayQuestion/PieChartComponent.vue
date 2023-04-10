@@ -29,7 +29,6 @@
             }
         },
         props: {
-            //最初に表示する画像のパス
             percent_value: { type: String, default: '100', },
             line_color: { type: String, default: '#406AFF', },
         },
@@ -53,7 +52,7 @@
         }
     }
 </script>
-<style>
+<style scoped>
     .pie-chart-box .percent {
         position: relative;
         width: 150px;

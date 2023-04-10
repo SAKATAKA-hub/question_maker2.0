@@ -464,6 +464,32 @@ Route::middleware(['admin_auth'])->group(function () {
     ->name('admin.violation_report');
 
 
+    # 削除リスト
+    Route::get('admin/delete_answers_list/{question_group}',  function( \App\Models\QuestionGroup $question_group){
+
+
+        $answer_groups = \App\Models\AnswerGroup::where('user_id',Auth::user()->id)
+        ->where('question_group_id',$question_group->id)
+        ->orderBy('created_at','desc')->get();
+
+        return view('Admin.delete_answers_list',compact('answer_groups','question_group')); }
+
+
+    )
+    ->name('admin.delete_answers_list');
+    Route::delete('admin/delete_answers_list/destory',  function( \Illuminate\Http\Request $request){
+
+        foreach ($request->answer_group_ids as $id) {
+
+            $answer_group = \App\Models\AnswerGroup::find($id);
+            $answer_group->delete();
+        }
+
+        return redirect()->route( 'admin.delete_answers_list', $request->question_group_id);
+    })
+    ->name('admin.delete_answers_list.destory');
+
+
     /**
      * ----------------------------------
      *  お知らせメール　処理

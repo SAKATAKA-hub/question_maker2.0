@@ -53,6 +53,7 @@ class ResultsController extends Controller
         // 問題集情報
         $question_group = $answer_group->question_group;
 
+
         // 問題情報
         $questions = $question_group->questions;
 
