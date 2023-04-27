@@ -13,6 +13,8 @@ class MyPageController extends Controller
     # いいねした問題集(like_list)
     public function like_list()
     {
+        // return view('layouts.base');
+
         $user = \Illuminate\Support\Facades\Auth::user();
 
 

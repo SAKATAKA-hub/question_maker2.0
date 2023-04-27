@@ -1,4 +1,5 @@
 <div class="">
+
     <div class="question_group_card card p-1 overflow-hidden list-group-item-action border-0 shadow mb-3 " style="cursor:pointer;"
     data-bs-toggle="modal" data-bs-target="#questionModal{{ $question_group->id +1 }}"
     >
@@ -35,8 +36,11 @@
                             background-image:url({{ asset('storage/'.$question_group->user->image_puth) }});
                             width:1.2rem; border-radius:50%;
                         "></div>
-                        <span class="">
-                            {{$question_group->user->name}}
+
+                        @php $user_name = mb_strlen($question_group->user->name ) > 14 ? mb_substr($question_group->user->name,0,14).'...' : $question_group->user->name; @endphp
+                        <span class="">{{ $user_name }}
+
+                            {{-- {{$question_group->user->name}} --}}
                         </span>
                     </div>
                 </div>
@@ -57,8 +61,8 @@
 
                 <!-- 説明文 -->
                 <div class="d-none d-md-block w-100">
-                    <div class="col-12 text-truncate w-100">
-                        {{ $question_group->resume_text }}
+                    <div class="col-12 w-100">
+                        {{ $question_group->resume_text_truncate }}
                     </div>
                 </div>
 

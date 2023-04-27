@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('layouts.base_02col')
 
 
 <!----- title ----->
@@ -31,70 +31,48 @@
 @endsection
 
 
+
+<!----- side_contents ----->
+@section('side_contents')
+
+    @include('_parts.user_info')
+
+@endsection
+
+
 <!----- contents ----->
 @section('contents')
-    <section>
-        <div class="container-1200 my-5">
-            <div class="d-md-flex">
+    @if ( $keep_question_groups->count() )
+        <div class="">
 
-                <!-- サイドコンテンツ[pc] -->
-                <div class="d-none d-md-block  pe-3" style="width:300px;">
-                    @include('_parts.user_info')
-                </div>
+            <!-- Please Login Modal -->
+            <please-login-modal-component login_form_route="{{ route('user_auth.login_form') }}"
+            ></please-login-modal-component>
+            @php $user_id = Auth::check() ? Auth::user()->id : '' ; @endphp
 
+            <!-- 問題集リスト -->
+            @foreach ($keep_question_groups as $keep_question_group)
+                @php $question_group = $keep_question_group->question_group @endphp
 
+                @include('_parts.question_group_card_list')
 
-
-                <!-- 中央コンテンツ -->
-                <div class="flex-fill">
-
-                    @if ( $keep_question_groups->count() )
-
-                        <!-- 問題集リスト -->
-                        {{-- @include('_parts.question_group_card_list') --}}
-
-                        <!-- ページネーション -->
-                        {{-- <div class="mb-5 d-flex justify-content-center">
-                            {{ $keep_question_groups->links('vendor.pagination.bootstrap-4') }}
-                        </div>
-                        --}}
-                        <div class="">
-
-                            <!-- Please Login Modal -->
-                            <please-login-modal-component login_form_route="{{ route('user_auth.login_form') }}"
-                            ></please-login-modal-component>
-                            @php $user_id = Auth::check() ? Auth::user()->id : '' ; @endphp
-
-                            <!-- 問題集リスト -->
-                            @foreach ($keep_question_groups as $keep_question_group)
-                                @php $question_group = $keep_question_group->question_group @endphp
-
-                                @include('_parts.question_group_card_list')
-
-                            @endforeach
+            @endforeach
 
 
-                            <!-- ページネーション -->
-                            <div class="my-5 d-flex justify-content-center">
-                                {{ $keep_question_groups->links('vendor.pagination.bootstrap-4') }}
-                            </div>
-
-                        </div>
-
-
-                    @else
-
-                        <div class="h2 text-secondary text-center py-5">
-                            いいねした問題集はありません。
-                        </div>
-
-                    @endif
-
-
-                </div>
+            <!-- ページネーション -->
+            <div class="my-5 d-flex justify-content-center">
+                {{ $keep_question_groups->links('vendor.pagination.bootstrap-4') }}
             </div>
+
         </div>
-    </section>
+    @else
+
+        <div class="h2 text-secondary text-center py-5">
+            いいねした問題集はありません。
+        </div>
+
+    @endif
+
 @endsection
 
 

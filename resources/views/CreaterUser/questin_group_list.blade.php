@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('layouts.base_02col_createruser')
 
 
 <!----- title ----->
@@ -36,7 +36,43 @@
 <!----- contents ----->
 @section('contents')
 
-    <section>
+    <section class="w-100">
+        @if ( $question_groups->count() )
+
+
+            <!-- Please Login Modal -->
+            <please-login-modal-component login_form_route="{{ route('user_auth.login_form') }}"
+            ></please-login-modal-component>
+            @php $user_id = Auth::check() ? Auth::user()->id : '' ; @endphp
+
+
+            <!-- 問題集リスト -->
+            @foreach ($question_groups as $question_group)
+
+                <div class="m-">
+                    @include('_parts.question_group_card_list')
+
+                </div>
+
+            @endforeach
+
+
+            <!-- ページネーション -->
+            <div class="my-5 d-flex justify-content-center">
+                {{ $question_groups->links('vendor.pagination.bootstrap-4') }}
+            </div>
+
+
+        @else
+
+            <h2 class="text-secondary text-center py-5">
+                現在、公開中の問題はありません。
+            </h2>
+
+        @endif
+
+    </section>
+    {{-- <section>
         <div class="container-1200 my-5">
             <div class="d-md-flex">
 
@@ -56,43 +92,49 @@
                 <div class="flex-fill overflow-hidden px-3">
 
 
+
+                    <section class="w-100">
                     @if ( $question_groups->count() )
 
 
-                        <!-- Please Login Modal -->
-                        <please-login-modal-component login_form_route="{{ route('user_auth.login_form') }}"
-                        ></please-login-modal-component>
-                        @php $user_id = Auth::check() ? Auth::user()->id : '' ; @endphp
+                    <!-- Please Login Modal -->
+                    <please-login-modal-component login_form_route="{{ route('user_auth.login_form') }}"
+                    ></please-login-modal-component>
+                    @php $user_id = Auth::check() ? Auth::user()->id : '' ; @endphp
 
 
-                        <!-- 問題集リスト -->
-                        @foreach ($question_groups as $question_group)
+                    <!-- 問題集リスト -->
+                    @foreach ($question_groups as $question_group)
 
+                        <div class="m-3">
                             @include('_parts.question_group_card_list')
 
-                        @endforeach
-
-
-                        <!-- ページネーション -->
-                        <div class="my-5 d-flex justify-content-center">
-                            {{ $question_groups->links('vendor.pagination.bootstrap-4') }}
                         </div>
+
+                    @endforeach
+
+
+                    <!-- ページネーション -->
+                    <div class="my-5 d-flex justify-content-center">
+                        {{ $question_groups->links('vendor.pagination.bootstrap-4') }}
+                    </div>
 
 
                     @else
 
-                        <h2 class="text-secondary text-center py-5">
-                            現在、公開中の問題はありません。
-                        </h2>
+                    <h2 class="text-secondary text-center py-5">
+                        現在、公開中の問題はありません。
+                    </h2>
 
                     @endif
 
+                    </section>
 
 
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 @endsection
 
 

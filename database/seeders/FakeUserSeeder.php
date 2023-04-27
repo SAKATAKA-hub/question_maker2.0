@@ -15,24 +15,6 @@ class FakeUserSeeder extends Seeder
     public function run()
     {
 
-        // $user = new \App\Models\User([
-        //     'name'     => 'Next Arrow',
-        //     'email'    => 'nextarrow.line@gmail.com',
-        //     'password' => Hash::make('password'),
-        //     'image'    => 'site/image/next_icon.png',
-        //     'key'      =>\Illuminate\Support\Str::random(40)
-        // ]);
-        // $user->save();
-        // $mail_setting = new  \App\Models\MailSetting([
-        //     'user_id' => $user->id,
-        //     'keep_question_group' => 0,
-        //     'keep_creator_user'   => 0,
-        //     'comment'             => 0,
-        //     'infomation'          => 0,
-        // ]);
-        // $mail_setting->save();
-
-
         $user = new \App\Models\User([
             'name'     => 'さかい　たかひろ',
             'email'    => 't.sakai@tosuma.ltd',

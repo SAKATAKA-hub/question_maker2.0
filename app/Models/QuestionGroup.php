@@ -90,6 +90,18 @@ class QuestionGroup extends Model
 
 
         /**
+         * 文章の省略（説明文）$question_group->resume_text_truncate
+         * @return String
+         */
+        public function getResumeTextTruncateAttribute()
+        {
+            $text = str_replace(["\r\n", "\r", "\n", "\t","\v"], '', $this->resume_text );
+            // return $text;
+            return mb_substr( $this->resume_text, 0,50 ).'...';
+        }
+
+
+        /**
          * 公開日のテキスト表示 $question_group->befor_datetime_text
          * ○○日前（時間前）
          * @return String
