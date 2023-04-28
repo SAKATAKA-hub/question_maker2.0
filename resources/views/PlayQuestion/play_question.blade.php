@@ -33,13 +33,15 @@
 
 </head>
 <body class="bg-white">
-    <header>
-        @include('_parts.header')
-    </header>
-    <main>
+    <div id="app">
 
-        <!-- contents -->
-        <div id="app">
+
+        <header>
+            @include('_parts.header')
+        </header>
+        <main>
+
+            <!-- contents -->
             <section class="">
                 <div class="container-1200 mt-5 bg-light border-start border-5 border-success">
 
@@ -55,18 +57,19 @@
 
                 </div>
             </section>
-        </div>
 
 
-        <!-- フェードインアラート -->
-        @include('_parts.alert')
+            <!-- フェードインアラート -->
+            @include('_parts.alert')
 
 
-    </main>
-    <footer>
-        @include('_parts.footer')
-    </footer>
+        </main>
+        <footer>
+            @include('_parts.footer')
+        </footer>
 
+
+    </div><!--end id:app-->
 
     <!-- フォームのページ離脱防止アラート -->
     <script src="{{asset('js/page_exit_prevention_alert.js')}}"></script>

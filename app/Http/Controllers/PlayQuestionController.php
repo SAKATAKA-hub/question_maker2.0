@@ -36,7 +36,7 @@ class PlayQuestionController extends Controller
 
 
         # ページの表示
-        return view('PlayQuestion.questions_list', compact(
+        return view('home', compact(
             'popular_question_groups','new_question_groups',
         ));
     }

@@ -66,8 +66,18 @@
             class="card card-body border-0 shadow-sm mb-3 text-dark text-decoration-none list-group-item-action">
 
                 <div class="row align-items-center">
-                    <!-- サムネイル -->
-                    <div class="col-auto  d-none d-sm-block">
+                    <!-- サムネイルmobile -->
+                    <div class="col-auto  d-md-none">
+                        <div class="card-image border border-light" style="
+                            background:url({{ asset('storage/'.$question_group->image_puth) }});
+                            background-repeat  : no-repeat;
+                            background-size    : cover;
+                            background-position: center center;
+                            width: 3rem; height: 3rem; border-radius: .5rem;
+                        "></div>
+                    </div>
+                    <!-- サムネイルpc -->
+                    <div class="col-auto  d-none d-md-block">
                         <div class="card-image border border-light" style="
                             background:url({{ asset('storage/'.$question_group->image_puth) }});
                             background-repeat  : no-repeat;
@@ -76,20 +86,25 @@
                             width: 4rem; height: 4rem; border-radius: .5rem;
                         "></div>
                     </div>
+
+
                     <!-- タイトルリンク -->
                     <div class="col text-truncate">
                         <div>
                             受験日{{ \Carbon\Carbon::parse($answer_group->created_at)->format('Y-m-d') }}
                         </div>
-                        <span class="fs-3">{{ $question_group->title }}</span>
-
+                        {{-- <span class="fs-3">{{ $question_group->title }}</span> --}}
+                        @php $title = mb_strlen($question_group->title ) > 16 ? mb_substr($question_group->title,0,16).'...' : $question_group->title; @endphp
+                        <span class="d-md-none fs-6">{{ $title }}</span>
+                        @php $title = mb_strlen($question_group->title ) > 24 ? mb_substr($question_group->title,0,24).'...' : $question_group->title; @endphp
+                        <span class="d-none d-md-inline fs-3">{{ $title }}</span>
                     </div>
                     <!-- 成績 -->
-                    <div class="col-auto d-none d-sm-block text-secondary">
+                    <div class="col-auto d-none d-sm-block">
                         <div class="d-flex justify-content-between align-items-end">
                                 <span class="">正解率</span>
                                 <span class="">
-                                    <strong class="fs-3">{{$answer_group->score}}</strong>％
+                                    <strong class="fs-3 text-success">{{ $answer_group->score.'％'}}</strong>
                                 </span>
                         </div>
                         <div class="">

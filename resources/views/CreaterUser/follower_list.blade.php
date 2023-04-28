@@ -2,12 +2,13 @@
 
 
 <!----- title ----->
-@section('title', 'フォロワー' )
+@php $creater_user_name = mb_strlen($creater_user->name ) > 8 ? mb_substr($creater_user->name,0,8).'...' : $creater_user->name; @endphp
+@section('title', $creater_user_name.'さん　フォロワー' )
 
 <!----- breadcrumb ----->
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="{{route('creater',$creater_user->id)}}" class="text-success">
-    クリエイターページ
+    {{$creater_user_name.'さん'}}
 </a></li>
 <li class="breadcrumb-item" aria-current="page">
     {{ 'フォロワー' }}
@@ -63,7 +64,7 @@
                         <div class="col">
                             <div class="d-flex align-items-center h-100">
                                 <!--[フォロワー名前]-->
-                                <h5 class="mb-0">
+                                <h5 class="mb-0 fs-6">
                                     <a href="{{route('creater',$follower_user->id)}}" class="text-decoration-none text-success">
                                         {{$follower_user->name}}
                                     </a>

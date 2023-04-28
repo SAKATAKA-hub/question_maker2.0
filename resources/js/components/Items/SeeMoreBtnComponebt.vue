@@ -5,26 +5,25 @@
 <script>
 
 export default {
-    name: 'timer',
+    props: {
+        open: { type: [String,Number], default: 0, },
+    },
     data() {
         return {
 
             text: '詳しく見る',
-            open: false,
+            view: 0,
 
         }
     },
-    props: {
-        //制限時間
-        btn_text: { type: String, default: '詳しく見る', },
-    },
     mounted() {
-        this.text = this.btn_text;
+        this.view = this.open;
+        this.text = this.view ?  '閉じる' : '詳しく見る' ;
     },
     methods: {
         click: function() {
-            this.text = this.open ? '詳しく見る' : '閉じる' ;
-            this.open = this.open ? false : true ;
+            this.text = this.view ? '詳しく見る' : '閉じる' ;
+            this.view = this.view ? 0 : 1 ;
         }
     },
 }

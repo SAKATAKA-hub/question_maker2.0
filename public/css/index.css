@@ -33,7 +33,7 @@ main{
         width:68px;
         rotate: -30deg;
     }
-    @media screen and (max-width: 576px) {
+    @media screen and (max-width: 768px) {
         .free_icon{
             left: -48px;
             width:48px;
@@ -65,14 +65,20 @@ main{
         border-radius:50%;
     }
 
-    @media screen and (max-width: 576px) {
+    @media screen and (max-width: 768px) {
         /*bottom menu 分の余白*/
         #addQuestion{
-            bottom: 4rem;
+            bottom: 5rem;
         }
         #addQuestion > .icon{
             width:3rem; height:3rem;
         }
+    }
+
+    /* ページネーション */
+    .page-item.active .page-link {
+        background-color: #14cfa0;
+        border-color: #14cfa0;
     }
 /*
 * ---------------------------
@@ -251,7 +257,7 @@ main{
     }
 
     /* 問題集カードのテキストの大きさ */
-    @media screen and (max-width: 576px) {
+    @media screen and (max-width: 768px) {
         .question-card-text{
             font-size: 11px;
         }

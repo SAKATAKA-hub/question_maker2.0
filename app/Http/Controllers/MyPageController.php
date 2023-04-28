@@ -25,6 +25,17 @@ class MyPageController extends Controller
         ->paginate( env('APP_PAGENATE_COUNT') );
 
 
+        # 非公開の助教
+        $array = [];
+        foreach ($keep_question_groups as $keep_question_group) {
+
+            if( $keep_question_group->question_group->published_at ){
+                $array[] = $keep_question_group;
+            }
+
+        }
+        $keep_question_groups = $array;
+
 
         return view('Mypage.like_list',compact('keep_question_groups'));
     }

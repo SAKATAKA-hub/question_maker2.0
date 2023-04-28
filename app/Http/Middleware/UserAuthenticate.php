@@ -32,6 +32,7 @@ class UserAuthenticate
         }
 
 
+
         return $next($request);
     }
 }

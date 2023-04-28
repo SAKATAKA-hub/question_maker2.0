@@ -96,6 +96,6 @@
         <p class="d-inline-block m-0">&copy; TOSUMA Co.,Ltd.</p>
     </div>
     <!-- bottom menu分の余白 -->
-    <div class="d-sm-none" style="height:5rem;"></div>
+    <div class="d-md-none" style="height:5rem;"></div>
 </section>
 

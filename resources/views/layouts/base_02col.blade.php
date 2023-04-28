@@ -19,33 +19,34 @@
 
 </head>
 <body class="bg-white">
-    <header>
-        @include('_parts.header')
+    <div id="app">
 
-        <!-- 見出しタイトル -->
-        <section class="border-bottom border-1 bg-white">
-            <div class="container-1200 pb-0">
+        <header>
+            @include('_parts.header')
 
-                <h2 class="text-secondary fw-bold">@yield('title')</h2>
+            <!-- 見出しタイトル -->
+            <section class="border-bottom border-1 bg-white">
+                <div class="container-1200 pb-0">
 
-                <!-- breadcrumb -->
-                <nav class="mb-0" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-0 bg-white">
-                        <li class="breadcrumb-item"><a href="{{route('questions_list')}}" class="text-success">
-                            <i class="bi bi-house-door-fill"></i> Home
-                        </a></li>
-                        @yield('breadcrumb')
-                    </ol>
-                </nav>
-            </div>
-        </section>
+                    <h2 class="text-secondary fw-bold fs-5">@yield('title')</h2>
 
-    </header>
-    <main>
+                    <!-- breadcrumb -->
+                    <nav class="mb-0" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 bg-white">
+                            <li class="breadcrumb-item"><a href="{{route('questions_list')}}" class="text-success">
+                                <i class="bi bi-house-door-fill"></i> Home
+                            </a></li>
+                            @yield('breadcrumb')
+                        </ol>
+                    </nav>
+                </div>
+            </section>
 
-        <!-- contents -->
-        <div id="app">
-            <div class="container-1200 my-5">
+        </header>
+        <main>
+
+            <!-- contents -->
+            <div class="container-1200">
                 <div class="d-md-flex gap-3">
 
                     <!-- サイドコンテンツ[pc] -->
@@ -53,8 +54,6 @@
 
 
                         @include('_parts.user_info')
-                        {{-- @yield('side_contents') --}}
-
 
                     </section>
 
@@ -69,18 +68,18 @@
 
                 </div>
             </div>
-        </div>
 
 
-        <!-- フェードインアラート -->
-        @include('_parts.alert')
+            <!-- フェードインアラート -->
+            @include('_parts.alert')
 
 
-    </main>
-    <footer>
-        @include('_parts.footer')
-    </footer>
+        </main>
+        <footer>
+            @include('_parts.footer')
+        </footer>
 
+    </div><!--end id:app-->
 
     <!-- bootstrap JavaScript -->
     @yield('script')

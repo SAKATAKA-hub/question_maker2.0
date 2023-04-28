@@ -7,8 +7,6 @@ use \App\Http\Controllers;
 Route::get('/', [Controllers\PlayQuestionController::class, 'list'])
 ->name('home');
 
-// Route::get('/', function(){ return 'question maker'; })
-// ->name('home');
 
 
 /*

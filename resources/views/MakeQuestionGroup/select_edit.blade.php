@@ -253,7 +253,11 @@
                                     <div class="form-group mb-3">
                                         <label for="title_input" class="form-check-label text-success fw-bold">説明文</label>
 
-                                        <textarea class="form-control bg-white" rows="6" disabled>{{ $question_group->resume_text }}</textarea>
+                                        <div class="card overflow-auto" style="max-height:50vh; border-color:#e9ecef;">
+                                            <div class="card-body">
+                                                <replace-text-component text="{{ $question_group->resume_text }}"></replace-text-component>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -261,6 +265,21 @@
 
                             <a href="{{route('make_question_group.edit',$question_group)}}" class="btn btn-success rounded-pill"
                             >基本情報の編集</a>
+                        </div>
+
+
+                        <!-- [ シェアボタン ] -->
+                        <div class="card card-body my-3">
+                            <div class="mb-1">この問題に挑戦しますか？</div>
+
+
+                            <div class="row g-0">
+                                <div class="col">
+                                    @php $param = ['question_group'=>$question_group->id,'key'=>$question_group->key,]; @endphp
+                                    <a href="{{ route('play_question', $param ) }}" class="btn btn-lg rounded-pill fs-5 btn-outline-success w-100"
+                                    >挑戦する！</a>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -370,7 +389,7 @@
                                                 <div class="my-3">
                                                     <span class="text-warning fw-bold">解説文</span>
                                                     <div class="p-2 bg-light">
-                                                        {!! nl2br( e( $question->commentary_storage_text ) )  !!}
+                                                        <replace-text-component text="{{ $question->commentary_storage_text }}"></replace-text-component>
                                                     </div>
                                                 </div>
                                             </div>

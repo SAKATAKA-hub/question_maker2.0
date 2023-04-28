@@ -15,7 +15,16 @@ class QuestionGroup extends Model
     use HasFactory;
     public $timestamps = true;
     protected $fillable = [
-        'title','resume','image','tags','time_limit','published_at','limited_published','key','user_id',
+        'title',            //
+        'resume',           //
+        'image',            //
+        'tags',             //
+        'time_limit',       //
+        'published_at',     // 公開日　null:非公開
+        'limited_published',//
+        'key',              //
+
+        'user_id',          //
         'random',            // ランダム設定
         'accessed_count',    // アクセス数
         'evaluation_points', // 評価ポイント

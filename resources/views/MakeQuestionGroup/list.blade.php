@@ -50,7 +50,18 @@
 
 
             <div class="row">
-                <div class="col-auto  d-none d-sm-block">
+                <!-- サムネイルmobile -->
+                <div class="col-auto  d-md-none">
+                    <div class="card-image border border-light" style="
+                        background:url({{ asset('storage/'.$question_group->image_puth) }});
+                        background-repeat  : no-repeat;
+                        background-size    : cover;
+                        background-position: center center;
+                        width: 3rem; height: 3rem; border-radius: .5rem;
+                    "></div>
+                </div>
+                <!-- サムネイルpc -->
+                <div class="col-auto  d-none d-md-block">
                     <div class="card-image border border-light" style="
                         background:url({{ asset('storage/'.$question_group->image_puth) }});
                         background-repeat  : no-repeat;
@@ -59,6 +70,7 @@
                         width: 4rem; height: 4rem; border-radius: .5rem;
                     "></div>
                 </div>
+                <!-- タイトルリンク -->
                 <div class="col">
 
 
@@ -76,8 +88,10 @@
                         <span>更新日{{ \Carbon\Carbon::parse($question_group->updated_at)->format('Y-m-d') }}</span>
                     </div>
 
-                    @php $title = mb_strlen($question_group->title ) > 20 ? mb_substr($question_group->title,0,20).'...' : $question_group->title; @endphp
-                    <span class="fs-3">{{ $title }}</span>
+                    @php $title = mb_strlen($question_group->title ) > 16 ? mb_substr($question_group->title,0,16).'...' : $question_group->title; @endphp
+                    <span class="d-md-none fs-6">{{ $title }}</span>
+                    @php $title = mb_strlen($question_group->title ) > 24 ? mb_substr($question_group->title,0,24).'...' : $question_group->title; @endphp
+                    <span class="d-none d-md-inline fs-3">{{ $title }}</span>
 
 
 
@@ -89,14 +103,19 @@
         </a>
 
         <!--// offcanvas //-->
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight{{ $i }}" aria-labelledby="offcanvasRight{{ $i }}Label"
+        <div class="offcanvas offcanvas-end"  style="max-width: 90vw;"
+        tabindex="-1" id="offcanvasRight{{ $i }}" aria-labelledby="offcanvasRight{{ $i }}Label"
         style="width:600px;">
             <!-- offcanvas-header -->
-            <div class="offcanvas-header text-end">
+            <div class="offcanvas-header align-items-center">
+                <h5 class="mb-0 text-success"><i class="bi bi-journals"></i>作成した問題集　詳細情報</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <!-- offcanvas-body -->
+            <div class="offcanvas-body p-0">
 
-
-                <div class="col">
-                    <div class="text-start">
+                <div class="p-3">
+                    <div class="">
                         <!-- 公開設定 -->
                         @if ( $question_group->published_at )
                         <span class="badge badge-primary"  style="border-radius:.8rem; transform: translateY(-0.1rem);"
@@ -126,14 +145,6 @@
                         @endif
                     </div>
                 </div>
-
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-
-
-            </div>
-            <!-- offcanvas-body -->
-            <div class="offcanvas-body p-0">
-
 
                 <!-- サムネ画像 -->
                 <div class="mx-auto" style="width:300px;">

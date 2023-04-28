@@ -40,7 +40,8 @@
                                 width:2rem; border-radius:50%;
                                 "></div>
 
-                                <span class="ms-1">{{ Auth::user()->name.' さん' }}</span>
+                                @php $user_name = mb_strlen(Auth::user()->name ) > 14 ? mb_substr(Auth::user()->name,0,14).'...' : Auth::user()->name; @endphp
+                                <span class="ms-1">{{ $user_name.' さん' }}</span>
                             </div>
 
                         </a>
@@ -132,29 +133,36 @@ id="seachOffcanvas" aria-labelledby="seachOffcanvasLabel">
 
 @if ( Auth::check() )
 <!-- mobileユーザーメニュー offcanvas -->
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasHeaderUserMenu" aria-labelledby="offcanvasHeaderUserMenuLabel">
-    <div class="offcanvas-header bg-light">
+<div class="offcanvas offcanvas-end" style="max-width: 90vw;"
+tabindex="-1" id="offcanvasHeaderUserMenu" aria-labelledby="offcanvasHeaderUserMenuLabel">
 
-        <button type="button" class="btn btn-sm px-1 py-0" data-bs-dismiss="offcanvas" aria-label="Close">
-            <i class="bi bi-arrow-left fs-5"></i>
-        </button>
-
+    <div class="offcanvas-header align-items-center">
+        <h5 class="mb-0 text-success"><i class="bi bi-person-fill"></i>マイメニュー</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
+
         <!-- user_menu -->
         @include('_parts.user_info')
+
+        <!-- マイページメニューリスト -->
+        <div class="card border-1 ">
+            @include('_parts.user_menu')
+        </div>
+
+
     </div>
 </div>
 @endif
 
 
 <!-- Bottom menu(mobile) -->
-<ul class="nav justify-content-between  d-md-none text-center text-info w-100 position-fixed bottom-0"
-style="z-index:10; background-color:rgb(255, 255, 255,.9);">
+<ul class="nav justify-content-between  d-md-none text-center text-white w-100 position-fixed bottom-0"
+style="z-index:10; background-color:rgb(20 207 160 / 90%);">
     <li class="nav-item" style="flex:1;">
         <a class="nav-link text-reset" aria-current="page" href="{{ route('home')}}">
             <div class="fs-2"><i class="bi bi-house-door-fill"></i></div>
-            <div class="text-secondary" style="font-size:10px;">Home</div>
+            <div class="text-" style="font-size:10px;">Home</div>
         </a>
     </li>
     <li class="nav-item" style="flex:1;">
@@ -162,13 +170,13 @@ style="z-index:10; background-color:rgb(255, 255, 255,.9);">
         data-bs-toggle="offcanvas" data-bs-target="#seachOffcanvas" aria-controls="seachOffcanvas"
         href="#">
             <div class="fs-2"><i class="bi bi-search"></i></div>
-            <div class="text-secondary" style="font-size:10px;">検　索</div>
+            <div class="text-" style="font-size:10px;">検　索</div>
         </a>
     </li>
     <li class="nav-item" style="flex:1;">
         <a class="nav-link text-reset" aria-current="page" href="{{route('footer_menu.news')}}">
             <div class="fs-2"><i class="bi bi-bell"></i></div>
-            <div class="text-secondary" style="font-size:10px;">お知らせ</div>
+            <div class="text-" style="font-size:10px;">お知らせ</div>
         </a>
     </li>
     @if ( Auth::check() )
@@ -177,14 +185,14 @@ style="z-index:10; background-color:rgb(255, 255, 255,.9);">
         data-bs-toggle="offcanvas" href="#offcanvasHeaderUserMenu" role="button" aria-controls="offcanvasHeaderUserMenu"
         >
             <div class="fs-2"><i class="bi bi-person-fill"></i></div>
-            <div class="text-secondary" style="font-size:10px;">マイページ</div>
+            <div class="text-" style="font-size:10px;">マイメニュー</div>
         </a>
     </li>
     @else
     <li class="nav-item" style="flex:1;">
         <a class="nav-link text-reset" aria-current="page" href="{{ route('user_auth.login_form')}}">
             <div class="fs-2"><i class="bi bi-box-arrow-in-right"></i></div>
-            <div class="text-secondary" style="font-size:10px;">ログイン</div>
+            <div class="text-" style="font-size:10px;">ログイン</div>
         </a>
     </li>
     @endif

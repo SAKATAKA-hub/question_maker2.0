@@ -22,73 +22,67 @@
 
 </head>
 <body class="bg-white ">
-    <header>
-        @include('_parts.header')
-    </header>
-    <main id="app" class="">
+    <div id="app">
+
+        <header>
+            @include('_parts.header')
+        </header>
+        <main class="">
 
 
-        <section>
-            <div class="container-1200">
+            <section>
+                <div class="container-1200">
 
 
-                <!-- 検索結果 -->
-                <div class="my-5">
+                    <!-- 検索結果 -->
+                    <div class="my-5">
 
 
-                    <div class="mb-5">
-                        @if ( $question_groups->count() )
-                        <h5 class="text-secondary">”{{$keywords?$keywords:'すべて'}}”の条件で一致する検索結果</h5>
-                        @else
-                        <h5 class="text-secondary">”{{$keywords}}”の条件に一致する結果がみつかりません。</h5>
-                        @endif
-                    </div>
-
-
-                    <div class="">
-
-                        <!-- Please Login Modal -->
-                        <please-login-modal-component login_form_route="{{ route('user_auth.login_form') }}"
-                        ></please-login-modal-component>
-                        @php $user_id = Auth::check() ? Auth::user()->id : '' ; @endphp
-
-
-                        <!-- 問題集リスト -->
-                        @foreach ($question_groups as $question_group)
-
-                            @include('_parts.question_group_card_list')
-
-                        @endforeach
-
-
-                        <!-- ページネーション -->
-                        <div class="my-5 d-flex justify-content-center">
-                            {{ $question_groups->links('vendor.pagination.bootstrap-4') }}
+                        <div class="mb-5">
+                            @if ( $question_groups->count() )
+                            <h5 class="text-secondary">検索条件”{{$keywords?$keywords:'全て表示'}}”</h5>
+                            @else
+                            <h5 class="text-secondary">”{{$keywords}}”の条件に一致する結果がみつかりません。</h5>
+                            @endif
                         </div>
 
-                    </div>
 
+                        <div class="">
+
+                            <!-- Please Login Modal -->
+                            <please-login-modal-component login_form_route="{{ route('user_auth.login_form') }}"
+                            ></please-login-modal-component>
+                            @php $user_id = Auth::check() ? Auth::user()->id : '' ; @endphp
+
+
+                            <!-- 問題集リスト -->
+                            @foreach ($question_groups as $question_group)
+
+                                @include('_parts.question_group_card_list')
+
+                            @endforeach
+
+
+                            <!-- ページネーション -->
+                            <div class="my-5 d-flex justify-content-center">
+                                {{ $question_groups->links('vendor.pagination.bootstrap-4') }}
+                            </div>
+
+                        </div>
+
+
+                    </div>
 
                 </div>
+            </section>
 
 
-                <!-- タグ一覧 -->
-                {{-- <div class="row my-5">
-                    <h5 class="text-secondary">＃タグから検索する</h5>
-                    <div class="bg-light">
-                        <div class="card-body">hoge</div>
-                    </div>
-                </div> --}}
+        </main>
+        <footer>
+            @include('_parts.footer')
+        </footer>
 
-            </div>
-        </section>
-
-
-    </main>
-    <footer>
-        @include('_parts.footer')
-    </footer>
-
+    </div><!--end id:app-->
 
     <!-- JavaScript -->
     <script src="{{ asset('js/app.js') }}" defer></script>

@@ -47,10 +47,58 @@
                             <div v-else>
                                 <div class="row my-4">
                                     <div class="col-auto pe-0" style="width:3rem;">
-                                        <!--//投稿者画像//-->
-                                        <div class="comment-user-image border ratio ratio-1x1 w-100"
-                                        :style="'background:url('+ comment.user.image_url +') white no-repeat center center /cover'"
-                                        style="border-radius:50%;"></div>
+                                        <div class="d-flex flex-column align-items-center">
+
+
+                                            <!--//投稿者画像//-->
+                                            <div class="comment-user-image border ratio ratio-1x1 w-100"
+                                            :style="'background:url('+ comment.user.image_url +') white no-repeat center center /cover'"
+                                            style="border-radius:50%;"></div>
+
+                                            <!--//メニューボタン( 投稿者のみ操作可能 )//-->
+                                            <div v-if="comment.user.id == user_id" class="text-center">
+
+                                                <button class="btn" type="button"
+                                                :id="'commentMenuDropdown'+key" data-bs-toggle="dropdown" aria-expanded="false"
+                                                ><i class="bi bi-three-dots-vertical"></i></button>
+
+                                                <ul class="dropdown-menu" :aria-labelledby="'commentMenuDropdown'+key">
+                                                    <li><a class="dropdown-item" href="#"
+                                                    data-bs-toggle="modal" :data-bs-target="'#comentDeleteModal'+key"
+                                                    >削除</a></li>
+                                                </ul>
+
+
+                                                <!-- Coment Delete Modal -->
+                                                <div class="modal fade" :id="'comentDeleteModal'+key" tabindex="-1" aria-labelledby="'comentDeleteModal'+key+'Label'" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+
+                                                            <div class="modal-body">
+                                                                <p>
+                                                                    <strong>コメント</strong>を1件削除します。<br>よろしいですか？
+                                                                </p>
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <button type="button" class="btn w-100 btn-secondary"
+                                                                        data-bs-dismiss="modal">閉じる</button>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <button type="button" class="btn w-100 btn-danger"
+                                                                        @click="comment_destory_api(comment.id)"
+                                                                        data-bs-dismiss="modal">削除</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
                                     </div>
                                     <div class="col">
                                         <div class="text-secondary mb-2">
@@ -63,51 +111,10 @@
                                         <!--//コメント本文(改行対応)//-->
                                         <div class="card card-body d-inline-block border-0 py-2 bg-comment"
                                         :class="{ 'bg-comment-sucess': comment.user.id == user_id }">
-                                            <div v-html="comment.body.replace(/\r?\n/g, '<br>')"></div>
+
+                                            <replace-text-component :text="comment.body"></replace-text-component>
+
                                         </div>
-                                    </div>
-
-
-                                    <!--//メニューボタン( 投稿者のみ操作可能 )//-->
-                                    <div v-if="comment.user.id == user_id" class="col-auto">
-
-                                        <button class="btn" type="button"
-                                        :id="'commentMenuDropdown'+key" data-bs-toggle="dropdown" aria-expanded="false"
-                                        ><i class="bi bi-three-dots-vertical"></i></button>
-
-                                        <ul class="dropdown-menu" :aria-labelledby="'commentMenuDropdown'+key">
-                                            <li><a class="dropdown-item" href="#"
-                                            data-bs-toggle="modal" :data-bs-target="'#comentDeleteModal'+key"
-                                            >削除</a></li>
-                                        </ul>
-
-
-                                        <!-- Coment Delete Modal -->
-                                        <div class="modal fade" :id="'comentDeleteModal'+key" tabindex="-1" aria-labelledby="'comentDeleteModal'+key+'Label'" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-
-                                                    <div class="modal-body">
-                                                        <p>
-                                                            <strong>コメント</strong>を1件削除します。<br>よろしいですか？
-                                                        </p>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <button type="button" class="btn w-100 btn-secondary"
-                                                                data-bs-dismiss="modal">閉じる</button>
-                                                            </div>
-                                                            <div class="col">
-                                                                <button type="button" class="btn w-100 btn-danger"
-                                                                @click="comment_destory_api(comment.id)"
-                                                                data-bs-dismiss="modal">削除</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
                                     </div>
                                 </div>
                             </div>

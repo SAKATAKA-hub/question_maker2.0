@@ -46,6 +46,10 @@ Vue.component('submit-button-component',  require('./components/Items/SubmitButt
 Vue.component('url-copy-component',       require('./components/Items/UrlCopyComponent.vue').default);
 // テキスト付きコピーボタン
 Vue.component('url-input-copy-component', require('./components/Items/UrlInputCopyComponent.vue').default);
+/* 文章置換え（改行・リンクタグ対応） */
+Vue.component('replace-text-component',  require('./components/Items/ReplaceTextComponent.vue').default);
+/* 文章の省略表示（改行・リンクタグ対応） */
+Vue.component('short-text-component',  require('./components/Items/ShortTextComponent.vue').default);
 
 
 /* 認証 */

@@ -76,11 +76,11 @@
                         <li class="list-group-item p-0 overflow-hidden">
                             <!-- 00問目 問題文 -->
                             <div class="px-3 py-2 bg-light">
-                                <div class="row align-items-end ">
+                                <div class="row align-items-start ">
                                     <div class="col-auto">
                                         <h5 class="mb-0 text-success">{{ sprintf('%02d',$answer->question->order) }}問目</h5>
                                     </div>
-                                    <div class="col text-truncate">
+                                    <div class="col text-truncateee">
                                         {{ $answer->question->text_text }}
                                     </div>
                                 </div>
@@ -89,19 +89,19 @@
                             <!-- 解答と結果 -->
                             <div class="px-3 py-2">
                                 <div class="row mt-3">
-                                    <div class="col text-truncate">
+                                    <div class="col text-truncateee ">
                                         <div class="text-secondary" style="font-size:11px;">あなたの解答</div>
                                         {{ $answer->text ? $answer->text : '---' }}
                                     </div>
                                     <div class="col-auto">
                                         <div class="text-secondary" style="font-size:11px;">添削結果</div>
                                         @if ( $answer->is_correct )
-                                            <div class="text-info">
-                                                <i class="bi bi-record fs-5"></i><span>正　解</span>
+                                            <div class="fs-3 text-info">
+                                                <i class="bi bi-record"></i><span>正　解</span>
                                             </div>
                                         @else
-                                            <div class="text-danger">
-                                                <i class="bi bi-x-lg fs-5"></i><span>不正解</span>
+                                            <div class="fs-3 text-danger">
+                                                <i class="bi bi-x-lg"></i><span>不正解</span>
                                             </div>
                                         @endif
                                     </div>
@@ -110,7 +110,8 @@
 
                             <!-- 詳細と解説 -->
                             <div class="px-3 py-2">
-                                <div  class="collapse card card-body bg-light-success border-0 mb-3" id="collapse{{$num}}">
+                                <div  class="collapse card card-body bg-light-success border-0 mb-3
+                                {{ $answer->is_correct==0 ? 'show' : ''}} " id="collapse{{$num}}">
 
                                     <!-- 詳細 -->
                                     <div class="row">
@@ -200,7 +201,7 @@
                                                 <div class="my-3">
                                                     <span class="text-warning fw-bold">解説文</span>
                                                     <div class="p-2 bg-light">
-                                                        {!! nl2br( e( $answer->question->commentary_storage_text ) )  !!}
+                                                        <replace-text-component text="{{ $answer->question->commentary_storage_text }}"></replace-text-component>
                                                     </div>
                                                 </div>
                                             </div>
@@ -215,7 +216,7 @@
                                     <a class="text-decoration-none"
                                     data-bs-toggle="collapse" href="#collapse{{$num}}" role="button" aria-expanded="false" aria-controls="collapse{{$num}}"
                                     >
-                                        <see-more-btn-component></see-more-btn-component>
+                                        <see-more-btn-component open="{{$answer->is_correct}}"></see-more-btn-component>
 
                                     </a>
                                 </div>
@@ -236,8 +237,8 @@
         <div class="container-1200 py-3">
 
             <!--
-                // Please Login Modal //
-                利用：フォローボタン・いいねボタン・通報ボタン・コメントコンポーネント
+            // Please Login Modal //
+            利用：フォローボタン・いいねボタン・通報ボタン・コメントコンポーネント
             -->
             <please-login-modal-component login_form_route="{{ route('user_auth.login_form') }}"
             ></please-login-modal-component>
@@ -355,23 +356,20 @@
 
 
                 <div id="collapseQGInfo" class="collapse mt-3">
-                    <div class="d-md-flex">
-                        <div class="col-md-6 order-2 p-3">
+                    <div class="row g-3">
+                        <div class="col-md-6">
 
 
                             <!-- サムネ画像 -->
-                            <div class="ratio ratio-16x9" style="
+                            <div class="ratio ratio-16x9 mb-3" style="
                                 background: no-repeat center center / cover;
                                 background-image:url({{ asset('storage/'.$question_group->image_puth) }});
                                 border-radius: .5rem;
                             "></div>
 
 
-                        </div>
-                        <div class="col-md-6 order-1">
-
                             <!-- [ 基本情報 ] -->
-                            <div class="mb-3">
+                            <div class="card">
                                 <div class="d-flex">
                                     <div class="col-4 ps-3 bg-light">公開日</div>
                                     <div class="col-8 ps-3">{{\Carbon\Carbon::parse( $question_group->published_at )->format('Y年m月d日 H:i')}}</div>
@@ -398,14 +396,18 @@
                                 </div>
                             </div>
 
+
+                        </div>
+                        <div class="col-md-6">
+
+
                             <!-- [ 問題集の説明 ] -->
                             @if ( $question_group->resume_text )
-                                <div class="modal-body">
-                                    <div class="card card-body border-0 bg-light-success">
-                                        {!! nl2br( e( $question_group->resume_text ) ) !!}
-                                    </div>
+                                <div class="card card-body border-0 bg-light-success">
+                                    <replace-text-component text="{{ $question_group->resume_text }}"></replace-text-component>
                                 </div>
                             @endif
+
 
                         </div>
                     </div>

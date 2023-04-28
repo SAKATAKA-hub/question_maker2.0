@@ -42,7 +42,8 @@
 
 <!----- contents ----->
 @section('contents')
-    @if ( $keep_question_groups->count() )
+
+    @if ( count( $keep_question_groups ) )
         <div class="">
 
             <!-- Please Login Modal -->
@@ -58,12 +59,6 @@
 
             @endforeach
 
-
-            <!-- ページネーション -->
-            <div class="my-5 d-flex justify-content-center">
-                {{ $keep_question_groups->links('vendor.pagination.bootstrap-4') }}
-            </div>
-
         </div>
     @else
 
@@ -72,6 +67,9 @@
         </div>
 
     @endif
+    <div class="form-text text-centerrr mt-5">
+        *非公開になった問題集は、表示されなくなります。
+    </div>
 
 @endsection
 

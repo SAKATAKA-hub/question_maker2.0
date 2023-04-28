@@ -8,13 +8,13 @@
                 <div class="d-flex  align-items-center h-100">
 
                     <!-- サムネ画像 -->
-                    <div class="ratio d-none d-sm-block" style="
+                    <div class="ratio d-none d-md-block" style="
                         height:150px;
                         background: no-repeat center center / cover;
                         background-image:url({{ asset('storage/'.$question_group->image_puth) }});
                         border-radius:.25rem;
                     "></div>
-                    <div class="ratio h-100 d-sm-none" style="
+                    <div class="ratio h-100 d-md-none" style="
                         background: no-repeat center center / cover;
                         background-image:url({{ asset('storage/'.$question_group->image_puth) }});
                         border-radius:.25rem;
@@ -75,7 +75,7 @@
 
     <!-- Modal -->
     <div class="modal fade" id="questionModal{{ $question_group->id +1 }}" tabindex="-1" aria-labelledby="questionModal{{ $question_group->id +1 }}Label" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog px-3">
             <div class="modal-content">
                 <!-- [ Modal-Header ] -->
                 <div class="modal-header">
@@ -196,24 +196,28 @@
                 @if ( $question_group->resume_text )
                     <div class="modal-body">
                         <div class="card card-body border-0 bg-light-success">
-                            {!! nl2br( e( $question_group->resume_text ) ) !!}
+                            <short-text-component  text="{{ $question_group->resume_text }}"></short-text-component>
+
+                            {{-- {!! nl2br( e( $question_group->resume_text ) ) !!} --}}
                         </div>
                     </div>
                 @endif
 
 
-                <div class="modal-body text-center fw-bold">
+                <div class="modal-body fw-bold">
 
                     <div class="mb-3">この問題に挑戦しますか？</div>
 
 
-                    <div class="d-flex gap-3">
-                        <div class="col">
+                    <div class="row g-3">
+                        <div class="col-12">
                             @php $param = ['question_group'=>$question_group->id,'key'=>$question_group->key,]; @endphp
-                            <a href="{{ route('play_question', $param ) }}" class="btn btn-lg fs-5 btn-success w-100">挑戦する</a>
+                            <a href="{{ route('play_question', $param ) }}" class="btn btn-lg rounded-pill fs-5 btn-success w-100"
+                            >挑戦する！</a>
                         </div>
                         <div class="col">
-                            <button type="button" class="btn btn-lg fs-5 btn-secondary w-100" data-bs-dismiss="modal">戻る</button>
+                            <button type="button" class="btn text-secondary w-100" data-bs-dismiss="modal"
+                            ><i class="bi bi-x"></i>閉じる</button>
                         </div>
                     </div>
                 </div>
