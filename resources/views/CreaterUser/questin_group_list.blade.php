@@ -25,7 +25,7 @@
 
  @php $description = mb_strlen($creater_user->profile_text ) > 140 ? mb_substr($creater_user->profile_text,0,140).'...' : $creater_user->profile_text; @endphp
  <meta  name="description" content="{{$description}}">
- <meta property="og:title" content="{{$creater_user->name.'さん 公開中'}}" />
+ <meta property="og:title" content="{{$creater_user->name.'さん　公開中の問題集'}}" />
  <meta property="og:description" content="{{$description}}" />
  <meta property="og:type" content="website" />
  <meta property="og:url" content=" {{url()->current()}}" />

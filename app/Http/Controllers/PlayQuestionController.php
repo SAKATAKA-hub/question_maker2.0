@@ -84,9 +84,8 @@ class PlayQuestionController extends Controller
     {
 
         # キー認証
-        if( $key != $question_group->key ){
-            return \App::abort(404);
-        }
+        if( $key != $question_group->key ){ return \App::abort(404); }
+
 
         # 問題数が0のとき、前ページへ戻る
         if( $question_group->questions->count() < 1 ){

@@ -20,13 +20,13 @@
         <h3>500 Internal Server Error</h3>
 
         <div class="w-100 my-5">
-            <img class="d-block mx-auto" style="max-width:200px;" src="https://nextarrow.heteml.net/error/image/error_mascot.jpg" alt="キャラクター画像">
+            <img class="d-block mx-auto" style="max-width:200px;" src="https://tosuma.ltd/storage/site/image/error.jpg" alt="キャラクター画像">
         </div>
-        <h5>技術的な問題が発生しています。</h5>
+        <h5>技術的な問題が<br>発生しています。</h5>
         <div>アクセスしようとしたページは表示できませんでした。</div>
 
-        <div class="my-5">
-            <a href="#" onClick="history.back(); return false;">>>前のページに戻る</a>
+        <div class="mt-3">
+            <a href="#" onClick="history.back(); return false;">>戻る</a>
         </div>
     </div>
 

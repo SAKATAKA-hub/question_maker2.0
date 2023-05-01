@@ -20,9 +20,15 @@
 
 
     <!-- 三点セット -->
+    @php
+    $param = [
+        'creater_user' => Auth::user(),
+        'key'          => Auth::user()->key,
+    ];
+    @endphp
     <div class="row mb-1">
         <div class="col p-0 text-center">
-            <a href="{{route('creater', Auth::user()->id)}}"
+            <a href="{{route('creater', $param)}}"
             class="btn list-group-item-action">
                 <h3 class="mb-0"><i class="bi bi-card-checklist"></i></h3>
                 <p class="text-secondary mb-0" style="font-size:.6rem;">公開中</p>
@@ -30,7 +36,7 @@
             </a>
         </div>
         <div class="col p-0 text-center">
-            <a href="{{route('creater.follower_list', Auth::user()->id)}}"
+            <a href="{{route('creater.follower_list', $param)}}"
             class="btn list-group-item-action">
                 <h3 class="mb-0"><i class="bi bi-people-fill"></i></h3>
                 <p class="text-secondary mb-0" style="font-size:.6rem;">フォロワー</p>
@@ -38,7 +44,7 @@
             </a>
         </div>
         <div class="col p-0 text-center">
-            <a href="{{route('creater.follow_creater_list', Auth::user()->id)}}"
+            <a href="{{route('creater.follow_creater_list', $param)}}"
             class="btn list-group-item-action">
                 <h3 class="mb-0"><i class="bi bi-person-heart"></i></h3>
                 <p class="text-secondary mb-0" style="font-size:.6rem;">フォロー中</p>
@@ -51,7 +57,7 @@
 
     <!-- シェアボタン -->
     <div class="mb-3">
-        @php $route = route('creater', Auth::user()->id ); @endphp
+        @php $route = route('creater.questin_group_list', $param ); @endphp
 
         <div class="d-flex align-items-center">
             <span class="badge rounded-pill bg-success me-1">

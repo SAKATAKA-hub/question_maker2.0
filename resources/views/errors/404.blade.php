@@ -15,18 +15,18 @@
     </style>
 </head>
 <body class="d-flex justify-content-center align-items-center">
-    
+
     <div class="text-center">
         <h3>404 Not Found</h3>
 
         <div class="w-100 my-5">
-            <img class="d-block mx-auto" style="max-width:200px;" src="https://nextarrow.heteml.net/error/image/error_mascot.jpg" alt="キャラクター画像">
+            <img class="d-block mx-auto" style="max-width:200px;" src="https://tosuma.ltd/storage/site/image/error.jpg" alt="キャラクター画像">
         </div>
-        <h5>お探しのページが見つかりませんでした。</h5>
+        <h5>お探しのページが<br>見つかりませんでした。</h5>
         <div>リクエストされたページはみつかりませんでした。</div>
 
-        <div class="my-5">
-            <a href="#" onClick="history.back(); return false;">>>前のページに戻る</a>
+        <div class="mt-3">
+            <a href="#" onClick="history.back(); return false;">>戻る</a>
         </div>
     </div>
 

@@ -39,17 +39,6 @@
             <i class="bi bi-chevron-right"></i>
         </div>
     </a>
-    {{-- <a href="{{route( 'infomation_list' )}}"
-    class="list-group-item list-group-item-action">
-        <div class="d-flex justify-content-between">
-            <p class="mb-0">
-                <i class="bi bi-bell"></i>
-                <span class="ms-3">おしらせ</span>
-                <span class="badge  badge-pill badge-danger">100</span>
-            </p>
-            <i class="bi bi-chevron-right"></i>
-        </div>
-    </a> --}}
     <a href="{{route( 'settings' )}}"
     class="list-group-item list-group-item-action">
         <div class="d-flex justify-content-between">
