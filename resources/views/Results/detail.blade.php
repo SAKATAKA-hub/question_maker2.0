@@ -44,9 +44,9 @@
     <section class="bg-light">
         <div class="container-1200 py-3">
 
-            <div class="card card-body  mb-3">
+            <div class="card card-body py-5 mb-3">
 
-                <div class="text-center my-5">
+                <div class="text-center">
                     <div class="fs-5">
                         {{\Carbon\Carbon::parse($answer_group->created_at)->format('Y年m月d日')}}
                     </div>
@@ -59,15 +59,10 @@
 
 
                 <!-- 成績円グラフ -->
-                {{-- <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center my-3">
                     <pie-chart-component percent_value="{{$answer_group->score}}"></pie-chart-component>
-                </div> --}}
-                <div class="d-flex justify-content-center">
-                    <pie-chart-component ></pie-chart-component>
                 </div>
-
-
-                <div class="text-center my-5">
+                <div class="text-center">
                     解答時間 {{$answer_group->elapsed_time}}
                 </div>
 
