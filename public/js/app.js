@@ -7055,6 +7055,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -7070,7 +7071,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     line_color: {
       type: String,
-      "default": '#406AFF'
+      "default": '#ED5565'
     }
   },
   mounted: function mounted() {
@@ -7083,13 +7084,30 @@ __webpack_require__.r(__webpack_exports__);
 
       if (_this.point + 1 > _this.percent_value) {
         _this.point = _this.percent_value;
+
+        _this.changeColor(_this.point); //色の変更
+
+
         clearInterval(intervalId);
       }
     }, 10);
   },
   methods: {
-    click: function click() {
-      this.disabled = true;
+    /* 色の変更 */
+    changeColor: function changeColor(point) {
+      var color = this.line_color;
+
+      if (point >= 100) {
+        color = '#14CFA0';
+      } else if (point >= 80) {
+        color = '#2CBED2 ';
+      } else if (point >= 60) {
+        color = '#FFA833';
+      } else {
+        color = '#ED5565';
+      }
+
+      this.stroke = color;
     }
   }
 });
@@ -15853,7 +15871,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.pie-chart-box .percent[data-v-53979c3e] {\n    position: relative;\n    width: 150px;\n    height: 150px;\n}\n.pie-chart-box .percent svg[data-v-53979c3e] {\n    position: relative;\n    width: 150px;\n    height: 150px;\n    transform: rotate(-90deg);\n}\n.pie-chart-box .percent svg circle[data-v-53979c3e] {\n    position: relative;\n    fill: none;\n    stroke-width: 10;\n    stroke: #f3f3f3;\n    stroke-dasharray: 440;\n    stroke-dashoffset: 0;\n    stroke-linecap: round;\n}\n.pie-chart-box .percent .number[data-v-53979c3e] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    color: #111;\n}\n.pie-chart-box .percent .number .title[data-v-53979c3e] {\n    font-size: 50px;\n}\n.pie-chart-box .percent .number .title span[data-v-53979c3e] {\n    font-size: 22px;\n}\n.pie-chart-box .text[data-v-53979c3e] {\n    padding: 10px 0 0;\n    text-align: center;\n    font-weight: bold;\n    font-size: 14px;\n}\n.pie-chart-box .percent .line[data-v-53979c3e] {\n    -webkit-animation: circleAnim-data-v-53979c3e 1s forwards;\n            animation: circleAnim-data-v-53979c3e 1s forwards;\n}\n@-webkit-keyframes circleAnim-data-v-53979c3e {\n0% {\n        stroke-dasharray: 0 440;\n}\n99.9%, to {\n        stroke-dasharray: 440 440;\n}\n}\n@keyframes circleAnim-data-v-53979c3e {\n0% {\n        stroke-dasharray: 0 440;\n}\n99.9%, to {\n        stroke-dasharray: 440 440;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.pie-chart-box .percent[data-v-53979c3e] {\n    position: relative;\n    width:  150px;\n    height: 150px;\n}\n.pie-chart-box .percent svg[data-v-53979c3e] {\n    position: relative;\n    width:  150px;\n    height: 150px;\n    transform: rotate(-90deg);\n}\n.pie-chart-box .percent svg circle[data-v-53979c3e] {\n    position: relative;\n    fill: none;\n    stroke-width: 10;\n    stroke: #f3f3f3;\n    stroke-dasharray: 440;\n    stroke-dashoffset: 0;\n    stroke-linecap: round;\n}\n.pie-chart-box .percent .number[data-v-53979c3e] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    color: #111;\n}\n.pie-chart-box .percent .number .title[data-v-53979c3e] {\n    font-size: 40px;\n}\n.pie-chart-box .percent .number .title span[data-v-53979c3e] {\n    font-size: 22px;\n}\n.pie-chart-box .text[data-v-53979c3e] {\n    padding: 10px 0 0;\n    text-align: center;\n    font-weight: bold;\n    font-size: 14px;\n}\n.pie-chart-box .percent .line[data-v-53979c3e] {\n    -webkit-animation: circleAnim-data-v-53979c3e 1s forwards;\n            animation: circleAnim-data-v-53979c3e 1s forwards;\n}\n@-webkit-keyframes circleAnim-data-v-53979c3e {\n0% {\n        stroke-dasharray: 0 440;\n}\n99.9%, to {\n        stroke-dasharray: 440 440;\n}\n}\n@keyframes circleAnim-data-v-53979c3e {\n0% {\n        stroke-dasharray: 0 440;\n}\n99.9%, to {\n        stroke-dasharray: 440 440;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38112,7 +38130,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", {}, [
     _c("div", { staticClass: "pie-chart-box" }, [
       _c("div", { staticClass: "percent" }, [
         _c("svg", [
@@ -38134,8 +38152,8 @@ var render = function () {
           }),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "number" }, [
-          _c("h3", { staticClass: "title" }, [
+        _c("div", { staticClass: "number text-dark" }, [
+          _c("h5", { staticClass: "title" }, [
             _vm._v(_vm._s(_vm.point)),
             _c("span", [_vm._v("%")]),
           ]),

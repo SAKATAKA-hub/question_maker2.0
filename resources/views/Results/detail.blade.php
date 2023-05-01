@@ -59,8 +59,11 @@
 
 
                 <!-- 成績円グラフ -->
-                <div class="d-flex justify-content-center">
+                {{-- <div class="d-flex justify-content-center">
                     <pie-chart-component percent_value="{{$answer_group->score}}"></pie-chart-component>
+                </div> --}}
+                <div class="d-flex justify-content-center">
+                    <pie-chart-component ></pie-chart-component>
                 </div>
 
 
@@ -220,8 +223,7 @@
                                     <a class="text-decoration-none"
                                     data-bs-toggle="collapse" href="#collapse{{$num}}" role="button" aria-expanded="false" aria-controls="collapse{{$num}}"
                                     >
-                                        <see-more-btn-component open="{{$answer->is_correct}}"></see-more-btn-component>
-
+                                        <see-more-btn-component open="{{$answer->is_correct ? '' : 1}}"></see-more-btn-component>
                                     </a>
                                 </div>
 

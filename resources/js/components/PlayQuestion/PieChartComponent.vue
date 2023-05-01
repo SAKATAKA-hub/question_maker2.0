@@ -1,17 +1,18 @@
 <template>
-    <div>
+    <div class="">
         <div class="pie-chart-box">
             <div class="percent">
                 <svg>
+
                     <circle class="base" cx="75" cy="75" r="70"></circle>
                     <circle class="line" cx="75" cy="75" r="70"
-                    :style="
-                    'stroke-dashoffset:'+strokeDashoffset+';'+
+                    :style=" 'stroke-dashoffset:'+strokeDashoffset+';'+
                     'stroke:'+stroke+';'
                     "></circle>
+
                 </svg>
-                <div class="number">
-                    <h3 class="title">{{point}}<span>%</span></h3>
+                <div class="number text-dark">
+                    <h5 class="title">{{point}}<span>%</span></h5>
                 </div>
             </div>
         </div>
@@ -26,11 +27,12 @@
                 strokeDashoffset: 0,
                 stroke: '',
                 point: 0,
+
             }
         },
         props: {
             percent_value: { type: String, default: '100', },
-            line_color: { type: String, default: '#406AFF', },
+            line_color: { type: String, default: '#ED5565', },
         },
         mounted() {
             this.strokeDashoffset = 440 - ( 440 * (this.percent_value/100) );
@@ -42,25 +44,46 @@
                 if( this.point +1 > this.percent_value){
 
                     this.point = this.percent_value;
+                    this.changeColor( this.point ); //色の変更
+
                     clearInterval(intervalId);
                 }
 
             }, 10 )
+
         },
         methods:{
-            click : function(){ this.disabled = true; }
+
+            /* 色の変更 */
+            changeColor: function(point){
+
+                let color = this.line_color;
+                if(point >= 100){
+                    color = '#14CFA0';
+                }else if(point >= 80){
+                    color = '#2CBED2 ';
+                }else if
+                ( point >= 60 ){
+                    color = '#FFA833';
+                }else{
+                    color = '#ED5565';
+                }
+
+
+                this.stroke = color;
+            },
         }
     }
 </script>
 <style scoped>
     .pie-chart-box .percent {
         position: relative;
-        width: 150px;
+        width:  150px;
         height: 150px;
     }
     .pie-chart-box .percent svg {
         position: relative;
-        width: 150px;
+        width:  150px;
         height: 150px;
         -webkit-transform: rotate(-90deg);
                 transform: rotate(-90deg);
@@ -92,7 +115,7 @@
         color: #111;
     }
     .pie-chart-box .percent .number .title {
-        font-size: 50px;
+        font-size: 40px;
     }
     .pie-chart-box .percent .number .title span {
         font-size: 22px;
