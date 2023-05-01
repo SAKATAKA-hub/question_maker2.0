@@ -110,7 +110,7 @@
 
                             <!-- 詳細と解説 -->
                             <div class="px-3 py-2">
-                                <div  class="collapse card card-body bg-light-success border-0 mb-3
+                                <div  class="collapse card card-body bg-light-success border-0  mb-3
                                 {{ $answer->is_correct==0 ? 'show' : ''}} " id="collapse{{$num}}">
 
                                     <!-- 詳細 -->
@@ -201,7 +201,11 @@
                                                 <div class="my-3">
                                                     <span class="text-warning fw-bold">解説文</span>
                                                     <div class="p-2 bg-light">
+
                                                         <replace-text-component text="{{ $answer->question->commentary_storage_text }}"></replace-text-component>
+
+                                                        {{-- {!! nl2br( e( $answer->question->commentary_storage_text ) ) !!} --}}
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -403,7 +407,7 @@
 
                             <!-- [ 問題集の説明 ] -->
                             @if ( $question_group->resume_text )
-                                <div class="card card-body border-0 bg-light-success">
+                                <div class="card card-body">
                                     <replace-text-component text="{{ $question_group->resume_text }}"></replace-text-component>
                                 </div>
                             @endif

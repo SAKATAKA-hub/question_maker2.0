@@ -116,6 +116,8 @@
         <div class="d-none d-md-block">
             <replace-text-component text="{{ $creater_user->profile_text }}"></replace-text-component>
         </div>
+
+        {{-- {!! nl2br( e( $creater_user->profile_text ) ) !!} --}}
     </div>
 
 

@@ -38,10 +38,7 @@
                         "></div>
 
                         @php $user_name = mb_strlen($question_group->user->name ) > 14 ? mb_substr($question_group->user->name,0,14).'...' : $question_group->user->name; @endphp
-                        <span class="">{{ $user_name }}
-
-                            {{-- {{$question_group->user->name}} --}}
-                        </span>
+                        <span class="">{{ $user_name }}</span>
                     </div>
                 </div>
 
@@ -177,7 +174,6 @@
                     </div>
                     <div class="d-flex">
                         <div class="col-4 ps-3 bg-light">受験回数</div>
-                        {{-- <div class="col-8 ps-3">{{$question_group->answer_groups->count()}}回</div> --}}
                         <div class="col-8 ps-3">{{$question_group->accessed_count}}回</div>
                     </div>
                     <div class="d-flex">
@@ -195,10 +191,8 @@
                 <!-- [ 問題集の説明 ] -->
                 @if ( $question_group->resume_text )
                     <div class="modal-body">
-                        <div class="card card-body border-0 bg-light-success">
+                        <div class="card card-body">
                             <short-text-component  text="{{ $question_group->resume_text }}"></short-text-component>
-
-                            {{-- {!! nl2br( e( $question_group->resume_text ) ) !!} --}}
                         </div>
                     </div>
                 @endif

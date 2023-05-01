@@ -61,7 +61,8 @@
             <!-- 問題集リスト -->
             @foreach ($question_groups as $question_group)
 
-                <div class="m-">
+                <div class="">
+
                     @include('_parts.question_group_card_list')
 
                 </div>

@@ -12,4 +12,12 @@
 </p>
 <p>
     ぜひお試しください！<br>
+
+
+
 </p>
+{{-- <p class="mt-5 p-3 bg-light">
+    ※ブラウザーの状況により、表示が更新されていない場合があります。<br>
+    表示がうまくいかない方は、 <button class="btn p-0 btn-link text-success fw-bold" onclick="doReload()">リロード</button>をお試しください。<br>
+
+<p> --}}

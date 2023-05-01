@@ -13,6 +13,14 @@
     <!-- 基本CSS -->
     @include('_parts.meta_css')
     @yield('style')
+    <style>
+        @media screen and (min-width: 768px) {
+            #center-contents{
+                overflow: hidden;
+                padding: 1rem;
+            }
+        }
+    </style>
 
     <!-- Google tag (gtag.js) -->
     @include('_parts.google_tag')
@@ -58,7 +66,7 @@
                     </section>
 
                     <!-- 中央コンテンツ -->
-                    <section class="flex-fill">
+                    <section id="center-contents" class="flex-fill">
 
 
                         @yield('contents')

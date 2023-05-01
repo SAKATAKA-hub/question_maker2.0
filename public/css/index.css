@@ -46,6 +46,25 @@ main{
     /*パンクズリスト*/
     .breadcrumb{ font-size: 11px; }
 
+    /* リンクタグ */
+    a{
+        color: #14CFA0;
+        text-decoration: none;
+    }
+    a:hover {
+        color: hsl(165, 82%, 30%);
+        text-decoration: none;
+    }
+
+    .bg-light-success{
+        background: rgba(92, 240, 203, 0.3);
+    }
+    .bg-light-warning{
+        background: rgb(255, 168, 51, 0.3);
+    }
+
+    #FFA833
+
 
     /* 問題追加ボタンのスタイル */
     #addQuestion{
@@ -252,9 +271,6 @@ main{
         box-shadow: none !important;
     }
 
-    .bg-light-success{
-        background: rgba(92, 240, 203, 0.3);
-    }
 
     /* 問題集カードのテキストの大きさ */
     @media screen and (max-width: 768px) {

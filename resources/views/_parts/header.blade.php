@@ -160,13 +160,13 @@ tabindex="-1" id="offcanvasHeaderUserMenu" aria-labelledby="offcanvasHeaderUserM
 <ul class="nav justify-content-between  d-md-none text-center text-white w-100 position-fixed bottom-0"
 style="z-index:10; background-color:rgb(20 207 160 / 90%);">
     <li class="nav-item" style="flex:1;">
-        <a class="nav-link text-reset" aria-current="page" href="{{ route('home')}}">
+        <a class="text-decoration-none text-white " aria-current="page" href="{{ route('home')}}">
             <div class="fs-2"><i class="bi bi-house-door-fill"></i></div>
             <div class="text-" style="font-size:10px;">Home</div>
         </a>
     </li>
     <li class="nav-item" style="flex:1;">
-        <a class="nav-link text-reset" aria-current="page"
+        <a class="text-decoration-none text-white " aria-current="page"
         data-bs-toggle="offcanvas" data-bs-target="#seachOffcanvas" aria-controls="seachOffcanvas"
         href="#">
             <div class="fs-2"><i class="bi bi-search"></i></div>
@@ -174,14 +174,14 @@ style="z-index:10; background-color:rgb(20 207 160 / 90%);">
         </a>
     </li>
     <li class="nav-item" style="flex:1;">
-        <a class="nav-link text-reset" aria-current="page" href="{{route('footer_menu.news')}}">
+        <a class="text-decoration-none text-white " aria-current="page" href="{{route('footer_menu.news')}}">
             <div class="fs-2"><i class="bi bi-bell"></i></div>
             <div class="text-" style="font-size:10px;">お知らせ</div>
         </a>
     </li>
     @if ( Auth::check() )
     <li class="nav-item" style="flex:1;">
-        <a class="nav-link text-reset" aria-current="page"
+        <a class="text-decoration-none text-white " aria-current="page"
         data-bs-toggle="offcanvas" href="#offcanvasHeaderUserMenu" role="button" aria-controls="offcanvasHeaderUserMenu"
         >
             <div class="fs-2"><i class="bi bi-person-fill"></i></div>
@@ -190,7 +190,7 @@ style="z-index:10; background-color:rgb(20 207 160 / 90%);">
     </li>
     @else
     <li class="nav-item" style="flex:1;">
-        <a class="nav-link text-reset" aria-current="page" href="{{ route('user_auth.login_form')}}">
+        <a class="text-decoration-none text-white " aria-current="page" href="{{ route('user_auth.login_form')}}">
             <div class="fs-2"><i class="bi bi-box-arrow-in-right"></i></div>
             <div class="text-" style="font-size:10px;">ログイン</div>
         </a>

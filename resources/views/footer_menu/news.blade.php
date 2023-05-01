@@ -28,6 +28,10 @@
 
 <!----- script ----->
 @section('script')
+<script>
+    // reloadメソッドによりページをリロード
+    // function doReload() { window.location.reload(true); }
+</script>
 @endsection
 
 
