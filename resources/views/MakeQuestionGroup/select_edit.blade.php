@@ -41,6 +41,11 @@
         width:540px;
     }
 }
+
+</style>
+
+<style>
+    #addQuestion{ position: fixed; right:1rem; bottom: 1rem; z-index: 20; }
 </style>
 @endsection
 
