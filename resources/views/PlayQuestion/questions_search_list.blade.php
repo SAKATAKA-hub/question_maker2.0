@@ -65,7 +65,7 @@
 
                             <!-- ページネーション -->
                             <div class="my-5 d-flex justify-content-center">
-                                {{ $question_groups->links('vendor.pagination.bootstrap-4') }}
+                                {{ $question_groups->appends( compact('question_groups', 'keywords','order') )->links('vendor.pagination.bootstrap-4') }}
                             </div>
 
                         </div>

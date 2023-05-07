@@ -49,8 +49,6 @@ class PlayQuestionController extends Controller
     */
     public function questions_search_list( Request $request )
     {
-
-
         # キーワード
         $keywords = str_replace( '　',' ',$request->seach_keywords );
 

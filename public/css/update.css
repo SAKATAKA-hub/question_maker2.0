@@ -1,0 +1,59 @@
+/*
+| --------------------
+|  更新用　CSS
+| --------------------
+*/
+
+/* リンクタグ */
+a{
+    color: #14CFA0;
+    text-decoration: none;
+}
+a:hover {
+    color: hsl(165, 82%, 30%);
+    text-decoration: none;
+}
+
+.bg-light-success{
+    background: rgba(92, 240, 203, 0.3);
+}
+.bg-light-warning{
+    background: rgb(255, 168, 51, 0.3);
+}
+
+
+
+/* 問題追加ボタンのスタイル */
+#addQuestion{
+    position: fixed;
+    right:1rem; bottom: 1rem;
+    z-index: 20;
+}
+#addQuestion > .icon{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 auto;
+    font-size:3rem;
+    width:5rem; height:5rem;
+    border-radius:50%;
+}
+
+@media screen and (max-width: 768px) {
+    /*bottom menu 分の余白*/
+    #addQuestion{
+        bottom: 5rem;
+    }
+    #addQuestion > .icon{
+        width:3rem; height:3rem;
+    }
+}
+
+/* ページネーション */
+.page-item.active .page-link {
+    background-color: #14cfa0;
+    border-color: #14cfa0;
+}
+/*
