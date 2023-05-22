@@ -79,7 +79,7 @@
                                         <h5 class="mb-0 text-success">{{ sprintf('%02d',$answer->question->order) }}問目</h5>
                                     </div>
                                     <div class="col text-truncateee">
-                                        {{ $answer->question->text_text }}
+                                        {{-- {{ $answer->question->text_text }} --}}
                                     </div>
                                 </div>
                             </div>

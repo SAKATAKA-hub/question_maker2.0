@@ -43,14 +43,14 @@
 
             <!-- contents -->
             <section class="">
-                <div class="container-1200 mt-5 bg-light border-start border-5 border-success">
+                <div class="container-1200 py-2 mt-md-5 bg-light border-start border-5 border-success">
 
-                    <h2 class="">{{$question_group->title}}</h2>
+                    <h2 class="mb-0">{{$question_group->title}}</h2>
 
                 </div>
             </section>
             <section>
-                <div class="container-600 my-5">
+                <div class="container-600 my-md-5">
 
 
                     <play-question-component></play-question-component>
