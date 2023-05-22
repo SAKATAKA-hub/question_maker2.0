@@ -29,7 +29,7 @@
 
             <div class="mb-2">
                 <div class="d-flex justify-content-between align-items-end">
-                    <h5>
+                    <h6>
                         <!-- 残り時間 -->
                         <div v-if="time_limit">
                             残り時間
@@ -40,7 +40,7 @@
                             経過時間
                             <count-up-timer-component   :time_limit="time_limit" @getElapsedTime="getElapsedTime"></count-up-timer-component>
                         </div>
-                    </h5>
+                    </h6>
                     <h3>
                         <!-- 現在の問題番号 -->
                         <span class="text-success fs-1">{{ question_num+1 > questions.length ? questions.length : question_num+1 }}</span>
@@ -74,66 +74,68 @@
                                     <img :src="question.image" class="w-100" alt="問題画像"/>
                                 </div>
 
-                            </div>
 
-                            <!-- 解答選択・入力 -->
-                            <div class="card-body">
-
-                                <div class="form-text">
-                                    <div class="" v-if="question.answer_type == 0">解答をテキストで入力してください。</div>
-                                    <div class="" v-if="question.answer_type == 1">解答を1つ選択してください。</div>
-                                    <div class="" v-if="question.answer_type == 2">解答を全て選択してください。</div>
-                                </div>
-
+                                <!-- 解答選択・入力 -->
                                 <div>
-                                    <!-- 解答をテキストで入力 -->
-                                    <ul v-if="question.answer_type == 0"
-                                    class="ps-0 mb-3" style=" list-style:none;">
-                                        <li>
-                                            <input type="text" class="form-control" :name="'answer_'+q_num"
-                                                placeholder="入力してください"/>
-                                        </li>
-                                    </ul>
+
+                                    <div class="form-text">
+                                        <div class="" v-if="question.answer_type == 0">解答をテキストで入力してください。</div>
+                                        <div class="" v-if="question.answer_type == 1">解答を1つ選択してください。</div>
+                                        <div class="" v-if="question.answer_type == 2">解答を全て選択してください。</div>
+                                    </div>
+
+                                    <div>
+                                        <!-- 解答をテキストで入力 -->
+                                        <ul v-if="question.answer_type == 0"
+                                        class="ps-0 mb-3" style=" list-style:none;">
+                                            <li>
+                                                <input type="text" class="form-control" :name="'answer_'+q_num"
+                                                    placeholder="入力してください"/>
+                                            </li>
+                                        </ul>
 
 
-                                    <!-- 解答を1つ選択 -->
-                                    <ul v-if="question.answer_type == 1"
-                                    class="ps-0 mb-3" style=" list-style:none;">
-                                        <li v-for="(option_answer_text, o_num) in question.option_answer_texts" :key="o_num"
-                                        class="w-100"
-                                        >
-                                            <div class="input-group mb-2">
-                                                <input type="radio" class="btn-check"
-                                                :name="'answer_'+q_num" :id="'answer_'+q_num +o_num" :value="option_answer_text"
-                                                >
-                                                <label class="btn btn-outline-success btn-select-ans text-start w-100" :for="'answer_'+q_num +o_num"
-                                                >{{option_answer_text}}</label>
-                                            </div>
+                                        <!-- 解答を1つ選択 -->
+                                        <ul v-if="question.answer_type == 1"
+                                        class="ps-0 mb-3" style=" list-style:none;">
+                                            <li v-for="(option_answer_text, o_num) in question.option_answer_texts" :key="o_num"
+                                            class="w-100"
+                                            >
+                                                <div class="input-group mb-2">
+                                                    <input type="radio" class="btn-check"
+                                                    :name="'answer_'+q_num" :id="'answer_'+q_num +o_num" :value="option_answer_text"
+                                                    >
+                                                    <label class="btn btn-outline-success btn-select-ans text-start w-100" :for="'answer_'+q_num +o_num"
+                                                    >{{option_answer_text}}</label>
+                                                </div>
 
-                                        </li>
-                                    </ul>
+                                            </li>
+                                        </ul>
 
 
-                                    <!-- 解答を複数選択 -->
-                                    <ul v-if="question.answer_type == 2"
-                                    class="ps-0 mb-3" style=" list-style:none;">
-                                        <li v-for="(option_answer_text, o_num) in question.option_answer_texts" :key="o_num"
-                                        class="w-100"
-                                        >
-                                            <div class="input-group mb-2">
-                                                <input type="checkbox" class="btn-check"
-                                                :name="'answer_'+q_num+'[]'" :id="'answer_'+q_num +o_num" :value="option_answer_text"
-                                                >
-                                                <label class="btn btn-outline-success btn-select-ans text-start w-100" :for="'answer_'+q_num +o_num"
-                                                >{{option_answer_text}}</label>
-                                            </div>
+                                        <!-- 解答を複数選択 -->
+                                        <ul v-if="question.answer_type == 2"
+                                        class="ps-0 mb-3" style=" list-style:none;">
+                                            <li v-for="(option_answer_text, o_num) in question.option_answer_texts" :key="o_num"
+                                            class="w-100"
+                                            >
+                                                <div class="input-group mb-2">
+                                                    <input type="checkbox" class="btn-check"
+                                                    :name="'answer_'+q_num+'[]'" :id="'answer_'+q_num +o_num" :value="option_answer_text"
+                                                    >
+                                                    <label class="btn btn-outline-success btn-select-ans text-start w-100" :for="'answer_'+q_num +o_num"
+                                                    >{{option_answer_text}}</label>
+                                                </div>
 
-                                        </li>
-                                    </ul>
+                                            </li>
+                                        </ul>
 
-                                </div>
+                                    </div>
 
-                            </div><!-- end body -->
+                                </div><!-- end body -->
+
+
+                            </div>
 
                         </div><!-- end card -->
                     </li>

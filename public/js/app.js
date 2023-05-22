@@ -7383,6 +7383,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -38218,7 +38220,7 @@ var render = function () {
               "div",
               { staticClass: "d-flex justify-content-between align-items-end" },
               [
-                _c("h5", [
+                _c("h6", [
                   _vm.time_limit
                     ? _c(
                         "div",
@@ -38357,176 +38359,194 @@ var render = function () {
                                   ]
                                 )
                               : _vm._e(),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "card-body" }, [
-                            _c("div", { staticClass: "form-text" }, [
-                              question.answer_type == 0
-                                ? _c("div", {}, [
-                                    _vm._v(
-                                      "解答をテキストで入力してください。"
-                                    ),
-                                  ])
-                                : _vm._e(),
-                              _vm._v(" "),
-                              question.answer_type == 1
-                                ? _c("div", {}, [
-                                    _vm._v("解答を1つ選択してください。"),
-                                  ])
-                                : _vm._e(),
-                              _vm._v(" "),
-                              question.answer_type == 2
-                                ? _c("div", {}, [
-                                    _vm._v("解答を全て選択してください。"),
-                                  ])
-                                : _vm._e(),
-                            ]),
                             _vm._v(" "),
                             _c("div", [
-                              question.answer_type == 0
-                                ? _c(
-                                    "ul",
-                                    {
-                                      staticClass: "ps-0 mb-3",
-                                      staticStyle: { "list-style": "none" },
-                                    },
-                                    [
-                                      _c("li", [
-                                        _c("input", {
-                                          staticClass: "form-control",
-                                          attrs: {
-                                            type: "text",
-                                            name: "answer_" + q_num,
-                                            placeholder: "入力してください",
-                                          },
-                                        }),
-                                      ]),
-                                    ]
-                                  )
-                                : _vm._e(),
+                              _c("div", { staticClass: "form-text" }, [
+                                question.answer_type == 0
+                                  ? _c("div", {}, [
+                                      _vm._v(
+                                        "解答をテキストで入力してください。"
+                                      ),
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                question.answer_type == 1
+                                  ? _c("div", {}, [
+                                      _vm._v("解答を1つ選択してください。"),
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                question.answer_type == 2
+                                  ? _c("div", {}, [
+                                      _vm._v("解答を全て選択してください。"),
+                                    ])
+                                  : _vm._e(),
+                              ]),
                               _vm._v(" "),
-                              question.answer_type == 1
-                                ? _c(
-                                    "ul",
-                                    {
-                                      staticClass: "ps-0 mb-3",
-                                      staticStyle: { "list-style": "none" },
-                                    },
-                                    _vm._l(
-                                      question.option_answer_texts,
-                                      function (option_answer_text, o_num) {
-                                        return _c(
-                                          "li",
-                                          { key: o_num, staticClass: "w-100" },
-                                          [
-                                            _c(
-                                              "div",
-                                              {
-                                                staticClass: "input-group mb-2",
-                                              },
-                                              [
-                                                _c("input", {
-                                                  staticClass: "btn-check",
-                                                  attrs: {
-                                                    type: "radio",
-                                                    name: "answer_" + q_num,
-                                                    id:
-                                                      "answer_" + q_num + o_num,
-                                                  },
-                                                  domProps: {
-                                                    value: option_answer_text,
-                                                  },
-                                                }),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "label",
-                                                  {
-                                                    staticClass:
-                                                      "btn btn-outline-success btn-select-ans text-start w-100",
+                              _c("div", [
+                                question.answer_type == 0
+                                  ? _c(
+                                      "ul",
+                                      {
+                                        staticClass: "ps-0 mb-3",
+                                        staticStyle: { "list-style": "none" },
+                                      },
+                                      [
+                                        _c("li", [
+                                          _c("input", {
+                                            staticClass: "form-control",
+                                            attrs: {
+                                              type: "text",
+                                              name: "answer_" + q_num,
+                                              placeholder: "入力してください",
+                                            },
+                                          }),
+                                        ]),
+                                      ]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                question.answer_type == 1
+                                  ? _c(
+                                      "ul",
+                                      {
+                                        staticClass: "ps-0 mb-3",
+                                        staticStyle: { "list-style": "none" },
+                                      },
+                                      _vm._l(
+                                        question.option_answer_texts,
+                                        function (option_answer_text, o_num) {
+                                          return _c(
+                                            "li",
+                                            {
+                                              key: o_num,
+                                              staticClass: "w-100",
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "input-group mb-2",
+                                                },
+                                                [
+                                                  _c("input", {
+                                                    staticClass: "btn-check",
                                                     attrs: {
-                                                      for:
+                                                      type: "radio",
+                                                      name: "answer_" + q_num,
+                                                      id:
                                                         "answer_" +
                                                         q_num +
                                                         o_num,
                                                     },
-                                                  },
-                                                  [
-                                                    _vm._v(
-                                                      _vm._s(option_answer_text)
-                                                    ),
-                                                  ]
-                                                ),
-                                              ]
-                                            ),
-                                          ]
-                                        )
-                                      }
-                                    ),
-                                    0
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              question.answer_type == 2
-                                ? _c(
-                                    "ul",
-                                    {
-                                      staticClass: "ps-0 mb-3",
-                                      staticStyle: { "list-style": "none" },
-                                    },
-                                    _vm._l(
-                                      question.option_answer_texts,
-                                      function (option_answer_text, o_num) {
-                                        return _c(
-                                          "li",
-                                          { key: o_num, staticClass: "w-100" },
-                                          [
-                                            _c(
-                                              "div",
-                                              {
-                                                staticClass: "input-group mb-2",
-                                              },
-                                              [
-                                                _c("input", {
-                                                  staticClass: "btn-check",
-                                                  attrs: {
-                                                    type: "checkbox",
-                                                    name:
-                                                      "answer_" + q_num + "[]",
-                                                    id:
-                                                      "answer_" + q_num + o_num,
-                                                  },
-                                                  domProps: {
-                                                    value: option_answer_text,
-                                                  },
-                                                }),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "label",
-                                                  {
-                                                    staticClass:
-                                                      "btn btn-outline-success btn-select-ans text-start w-100",
+                                                    domProps: {
+                                                      value: option_answer_text,
+                                                    },
+                                                  }),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass:
+                                                        "btn btn-outline-success btn-select-ans text-start w-100",
+                                                      attrs: {
+                                                        for:
+                                                          "answer_" +
+                                                          q_num +
+                                                          o_num,
+                                                      },
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          option_answer_text
+                                                        )
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]
+                                              ),
+                                            ]
+                                          )
+                                        }
+                                      ),
+                                      0
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                question.answer_type == 2
+                                  ? _c(
+                                      "ul",
+                                      {
+                                        staticClass: "ps-0 mb-3",
+                                        staticStyle: { "list-style": "none" },
+                                      },
+                                      _vm._l(
+                                        question.option_answer_texts,
+                                        function (option_answer_text, o_num) {
+                                          return _c(
+                                            "li",
+                                            {
+                                              key: o_num,
+                                              staticClass: "w-100",
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "input-group mb-2",
+                                                },
+                                                [
+                                                  _c("input", {
+                                                    staticClass: "btn-check",
                                                     attrs: {
-                                                      for:
+                                                      type: "checkbox",
+                                                      name:
+                                                        "answer_" +
+                                                        q_num +
+                                                        "[]",
+                                                      id:
                                                         "answer_" +
                                                         q_num +
                                                         o_num,
                                                     },
-                                                  },
-                                                  [
-                                                    _vm._v(
-                                                      _vm._s(option_answer_text)
-                                                    ),
-                                                  ]
-                                                ),
-                                              ]
-                                            ),
-                                          ]
-                                        )
-                                      }
-                                    ),
-                                    0
-                                  )
-                                : _vm._e(),
+                                                    domProps: {
+                                                      value: option_answer_text,
+                                                    },
+                                                  }),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass:
+                                                        "btn btn-outline-success btn-select-ans text-start w-100",
+                                                      attrs: {
+                                                        for:
+                                                          "answer_" +
+                                                          q_num +
+                                                          o_num,
+                                                      },
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          option_answer_text
+                                                        )
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]
+                                              ),
+                                            ]
+                                          )
+                                        }
+                                      ),
+                                      0
+                                    )
+                                  : _vm._e(),
+                              ]),
                             ]),
                           ]),
                         ]

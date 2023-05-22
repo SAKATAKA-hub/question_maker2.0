@@ -45,7 +45,8 @@
             <section class="">
                 <div class="container-1200 py-2 mt-md-5 bg-light border-start border-5 border-success">
 
-                    <h2 class="mb-0">{{$question_group->title}}</h2>
+                    <h2 class="mb-0 fs-6 d-md-none">{{$question_group->title}}</h2>
+                    <h2 class="mb-0 d-none d-md-block">{{$question_group->title}}</h2>
 
                 </div>
             </section>
