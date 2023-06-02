@@ -98,8 +98,14 @@
                                     <label for="profile_profile" class="form-label">
                                         自己紹介
                                     </label>
-                                    <textarea class="form-control" name="profile" id="profile_profile" rows="6"
-                                    placeholder="自己紹介の文章を入力しましょう！">{{Auth::user()->profile_text}}</textarea>
+                                    {{-- <textarea class="form-control" name="profile" id="profile_profile" rows="6"
+                                    placeholder="自己紹介の文章を入力しましょう！">{{Auth::user()->profile_text}}</textarea> --}}
+
+                                    <encodedーtextarea-component
+                                    id="profile_profile" name="profile" style_class="form-control" rows="6"
+                                    placeholder="自己紹介の文章を入力しましょう！"
+                                    default_body="{{Auth::user()->profile_text}}"
+                                    ></encodedーtextarea-component>
                                 </div>
 
                                 <div class="d-flex justify-content-end">

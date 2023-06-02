@@ -53,13 +53,20 @@ class ResultsController extends Controller
         // 問題集情報
         $question_group = $answer_group->question_group;
 
-
         // 問題情報
         $questions = $question_group->questions;
 
+        # 新着問題集トップ５
+        $new_question_groups =
+        \App\Models\QuestionGroup::orderBy('published_at','desc') //公開順
+        ->where('published_at', '<>', null) //非公開は除く
+        ->limit(5)->get();
+
 
         # ページの表示
-        return view('Results.detail', compact('answer_group', 'answers','question_group','questions') );
+        return view('Results.detail',
+            compact('answer_group', 'answers','question_group','questions','new_question_groups')
+        );
     }
 
 }

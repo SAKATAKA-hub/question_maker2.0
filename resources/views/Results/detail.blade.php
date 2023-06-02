@@ -78,9 +78,6 @@
                                     <div class="col-auto">
                                         <h5 class="mb-0 text-success">{{ sprintf('%02d',$answer->question->order) }}問目</h5>
                                     </div>
-                                    <div class="col text-truncateee">
-                                        {{-- {{ $answer->question->text_text }} --}}
-                                    </div>
                                 </div>
                             </div>
 
@@ -89,7 +86,11 @@
                                 <div class="row mt-3">
                                     <div class="col text-truncateee ">
                                         <div class="text-secondary" style="font-size:11px;">あなたの解答</div>
-                                        {{ $answer->text ? $answer->text : '---' }}
+
+                                        <replace-text-component  replace_url="0"
+                                        text="{{ $answer->text ? $answer->text : '---' }}"
+                                        ></replace-text-component>
+
                                     </div>
                                     <div class="col-auto">
                                         <div class="text-secondary" style="font-size:11px;">添削結果</div>
@@ -134,7 +135,11 @@
                                             <div class="my-3">
                                                 <span class="text-success fw-bold">問題文</span>
                                                 <div class="p-2 bg-light">
-                                                    {!! nl2br( e(  $answer->question->text_text ) )  !!}
+
+                                                    <replace-text-component replace_url="0"
+                                                    text="{{ $answer->question->text_text }}"
+                                                    ></replace-text-component>
+
                                                 </div>
                                             </div>
 
@@ -158,12 +163,24 @@
                                                             <div class="col-auto">
                                                                 <span class="fw-bold text-info">正　解</span>
                                                             </div>
-                                                            <div class="col card border-info"> {{ $option->answer_text }}</div>
+                                                            <div class="col card border-info">
+
+                                                                <replace-text-component
+                                                                text="{{ $option->answer_text }}" replace_url="0"
+                                                                ></replace-text-component>
+
+                                                            </div>
                                                         @else
                                                             <div class="col-auto">
                                                                 <span class="fw-bold text-secondary">不正解</span>
                                                             </div>
-                                                            <div class="col card bg-light">{{ $option->answer_text }}</div>
+                                                            <div class="col card bg-light">
+
+                                                                <replace-text-component
+                                                                text="{{ $option->answer_text }}" replace_url="0"
+                                                                ></replace-text-component>
+
+                                                            </div>
                                                         @endif
                                                     </div>
                                                 @endforeach
@@ -432,7 +449,7 @@
         </div>
     </section>
 
-
+    <!-- コメント -->
     <section class="bg-light">
         <div class="container-1200 py-3">
 
@@ -496,6 +513,32 @@
 
         </div>
     </section>
-@endsection
+
+
+    <!-- [ 新着問題集トップ５！ ] -->
+    <section class="bg-light">
+        <div class="container-1200 py-3">
+
+            <div class="  anm_right_01">
+                <p class="fw-bold text-success mb-2">
+                New handmade questions!
+                </p>
+                <h3 class="mb-2">新着問題集</h3>
+            </div>
+
+            <!-- 問題集リスト -->
+            @foreach ($new_question_groups as $question_group)
+
+                @include('_parts.question_group_card_list')
+
+            @endforeach
+
+
+        </div>
+    </section>
+
+
+
+    @endsection
 
 

@@ -324,7 +324,9 @@
                                             <div class="my-3">
                                                 <span class="text-success fw-bold">問題文</span>
                                                 <div class="p-2 bg-light">
-                                                    {!! nl2br( e( $question->text_text ) )  !!}
+                                                    <replace-text-component
+                                                    text="{{ $question->text_text }}" replace_url="0"
+                                                    ></replace-text-component>
                                                 </div>
                                             </div>
 
@@ -348,12 +350,20 @@
                                                             <div class="col-auto">
                                                                 <span class="fw-bold text-info">正　解</span>
                                                             </div>
-                                                            <div class="col card border-info"> {{ $option->answer_text }}</div>
+                                                            <div class="col card border-info">
+                                                                <replace-text-component
+                                                                text="{{ $option->answer_text }}" replace_url="0"
+                                                                ></replace-text-component>
+                                                            </div>
                                                         @else
                                                             <div class="col-auto">
                                                                 <span class="fw-bold text-secondary">不正解</span>
                                                             </div>
-                                                            <div class="col card bg-light">{{ $option->answer_text }}</div>
+                                                            <div class="col card bg-light">
+                                                                <replace-text-component
+                                                                text="{{ $option->answer_text }}" replace_url="0"
+                                                                ></replace-text-component>
+                                                            </div>
                                                         @endif
                                                     </div>
                                                 @endforeach
@@ -390,7 +400,9 @@
                                                 <div class="my-3">
                                                     <span class="text-warning fw-bold">解説文</span>
                                                     <div class="p-2 bg-light">
-                                                        <replace-text-component text="{{ $question->commentary_storage_text }}"></replace-text-component>
+                                                        <replace-text-component
+                                                        text="{{ $question->commentary_storage_text }}"
+                                                        ></replace-text-component>
                                                     </div>
                                                 </div>
                                             </div>

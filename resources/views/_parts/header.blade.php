@@ -1,19 +1,17 @@
 <nav class="navbar navbar-expand navbar-light mx-auto" style="max-width:1200px;">
     <div class="container-fluid">
 
-
-        <!--PC-->
-        <div class="d-none d-md-block   anm_top_s01">
-            <a class="navbar-brand" href="{{ route('home')}} ">
-                <img src="{{asset('storage/site/image/logo_lg.png')}}" alt="サイトロゴ" style="height:3rem;">
+        <h1 class="m-0 d-flex align-items-center">
+            <!--PC-->
+            <a class="navbar-brand d-none d-md-block  anm_top_s01"
+            href="{{ route('home')}} ">
+                <img src="{{asset('storage/site/image/logo_lg.png')}}" alt="もんだいDIY - mondai DIY - オリジナル問題集が自由に作れる！無料の問題作成ツール"  style="height:3rem;">
             </a>
-        </div>
-        <!--movile-->
-        <div class="d-md-none   anm_top_s01">
-            <a class="navbar-brand" href="{{ route('home')}} ">
-                <img src="{{asset('storage/site/image/logo_lg.png')}}" alt="サイトロゴ" style="width:3rem;">
+            <!--movile-->
+            <a class="navbar-brand d-md-none  anm_top_s01" href="{{ route('home')}} ">
+                <img src="{{asset('storage/site/image/logo_lg.png')}}" alt="もんだいDIY - mondai DIY - オリジナル問題集が自由に作れる！無料の問題作成ツール"  style="height:2rem;">
             </a>
-        </div>
+        </h1>
 
 
 

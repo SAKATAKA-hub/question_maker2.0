@@ -12,6 +12,8 @@
         props: {
 
             text:{ type: String, default: 'test', }, //
+            replace_url:{ type: String, default: '1', }, //
+
 
         },
         data : function() {
@@ -31,33 +33,12 @@
 
 
                 //[リンクタグへの変換]
-
-                    // ターゲットキー
-                    const targetKey = this.getRandomStr(16);
-
-                    // URL正規表現
-                    var regex = /(https?|http)(:\/\/[\w\/:%#\$&\?\(\)~\.=\+\-]+)/g; //
-                    let result = body.match(regex) || [] ;
-
-                    // ターゲットに印をつける
-                    let array = [];
-                    for (let index = 0; index < result.length; index++) {
-                        const target  = result[index];
-                        const replace =`{{${targetKey}${ index }}}`;
-                        body = body.replace( target, replace);
-                    }
-
-                    // リンクタグに差替え
-                    for (let index = 0; index < result.length; index++) {
-                        const url     = result[index];
-                        const target  = `{{${targetKey}${ index }}}`;
-                        const replace =`<a href="${ url }" class="text-break">${ url }</a>`;
-                        body = body.replace( target, replace);
-
+                    if(this.replace_url==1){
+                        body = this.replaceUrl( body );
                     }
 
                 //[改行の変換]
-                body = body.replace(/\r?\n/g, '<br>');
+                    body = body.replace(/\r?\n/g, '<br>');
 
                 return body;
             },
@@ -73,11 +54,41 @@
                 .replace(/'/g, "&#x27;");
             },
 
+            //[リンクタグへの変換]
+            replaceUrl: function(string){
+
+                // ターゲットキー
+                const targetKey = this.getRandomStr(16);
+
+                // URL正規表現
+                var regex = /(https?|http)(:\/\/[\w\/:%#\$&\?\(\)~\.=\+\-]+)/g; //
+                let result = string.match(regex) || [] ;
+
+                // ターゲットに印をつける
+                let array = [];
+                for (let index = 0; index < result.length; index++) {
+                    const target  = result[index];
+                    const replace =`{{${targetKey}${ index }}}`;
+                    string = string.replace( target, replace);
+                }
+
+                // リンクタグに差替え
+                for (let index = 0; index < result.length; index++) {
+                    const url     = result[index];
+                    const target  = `{{${targetKey}${ index }}}`;
+                    const replace =`<a href="${ url }" class="text-break">${ url }</a>`;
+                    string = string.replace( target, replace);
+                }
+
+
+                return string;
+            },
 
 
 
             /* ランダム文字列の生成 */
             getRandomStr: function (LENGTH = 16){
+
 
                 const SOURCE = "abcdefghijklmnopqrstuvwxyz0123456789" //元になる文字
                 let result = ''

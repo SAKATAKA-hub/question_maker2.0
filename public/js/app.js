@@ -5314,6 +5314,83 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/EncodedTextareaComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/EncodedTextareaComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    //最初に表示する画像のパス
+    style_class: {
+      type: String,
+      "default": 'form-control'
+    },
+    placeholder: {
+      type: String,
+      "default": ''
+    },
+    name: {
+      type: String,
+      "default": ''
+    },
+    id: {
+      type: String,
+      "default": ''
+    },
+    rows: {
+      type: String,
+      "default": '6'
+    },
+    default_body: {
+      type: String,
+      "default": ''
+    }
+  },
+  data: function data() {
+    return {
+      body: ''
+    };
+  },
+  mounted: function mounted() {
+    this.body = this.default_body;
+    this.change();
+  },
+  methods: {
+    /* 文字列のエスケープ処理 */
+    escapeHTML: function escapeHTML(string) {
+      return string.replace(/&/g, '&lt;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, "&#x27;");
+    },
+    urlEncoded: function urlEncoded() {
+      return encodeURIComponent(this.body);
+    },
+    change: function change() {
+      console.log(this.body);
+      console.log(this.escapeHTML(this.body));
+      console.log(encodeURIComponent(this.body));
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/ReplaceTextComponent.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/ReplaceTextComponent.vue?vue&type=script&lang=js& ***!
@@ -5340,6 +5417,11 @@ __webpack_require__.r(__webpack_exports__);
     text: {
       type: String,
       "default": 'test'
+    },
+    //
+    replace_url: {
+      type: String,
+      "default": '1'
     } //
 
   },
@@ -5353,31 +5435,9 @@ __webpack_require__.r(__webpack_exports__);
     replaceBody: function replaceBody(body) {
       //[文字列のエスケープ処理]
       body = this.escapeHTML(body); //[リンクタグへの変換]
-      // ターゲットキー
 
-      var targetKey = this.getRandomStr(16); // URL正規表現
-
-      var regex = /(https?|http)(:\/\/[\w\/:%#\$&\?\(\)~\.=\+\-]+)/g; //
-
-      var result = body.match(regex) || []; // ターゲットに印をつける
-
-      var array = [];
-
-      for (var index = 0; index < result.length; index++) {
-        var target = result[index];
-        var replace = "{{".concat(targetKey).concat(index, "}}");
-        body = body.replace(target, replace);
-      } // リンクタグに差替え
-
-
-      for (var _index = 0; _index < result.length; _index++) {
-        var url = result[_index];
-
-        var _target = "{{".concat(targetKey).concat(_index, "}}");
-
-        var _replace = "<a href=\"".concat(url, "\" class=\"text-break\">").concat(url, "</a>");
-
-        body = body.replace(_target, _replace);
+      if (this.replace_url == 1) {
+        body = this.replaceUrl(body);
       } //[改行の変換]
 
 
@@ -5388,6 +5448,36 @@ __webpack_require__.r(__webpack_exports__);
     /* 文字列のエスケープ処理 */
     escapeHTML: function escapeHTML(string) {
       return string.replace(/&/g, '&lt;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, "&#x27;");
+    },
+    //[リンクタグへの変換]
+    replaceUrl: function replaceUrl(string) {
+      // ターゲットキー
+      var targetKey = this.getRandomStr(16); // URL正規表現
+
+      var regex = /(https?|http)(:\/\/[\w\/:%#\$&\?\(\)~\.=\+\-]+)/g; //
+
+      var result = string.match(regex) || []; // ターゲットに印をつける
+
+      var array = [];
+
+      for (var index = 0; index < result.length; index++) {
+        var target = result[index];
+        var replace = "{{".concat(targetKey).concat(index, "}}");
+        string = string.replace(target, replace);
+      } // リンクタグに差替え
+
+
+      for (var _index = 0; _index < result.length; _index++) {
+        var url = result[_index];
+
+        var _target = "{{".concat(targetKey).concat(_index, "}}");
+
+        var _replace = "<a href=\"".concat(url, "\" class=\"text-break\">").concat(url, "</a>");
+
+        string = string.replace(_target, _replace);
+      }
+
+      return string;
     },
 
     /* ランダム文字列の生成 */
@@ -7125,6 +7215,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -10741,6 +10837,9 @@ Vue.component('replace-text-component', (__webpack_require__(/*! ./components/It
 /* 文章の省略表示（改行・リンクタグ対応） */
 
 Vue.component('short-text-component', (__webpack_require__(/*! ./components/Items/ShortTextComponent.vue */ "./resources/js/components/Items/ShortTextComponent.vue")["default"]));
+/* エスケープテ　キストボックス*/
+
+Vue.component('encodedーtextarea-component', (__webpack_require__(/*! ./components/Items/EncodedTextareaComponent.vue */ "./resources/js/components/Items/EncodedTextareaComponent.vue")["default"]));
 /* 認証 */
 
 Vue.component('reset-pass-component', (__webpack_require__(/*! ./components/UserAuth/ResetPassComponent.vue */ "./resources/js/components/UserAuth/ResetPassComponent.vue")["default"]));
@@ -33915,6 +34014,45 @@ component.options.__file = "resources/js/components/ExampleComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/Items/EncodedTextareaComponent.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/Items/EncodedTextareaComponent.vue ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _EncodedTextareaComponent_vue_vue_type_template_id_1ebd1a2f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EncodedTextareaComponent.vue?vue&type=template&id=1ebd1a2f& */ "./resources/js/components/Items/EncodedTextareaComponent.vue?vue&type=template&id=1ebd1a2f&");
+/* harmony import */ var _EncodedTextareaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EncodedTextareaComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/Items/EncodedTextareaComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _EncodedTextareaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EncodedTextareaComponent_vue_vue_type_template_id_1ebd1a2f___WEBPACK_IMPORTED_MODULE_0__.render,
+  _EncodedTextareaComponent_vue_vue_type_template_id_1ebd1a2f___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Items/EncodedTextareaComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Items/ReplaceTextComponent.vue":
 /*!****************************************************************!*\
   !*** ./resources/js/components/Items/ReplaceTextComponent.vue ***!
@@ -35033,6 +35171,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Items/EncodedTextareaComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/Items/EncodedTextareaComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EncodedTextareaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EncodedTextareaComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/EncodedTextareaComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EncodedTextareaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Items/ReplaceTextComponent.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************!*\
   !*** ./resources/js/components/Items/ReplaceTextComponent.vue?vue&type=script&lang=js& ***!
@@ -35563,6 +35717,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Items/EncodedTextareaComponent.vue?vue&type=template&id=1ebd1a2f&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/Items/EncodedTextareaComponent.vue?vue&type=template&id=1ebd1a2f& ***!
+  \***************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EncodedTextareaComponent_vue_vue_type_template_id_1ebd1a2f___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EncodedTextareaComponent_vue_vue_type_template_id_1ebd1a2f___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EncodedTextareaComponent_vue_vue_type_template_id_1ebd1a2f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EncodedTextareaComponent.vue?vue&type=template&id=1ebd1a2f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/EncodedTextareaComponent.vue?vue&type=template&id=1ebd1a2f&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Items/ReplaceTextComponent.vue?vue&type=template&id=5f3f4794&":
 /*!***********************************************************************************************!*\
   !*** ./resources/js/components/Items/ReplaceTextComponent.vue?vue&type=template&id=5f3f4794& ***!
@@ -36073,6 +36244,63 @@ var render = function () {
         ]),
       ]),
     ]),
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/EncodedTextareaComponent.vue?vue&type=template&id=1ebd1a2f&":
+/*!******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/EncodedTextareaComponent.vue?vue&type=template&id=1ebd1a2f& ***!
+  \******************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("textarea", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.body,
+          expression: "body",
+        },
+      ],
+      class: _vm.style_class,
+      attrs: {
+        id: _vm.id,
+        rows: _vm.rows,
+        placeholder: "自己紹介の文章を入力しましょう！",
+      },
+      domProps: { value: _vm.body },
+      on: {
+        change: _vm.change,
+        input: function ($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.body = $event.target.value
+        },
+      },
+    }),
+    _vm._v(" "),
+    _c("input", {
+      attrs: { type: "hidden", name: _vm.name },
+      domProps: { value: _vm.urlEncoded(_vm.body) },
+    }),
   ])
 }
 var staticRenderFns = []
@@ -38332,14 +38560,19 @@ var render = function () {
                               _vm._v("問題" + _vm._s(q_num + 1)),
                             ]),
                             _vm._v(" "),
-                            _c("p", {
-                              staticClass: "bg-light p-3",
-                              domProps: {
-                                innerHTML: _vm._s(
-                                  question.text.replace(/\r?\n/g, "<br>")
-                                ),
-                              },
-                            }),
+                            _c(
+                              "p",
+                              { staticClass: "bg-light p-3" },
+                              [
+                                _c("replace-text-component", {
+                                  attrs: {
+                                    text: question.text,
+                                    replace_url: "0",
+                                  },
+                                }),
+                              ],
+                              1
+                            ),
                             _vm._v(" "),
                             question.image
                               ? _c(
@@ -38458,12 +38691,17 @@ var render = function () {
                                                       },
                                                     },
                                                     [
-                                                      _vm._v(
-                                                        _vm._s(
-                                                          option_answer_text
-                                                        )
+                                                      _c(
+                                                        "replace-text-component",
+                                                        {
+                                                          attrs: {
+                                                            text: option_answer_text,
+                                                            replace_url: "0",
+                                                          },
+                                                        }
                                                       ),
-                                                    ]
+                                                    ],
+                                                    1
                                                   ),
                                                 ]
                                               ),
@@ -38530,12 +38768,17 @@ var render = function () {
                                                       },
                                                     },
                                                     [
-                                                      _vm._v(
-                                                        _vm._s(
-                                                          option_answer_text
-                                                        )
+                                                      _c(
+                                                        "replace-text-component",
+                                                        {
+                                                          attrs: {
+                                                            text: option_answer_text,
+                                                            replace_url: "0",
+                                                          },
+                                                        }
                                                       ),
-                                                    ]
+                                                    ],
+                                                    1
                                                   ),
                                                 ]
                                               ),

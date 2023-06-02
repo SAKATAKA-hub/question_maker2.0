@@ -34,10 +34,17 @@ class PlayQuestionController extends Controller
         ->limit(5)->get();
 
 
+        $title = <<<__
+        もんだいDIY - mondai DIY - オリジナル問題集が自由に作れる！無料の問題作成ツール
+        __;
+
+        $description = <<<__
+        誰でも簡単な操作で、自分の好きな問題集を作れる！作成した問題を簡単に出題できる！作成した問題をシェアできるから、ブログやSNSにも最適。eラーニング/試験勉強/クイズ/テスト対策/クイズなどに最適！『もんだいDIY』は、問題を「作る」「答える」「出題する」ツールを揃えた、問題作成ツールです。
+        __;
 
         # ページの表示
         return view('home', compact(
-            'popular_question_groups','new_question_groups',
+            'popular_question_groups','new_question_groups','title','description',
         ));
     }
 

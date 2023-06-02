@@ -21,15 +21,18 @@ class SettingsController extends Controller
     # プロフィールの変更(update_user_profile)
     public function update_user_profile(Request $request)
     {
+        # 入力情報のデコード処理
+        $request->profile = urldecode($request->profile);
+
+
 
         $user = \Illuminate\Support\Facades\Auth::user();
-
 
         # 画像のアップロード
 
             /* 基本設定 */
             $dir = 'upload/user/image/'; //保存先ディレクトリ
-            $input_file_name = 'image';             //インプットファイルのname
+            $input_file_name = 'image';  //インプットファイルのname
             $old_image_path = $user->image;
             $image_path = null;
             $delete = $request->image_dalete;

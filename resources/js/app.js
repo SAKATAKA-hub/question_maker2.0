@@ -50,6 +50,8 @@ Vue.component('url-input-copy-component', require('./components/Items/UrlInputCo
 Vue.component('replace-text-component',  require('./components/Items/ReplaceTextComponent.vue').default);
 /* 文章の省略表示（改行・リンクタグ対応） */
 Vue.component('short-text-component',  require('./components/Items/ShortTextComponent.vue').default);
+/* エスケープテ　キストボックス*/
+Vue.component('encodedーtextarea-component',  require('./components/Items/EncodedTextareaComponent.vue').default);
 
 
 /* 認証 */

@@ -65,8 +65,10 @@
                             <div class="card-body">
 
                                 <h5 class="fw-bold">問題{{q_num+1}}</h5>
-                                <p class="bg-light p-3" v-html="question.text.replace(/\r?\n/g, '<br>')"></p>
-
+                                <!-- <p class="bg-light p-3" v-html="question.text.replace(/\r?\n/g, '<br>')"></p> -->
+                                <p class="bg-light p-3">
+                                    <replace-text-component :text="question.text" replace_url="0"></replace-text-component>
+                                </p>
 
                                 <!-- 問題画像 -->
                                 <div v-if="question.image"
@@ -105,8 +107,10 @@
                                                     <input type="radio" class="btn-check"
                                                     :name="'answer_'+q_num" :id="'answer_'+q_num +o_num" :value="option_answer_text"
                                                     >
-                                                    <label class="btn btn-outline-success btn-select-ans text-start w-100" :for="'answer_'+q_num +o_num"
-                                                    >{{option_answer_text}}</label>
+                                                    <label class="btn btn-outline-success btn-select-ans text-start w-100"
+                                                    :for="'answer_'+q_num +o_num">
+                                                        <replace-text-component :text="option_answer_text" replace_url="0" ></replace-text-component>
+                                                    </label>
                                                 </div>
 
                                             </li>
@@ -123,8 +127,10 @@
                                                     <input type="checkbox" class="btn-check"
                                                     :name="'answer_'+q_num+'[]'" :id="'answer_'+q_num +o_num" :value="option_answer_text"
                                                     >
-                                                    <label class="btn btn-outline-success btn-select-ans text-start w-100" :for="'answer_'+q_num +o_num"
-                                                    >{{option_answer_text}}</label>
+                                                    <label class="btn btn-outline-success btn-select-ans text-start w-100"
+                                                    :for="'answer_'+q_num +o_num">
+                                                        <replace-text-component :text="option_answer_text" replace_url="0" ></replace-text-component>
+                                                    </label>
                                                 </div>
 
                                             </li>

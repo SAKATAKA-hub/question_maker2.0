@@ -7,7 +7,6 @@
      *  フェードインアニメーション
      * ==============================
     */
-    // Windowの高さ
 
     // アニメーション対象クラスと、追加クラス
     const animation_class =[
@@ -97,12 +96,12 @@
 
         // アニメーション実行関数
         window.setTimeout( playAnimations, 2000 );
-
     });
 
 
     // Loadingのフェードアウト実行
     const splashFadeOut = function(){
+
 
         // フェードアウトアニメーション
         const target_class = '.'+'fadeUOut';
