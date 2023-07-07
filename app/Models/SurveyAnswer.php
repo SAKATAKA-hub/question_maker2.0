@@ -57,9 +57,15 @@ class SurveyAnswer extends Model
          */
         public function getStorageValueAttribute()
         {
-            // パスから改行を取り除く
-            $path = str_replace(["\r\n", "\r", "\n"], '', $this->value);
+            $text = $this->value;
+            $path = $this->value;
 
+            //余計な記号をを除去
+            preg_match_all('/[a-zA-Z0-9\/._-]+/', $path, $matches);
+            $path = implode('', $matches[0]);
+
+            // パスから改行を取り除く
+            $path = str_replace(["\r\n", "\r", "\n", "\t","\v"], '', $path);
 
             return \Illuminate\Support\Facades\Storage::exists($path) ?
             \Illuminate\Support\Facades\Storage::get($this->value) : $this->value;

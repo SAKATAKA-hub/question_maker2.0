@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 /**
  * ----------------------------------
- *  アンケート　コントローラー
+ *  Admin アンケート　コントローラー
  * ----------------------------------
 */
 class AdminSurveyController extends Controller

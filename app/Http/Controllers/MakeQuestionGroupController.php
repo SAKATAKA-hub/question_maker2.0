@@ -18,6 +18,7 @@ class MakeQuestionGroupController extends Controller
     */
     public function list()
     {
+
         # ユーザー情報
         $user = Auth::user();
 
@@ -25,7 +26,6 @@ class MakeQuestionGroupController extends Controller
         $question_groups = \App\Models\QuestionGroup::where('user_id',$user->id)
         ->orderBy('created_at','desc')
         ->paginate(10);
-
 
         # ページの表示
         return view('MakeQuestionGroup.list', compact('question_groups'));
@@ -118,6 +118,11 @@ class MakeQuestionGroupController extends Controller
     */
     public function select_edit(\App\Models\QuestionGroup $question_group, $tab_menu='tab01')
     {
+
+        // dd($question_group->questions[0]->text_text);
+
+
+
         return view('MakeQuestionGroup.select_edit', compact(
             'question_group','tab_menu'
         ) );

@@ -1,6 +1,13 @@
 <template>
-<div>
     <div class="">
+        <form :action="api_route" v-if="test" method="POST">
+            <input v-for="( value, name) in  {  _token: token, question_id: question_id, }" :key="name"
+            type="hidden" :name="name" :value="value">
+            <button class="btn btn-danger">テスト</button>
+        </form>
+
+
+
         <label>
             <span class="form-check-label fs-5 mb-2 fw-bold">正解と解答方法</span>
             <span class="badge bg-danger" style="transform:translateY(-3px);">1つ以上必須</span>
@@ -62,10 +69,11 @@
 
                     <!--[ 選択肢テキストの入力 ]-->
                     <!-- <input type="text" name="answer_texts[]" class="form-control" maxlength="140"
-                    v-model="options[0].answer_text" required> -->
-                    <input type="text" name="answer_texts[]" class="form-control" maxlength="140"
-                    v-model="answer_text" required>
-
+                    v-model="answer_text" required> -->
+                    <encodedーinputtext-component
+                    id="text" name="answer_texts[]" style_class="form-control" maxlength="140"
+                    :default_body="answer_text" required="1"
+                    ></encodedーinputtext-component>
 
                 </div>
 
@@ -73,9 +81,6 @@
             </div>
             <div v-if="answer_type == 1">
 
-
-                <!-- 最初のinput(key==0)は正解 -->
-                <!-- <input name="answer_booleans[]" type="hidden" value="0"> -->
 
                 ひとつの答えを選ぶ （140文字以内）
                 <div class="input-group mb-2" v-for="(option, key) in options" :key="key">
@@ -101,8 +106,10 @@
 
 
                     <!--[ 選択肢テキストの入力 ]-->
-                    <input type="text" name="answer_texts[]" class="form-control" maxlength="140"
-                    v-model="option.answer_text" :required="option.only">
+                    <encodedーinputtext-component
+                    id="text" name="answer_texts[]" style_class="form-control" maxlength="140"
+                    :default_body="option.answer_text" :required="option.only?1:0"
+                    ></encodedーinputtext-component>
 
 
                     <!--[ 削除ボタン ]-->
@@ -150,8 +157,10 @@
 
 
                     <!--[ 選択肢テキストの入力 ]-->
-                    <input type="text" name="answer_texts[]" class="form-control" maxlength="140"
-                    v-model="option.answer_text" :required="option.only">
+                    <encodedーinputtext-component
+                    id="text" name="answer_texts[]" style_class="form-control" maxlength="140"
+                    :default_body="option.answer_text" :required="option.only?1:0"
+                    ></encodedーinputtext-component>
 
 
                     <!--[ 削除ボタン ]-->
@@ -171,9 +180,6 @@
 
         </div>
     </div>
-
-
-</div>
 </template>
 
 <script>
@@ -181,6 +187,7 @@
         data : function() {
             return{
 
+                test: false,
                 /*
                 |  解答方法(anser_type) ------
                 |  0: テキストで答えを入力する
@@ -218,7 +225,6 @@
             // propsのデータを利用(解答方法)
             this.answer_type = this.answer_type_num;
 
-
             // 編集の時、問題の選択肢データを取得
             if( this.question_id ){
 
@@ -244,8 +250,6 @@
 
                     /* 正解IDデータのコピー */
                     this.answer_booleans = json.answer_booleans;
-
-
 
                     // ラジオボタンの更新
                     this.refreshRadiioChack();
@@ -278,18 +282,25 @@
             addInput: function(){
 
                 this.options.push( { answer_boolean: false, answer_text: '', only: false, button_text: '不正解'} );
+                console.log( this.options );
 
             },
 
             /* 削除ボタン */
             deleteInput: function(key){
 
+                //削除
+                const options_array = [];
+                for (let index = 0; index < this.options.length; index++) {
+                    if(index==key){ continue; }
+                    options_array.push( this.options[ index ] );
+                }
+                this.options = options_array;
+                console.log(this.options);
+
+
                 //answer_booleansの修正処理
                 if(this.answer_radio > key){ this.answer_radio -= 1; }
-
-
-                //optionsの削除処理
-                this.options.splice(key,1);
 
                 //answer_booleansの削除処理
                 const array = [];

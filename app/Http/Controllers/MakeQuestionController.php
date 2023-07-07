@@ -31,6 +31,31 @@ class MakeQuestionController extends Controller
     */
     public function store(Request $request, \App\Models\QuestionGroup $question_group)
     {
+        # 入力情報のデコード処理
+            // dd( $request->all() );
+            $inputs = [
+                "order"           => $request->order,
+                "text"            => $request->text,
+                "answer_type"     => $request->answer_type,
+                "answer_booleans" => $request->answer_booleans,
+                "option_ids"      => $request->option_ids,
+                "answer_texts"    => $request->answer_texts,
+                "image_dalete"    => $request->image_dalete,
+                "commentary_image_dalete" => $request->commentary_image_dalete,
+                "commentary_text" => $request->commentary_text,
+            ];
+
+            $request->text = urldecode($request->text);
+            $request->commentary_text = urldecode($request->commentary_text);
+            $answer_texts = $request->answer_texts;
+            for ($i=0; $i < count( $answer_texts ); $i++) {
+                $answer_texts[$i] = urldecode( $answer_texts[$i] );
+            }
+            $request->answer_texts = $answer_texts;
+
+
+        // dd( $request->text );
+
 
         # 画像のアップロード
 
@@ -174,8 +199,6 @@ class MakeQuestionController extends Controller
     */
     public function question_options_api( Request $request )
     {
-
-        // dd( $request->all());
         /*
             送信データ形式
             options: [
@@ -223,12 +246,20 @@ class MakeQuestionController extends Controller
     */
     public function update( Request $request, \App\Models\Question $question )
     {
+        # 入力情報のデコード処理
+
+            $request->text = urldecode($request->text);
+            $request->commentary_text = urldecode($request->commentary_text);
+            $answer_texts = $request->answer_texts;
+            for ($i=0; $i < count( $answer_texts ); $i++) {
+                $answer_texts[$i] = urldecode( $answer_texts[$i] );
+            }
+            $request->answer_texts = $answer_texts;
+
 
         # 問題集データ
         $question_group = $question->question_group;
 
-
-        // dd($question_group);
 
         # 画像のアップロード
 

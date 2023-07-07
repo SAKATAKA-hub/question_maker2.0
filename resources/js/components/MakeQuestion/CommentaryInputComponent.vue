@@ -22,8 +22,14 @@
                 <label for="commentary_text" class="form-check-label mb-2 fw-bold">
                     解説文 <span class="badge bg-danger" style="transform:translateY(-3px);">必須</span>
                 </label>
-                <textarea name="commentary_text" class="form-control h-100" id="commentary_text"
-                placeholder="問題の解説文を入力してください。" required v-model="inputs.text"></textarea>
+                <!-- <textarea name="commentary_text" class="form-control h-100" id="commentary_text"
+                placeholder="問題の解説文を入力してください。" required v-model="inputs.text"></textarea> -->
+                <encodedーtextarea-component
+                id="commentary_text" name="commentary_text" style_class="form-control" rows="10"
+                placeholder="問題の解説文を入力してください。"
+                :default_body="inputs.text" :required="1"
+                ></encodedーtextarea-component>
+
 
             </div>
         </div>

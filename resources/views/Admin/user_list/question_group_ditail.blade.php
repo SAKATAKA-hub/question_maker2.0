@@ -1,4 +1,4 @@
-@extends('layouts.base_02col')
+@extends('layouts.base_02col_createruser')
 
 
 <!----- title ----->
@@ -6,11 +6,14 @@
 
 <!----- breadcrumb ----->
 @section('breadcrumb')
-<li class="breadcrumb-item"><a href="{{route('mypage')}}" class="text-success">
-    マイページ
+<li class="breadcrumb-item"><a href="{{route('admin.top')}}" class="text-success">
+    管理者画面
 </a></li>
-<li class="breadcrumb-item"><a href="{{route('make_question_group.list')}}" class="text-success">
-    作成した問題集
+<li class="breadcrumb-item"><a href="{{route('admin.user_list')}}" class="text-success">
+    登録ユーザー一覧
+</a></li>
+<li class="breadcrumb-item"><a href="{{route('admin.user_list.question_groups',$user)}}" class="text-success">
+    {{  $user->name.'さんの問題集一覧' }}
 </a></li>
 <li class="breadcrumb-item" aria-current="page">
    {{'『'.$question_group->title.'』詳細情報'}}
@@ -327,7 +330,6 @@
                                                     <replace-text-component
                                                     text="{{ $question->text_text }}" replace_url="0"
                                                     ></replace-text-component>
-
                                                 </div>
                                             </div>
 
@@ -549,10 +551,7 @@
                                                 <div class="d-flex align-items-center h-100">
                                                     <!--[フォロワー名前]-->
                                                     <h5 class="mb-0">
-                                                        {{-- @php $param = [ 'answer_group'=>$answer_group, 'key'=>$answer_group->user->key ]; @endphp
-                                                        <a href="{{route('results.detail', $param )}}" class="text-decoration-none text-success"> --}}
                                                             {{$answer_group->user->name}}
-                                                        {{-- </a> --}}
                                                     </h5>
                                                 </div>
                                             </div>
@@ -603,11 +602,11 @@
 
 
     <!-- 問題追加ボタン -->
-    <a id="addQuestion" href="{{route('make_question.create',$question_group)}}" class="d-block text-decoration-none">
+    {{-- <a id="addQuestion" href="{{route('make_question.create',$question_group)}}" class="d-block text-decoration-none">
         <div class="icon text-white bg-info shadow">
             <i class="bi bi-plus"></i>
         </div>
         <div class="text-secondary text-center w-100">問題の追加</div>
-    </a>
+    </a> --}}
 
 @endsection

@@ -37,6 +37,8 @@
     <div class="container-600 my-5">
 
         <div class="list-group">
+            <a href="{{(route('admin.user_list'))}}" class="list-group-item list-group-item-action"
+            > > 登録ユーザー一覧</a>
             <a href="{{(route('admin.info_mail.form'))}}" class="list-group-item list-group-item-action"
             > > お知らせメール手動送信</a>
             <a href="{{route('admin.survey')}}" class="list-group-item list-group-item-action"

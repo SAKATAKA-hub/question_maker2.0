@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <textarea :class="style_class" :required="required!=0?true:false"
-        :id="id" :rows="rows"  v-model="body" :placeholder="placeholder"
-        ></textarea>
+    <div class="col">
+        <input type="text" :class="style_class" class="h-100"
+        :id="id"  v-model="body" :placeholder="placeholder" :required="required!=0?true:false"
+        >
 
         <input type="hidden" :name="name" :value="urlEncoded(body)">
     </div>
@@ -16,10 +16,11 @@
             placeholder: { type: String, default: '', },
             name:        { type: String, default: '', },
             id:          { type: String, default: '', },
-            rows:        { type: String, default: '6', },
+            maxlength:   { type: String, default: '140', },
             default_body:{ type: String, default: '', },
             required:    { type: [String,Number], default: 0, },
         },
+
         data : function() {
             return{
                 body : '',
@@ -34,6 +35,7 @@
                 deep:true
             },
         },
+
         mounted() {
 
             this.body = this.default_body;

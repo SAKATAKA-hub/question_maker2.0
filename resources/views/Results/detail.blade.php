@@ -14,9 +14,9 @@
 
 <!----- meta ----->
 @section('meta')
-<meta name="csrf_token"                  content="{{ csrf_token() }}">
-<meta name="company_key" content="{{ env('COMPANY_KEY') }}">
-<meta name="question_group_id"           content="{{ $question_group->id }}">
+<meta name="csrf_token"              content="{{ csrf_token() }}">
+<meta name="company_key"             content="{{ env('COMPANY_KEY') }}">
+<meta name="question_group_id"       content="{{ $question_group->id }}">
 <meta name="route_get_questions_api" content="{{ route('get_questions_api') }}">
 <meta name="route_scoring"           content="{{ route('scoring') }}">
 @endsection

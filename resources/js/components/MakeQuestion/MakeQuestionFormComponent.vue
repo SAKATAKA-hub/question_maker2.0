@@ -32,8 +32,16 @@
                     <span class="badge bg-danger" style="transform:translateY(-3px);">必須</span>
                 </label>
 
-                <textarea name="text" class="form-control" id="text" rows="8" placeholder="問題文を入力してください。"
-                v-model="inputs.text" required></textarea>
+
+                <!-- <textarea name="text" class="form-control" id="text" rows="8" placeholder="問題文を入力してください。"
+                v-model="inputs.text" required></textarea> -->
+
+                <encodedーtextarea-component
+                id="text" name="text" style_class="form-control" rows="10"
+                placeholder="問題文を入力してください。"
+                :default_body="inputs.text" :required="1"
+                ></encodedーtextarea-component>
+
             </div>
 
 
@@ -106,7 +114,7 @@
 
                 question: {count:0 , num:0,},
                 inputs:{
-                    text: '',
+                    // text: '',
                 },
             }
         },

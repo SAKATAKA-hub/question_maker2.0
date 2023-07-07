@@ -8,7 +8,6 @@ Route::get('/', [Controllers\PlayQuestionController::class, 'list'])
 ->name('home');
 
 
-
 /*
 |--------------------------------------------------------------------------
 | 問題集を解く　処理　PlayQuestionController
@@ -382,17 +381,18 @@ Route::get('/', [Controllers\PlayQuestionController::class, 'list'])
 
     /* google ユーザー認証 */
 
-
         # テスト
         Route::get('/user_auth/google', function(){ return view('test.sns_auth'); })
         ->name('user_auth.google');
 
         # Googleログインページリダイレクト(google_redirect)
-        Route::get('/user_auth/google/redirect', [ \App\Http\Controllers\UserSnsAuthController::class, 'google_redirect'])
+        Route::get('/user_auth/google/redirect',
+        [ \App\Http\Controllers\UserSnsAuthController::class, 'google_redirect'])
         ->name('user_auth.google.redirect');
 
         # Googleログイン処理(google_callback)
-        Route::get('/user_auth/google/callback', [ \App\Http\Controllers\UserSnsAuthController::class, 'google_callback'])
+        Route::get('/user_auth/google/callback',
+        [ \App\Http\Controllers\UserSnsAuthController::class, 'google_callback'])
         ->name('user_auth.google.callback');
 
 
@@ -466,6 +466,26 @@ Route::middleware(['admin_auth'])->group(function () {
     # 管理者トップ
     Route::get('/admin', function(){ return view('Admin.top'); })
     ->name('admin.top');
+
+    # 登録会員リスト(user_list)
+    Route::get('admin/user_list',
+    [Controllers\AdminUserLisetController::class, 'list'] )
+    ->name('admin.user_list');
+
+        # 登録会員 問題集リスト(question_groups)
+        Route::get('admin/user_list/{user}/question_groups',
+        [Controllers\AdminUserLisetController::class, 'question_groups'] )
+        ->name('admin.user_list.question_groups');
+
+        # 登録会員 問題集情報(question_group_ditail)
+        Route::get('admin/user_list/{user}/question_group_ditail/{question_group}',
+        [Controllers\AdminUserLisetController::class, 'question_group_ditail'] )
+        ->name('admin.user_list.question_group_ditail');
+
+        # 登録会員 問題集情報(question_group_array)
+        Route::get('admin/user_list/{user}/question_group_ditail/{question_group}/array',
+        [Controllers\AdminUserLisetController::class, 'question_group_array'] )
+        ->name('admin.user_list.question_group_array');
 
 
     # お問い合わせ一覧の表示(contact)

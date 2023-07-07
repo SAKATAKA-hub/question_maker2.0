@@ -24,7 +24,15 @@ class Method
     {
 
         //1. $st_countより多い文字数・ストレージを利用中
-        $file_path = str_replace(["\r\n", "\r", "\n", "\t","\v"], '', $old_text);
+            $file_path = $old_text;
+
+            //余計な記号をを除去
+            preg_match_all('/[a-zA-Z0-9\/._-]+/', $file_path, $matches);
+            $file_path = implode('', $matches[0]);
+
+            // パスから改行を取り除く
+            $file_path = str_replace(["\r\n", "\r", "\n", "\t","\v"], '', $file_path);
+
         if(
             ( mb_strlen( $new_text ) > $st_count ) &&
             Storage::exists( $file_path )
@@ -77,7 +85,16 @@ class Method
      */
     public static function deleteStorageText($text)
     {
-        $file_path = str_replace(["\r\n", "\r", "\n", "\t","\v"], '', $text);
+        $file_path = $text;
+
+        //余計な記号をを除去
+        preg_match_all('/[a-zA-Z0-9\/._-]+/', $file_path, $matches);
+        $file_path = implode('', $matches[0]);
+
+        // パスから改行を取り除く
+        $file_path = str_replace(["\r\n", "\r", "\n", "\t","\v"], '', $file_path);
+
+
         if( Storage::exists( $file_path ) ){ storage::delete( $file_path ); }
     }
 

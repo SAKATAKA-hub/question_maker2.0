@@ -23,8 +23,6 @@ class UserSnsAuthController extends Controller
     public function google_redirect()
     {
         return Socialite::driver('google')->redirect();
-
-        return 'google_redirect';
     }
 
 
@@ -109,31 +107,6 @@ class UserSnsAuthController extends Controller
             return redirect()->route( $route_after_login )
             ->with('alert-success','ログインしました。');
         }
-
-
-
-
-
-
-
-
-
-
-
-        dd($user);
-        return 'google_callback';
-
-        // $user = new \App\Models\User([
-        //     'name'     => 'さかい　たかひろ',
-        //     'email'    => 'aek1214@yahoo.co.jp',
-        //     'password' => Hash::make('password'),
-        //     'image'    => 'site/image/sakai.png',
-        //     'key'      =>\Illuminate\Support\Str::random(40)
-        // ]);
-        // $user->save();
-        // $mail_setting = new  \App\Models\MailSetting([ 'user_id' => $user->id]);
-        // $mail_setting->save();
-
     }
 
 }

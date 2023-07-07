@@ -275,9 +275,15 @@ class User extends Authenticatable
          */
         public function getProfileTextAttribute()
         {
-            // パスから改行を取り除く
             $text = $this->profile;
-            $path = str_replace(["\r\n", "\r", "\n", "\t","\v"], '', $text);
+            $path = $this->profile;
+
+            //余計な記号をを除去
+            preg_match_all('/[a-zA-Z0-9\/._-]+/', $path, $matches);
+            $path = implode('', $matches[0]);
+
+            // パスから改行を取り除く
+            $path = str_replace(["\r\n", "\r", "\n", "\t","\v"], '', $path);
 
             return \Illuminate\Support\Facades\Storage::exists($path) ?
             \Illuminate\Support\Facades\Storage::get($path) : $text;

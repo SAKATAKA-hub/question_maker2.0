@@ -46,7 +46,7 @@ class QuestionGroup extends Model
         # Questionテーブルとのリレーション ※カラムoderの番号順
         public function questions()
         {
-            return $this->hasMany(Question::class)->orderBy('order','asc');
+            return $this->hasMany(Question::class)->orderBy('order','asc')->with('question_options');
         }
 
         # AnswerGroupsテーブルとのリレーション
@@ -89,9 +89,15 @@ class QuestionGroup extends Model
          */
         public function getResumeTextAttribute()
         {
-            // パスから改行を取り除く
             $text = $this->resume;
-            $path = str_replace(["\r\n", "\r", "\n", "\t","\v"], '', $text);
+            $path = $this->resume;
+
+            //余計な記号をを除去
+            preg_match_all('/[a-zA-Z0-9\/._-]+/', $path, $matches);
+            $path = implode('', $matches[0]);
+
+            // パスから改行を取り除く
+            $path = str_replace(["\r\n", "\r", "\n", "\t","\v"], '', $path);
 
             return \Illuminate\Support\Facades\Storage::exists($path) ?
             \Illuminate\Support\Facades\Storage::get($path) : $text;

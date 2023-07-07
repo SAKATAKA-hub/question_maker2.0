@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 /**
  * ----------------------------------
- *  お知らせメール　コントローラー
+ *  Admin お知らせメール　コントローラー
  * ----------------------------------
 */
 class AdminInfoController extends Controller

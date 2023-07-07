@@ -5314,6 +5314,86 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/EncodedInputtextComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/EncodedInputtextComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    //最初に表示する画像のパス
+    style_class: {
+      type: String,
+      "default": 'form-control'
+    },
+    placeholder: {
+      type: String,
+      "default": ''
+    },
+    name: {
+      type: String,
+      "default": ''
+    },
+    id: {
+      type: String,
+      "default": ''
+    },
+    maxlength: {
+      type: String,
+      "default": '140'
+    },
+    default_body: {
+      type: String,
+      "default": ''
+    },
+    required: {
+      type: [String, Number],
+      "default": 0
+    }
+  },
+  data: function data() {
+    return {
+      body: ''
+    };
+  },
+  watch: {
+    //表示中データが変更したとき、
+    default_body: {
+      handler: function handler() {
+        this.body = this.default_body;
+      },
+      deep: true
+    }
+  },
+  mounted: function mounted() {
+    this.body = this.default_body;
+  },
+  methods: {
+    /* 文字列のエンコード処理 */
+    urlEncoded: function urlEncoded() {
+      return encodeURIComponent(this.body);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/EncodedTextareaComponent.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/EncodedTextareaComponent.vue?vue&type=script&lang=js& ***!
@@ -5325,7 +5405,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
 //
 //
 //
@@ -5362,6 +5441,10 @@ __webpack_require__.r(__webpack_exports__);
     default_body: {
       type: String,
       "default": ''
+    },
+    required: {
+      type: [String, Number],
+      "default": 0
     }
   },
   data: function data() {
@@ -5369,22 +5452,22 @@ __webpack_require__.r(__webpack_exports__);
       body: ''
     };
   },
+  watch: {
+    //表示中データが変更したとき、
+    default_body: {
+      handler: function handler() {
+        this.body = this.default_body;
+      },
+      deep: true
+    }
+  },
   mounted: function mounted() {
     this.body = this.default_body;
-    this.change();
   },
   methods: {
-    /* 文字列のエスケープ処理 */
-    escapeHTML: function escapeHTML(string) {
-      return string.replace(/&/g, '&lt;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, "&#x27;");
-    },
+    /* 文字列のエンコード処理 */
     urlEncoded: function urlEncoded() {
       return encodeURIComponent(this.body);
-    },
-    change: function change() {
-      console.log(this.body);
-      console.log(this.escapeHTML(this.body));
-      console.log(encodeURIComponent(this.body));
     }
   }
 });
@@ -5915,6 +5998,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -6067,6 +6156,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -6076,8 +6173,7 @@ __webpack_require__.r(__webpack_exports__);
         count: 0,
         num: 0
       },
-      inputs: {
-        text: ''
+      inputs: {// text: '',
       }
     };
   },
@@ -6722,9 +6818,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      test: false,
+
       /*
       |  解答方法(anser_type) ------
       |  0: テキストで答えを入力する
@@ -6838,22 +6942,34 @@ __webpack_require__.r(__webpack_exports__);
         only: false,
         button_text: '不正解'
       });
+      console.log(this.options);
     },
 
     /* 削除ボタン */
     deleteInput: function deleteInput(key) {
-      //answer_booleansの修正処理
+      //削除
+      var options_array = [];
+
+      for (var index = 0; index < this.options.length; index++) {
+        if (index == key) {
+          continue;
+        }
+
+        options_array.push(this.options[index]);
+      }
+
+      this.options = options_array;
+      console.log(this.options); //answer_booleansの修正処理
+
       if (this.answer_radio > key) {
         this.answer_radio -= 1;
-      } //optionsの削除処理
+      } //answer_booleansの削除処理
 
-
-      this.options.splice(key, 1); //answer_booleansの削除処理
 
       var array = [];
 
-      for (var index = 0; index < this.answer_booleans.length; index++) {
-        var value = this.answer_booleans[index];
+      for (var _index = 0; _index < this.answer_booleans.length; _index++) {
+        var value = this.answer_booleans[_index];
 
         if (value < key) {
           array.push(value);
@@ -10837,9 +10953,12 @@ Vue.component('replace-text-component', (__webpack_require__(/*! ./components/It
 /* 文章の省略表示（改行・リンクタグ対応） */
 
 Vue.component('short-text-component', (__webpack_require__(/*! ./components/Items/ShortTextComponent.vue */ "./resources/js/components/Items/ShortTextComponent.vue")["default"]));
-/* エスケープテ　キストボックス*/
+/* エスケープテキストエリア*/
 
 Vue.component('encodedーtextarea-component', (__webpack_require__(/*! ./components/Items/EncodedTextareaComponent.vue */ "./resources/js/components/Items/EncodedTextareaComponent.vue")["default"]));
+/* エスケープインプットテキスト*/
+
+Vue.component('encodedーinputtext-component', (__webpack_require__(/*! ./components/Items/EncodedInputtextComponent.vue */ "./resources/js/components/Items/EncodedInputtextComponent.vue")["default"]));
 /* 認証 */
 
 Vue.component('reset-pass-component', (__webpack_require__(/*! ./components/UserAuth/ResetPassComponent.vue */ "./resources/js/components/UserAuth/ResetPassComponent.vue")["default"]));
@@ -34014,6 +34133,45 @@ component.options.__file = "resources/js/components/ExampleComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/Items/EncodedInputtextComponent.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/Items/EncodedInputtextComponent.vue ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _EncodedInputtextComponent_vue_vue_type_template_id_188236aa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EncodedInputtextComponent.vue?vue&type=template&id=188236aa& */ "./resources/js/components/Items/EncodedInputtextComponent.vue?vue&type=template&id=188236aa&");
+/* harmony import */ var _EncodedInputtextComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EncodedInputtextComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/Items/EncodedInputtextComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _EncodedInputtextComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EncodedInputtextComponent_vue_vue_type_template_id_188236aa___WEBPACK_IMPORTED_MODULE_0__.render,
+  _EncodedInputtextComponent_vue_vue_type_template_id_188236aa___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Items/EncodedInputtextComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Items/EncodedTextareaComponent.vue":
 /*!********************************************************************!*\
   !*** ./resources/js/components/Items/EncodedTextareaComponent.vue ***!
@@ -35171,6 +35329,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Items/EncodedInputtextComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/Items/EncodedInputtextComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EncodedInputtextComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EncodedInputtextComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/EncodedInputtextComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EncodedInputtextComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Items/EncodedTextareaComponent.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************!*\
   !*** ./resources/js/components/Items/EncodedTextareaComponent.vue?vue&type=script&lang=js& ***!
@@ -35717,6 +35891,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Items/EncodedInputtextComponent.vue?vue&type=template&id=188236aa&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/Items/EncodedInputtextComponent.vue?vue&type=template&id=188236aa& ***!
+  \****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EncodedInputtextComponent_vue_vue_type_template_id_188236aa___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EncodedInputtextComponent_vue_vue_type_template_id_188236aa___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EncodedInputtextComponent_vue_vue_type_template_id_188236aa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EncodedInputtextComponent.vue?vue&type=template&id=188236aa& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/EncodedInputtextComponent.vue?vue&type=template&id=188236aa&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Items/EncodedTextareaComponent.vue?vue&type=template&id=1ebd1a2f&":
 /*!***************************************************************************************************!*\
   !*** ./resources/js/components/Items/EncodedTextareaComponent.vue?vue&type=template&id=1ebd1a2f& ***!
@@ -36253,6 +36444,64 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/EncodedInputtextComponent.vue?vue&type=template&id=188236aa&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/EncodedInputtextComponent.vue?vue&type=template&id=188236aa& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "col" }, [
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.body,
+          expression: "body",
+        },
+      ],
+      staticClass: "h-100",
+      class: _vm.style_class,
+      attrs: {
+        type: "text",
+        id: _vm.id,
+        placeholder: _vm.placeholder,
+        required: _vm.required != 0 ? true : false,
+      },
+      domProps: { value: _vm.body },
+      on: {
+        input: function ($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.body = $event.target.value
+        },
+      },
+    }),
+    _vm._v(" "),
+    _c("input", {
+      attrs: { type: "hidden", name: _vm.name },
+      domProps: { value: _vm.urlEncoded(_vm.body) },
+    }),
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/EncodedTextareaComponent.vue?vue&type=template&id=1ebd1a2f&":
 /*!******************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Items/EncodedTextareaComponent.vue?vue&type=template&id=1ebd1a2f& ***!
@@ -36281,13 +36530,13 @@ var render = function () {
       ],
       class: _vm.style_class,
       attrs: {
+        required: _vm.required != 0 ? true : false,
         id: _vm.id,
         rows: _vm.rows,
-        placeholder: "自己紹介の文章を入力しましょう！",
+        placeholder: _vm.placeholder,
       },
       domProps: { value: _vm.body },
       on: {
-        change: _vm.change,
         input: function ($event) {
           if ($event.target.composing) {
             return
@@ -36802,36 +37051,26 @@ var render = function () {
             1
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-6 pb-3" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("textarea", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.inputs.text,
-                  expression: "inputs.text",
+          _c(
+            "div",
+            { staticClass: "col-md-6 pb-3" },
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("encodedーtextarea-component", {
+                attrs: {
+                  id: "commentary_text",
+                  name: "commentary_text",
+                  style_class: "form-control",
+                  rows: "10",
+                  placeholder: "問題の解説文を入力してください。",
+                  default_body: _vm.inputs.text,
+                  required: 1,
                 },
-              ],
-              staticClass: "form-control h-100",
-              attrs: {
-                name: "commentary_text",
-                id: "commentary_text",
-                placeholder: "問題の解説文を入力してください。",
-                required: "",
-              },
-              domProps: { value: _vm.inputs.text },
-              on: {
-                input: function ($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.inputs, "text", $event.target.value)
-                },
-              },
-            }),
-          ]),
+              }),
+            ],
+            1
+          ),
         ])
       : _vm._e(),
   ])
@@ -36953,34 +37192,19 @@ var render = function () {
           [
             _vm._m(0),
             _vm._v(" "),
-            _c("textarea", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.inputs.text,
-                  expression: "inputs.text",
-                },
-              ],
-              staticClass: "form-control",
+            _c("encodedーtextarea-component", {
               attrs: {
-                name: "text",
                 id: "text",
-                rows: "8",
+                name: "text",
+                style_class: "form-control",
+                rows: "10",
                 placeholder: "問題文を入力してください。",
-                required: "",
-              },
-              domProps: { value: _vm.inputs.text },
-              on: {
-                input: function ($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.inputs, "text", $event.target.value)
-                },
+                default_body: _vm.inputs.text,
+                required: 1,
               },
             }),
-          ]
+          ],
+          1
         ),
         _vm._v(" "),
         _c(
@@ -37732,153 +37956,173 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", {}, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "ms-3 d-flex flex-column flex-md-row gap-3 my-3" },
-        [
-          _c(
-            "label",
-            { staticClass: "card p-2", attrs: { for: "answerType1" } },
-            [
-              _c("div", { staticClass: "form-check w-100" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.answer_type,
-                      expression: "answer_type",
-                    },
-                  ],
-                  staticClass: "form-check-input",
-                  attrs: {
-                    name: "answer_type",
-                    value: "1",
-                    type: "radio",
-                    id: "answerType1",
-                  },
-                  domProps: { checked: _vm._q(_vm.answer_type, "1") },
-                  on: {
-                    change: function ($event) {
-                      _vm.answer_type = "1"
-                    },
-                  },
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "form-check-label fw-bold",
-                    attrs: { for: "answerType1" },
-                  },
-                  [_vm._v("ひとつの答えを選ぶ")]
-                ),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "label",
-            { staticClass: "card p-2", attrs: { for: "answerType2" } },
-            [
-              _c("div", { staticClass: "form-check" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.answer_type,
-                      expression: "answer_type",
-                    },
-                  ],
-                  staticClass: "form-check-input",
-                  attrs: {
-                    name: "answer_type",
-                    value: "2",
-                    type: "radio",
-                    id: "answerType2",
-                  },
-                  domProps: { checked: _vm._q(_vm.answer_type, "2") },
-                  on: {
-                    change: function ($event) {
-                      _vm.answer_type = "2"
-                    },
-                  },
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "form-check-label fw-bold",
-                    attrs: { for: "answerType2" },
-                  },
-                  [_vm._v("複数の答えを選ぶ")]
-                ),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "label",
-            { staticClass: "card p-2", attrs: { for: "answerType0" } },
-            [
-              _c("div", { staticClass: "form-check" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.answer_type,
-                      expression: "answer_type",
-                    },
-                  ],
-                  staticClass: "form-check-input",
-                  attrs: {
-                    name: "answer_type",
-                    value: "0",
-                    type: "radio",
-                    id: "answerType0",
-                  },
-                  domProps: { checked: _vm._q(_vm.answer_type, "0") },
-                  on: {
-                    change: function ($event) {
-                      _vm.answer_type = "0"
-                    },
-                  },
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "form-check-label fw-bold",
-                    attrs: { for: "answerType0" },
-                  },
-                  [_vm._v("テキストで答えを入力する")]
-                ),
-              ]),
-            ]
-          ),
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "ms-3 mb-3" }, [
-        _vm.answer_type == 0
-          ? _c("div", [
+  return _c("div", {}, [
+    _vm.test
+      ? _c(
+          "form",
+          { attrs: { action: _vm.api_route, method: "POST" } },
+          [
+            _vm._l(
+              { _token: _vm.token, question_id: _vm.question_id },
+              function (value, name) {
+                return _c("input", {
+                  key: name,
+                  attrs: { type: "hidden", name: name },
+                  domProps: { value: value },
+                })
+              }
+            ),
+            _vm._v(" "),
+            _c("button", { staticClass: "btn btn-danger" }, [_vm._v("テスト")]),
+          ],
+          2
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "ms-3 d-flex flex-column flex-md-row gap-3 my-3" },
+      [
+        _c(
+          "label",
+          { staticClass: "card p-2", attrs: { for: "answerType1" } },
+          [
+            _c("div", { staticClass: "form-check w-100" }, [
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.answer_type,
+                    expression: "answer_type",
+                  },
+                ],
+                staticClass: "form-check-input",
                 attrs: {
-                  name: "answer_booleans[]",
-                  type: "hidden",
-                  value: "0",
+                  name: "answer_type",
+                  value: "1",
+                  type: "radio",
+                  id: "answerType1",
+                },
+                domProps: { checked: _vm._q(_vm.answer_type, "1") },
+                on: {
+                  change: function ($event) {
+                    _vm.answer_type = "1"
+                  },
                 },
               }),
-              _vm._v(
-                "\n\n                テキストで答えを入力する （140文字以内）\n                "
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label fw-bold",
+                  attrs: { for: "answerType1" },
+                },
+                [_vm._v("ひとつの答えを選ぶ")]
               ),
-              _c("div", { staticClass: "input-group mb-2" }, [
+            ]),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "label",
+          { staticClass: "card p-2", attrs: { for: "answerType2" } },
+          [
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.answer_type,
+                    expression: "answer_type",
+                  },
+                ],
+                staticClass: "form-check-input",
+                attrs: {
+                  name: "answer_type",
+                  value: "2",
+                  type: "radio",
+                  id: "answerType2",
+                },
+                domProps: { checked: _vm._q(_vm.answer_type, "2") },
+                on: {
+                  change: function ($event) {
+                    _vm.answer_type = "2"
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label fw-bold",
+                  attrs: { for: "answerType2" },
+                },
+                [_vm._v("複数の答えを選ぶ")]
+              ),
+            ]),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "label",
+          { staticClass: "card p-2", attrs: { for: "answerType0" } },
+          [
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.answer_type,
+                    expression: "answer_type",
+                  },
+                ],
+                staticClass: "form-check-input",
+                attrs: {
+                  name: "answer_type",
+                  value: "0",
+                  type: "radio",
+                  id: "answerType0",
+                },
+                domProps: { checked: _vm._q(_vm.answer_type, "0") },
+                on: {
+                  change: function ($event) {
+                    _vm.answer_type = "0"
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label fw-bold",
+                  attrs: { for: "answerType0" },
+                },
+                [_vm._v("テキストで答えを入力する")]
+              ),
+            ]),
+          ]
+        ),
+      ]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "ms-3 mb-3" }, [
+      _vm.answer_type == 0
+        ? _c("div", [
+            _c("input", {
+              attrs: { name: "answer_booleans[]", type: "hidden", value: "0" },
+            }),
+            _vm._v(
+              "\n\n            テキストで答えを入力する （140文字以内）\n            "
+            ),
+            _c(
+              "div",
+              { staticClass: "input-group mb-2" },
+              [
                 _vm._m(1),
                 _vm._v(" "),
                 _c("input", {
@@ -37886,351 +38130,301 @@ var render = function () {
                   domProps: { value: _vm.options[0].id },
                 }),
                 _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.answer_text,
-                      expression: "answer_text",
-                    },
-                  ],
-                  staticClass: "form-control",
+                _c("encodedーinputtext-component", {
                   attrs: {
-                    type: "text",
+                    id: "text",
                     name: "answer_texts[]",
+                    style_class: "form-control",
                     maxlength: "140",
-                    required: "",
-                  },
-                  domProps: { value: _vm.answer_text },
-                  on: {
-                    input: function ($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.answer_text = $event.target.value
-                    },
+                    default_body: _vm.answer_text,
+                    required: "1",
                   },
                 }),
-              ]),
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.answer_type == 1
-          ? _c(
-              "div",
-              [
-                _vm._v(
-                  "\n\n                ひとつの答えを選ぶ （140文字以内）\n                "
-                ),
-                _vm._l(_vm.options, function (option, key) {
-                  return _c(
-                    "div",
-                    { key: key, staticClass: "input-group mb-2" },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "input-group-text overflow-hidden p-0" },
-                        [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.answer_radio,
-                                expression: "answer_radio",
-                              },
-                            ],
-                            staticClass: "btn-check",
-                            attrs: {
-                              type: "radio",
-                              name: "answer_booleans[]",
-                              id: "answer_booleans" + key,
-                              autocomplete: "off",
-                            },
-                            domProps: {
-                              value: key,
-                              checked: _vm._q(_vm.answer_radio, key),
-                            },
-                            on: {
-                              change: function ($event) {
-                                _vm.answer_radio = key
-                              },
-                            },
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "label",
+              ],
+              1
+            ),
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.answer_type == 1
+        ? _c(
+            "div",
+            [
+              _vm._v(
+                "\n\n\n            ひとつの答えを選ぶ （140文字以内）\n            "
+              ),
+              _vm._l(_vm.options, function (option, key) {
+                return _c(
+                  "div",
+                  { key: key, staticClass: "input-group mb-2" },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "input-group-text overflow-hidden p-0" },
+                      [
+                        _c("input", {
+                          directives: [
                             {
-                              staticClass:
-                                "btn action-btn btn-outline-info border-0",
-                              staticStyle: { "border-radius": "0" },
-                              attrs: { for: "answer_booleans" + key },
-                              on: {
-                                click: function ($event) {
-                                  return _vm.changeRadioButton(
-                                    _vm.answer_radio,
-                                    key
-                                  )
-                                },
-                              },
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.answer_radio,
+                              expression: "answer_radio",
                             },
-                            [
-                              _vm.answer_radio == key
-                                ? _c("span", [_vm._v("正　解")])
-                                : _c("span", [_vm._v("不正解")]),
-                            ]
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        attrs: { name: "option_ids[]", type: "hidden" },
-                        domProps: { value: option.id },
-                      }),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: option.answer_text,
-                            expression: "option.answer_text",
+                          ],
+                          staticClass: "btn-check",
+                          attrs: {
+                            type: "radio",
+                            name: "answer_booleans[]",
+                            id: "answer_booleans" + key,
+                            autocomplete: "off",
                           },
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          name: "answer_texts[]",
-                          maxlength: "140",
-                          required: option.only,
-                        },
-                        domProps: { value: option.answer_text },
-                        on: {
-                          input: function ($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(option, "answer_text", $event.target.value)
+                          domProps: {
+                            value: key,
+                            checked: _vm._q(_vm.answer_radio, key),
                           },
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "input-group-text" }, [
+                          on: {
+                            change: function ($event) {
+                              _vm.answer_radio = key
+                            },
+                          },
+                        }),
+                        _vm._v(" "),
                         _c(
-                          "a",
+                          "label",
                           {
-                            staticClass: "btn p-0 text-danger",
-                            class: { disabled: _vm.answer_radio == key },
-                            staticStyle: { "text-decoration": "none" },
-                            attrs: { href: "" },
+                            staticClass:
+                              "btn action-btn btn-outline-info border-0",
+                            staticStyle: { "border-radius": "0" },
+                            attrs: { for: "answer_booleans" + key },
                             on: {
                               click: function ($event) {
-                                $event.preventDefault()
-                                return _vm.deleteInput(key)
+                                return _vm.changeRadioButton(
+                                  _vm.answer_radio,
+                                  key
+                                )
                               },
                             },
                           },
-                          [_vm._v("削除")]
+                          [
+                            _vm.answer_radio == key
+                              ? _c("span", [_vm._v("正　解")])
+                              : _c("span", [_vm._v("不正解")]),
+                          ]
                         ),
-                      ]),
-                    ]
-                  )
-                }),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-light border",
-                    attrs: { type: "button" },
-                    on: { click: _vm.addInput },
-                  },
-                  [_vm._v("+ 選択肢の追加")]
-                ),
-              ],
-              2
-            )
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.answer_type == 2
-          ? _c(
-              "div",
-              [
-                _vm.answer_booleans.length < 2
-                  ? _c("div", [
-                      _c("input", {
-                        attrs: { name: "answer_booleans[]", type: "hidden" },
-                        domProps: { value: _vm.answer_booleans[0] },
-                      }),
-                    ])
-                  : _vm._e(),
-                _vm._v(
-                  "\n\n\n                複数の答えを選ぶ （140文字以内）\n                "
-                ),
-                _vm._l(_vm.options, function (option, key) {
-                  return _c(
-                    "div",
-                    { key: key, staticClass: "input-group mb-2" },
-                    [
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { name: "option_ids[]", type: "hidden" },
+                      domProps: { value: option.id },
+                    }),
+                    _vm._v(" "),
+                    _c("encodedーinputtext-component", {
+                      attrs: {
+                        id: "text",
+                        name: "answer_texts[]",
+                        style_class: "form-control",
+                        maxlength: "140",
+                        default_body: option.answer_text,
+                        required: option.only ? 1 : 0,
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "input-group-text" }, [
                       _c(
-                        "div",
+                        "a",
                         {
-                          staticClass: "input-group-text  overflow-hidden  p-0",
+                          staticClass: "btn p-0 text-danger",
+                          class: { disabled: _vm.answer_radio == key },
+                          staticStyle: { "text-decoration": "none" },
+                          attrs: { href: "" },
+                          on: {
+                            click: function ($event) {
+                              $event.preventDefault()
+                              return _vm.deleteInput(key)
+                            },
+                          },
                         },
-                        [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.answer_booleans,
-                                expression: "answer_booleans",
+                        [_vm._v("削除")]
+                      ),
+                    ]),
+                  ],
+                  1
+                )
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-light border",
+                  attrs: { type: "button" },
+                  on: { click: _vm.addInput },
+                },
+                [_vm._v("+ 選択肢の追加")]
+              ),
+            ],
+            2
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.answer_type == 2
+        ? _c(
+            "div",
+            [
+              _vm.answer_booleans.length < 2
+                ? _c("div", [
+                    _c("input", {
+                      attrs: { name: "answer_booleans[]", type: "hidden" },
+                      domProps: { value: _vm.answer_booleans[0] },
+                    }),
+                  ])
+                : _vm._e(),
+              _vm._v(
+                "\n\n\n            複数の答えを選ぶ （140文字以内）\n            "
+              ),
+              _vm._l(_vm.options, function (option, key) {
+                return _c(
+                  "div",
+                  { key: key, staticClass: "input-group mb-2" },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "input-group-text  overflow-hidden  p-0" },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.answer_booleans,
+                              expression: "answer_booleans",
+                            },
+                          ],
+                          staticClass: "btn-check",
+                          attrs: {
+                            type: "checkbox",
+                            name: "answer_booleans[]",
+                            id: "answer_booleans" + key,
+                            autocomplete: "off",
+                            disabled:
+                              _vm.answer_booleans.length < 2 &&
+                              _vm.answer_booleans.includes(key),
+                          },
+                          domProps: {
+                            value: key,
+                            checked: Array.isArray(_vm.answer_booleans)
+                              ? _vm._i(_vm.answer_booleans, key) > -1
+                              : _vm.answer_booleans,
+                          },
+                          on: {
+                            change: [
+                              function ($event) {
+                                var $$a = _vm.answer_booleans,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = key,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      (_vm.answer_booleans = $$a.concat([$$v]))
+                                  } else {
+                                    $$i > -1 &&
+                                      (_vm.answer_booleans = $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1)))
+                                  }
+                                } else {
+                                  _vm.answer_booleans = $$c
+                                }
+                              },
+                              function ($event) {
+                                _vm.refreshRadiioChack(), _vm.refreshInputText()
                               },
                             ],
-                            staticClass: "btn-check",
-                            attrs: {
-                              type: "checkbox",
-                              name: "answer_booleans[]",
-                              id: "answer_booleans" + key,
-                              autocomplete: "off",
-                              disabled:
-                                _vm.answer_booleans.length < 2 &&
-                                _vm.answer_booleans.includes(key),
-                            },
-                            domProps: {
-                              value: key,
-                              checked: Array.isArray(_vm.answer_booleans)
-                                ? _vm._i(_vm.answer_booleans, key) > -1
-                                : _vm.answer_booleans,
-                            },
-                            on: {
-                              change: [
-                                function ($event) {
-                                  var $$a = _vm.answer_booleans,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = key,
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        (_vm.answer_booleans = $$a.concat([
-                                          $$v,
-                                        ]))
-                                    } else {
-                                      $$i > -1 &&
-                                        (_vm.answer_booleans = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
-                                    }
-                                  } else {
-                                    _vm.answer_booleans = $$c
-                                  }
-                                },
-                                function ($event) {
-                                  _vm.refreshRadiioChack(),
-                                    _vm.refreshInputText()
-                                },
-                              ],
-                            },
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "label",
-                            {
-                              staticClass:
-                                "btn action-btn btn-outline-info border-0",
-                              staticStyle: { "border-radius": "0" },
-                              attrs: { for: "answer_booleans" + key },
-                              on: {
-                                click: function ($event) {
-                                  return _vm.changeButtonText(key)
-                                },
-                              },
-                            },
-                            [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(option.button_text) +
-                                  "\n                        "
-                              ),
-                            ]
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        attrs: { name: "option_ids[]", type: "hidden" },
-                        domProps: { value: option.id },
-                      }),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: option.answer_text,
-                            expression: "option.answer_text",
                           },
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          name: "answer_texts[]",
-                          maxlength: "140",
-                          required: option.only,
-                        },
-                        domProps: { value: option.answer_text },
-                        on: {
-                          input: function ($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(option, "answer_text", $event.target.value)
-                          },
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "input-group-text" }, [
+                        }),
+                        _vm._v(" "),
                         _c(
-                          "a",
+                          "label",
                           {
-                            staticClass: "btn p-0 text-danger",
-                            class: {
-                              disabled:
-                                _vm.answer_booleans.length < 2 &&
-                                _vm.answer_booleans.includes(key),
-                            },
-                            staticStyle: { "text-decoration": "none" },
-                            attrs: { href: "" },
+                            staticClass:
+                              "btn action-btn btn-outline-info border-0",
+                            staticStyle: { "border-radius": "0" },
+                            attrs: { for: "answer_booleans" + key },
                             on: {
                               click: function ($event) {
-                                $event.preventDefault()
-                                return _vm.deleteInput(key)
+                                return _vm.changeButtonText(key)
                               },
                             },
                           },
-                          [_vm._v("削除")]
+                          [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(option.button_text) +
+                                "\n                    "
+                            ),
+                          ]
                         ),
-                      ]),
-                    ]
-                  )
-                }),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-light border",
-                    attrs: { type: "button" },
-                    on: { click: _vm.addInput },
-                  },
-                  [_vm._v("+ 選択肢の追加")]
-                ),
-              ],
-              2
-            )
-          : _vm._e(),
-      ]),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { name: "option_ids[]", type: "hidden" },
+                      domProps: { value: option.id },
+                    }),
+                    _vm._v(" "),
+                    _c("encodedーinputtext-component", {
+                      attrs: {
+                        id: "text",
+                        name: "answer_texts[]",
+                        style_class: "form-control",
+                        maxlength: "140",
+                        default_body: option.answer_text,
+                        required: option.only ? 1 : 0,
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "input-group-text" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn p-0 text-danger",
+                          class: {
+                            disabled:
+                              _vm.answer_booleans.length < 2 &&
+                              _vm.answer_booleans.includes(key),
+                          },
+                          staticStyle: { "text-decoration": "none" },
+                          attrs: { href: "" },
+                          on: {
+                            click: function ($event) {
+                              $event.preventDefault()
+                              return _vm.deleteInput(key)
+                            },
+                          },
+                        },
+                        [_vm._v("削除")]
+                      ),
+                    ]),
+                  ],
+                  1
+                )
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-light border",
+                  attrs: { type: "button" },
+                  on: { click: _vm.addInput },
+                },
+                [_vm._v("+ 選択肢の追加")]
+              ),
+            ],
+            2
+          )
+        : _vm._e(),
     ]),
   ])
 }
