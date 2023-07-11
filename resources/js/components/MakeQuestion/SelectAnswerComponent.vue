@@ -109,6 +109,7 @@
                     <encodedーinputtext-component
                     id="text" name="answer_texts[]" style_class="form-control" maxlength="140"
                     :default_body="option.answer_text" :required="option.only?1:0"
+                    @send-input="getInputText(key,$event)"
                     ></encodedーinputtext-component>
 
 
@@ -160,6 +161,7 @@
                     <encodedーinputtext-component
                     id="text" name="answer_texts[]" style_class="form-control" maxlength="140"
                     :default_body="option.answer_text" :required="option.only?1:0"
+                    @send-input="getInputText(key,$event)"
                     ></encodedーinputtext-component>
 
 
@@ -282,7 +284,7 @@
             addInput: function(){
 
                 this.options.push( { answer_boolean: false, answer_text: '', only: false, button_text: '不正解'} );
-                console.log( this.options );
+                // console.log( this.options );
 
             },
 
@@ -296,7 +298,7 @@
                     options_array.push( this.options[ index ] );
                 }
                 this.options = options_array;
-                console.log(this.options);
+                // console.log(this.options);
 
 
                 //answer_booleansの修正処理
@@ -370,7 +372,16 @@
                 this.answer_text = this.options[key].answer_text;
             },
 
+            /* 子コンポーネント(encoded-inputtext-component)から値の受け取り */
+            getInputText: function( key, input ){
+                // console.log( input );
+                // console.log( key );
 
+
+                this.options[key].answer_text = input;
+                // console.log( this.options[key].answer_text );
+
+            },
         }
     }
 </script>

@@ -28,6 +28,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     Route::post('/user/list/api', [Controllers\UserListAPIController::class, 'user_list_api'])
     ->name('user.list.api');
 
+
+/*
+|--------------------------------------------------------------------------
+| クリエーター　CreaterUserController
+|--------------------------------------------------------------------------
+*/
+
+    # 公開中問題集一覧API[(api_questin_group_list)
+    Route::get('/creater/questin_group_list/{creater_user}/{key}',
+    [Controllers\CreaterUserController::class, 'api_questin_group_list'])
+    ->name('api.creater.questin_group_list');
+
+
 /*
 |--------------------------------------------------------------------------
 | その他のサービス　ServiceController

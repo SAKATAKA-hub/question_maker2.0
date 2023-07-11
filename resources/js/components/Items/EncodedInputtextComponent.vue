@@ -1,10 +1,11 @@
 <template>
     <div class="col">
-        <input type="text" :class="style_class" class="h-100"
+        <input type="text" :class="style_class" class="h-100" @change="emitSendInput( body )"
         :id="id"  v-model="body" :placeholder="placeholder" :required="required!=0?true:false"
         >
 
         <input type="hidden" :name="name" :value="urlEncoded(body)">
+
     </div>
 </template>
 
@@ -44,10 +45,16 @@
         },
         methods:{
 
-            /* 文字列のエンコード処理 */
+            /* デフォルト文字列のエンコード処理 */
             urlEncoded: function(){
                 return encodeURIComponent(this.body);
             },
+
+
+            /* 親関数を呼び出すemitの定義 */
+            emitSendInput( input ) {
+                this.$emit("send-input", input );
+            }
 
         }
     }

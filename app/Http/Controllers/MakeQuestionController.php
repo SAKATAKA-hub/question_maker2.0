@@ -247,6 +247,7 @@ class MakeQuestionController extends Controller
     public function update( Request $request, \App\Models\Question $question )
     {
         # 入力情報のデコード処理
+            // dd( $request->all() );
 
             $request->text = urldecode($request->text);
             $request->commentary_text = urldecode($request->commentary_text);

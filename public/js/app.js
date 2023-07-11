@@ -5335,6 +5335,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     //最初に表示する画像のパス
@@ -5385,9 +5386,14 @@ __webpack_require__.r(__webpack_exports__);
     this.body = this.default_body;
   },
   methods: {
-    /* 文字列のエンコード処理 */
+    /* デフォルト文字列のエンコード処理 */
     urlEncoded: function urlEncoded() {
       return encodeURIComponent(this.body);
+    },
+
+    /* 親関数を呼び出すemitの定義 */
+    emitSendInput: function emitSendInput(input) {
+      this.$emit("send-input", input);
     }
   }
 });
@@ -6824,6 +6830,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -6941,8 +6949,7 @@ __webpack_require__.r(__webpack_exports__);
         answer_text: '',
         only: false,
         button_text: '不正解'
-      });
-      console.log(this.options);
+      }); // console.log( this.options );
     },
 
     /* 削除ボタン */
@@ -6958,8 +6965,8 @@ __webpack_require__.r(__webpack_exports__);
         options_array.push(this.options[index]);
       }
 
-      this.options = options_array;
-      console.log(this.options); //answer_booleansの修正処理
+      this.options = options_array; // console.log(this.options);
+      //answer_booleansの修正処理
 
       if (this.answer_radio > key) {
         this.answer_radio -= 1;
@@ -7026,6 +7033,13 @@ __webpack_require__.r(__webpack_exports__);
     refreshInputText: function refreshInputText() {
       var key = this.answer_radio;
       this.answer_text = this.options[key].answer_text;
+    },
+
+    /* 子コンポーネント(encoded-inputtext-component)から値の受け取り */
+    getInputText: function getInputText(key, input) {
+      // console.log( input );
+      // console.log( key );
+      this.options[key].answer_text = input; // console.log( this.options[key].answer_text );
     }
   }
 });
@@ -36480,6 +36494,9 @@ var render = function () {
       },
       domProps: { value: _vm.body },
       on: {
+        change: function ($event) {
+          return _vm.emitSendInput(_vm.body)
+        },
         input: function ($event) {
           if ($event.target.composing) {
             return
@@ -38228,6 +38245,11 @@ var render = function () {
                         default_body: option.answer_text,
                         required: option.only ? 1 : 0,
                       },
+                      on: {
+                        "send-input": function ($event) {
+                          return _vm.getInputText(key, $event)
+                        },
+                      },
                     }),
                     _vm._v(" "),
                     _c("div", { staticClass: "input-group-text" }, [
@@ -38382,6 +38404,11 @@ var render = function () {
                         maxlength: "140",
                         default_body: option.answer_text,
                         required: option.only ? 1 : 0,
+                      },
+                      on: {
+                        "send-input": function ($event) {
+                          return _vm.getInputText(key, $event)
+                        },
                       },
                     }),
                     _vm._v(" "),
