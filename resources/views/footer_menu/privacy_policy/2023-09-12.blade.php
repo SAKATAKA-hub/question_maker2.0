@@ -187,7 +187,8 @@
 
                 <div class="mb-3">
                     <h5>１０．個人情報取り扱いに関する連絡先</h5>
-                    〒105-0003 東京都港区西新橋1-6-12 アイオス虎ノ門803<br>
+                    〒113-0033 東京都文京区本郷4丁目16-6 天翔オフィス後楽園507<br>
+                    {{-- 〒105-0003 東京都港区西新橋1-6-12 アイオス虎ノ門803<br> --}}
                     当社の個人情報の取り扱いに関するご質問やご不明点、苦情、その他のお問い合わせは
                     <a href="javascript:void(0)" onclick="window.open('{{route('footer_menu.contact')}}')">
                         お問い合わせフォーム<i class="bi bi-box-arrow-up-right ms-1"></i>
@@ -230,11 +231,13 @@
 
             <div class="mb-3">
                 <div class="float-end text-end">
-                    <p>制定日2022年12月12日</p>
+                    <p>制定日2023年09月12日</p>
 
                     <div class="d-flex flex-column">
                         <span>旧プライバシーポリシー</span>
-                        <a href="{{route('footer_menu.privacy_policy','20221010')}}"
+                        <a href="{{route('footer_menu.privacy_policy','2022-12-12')}}"
+                        >2022年12月12日<i class="bi bi-box-arrow-up-right ms-1"></i></a>
+                        <a href="{{route('footer_menu.privacy_policy','2022-10-10')}}"
                         >2022年10月10日<i class="bi bi-box-arrow-up-right ms-1"></i></a>
                     </div>
 

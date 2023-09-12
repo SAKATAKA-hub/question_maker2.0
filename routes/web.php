@@ -324,7 +324,9 @@ Route::get('/', [Controllers\PlayQuestionController::class, 'list'])
     # プライバシーポリシー(privacy_policy)
     //$revision_date 改定日
     Route::get('/privacy_policy/{revision_date?}',
-    function ($revision_date='20221212') { return view('footer_menu.privacy_policy.'.$revision_date); })
+    // function ($revision_date='2022-12-12') { return view('footer_menu.privacy_policy.'.$revision_date); })
+    // ->name('footer_menu.privacy_policy');
+    function ($revision_date='2023-09-12') { return view('footer_menu.privacy_policy.'.$revision_date); })
     ->name('footer_menu.privacy_policy');
 
     # 利用規約(trems)
