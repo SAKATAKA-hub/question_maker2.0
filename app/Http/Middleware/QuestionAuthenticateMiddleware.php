@@ -17,6 +17,7 @@ class QuestionAuthenticateMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        // dd($request->question);
         if( $request->question->question_group->user->id != Auth::user()->id )
         {
           return \App::abort(404);

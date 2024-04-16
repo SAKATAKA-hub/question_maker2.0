@@ -42,6 +42,10 @@
     }
 }
 
+.nav-pills .nav-link.active {
+    background-color: #14CFA0 !important ;
+}
+
 </style>
 @endsection
 
@@ -80,13 +84,14 @@
 
 
         <!-- tabmenu -->
-        <div class="my-3">
+        <div class="my-3 mt-5">
 
             <!-- tabmenu button -->
             <div id="question-group-tabmenu" style="font-size:11px;">
-                <ul class="nav nav-tabs nav-fill" id="pills-tab" role="tablist">
+                <ul class="nav nav-pills flex-row gap-1" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link @if( $tab_menu === 'tab01' ) active @endif"
+                        <button class="nav-link rounded-pill border border-success
+                        @if( $tab_menu === 'tab01' )  active @endif"
                         id="tab-tab01-tab" data-bs-target="#tab-tab01"
                         aria-controls="tab-tab01" aria-selected="{{ $tab_menu === 'tab01' ? 'true' : 'false' }}"
                         type="button" role="tab" data-bs-toggle="pill"
@@ -95,7 +100,8 @@
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link @if( $tab_menu === 'tab02' ) active @endif"
+                        <button class="nav-link rounded-pill border border-success
+                        @if( $tab_menu === 'tab02' )  active @endif"
                         id="tab-tab02-tab" data-bs-target="#tab-tab02"
                         aria-controls="tab-tab02" aria-selected="{{ $tab_menu === 'tab02' ? 'true' : 'false' }}"
                         type="button" role="tab" data-bs-toggle="pill"
@@ -104,7 +110,8 @@
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link @if( $tab_menu === 'tab03' ) active @endif"
+                        <button class="nav-link rounded-pill border border-success
+                        @if( $tab_menu === 'tab03' )  active @endif"
                         id="tab-tab03-tab" data-bs-target="#tab-tab03"
                         aria-controls="tab-tab03" aria-selected="{{ $tab_menu === 'tab03' ? 'true' : 'false' }}"
                         type="button" role="tab" data-bs-toggle="pill"
@@ -113,7 +120,8 @@
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link @if( $tab_menu === 'tab04' ) active @endif"
+                        <button class="nav-link rounded-pill border border-success
+                        @if( $tab_menu === 'tab04' )  active @endif"
                         id="tab-tab04-tab" data-bs-target="#tab-tab04"
                         aria-controls="tab-tab04" aria-selected="{{ $tab_menu === 'tab04' ? 'true' : 'false' }}"
                         type="button" role="tab" data-bs-toggle="pill"
@@ -122,7 +130,8 @@
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link @if( $tab_menu === 'tab05' ) active @endif"
+                        <button class="nav-link rounded-pill border border-success
+                        @if( $tab_menu === 'tab05' )  active @endif"
                         id="tab-tab05-tab" data-bs-target="#tab-tab05"
                         aria-controls="tab-tab05" aria-selected="{{ $tab_menu === 'tab05' ? 'true' : 'false' }}"
                         type="button" role="tab" data-bs-toggle="pill"
@@ -135,9 +144,11 @@
             </div>
 
             <!-- tabmenu contents -->
-            <div class="tab-content bg-light card" id="pills-tabContent" style="border-top-color: transparent;">
+            <div class="tab-content" id="pills-tabContent" style="border-top-color: transparent;">
                 <!-- tab01 -->
-                <div class="tab-pane fade card-body @if( $tab_menu === 'tab01' ) show active @endif" role="tabpane0l"
+                <div class="tab-pane fade
+                @if( $tab_menu === 'tab01' ) show active @endif
+                " role="tabpane0l"
                 id="tab-tab01" aria-labelledby="tab-tab01-tab">
 
 
@@ -270,14 +281,15 @@
 
 
                         <!-- [ シェアボタン ] -->
-                        <div class="card card-body my-3">
+                        <div class="d-grid gap-2 col-md-6 mx-auto">
+
                             <div class="mb-1">この問題に挑戦しますか？</div>
 
 
                             <div class="row g-0">
                                 <div class="col">
                                     @php $param = ['question_group'=>$question_group->id,'key'=>$question_group->key,]; @endphp
-                                    <a href="{{ route('play_question', $param ) }}" class="btn btn-lg rounded-pill fs-5 btn-outline-success w-100"
+                                    <a href="{{ route('play_question', $param ) }}" class="btn rounded-pill btn-outline-success w-100"
                                     >挑戦する！</a>
                                 </div>
                             </div>
@@ -288,132 +300,32 @@
 
                 </div>
                 <!-- tab02 -->
-                <div class="tab-pane fade p-0 @if( $tab_menu === 'tab02' ) show active @endif" role="tabpane02"
+                <div class="tab-pane fade p-0
+                @if( $tab_menu === 'tab02' ) show active @endif
+                " role="tabpane02"
                 id="tab-tab02" aria-labelledby="tab-tab02-tab">
 
 
-                    <div class="card-body pt-5 overflow-auto" style="height: 90vh;">
+                    <div class="pt-3">
 
 
                         @forelse ($question_group->questions as $key => $question)
-                            <div class="card mb-3">
-                                <div class="card-body">
+                            <div class="mb-3 border-bottom">
+                                <div class="card-body px-0">
                                     <h2 class="text-secondary fw-bold">
                                         問題 {{sprintf('%02d', $question->order )}}
                                     </h2>
 
-                                    <div class="row">
-                                        <!-- 問題画像 -->
-                                        @if ($question->image)
-                                        <div class="col-md-4 order-md-2">
-                                            <div class="my-3">
-                                                <span class="text-success fw-bold">問題画像</span>
-                                                <div class="w-100  mb-3">
-                                                    <div class="ratio ratio-16x9 border" style="
-                                                        background: no-repeat center center / cover;
-                                                        background-image:url({{asset('storage/'.$question->image_puth)}});
-                                                        border-radius: .5rem;
-                                                    "></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @endif
-
-                                        <div class="col-md-8">
-                                            <!-- 問題文 -->
-                                            <div class="my-3">
-                                                <span class="text-success fw-bold">問題文</span>
-                                                <div class="p-2 bg-light">
-                                                    <replace-text-component
-                                                    text="{{ $question->text_text }}" replace_url="0"
-                                                    ></replace-text-component>
-
-                                                </div>
-                                            </div>
-
-                                            <!-- 正解 -->
-                                            <div class="mb-3">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <span class="text-success fw-bold me-5">正解</span>
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <div class="mb-2 text-secondary">
-                                                            解答方法：
-                                                            {{ $question->answer_type == 0 ? '文章で答えを入力する' :
-                                                            (  $question->answer_type == 1 ? 'ひとつの答えを選ぶ' : '複数の答えを選ぶ'  ) }}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                @foreach ($question->question_options as $option)
-                                                    <div class="row mb-2 pe-3">
-                                                        @if ($option->answer_boolean)
-                                                            <div class="col-auto">
-                                                                <span class="fw-bold text-info">正　解</span>
-                                                            </div>
-                                                            <div class="col card border-info">
-                                                                <replace-text-component
-                                                                text="{{ $option->answer_text }}" replace_url="0"
-                                                                ></replace-text-component>
-                                                            </div>
-                                                        @else
-                                                            <div class="col-auto">
-                                                                <span class="fw-bold text-secondary">不正解</span>
-                                                            </div>
-                                                            <div class="col card bg-light">
-                                                                <replace-text-component
-                                                                text="{{ $option->answer_text }}" replace_url="0"
-                                                                ></replace-text-component>
-                                                            </div>
-                                                        @endif
-                                                    </div>
-                                                @endforeach
-                                            </div>
-
-                                        </div>
-                                    </div>
 
 
-                                    <!-- 解説 -->
-                                    @if($question->commentary_text )
+                                    @include('MakeQuestionGroup.component.question_discription')
 
-                                        <div class="divider divider-dashed my-3"></div>
-                                        <div class="row">
-
-                                            <!-- 解説画像 -->
-                                            @if ($question->commentary_image)
-                                            <div class="col-md-4 order-md-2">
-                                                <div class="my-3">
-                                                    <span class="text-warning fw-bold">解説画像</span>
-                                                    <div class="w-100  mb-3">
-                                                        <div class="ratio ratio-16x9 border" style="
-                                                            background: no-repeat center center / cover;
-                                                            background-image:url({{asset('storage/'.$question->commentary_image_puth)}});
-                                                            border-radius: .5rem;
-                                                        "></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            @endif
-
-                                            <div class="col-md-8">
-                                                <!-- 解説文 -->
-                                                <div class="my-3">
-                                                    <span class="text-warning fw-bold">解説文</span>
-                                                    <div class="p-2 bg-light">
-                                                        <replace-text-component
-                                                        text="{{ $question->commentary_storage_text }}"
-                                                        ></replace-text-component>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    @endif
 
                                     <div class="my-3">
                                         <a href="{{route('make_question.edit',$question)}}"    class="btn btn-info rounded-pill" style="text-decoration:none;"
                                         >編集</a>
+                                        <a href="{{route('make_question.copy',$question)}}" class="btn btn-warning  rounded-pill" style="text-decoration:none;"
+                                        >コピー</a>
                                         <a href="#" class="btn btn-outline-danger  rounded-pill" style="text-decoration:none;"
                                         data-bs-toggle="modal" data-bs-target="#deleteQuestionModal{{$key}}"
                                         >削除</a>
@@ -459,7 +371,9 @@
 
                 </div>
                 <!-- tab03 -->
-                <div class="tab-pane fade card-body @if( $tab_menu === 'tab03' ) show active @endif" role="tabpane03"
+                <div class="tab-pane fade
+                @if( $tab_menu === 'tab03' ) show active @endif
+                " role="tabpane03"
                 id="tab-tab03" aria-labelledby="tab-tab03-tab">
 
 
@@ -502,7 +416,9 @@
 
                 </div>
                 <!-- tab04 -->
-                <div class="tab-pane fade card-body @if( $tab_menu === 'tab04' ) show active @endif" role="tabpane04"
+                <div class="tab-pane fade
+                @if( $tab_menu === 'tab04' ) show active @endif
+                " role="tabpane04"
                 id="tab-tab04" aria-labelledby="tab-info04-tab">
 
 
@@ -519,11 +435,13 @@
 
                 </div>
                 <!-- tab05 -->
-                <div class="tab-pane fade card-body @if( $tab_menu === 'tab05' ) show active @endif" role="tabpane05"
+                <div class="tab-pane fade
+                @if( $tab_menu === 'tab05' ) show active @endif
+                " role="tabpane05"
                 id="tab-tab05" aria-labelledby="tab-info05-tab">
 
 
-                    <div class="list-group">
+                    <div class="list-group mt-3">
                         @forelse ($question_group->answer_groups as $key => $answer_group)
                             @php $param = [ 'answer_group'=>$answer_group, 'key'=>$answer_group->user->key ]; @endphp
                             <a href="{{route('results.detail', $param )}}" class="list-group-item list-group-item-action text-decoration-none text-secondary" >
@@ -590,11 +508,11 @@
         </div>
 
         <div class="mt-5 mb-5">
-            <div class="d-grid gap-2 col-md-4 mx-auto">
+            <div class="d-grid gap-2 col-md-6 mx-auto">
 
                 <!-- 問題集一覧へ戻る -->
                 <a href="{{ route('make_question_group.list') }}"
-                class="btn btn-secondary btn-lg rounded-pill fs-5 w-100">作成した問題集一覧</a>
+                class="btn btn-light border rounded-pill w-100">一覧に戻る</a>
 
             </div>
         </div>

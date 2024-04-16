@@ -12,21 +12,7 @@
         </div>
 
 
-        <!-- 読読み込み中 -->
-        <div v-if="questions.length == 0">
-            <div class="card card-body py-5">
-                <div class="d-flex justify-content-center">
-                    <div class="spinner-border" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                </div>
-                <h2 class="text-center">読み込み中</h2>
-            </div>
-        </div>
-        <!-- 読読み込み後 -->
-        <div v-else>
-
-
+        <div >
             <div class="mb-2">
                 <div class="d-flex justify-content-between align-items-end">
                     <h6>
@@ -59,7 +45,7 @@
                 <ul class="ps-0" style="list-style:none;">
 
                     <li v-for="( question, q_num ) in questions" :key="q_num">
-                        <div v-show="question_num == q_num" class="card border-0 shadow">
+                        <div v-show="question_num == q_num" class="card border-0 shadow" style="border-radius:1rem;">
 
                             <!-- 問題文 -->
                             <div class="card-body">
@@ -71,16 +57,24 @@
                                 </p>
 
                                 <!-- 問題画像 -->
-                                <div v-if="question.image"
-                                class="overflow-hidden w-100 mb-3" style="border-radius:.5rem;">
-                                    <img :src="question.image" class="w-100" alt="問題画像"/>
+                                <div v-if="question.image" class="mx-auto my-5" style="max-width: 400px;">
+                                    <div class="overflow-hidden w-100 mb-3" style="border-radius:.5rem;">
+                                        <img :src="question.image" class="w-100" alt="問題画像"/>
+                                    </div>
                                 </div>
+
+                                <!-- <div v-if="question.image" class="ratio ratio-4x3 mx-auto my-5"
+                                :style="`background-image: url(${question.image});`"
+                                style="
+                                max-width: 400px; border-radius: 1rem;
+                                background: no-repeat center center / cover;
+                                "></div> -->
 
 
                                 <!-- 解答選択・入力 -->
                                 <div>
 
-                                    <div class="form-text">
+                                    <div class="form-text text-success">
                                         <div class="" v-if="question.answer_type == 0">解答をテキストで入力してください。</div>
                                         <div class="" v-if="question.answer_type == 1">解答を1つ選択してください。</div>
                                         <div class="" v-if="question.answer_type == 2">解答を全て選択してください。</div>
@@ -90,9 +84,10 @@
                                         <!-- 解答をテキストで入力 -->
                                         <ul v-if="question.answer_type == 0"
                                         class="ps-0 mb-3" style=" list-style:none;">
-                                            <li>
-                                                <input type="text" class="form-control" :name="'answer_'+q_num"
-                                                    placeholder="入力してください"/>
+                                            <li class="input-group input-group-lg">
+                                                <input class="form-control"
+                                                type="text" :name="'answer_'+q_num"
+                                                placeholder="入力してください"/>
                                             </li>
                                         </ul>
 
@@ -146,7 +141,7 @@
                         </div><!-- end card -->
                     </li>
                     <li v-if="questions.length == 0">
-                        <div class="card border-0 shadow card-body py-5">
+                        <div class="card border-0 shadow card-body py-5" style="border-radius:1rem;">
                             <div class="d-flex justify-content-center">
                                 <div class="spinner-border" role="status">
                                     <span class="visually-hidden">Loading...</span>
@@ -156,7 +151,7 @@
                         </div>
                     </li>
                     <li v-else-if="question_num == questions.length">
-                        <div class="card border-0 shadow card-body text-center py-5">
+                        <div class="card border-0 shadow card-body text-center py-5" style="border-radius:1rem;">
 
 
                             <i class="bi bi-hourglass-split mb-3" style="font-size:3rem;"></i>
@@ -172,20 +167,21 @@
                             </p>
 
                             <!-- 採点ボタン -->
-                            <button type="submit" class="btn btn-success rounded-pill btn-lg px-3"
-                            :disabled="submit_button.disabled">
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <div class="spinner-border me-3" role="status" v-show="submit_button.disabled">
-                                        <span class="visually-hidden">Loading...</span>
+                            <div class="col-12 col-md-6 mx-auto">
+                                <button type="submit" class="btn btn-success rounded-pill btn-lg px-3 w-100"
+                                :disabled="submit_button.disabled">
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <div class="spinner-border me-3" role="status" v-show="submit_button.disabled">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                        {{ submit_button.text }}
                                     </div>
-                                    {{ submit_button.text }}
-                                </div>
-                            </button>
-
+                                </button>
+                            </div>
                         </div>
                     </li>
                     <li v-else-if="question_num > questions.length">
-                        <div class="card card-body text-center py-5">
+                        <div class="card border-0 shadow card-body text-center py-5" style="border-radius:1rem;">
                             <i class="bi bi-hourglass-bottom mb-3" style="font-size:3rem;"></i>
                             <h5>タイムオーバー！</h5>
                             <p class="mb-5">
@@ -193,16 +189,17 @@
                             </p>
 
                             <!-- 採点ボタン -->
-                            <button type="submit" class="btn btn-success rounded-pill btn-lg px-3"
-                            :disabled="submit_button.disabled">
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <div class="spinner-border me-3" role="status" v-show="submit_button.disabled">
-                                        <span class="visually-hidden">Loading...</span>
+                            <div class="col-12 col-md-6 mx-auto">
+                                <button type="submit" class="btn btn-success rounded-pill btn-lg px-3 w-100"
+                                :disabled="submit_button.disabled">
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <div class="spinner-border me-3" role="status" v-show="submit_button.disabled">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                        {{ submit_button.text }}
                                     </div>
-                                    {{ submit_button.text }}
-                                </div>
-                            </button>
-
+                                </button>
+                            </div>
 
                         </div>
                     </li>
@@ -227,7 +224,7 @@
             </div>
 
 
-            <div class="mt-5">
+            <div class="mt-1">
                 <div class="d-flex flex-wrap justify-content-center">
                     <div class="">
                         <button class="btn btn-light btn-sm border rounded-pill"
@@ -238,17 +235,21 @@
                         <div v-if="true">
 
                             <button class="btn btn-sm rounded-pill mx-1"
-                            :class="{'btn-light border':(question_num != btn_num-1), 'btn-success':(question_num == btn_num-1)}"
-                            @click="numChange(btn_num)" :disabled="(question_num == btn_num-1)||(question_num > questions.length)"
+                            :class="{'btn-light border':(question_num != btn_num-1),
+                            'btn-success':(question_num == btn_num-1)}"
+                            :disabled="(question_num == btn_num-1)||(question_num > questions.length)"
+                            @click="numChange(btn_num)"
                             >{{btn_num}}</button>
 
                         </div>
                     </div>
 
                     <div class="">
-                        <button class="btn btn-light btn-sm border rounded-pill"
-                        :class="{'btn-light border':(question_num != questions.length+1-1), 'btn-success':(question_num == questions.length+1-1)}"
-                        @click="numChange(questions.length+1)" :disabled="(question_num == questions.length+1-1)||(question_num > questions.length)"
+                        <button class="btn btn-sm border rounded-pill"
+                        :class="{'btn-light border':(question_num != questions.length+1-1),
+                        'btn-success':(question_num == questions.length+1-1)}"
+                        :disabled="(question_num == questions.length+1-1)||(question_num > questions.length)"
+                        @click="numChange(questions.length+1)"
                         >採点する</button>
                     </div>
                 </div>
@@ -366,12 +367,18 @@
         }
     }
 </script>
-<style>
+<style scoped>
     .btn-select-ans:hover{
-        background: #fff;
-        color: #12b88e;
+        /* background: #fff; */
+        /* color: #12b88e; */
+        color:#fff;
     }
     .btn-select-ans, .btn-select-ans.disabled, .btn-select-ans:disabled {
         color: #495057;
+        /* color:#fff; */
+    }
+    .btn-outline-success {
+        color: #495057;
+        border-color: #e9ecef;
     }
 </style>

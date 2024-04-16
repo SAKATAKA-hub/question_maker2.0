@@ -140,7 +140,7 @@ class PlayQuestionController extends Controller
 
 
     /**
-     * 問題の採点(scoring)
+     * 問題の解答保存(scoring)
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\View\View
     */
@@ -171,52 +171,58 @@ class PlayQuestionController extends Controller
 
 
         # 解答の添削とDB保存
-            $correct_count = 0;  //正解数
-            for ($q_num=0; $q_num < $questions->count(); $q_num++) {
-                $question = $questions[ $q_num ];
+        // $correct_count = 0;  //正解数
+        for ($q_num=0; $q_num < $questions->count(); $q_num++) {
+            $question = $questions[ $q_num ];
 
 
-                // 解答選択内容と答えが一致するかチェック
-                $input_answer_text = $request['answer_'.$q_num]; //選択した答え
-                switch ( $question->answer_type ) {
-                    /* 解答選択肢が複数の時 */
-                    case '2':
-                        $input_answer_array = $input_answer_text;
+            // 解答選択内容と答えが一致するかチェック
+            $input_answer_text = $request['answer_'.$q_num]; //選択した答え
+            $is_correct = 0;
 
-                        $question_answer_array = $question->answer; //テキストの答え(配列)を取得
+            switch ( $question->answer_type ) {
+                /* 解答選択肢が複数の時 */
+                case '2':
+                    $input_answer_array = $input_answer_text;
 
-                        $is_correct = ( $question->answer == $input_answer_array) ? 1 : 0 ;
+                    // $question_answer_array = $question->answer; //テキストの答え(配列)を取得
 
-                        $input_answer_text = $input_answer_array ? implode(', ',$input_answer_array) : '';
+                    // $is_correct = ( $question->answer == $input_answer_array) ? 1 : 0 ;
 
-                        break;
+                    $input_answer_text = $input_answer_array ? implode(', ',$input_answer_array) : '';
 
-                    /* それ以外の時 */
-                    default:
-                        $is_correct = $input_answer_text == $question->answer ? 1 : 0 ;
-                        break;
+                    # 解説テキストのストレージ保存
+                    $dir = 'upload/answer/';
+                    $input_answer_text = Method::uploadStorageText( $dir, $input_answer_text );
 
-                    //
-                }
+                    break;
 
+                /* それ以外の時 */
+                default:
+                    // $is_correct = $input_answer_text == $question->answer ? 1 : 0 ;
+                    break;
 
-                $correct_count += $is_correct ? 1 : 0 ; //正解数の加算
-
-
-                // 解答データ
-                $input_aswer = [
-                    'text'            => $input_answer_text, //入力した正解
-                    'is_correct'      => $is_correct,// 正解か否か
-                    'answer_group_id' => $answer_group->id,
-                    'question_id'     => $question->id,
-                ];
+                //
+            }
 
 
-                // 解答データをDBへ保存
-                $answer = new \App\Models\Answer($input_aswer);
-                $answer->save();
+            // $correct_count += $is_correct ? 1 : 0 ; //正解数の加算
 
-            }//end for
+
+            // 解答データ
+            $input_aswer = [
+                'text'            => $input_answer_text, //入力した正解
+                'is_correct'      => $is_correct,// 正解か否か
+                'answer_group_id' => $answer_group->id,
+                'question_id'     => $question->id,
+            ];
+
+
+            // 解答データをDBへ保存
+            $answer = new \App\Models\Answer($input_aswer);
+            $answer->save();
+
+        }//end for
 
         //
         // dd($correct_count);
@@ -224,9 +230,9 @@ class PlayQuestionController extends Controller
 
         # 解答の採点・解答時間
 
-            $score = round( ( $correct_count / $questions->count() )*100 );
-            $answer_group->score = $score;
-            $answer_group->save();
+            // $score = round( ( $correct_count / $questions->count() )*100 );
+            // $answer_group->score = $score;
+            // $answer_group->save();
 
         //
 
@@ -235,28 +241,17 @@ class PlayQuestionController extends Controller
         |  平均点の計算
         | { (平均点×アクセス数)＋今回の点数 } ÷ アクセス数+1
         */
-            $accessed_count = $question_group->answer_groups->count();
-            $total_score    = $question_group->answer_groups->sum('score');
-            $question_group->update([
+            // $accessed_count = $question_group->answer_groups->count();
+            // $total_score    = $question_group->answer_groups->sum('score');
+            // $question_group->update([
 
-                'accessed_count' => $accessed_count,
-                'average_score'  => $total_score / $accessed_count,
-            ]);
-
-
-
-
-
-        // $question_group->average_score =
-        // ( ( $question_group->average_score * $question_group->accessed_count ) + $score )
-        // / ($question_group->accessed_count+1);
-
-        // $question_group->save();
-
+            //     'accessed_count' => $accessed_count,
+            //     'average_score'  => $total_score / $accessed_count,
+            // ]);
 
 
         # 受検者数の登録
-        $question_group->update(['accessed_count' => $question_group->accessed_count ++]);
+        // $question_group->update(['accessed_count' => $question_group->accessed_count ++]);
 
 
 

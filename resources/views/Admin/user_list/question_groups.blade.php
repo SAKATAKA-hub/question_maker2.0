@@ -130,7 +130,7 @@
                     <!-- タグ -->
                     <div class="">
                         @if ($question_group->tags)
-                        <div class="d-flex gap-1 align-items-center">
+                        <div class="d-flex gap-1 flex-wrap align-items-center">
                             @foreach ( explode('　',$question_group->tags) as $tag )
                             <form action="{{ route('questions_search_list') }}">
                                 <input type="hidden" name="seach_keywords" value="{{$tag}}">

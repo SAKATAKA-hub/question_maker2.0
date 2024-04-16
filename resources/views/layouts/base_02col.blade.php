@@ -33,7 +33,7 @@
             @include('_parts.header')
 
             <!-- 見出しタイトル -->
-            <section class="border-bottom border-1 bg-white">
+            <section class="border- bg-white">
                 <div class="container-1200 pb-0">
 
                     <h2 class="text-secondary fw-bold fs-5">@yield('title')</h2>
@@ -52,6 +52,35 @@
 
         </header>
         <main>
+            <div  class="row mx-auto g-5 pt-3" style="max-width:1200px;">
+
+
+                <!--flex-c1-->
+                <aside class="d-none d-lg-block col-auto" style="max-width:300px;">
+                    <div class="position-sticky ps-2" style="top: 2rem; ">
+
+
+                        @include('_parts.user_info')
+
+                    </div>
+                </aside>
+                <!--flex-c2-->
+                <div class="col bg-white">
+
+                    <div style="min-height:90vh;">
+                        @yield('contents')
+                    </div>
+
+                </div>
+
+
+            </div>
+            <!-- フェードインアラート -->
+            @include('_parts.alert')
+
+        </main>
+
+        {{-- <main>
 
             <!-- contents -->
             <div class="container-1200">
@@ -60,8 +89,11 @@
                     <!-- サイドコンテンツ[pc] -->
                     <section class="d-none d-md-block col-auto" style="max-width:300px;">
 
+                        <div class="position-sticky ps-2" style="top: 2rem; ">
 
-                        @include('_parts.user_info')
+                            @include('_parts.user_info')
+
+                        </div>
 
                     </section>
 
@@ -82,7 +114,7 @@
             @include('_parts.alert')
 
 
-        </main>
+        </main> --}}
         <footer>
             @include('_parts.footer')
         </footer>

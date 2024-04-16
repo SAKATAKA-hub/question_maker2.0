@@ -41,10 +41,10 @@
 @section('contents')
 
     <!-- 受検結果 -->
-    <section class="bg-light">
+    <section class="bg-">
         <div class="container-1200 py-3">
 
-            <div class="card card-body py-5 mb-3">
+            <div class="py-5 mb-3">
 
                 <div class="text-center">
                     <div class="fs-5">
@@ -68,10 +68,10 @@
 
 
             </div>
-            <div class="card">
+            <div class="cardd">
                 <ul class="list-group list-group-flush">
                     @foreach ($answers as $num => $answer)
-                        <li class="list-group-item p-0 overflow-hidden">
+                        <li class="list-group-item p-0 py-3 overflow-hidden">
                             <!-- 00問目 問題文 -->
                             <div class="px-3 py-2 bg-light">
                                 <div class="row align-items-start ">
@@ -88,7 +88,7 @@
                                         <div class="text-secondary" style="font-size:11px;">あなたの解答</div>
 
                                         <replace-text-component  replace_url="0"
-                                        text="{{ $answer->text ? $answer->text : '---' }}"
+                                        text="{{ $answer->text ? $answer->text_text : '---' }}"
                                         ></replace-text-component>
 
                                     </div>
@@ -251,7 +251,7 @@
 
 
 
-    <section class="bg-light">
+    <section class="bg-">
         <div class="container-1200 py-3">
 
             <!--
@@ -264,7 +264,7 @@
 
 
             <!-- [ 作成者情報 ] -->
-            <div class="">
+            <div class="border-top pt-3">
                 <div class="d-flex justify-content-between w-100">
                     <div class="col-auto">
                         <a href="{{route('creater',$question_group->user->id)}}" class="btn ps-0">
@@ -295,7 +295,7 @@
 
 
             <!-- [ 問題集の情報 ] -->
-            <div class="card card-body mb-3">
+            <div class="cardd card-body mb-3">
 
 
                 <!-- タイトル -->
@@ -421,7 +421,7 @@
 
                             <!-- [ 問題集の説明 ] -->
                             @if ( $question_group->resume_text )
-                                <div class="card card-body">
+                                <div class="card card-body h-100">
                                     <replace-text-component text="{{ $question_group->resume_text }}"></replace-text-component>
                                 </div>
                             @endif
@@ -450,7 +450,7 @@
     </section>
 
     <!-- コメント -->
-    <section class="bg-light">
+    <section class="bg-">
         <div class="container-1200 py-3">
 
             <!-- コメントリストコンポーネント -->
@@ -472,30 +472,30 @@
 
 
     <!-- 三連メニュー -->
-    <section class="bg-light">
-        <div class="container-1200 py-3 pb-5">
-            <div class="row gap-3 px-3">
-                <div class="col-md h-100 card">
-                    <div class="card-body text-center">
-                        <h6 class="mb-3">同じ問題に挑戦する</h6>
+    <section class="bg-">
+        <div class="container-1200 py-5">
+            <div class="row gap-3">
+                <div class="col-md h-100 ">
+                    <div class="text-center">
                         @php $param = ['question_group'=>$question_group->id,'key'=>$question_group->key,]; @endphp
-                        <a href="{{ route('play_question', $param ) }}" class="btn rounded-pill btn-outline-success mx-auto"
-                        >GO!</a>
+                        <a href="{{ route('play_question', $param ) }}"
+                        class="btn rounded-pill btn-outline-success mx-auto w-100"
+                        >同じ問題に挑戦する</a>
                     </div>
                 </div>
-                <div class="col-md h-100 card">
-                    <div class="card-body text-center">
-                        <h6 class="mb-3">別の問題に挑戦する</h6>
-                        <a href="{{ route('questions_search_list') }}" class="btn rounded-pill btn-outline-success mx-auto"
-                        >GO!</a>
+                <div class="col-md h-100 cardd">
+                    <div class="text-center">
+                        <a href="{{ route('questions_search_list') }}"
+                        class="btn rounded-pill btn-outline-success mx-auto w-100"
+                        >別の問題に挑戦する</a>
                     </div>
                 </div>
                 @if (Auth::check())
-                    <div class="col-md h-100 card">
-                        <div class="card-body text-center">
-                            <h6 class="mb-3">これまでの成績を見る</h6>
-                            <a href="{{route('results.list')}}" class="btn rounded-pill btn-outline-success mx-auto"
-                            >GO!</a>
+                    <div class="col-md h-100 cardd">
+                        <div class="text-center">
+                            <a href="{{route('results.list')}}"
+                            class="btn rounded-pill btn-outline-success mx-auto w-100"
+                            >これまでの成績を見る</a>
                         </div>
                     </div>
                 @else
@@ -516,7 +516,7 @@
 
 
     <!-- [ 新着問題集トップ５！ ] -->
-    <section class="bg-light">
+    <section class="bg-">
         <div class="container-1200 py-3">
 
             <div class="  anm_right_01">

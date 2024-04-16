@@ -44,64 +44,71 @@
     <section class="">
 
         @forelse ($question_groups as $i => $question_group)
-        <a href=""
-        data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight{{ $i }}" aria-controls="offcanvasRight{{ $i }}"
-        class="card card-body border-0 shadow-sm mb-3 text-dark text-decoration-none list-group-item-action">
+        <div class="position-relative ">
 
-
-            <div class="row">
-                <!-- サムネイルmobile -->
-                <div class="col-auto  d-md-none">
-                    <div class="card-image border border-light" style="
-                        background:url({{ asset('storage/'.$question_group->image_puth) }});
-                        background-repeat  : no-repeat;
-                        background-size    : cover;
-                        background-position: center center;
-                        width: 3rem; height: 3rem; border-radius: .5rem;
-                    "></div>
-                </div>
-                <!-- サムネイルpc -->
-                <div class="col-auto  d-none d-md-block">
-                    <div class="card-image border border-light" style="
-                        background:url({{ asset('storage/'.$question_group->image_puth) }});
-                        background-repeat  : no-repeat;
-                        background-size    : cover;
-                        background-position: center center;
-                        width: 4rem; height: 4rem; border-radius: .5rem;
-                    "></div>
-                </div>
-                <!-- タイトルリンク -->
-                <div class="col">
-
-
-                    <div>
-                        <!-- 公開設定 -->
-                        @if ( $question_group->published_at )
-                        <span class="badge badge-primary"  style="border-radius:.8rem; transform: translateY(-0.1rem);"
-                        >公開中</span>
-                        @else
-                        <span class="badge badge-secondary" style="border-radius:.8rem; transform: translateY(-0.1rem);"
-                        >非公開</span>
-                        @endif
-
-                        <!-- 更新日 -->
-                        <span>更新日{{ \Carbon\Carbon::parse($question_group->updated_at)->format('Y-m-d') }}</span>
-                    </div>
-
-                    @php $title = mb_strlen($question_group->title ) > 16 ? mb_substr($question_group->title,0,16).'...' : $question_group->title; @endphp
-                    <span class="d-md-none fs-6">{{ $title }}</span>
-                    @php $title = mb_strlen($question_group->title ) > 24 ? mb_substr($question_group->title,0,24).'...' : $question_group->title; @endphp
-                    <span class="d-none d-md-inline fs-3">{{ $title }}</span>
-
-
-
-                </div>
+            <!--メニューボタン-->
+            <div class="position-absolute top-0 end-0" style="z-index:10;">
+                <botton class="btn bg-white px-2 py-1 rounded-pill border"
+                data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight{{ $i }}" aria-controls="offcanvasRight{{ $i }}"
+                ><i class="bi bi-three-dots-vertical"></i></botton>
             </div>
 
+            <a href="{{ route('make_question_group.select_edit', $question_group ) }}"
+            class="card card-body border-0 shadow- mb-3 text-dark text-decoration-none list-group-item-action">
+
+                <div class="row">
+                    <!-- サムネイルmobile -->
+                    <div class="col-auto  d-md-none">
+                        <div class="card-image border border-light" style="
+                            background:url({{ asset('storage/'.$question_group->image_puth) }});
+                            background-repeat  : no-repeat;
+                            background-size    : cover;
+                            background-position: center center;
+                            width: 3rem; height: 3rem; border-radius: .5rem;
+                        "></div>
+                    </div>
+                    <!-- サムネイルpc -->
+                    <div class="col-auto  d-none d-md-block">
+                        <div class="card-image border border-light" style="
+                            background:url({{ asset('storage/'.$question_group->image_puth) }});
+                            background-repeat  : no-repeat;
+                            background-size    : cover;
+                            background-position: center center;
+                            width: 4rem; height: 4rem; border-radius: .5rem;
+                        "></div>
+                    </div>
+                    <!-- タイトルリンク -->
+                    <div class="col">
 
 
-        </a>
+                        <div>
+                            <!-- 公開設定 -->
+                            @if ( $question_group->published_at )
+                            <span class="badge badge-primary"  style="border-radius:.8rem; transform: translateY(-0.1rem);"
+                            >公開中</span>
+                            @else
+                            <span class="badge badge-secondary" style="border-radius:.8rem; transform: translateY(-0.1rem);"
+                            >非公開</span>
+                            @endif
 
+                            <!-- 更新日 -->
+                            <span>更新日{{ \Carbon\Carbon::parse($question_group->updated_at)->format('Y-m-d') }}</span>
+                        </div>
+
+                        @php $title = mb_strlen($question_group->title ) > 16 ? mb_substr($question_group->title,0,16).'...' : $question_group->title; @endphp
+                        <span class="d-md-none fs-6">{{ $title }}</span>
+                        @php $title = mb_strlen($question_group->title ) > 24 ? mb_substr($question_group->title,0,24).'...' : $question_group->title; @endphp
+                        <span class="d-none d-md-inline fs-3">{{ $title }}</span>
+
+
+
+                    </div>
+                </div>
+
+
+
+            </a>
+        </div>
         <!--// offcanvas //-->
         <div class="offcanvas offcanvas-end"  style="max-width: 90vw;"
         tabindex="-1" id="offcanvasRight{{ $i }}" aria-labelledby="offcanvasRight{{ $i }}Label"
@@ -133,7 +140,7 @@
                     <!-- タグ -->
                     <div class="">
                         @if ($question_group->tags)
-                        <div class="d-flex gap-1 align-items-center">
+                        <div class="d-flex gap-1 flex-wrap align-items-center">
                             @foreach ( explode('　',$question_group->tags) as $tag )
                             <form action="{{ route('questions_search_list') }}">
                                 <input type="hidden" name="seach_keywords" value="{{$tag}}">
@@ -161,7 +168,7 @@
                 </div>
 
                 <!-- 公開日等 -->
-                <div class="m-3 card py-2">
+                {{-- <div class="m-3 card py-2">
                     @if ($question_group->published_at)
                         <div class="d-flex">
                             <div class="col-auto ps-3">公開</div>
@@ -183,10 +190,10 @@
                             {{\Carbon\Carbon::parse($question_group->updated_at)->format('Y年m月d日 H時i分')}}
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <!-- 基本情報 -->
-                <div class="m-3">
+                {{-- <div class="m-3">
                     <div class="card">
                     <div class="d-flex">
                         <div class="col-4 ps-3 bg-light">問題数</div>
@@ -209,7 +216,7 @@
                         <div class="col-8 ps-3">{{$question_group->keep_question_groups->count()}}</div>
                     </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <!-- menu -->
                 <div class="list-group mx-3 mb-5">

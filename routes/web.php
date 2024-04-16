@@ -7,6 +7,11 @@ use \App\Http\Controllers;
 Route::get('/', [Controllers\PlayQuestionController::class, 'list'])
 ->name('home');
 
+/*
+|--------------------------------------------------------------------------
+| 問題集を解く　処理　PlayJobQuestionController
+|--------------------------------------------------------------------------
+*/
 
 /*
 |--------------------------------------------------------------------------
@@ -14,24 +19,28 @@ Route::get('/', [Controllers\PlayQuestionController::class, 'list'])
 |--------------------------------------------------------------------------
 */
     # 全ての問題集一覧ページの表示(list)
-    Route::get('/questions_list', [Controllers\PlayQuestionController::class, 'list'])
+    Route::get('/questions_list',
+    [Controllers\PlayQuestionController::class, 'list'])
     ->name('questions_list');
 
     # 検索結果一覧の表示(questions_search_list)
-    Route::get('questions_search_list', [Controllers\PlayQuestionController::class, 'questions_search_list'])
+    Route::get('questions_search_list',
+    [Controllers\PlayQuestionController::class, 'questions_search_list'])
     ->name('questions_search_list');
 
     # 問題を解く(play_question)
-    Route::get('/play_question/{question_group}/{key}',[Controllers\PlayQuestionController::class, 'play_question'])
-    // function( \App\Models\QuestionGroup $question_group ){ return view('PlayQuestion.play_question', compact('question_group')); })
+    Route::get('/play_question/{question_group}/{key}',
+    [Controllers\PlayQuestionController::class, 'play_question'])
     ->name('play_question');
 
     # 問題情報の取得(get_questions_api)
-    Route::post('/get_questions_api', [Controllers\PlayQuestionController::class, 'get_questions_api'])
+    Route::post('/get_questions_api',
+    [Controllers\PlayQuestionController::class, 'get_questions_api'])
     ->name('get_questions_api');
 
     # 問題の採点(scoring)
-    Route::post('/scoring', [Controllers\PlayQuestionController::class, 'scoring'])
+    Route::post('/scoring',
+    [Controllers\PlayQuestionController::class, 'scoring'])
     ->name('scoring');
 
 
@@ -131,24 +140,43 @@ Route::get('/', [Controllers\PlayQuestionController::class, 'list'])
 
 
         # 問題の編集ページの表示(edit)
-        Route::get('/make_question/edit/{question}', [Controllers\MakeQuestionController::class, 'edit'])
+        Route::get('/make_question/edit/{question}',
+        [Controllers\MakeQuestionController::class, 'edit'])
         ->middleware(['question_auth'])
         ->name('make_question.edit');
 
         # 問題選択肢情報のAPI取得(question_options_api)
-        Route::post('/make_question/question_options_api', [Controllers\MakeQuestionController::class, 'question_options_api'])
+        Route::post('/make_question/question_options_api',
+        [Controllers\MakeQuestionController::class, 'question_options_api'])
         ->name('make_question.question_options_api');
 
         # 編集問題の保存(update)
-        Route::patch('/make_question/update/{question}', [Controllers\MakeQuestionController::class, 'update'])
+        Route::patch('/make_question/update/{question}',
+        [Controllers\MakeQuestionController::class, 'update'])
         ->middleware(['question_auth'])
         ->name('make_question.update');
 
 
         # 問題の削除(destroy)
-        Route::delete('/make_question/destroy/{question}', [Controllers\MakeQuestionController::class, 'destroy'])
+        Route::delete('/make_question/destroy/{question}',
+        [Controllers\MakeQuestionController::class, 'destroy'])
         ->middleware(['question_auth'])
         ->name('make_question.destroy');
+
+
+        # 問題のコピー(copy)
+        Route::get('/make_question/copy/{question}',
+        [Controllers\MakeQuestionController::class, 'copy'])
+        ->middleware(['question_auth'])
+        ->name('make_question.copy');
+
+
+        # 問題のコピー処理(copy)
+        Route::post('/make_question/copy_post/{question}',
+        [Controllers\MakeQuestionController::class, 'copy_post'])
+        ->middleware(['question_auth'])
+        ->name('make_question.copy_post');
+
 
     });//end middleware
 /*

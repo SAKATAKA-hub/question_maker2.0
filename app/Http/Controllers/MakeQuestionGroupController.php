@@ -27,6 +27,7 @@ class MakeQuestionGroupController extends Controller
         ->orderBy('created_at','desc')
         ->paginate(10);
 
+
         # ページの表示
         return view('MakeQuestionGroup.list', compact('question_groups'));
     }

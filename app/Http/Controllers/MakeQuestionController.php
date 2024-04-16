@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use App\Models\QuestionGroup;
+use App\Models\Question;
+use App\Models\QuestionOption;
 /*
 | =================================
 |  問題を作る　処理
@@ -14,10 +18,10 @@ class MakeQuestionController extends Controller
 
     /**
      * 問題の新規作成ページの表示(create)
-     * @param \App\Models\QuestionGroup $question_group //問題集グループ
+     * @param QuestionGroup $question_group //問題集グループ
      * @return \Illuminate\View\View
     */
-    public function create(\App\Models\QuestionGroup $question_group)
+    public function create(QuestionGroup $question_group)
     {
         return view('MakeQuestion.edit', compact('question_group') );
     }
@@ -26,116 +30,27 @@ class MakeQuestionController extends Controller
     /**
      * 新規作成問題の保存(store)
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\QuestionGroup $question_group //問題集グループ
+     * @param QuestionGroup $question_group //問題集グループ
      * @return \Illuminate\View\View
     */
-    public function store(Request $request, \App\Models\QuestionGroup $question_group)
+    public function store(Request $request, QuestionGroup $question_group)
     {
-        # 入力情報のデコード処理
-            // dd( $request->all() );
-            $inputs = [
-                "order"           => $request->order,
-                "text"            => $request->text,
-                "answer_type"     => $request->answer_type,
-                "answer_booleans" => $request->answer_booleans,
-                "option_ids"      => $request->option_ids,
-                "answer_texts"    => $request->answer_texts,
-                "image_dalete"    => $request->image_dalete,
-                "commentary_image_dalete" => $request->commentary_image_dalete,
-                "commentary_text" => $request->commentary_text,
-            ];
-
-            $request->text = urldecode($request->text);
-            $request->commentary_text = urldecode($request->commentary_text);
-            $answer_texts = $request->answer_texts;
-            for ($i=0; $i < count( $answer_texts ); $i++) {
-                $answer_texts[$i] = urldecode( $answer_texts[$i] );
-            }
-            $request->answer_texts = $answer_texts;
-
-
-        // dd( $request->text );
-
-
-        # 画像のアップロード
-
-            /* 基本設定 */
-            $dir = 'upload/user/question/image/'; //保存先ディレクトリ
-            $input_file_name = 'image';             //インプットファイルのname
-            $image_path = null;
-
-            /* アップロードする画像があるとき、画像のアップロード*/
-            if( $request_file = $request->file( $input_file_name ) )
-            {
-                $image_path =  $request->file( $input_file_name )->store($dir);
-            }//end if
-
-        //end 画像のアップロード
-
-
-        # テキストのストレージ保存
-        $dir = 'upload/user/question/text/';
-        $request->text = Method::uploadStorageText( $dir, $request->text );
-
-
-        # 解説画像のアップロード
-
-            /* 基本設定 */
-            $dir = 'upload/user/question/commentary_image/'; //保存先ディレクトリ
-            $input_file_name = 'commentary_image';             //インプットファイルのname
-            $commentary_image_path = null;
-
-            /* アップロードする画像があるとき、画像のアップロード*/
-            if( $request_file = $request->file( $input_file_name ) )
-            {
-                $commentary_image_path =  $request->file( $input_file_name )->store($dir);
-            }//end if
-
-        //end 画像のアップロード
-
-
-        # 解説テキストのストレージ保存
-        $dir = 'upload/user/question/commentary_text/';
-        $request->commentary_text = Method::uploadStorageText( $dir, $request->commentary_text );
-
-
-
         # 問題順の入替え
-
-            // 指定番号($request->order)以上の問題をすべて取得
-            $order_questions = \App\Models\Question::where('question_group_id',$question_group->id)
-            ->where( 'order', '>=', $request->order )
-            ->orderBy('order','asc')->get();
-
-            // 順番IDの更新
-            $order = $request->order + 1;
-            foreach ($order_questions as$order_queston) {
-               $order_queston->update(['order'=>$order]);
-                $order ++;
-            }
-
-        //end 問題順の入替え
+        MakeQuestionInput::ChangeOrder( $request,$question_group );
 
 
         # 問題情報の保存
-        $question = new \App\Models\Question([
-            'question_group_id' => $question_group->id,
-            'answer_type' => $request->answer_type,
-            'order' => $request->order,
-            'image' => $image_path,
-            'text' => $request->text,
-            'commentary_image' => $commentary_image_path,
-            'commentary_text' => $request->commentary_text,
-        ]);
+        $inputs = MakeQuestionInput::Index( $request, $question_group );
+        $question = new Question($inputs);
         $question->save();
-        $request->session()->regenerateToken(); //二重投稿防止
 
 
         # 解答選択肢の新規作成
 
             /* 0.基本情報 */
-            $answer_booleans = $request->answer_booleans; //「正解」の選択肢のkey番号を保存
-            $answer_texts    = $request->answer_texts   ; //選択肢のテキストを順に保存する配列
+            $answer_booleans = $inputs['answer_booleans']; //「正解」の選択肢のkey番号を保存
+            $answer_texts    = $inputs['answer_texts'];    //選択肢のテキストを順に保存する配列
+
 
             for ( $key=0; $key < count( $answer_texts ); $key++ )
             {
@@ -151,7 +66,7 @@ class MakeQuestionController extends Controller
                 /* テキストの入力あり => DBデータの新規作成 */
                 if( $answer_texts[ $key ] ){
 
-                    $question_option = new \App\Models\QuestionOption( $data );
+                    $question_option = new QuestionOption( $data );
                     $question_option->save();
 
                 }else{ /* DBデータ無し、テキストの入力なし => 処理なし*/ }
@@ -166,6 +81,7 @@ class MakeQuestionController extends Controller
         $question_group->updated_at = \Carbon\Carbon::now()->format('Y-m-d H:i:s');
         $question_group->save();
 
+        $request->session()->regenerateToken(); //二重投稿防止
 
         # 問題集の編集ヶ所選択ページへリダイレクト
         $param = ['question_group'=> $question_group->id, 'tab_menu'=>'tab02',];
@@ -179,13 +95,13 @@ class MakeQuestionController extends Controller
     /**
      * 問題の編集ページの表示(edit)
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Question $question //問題集グループ
+     * @param Question $question //問題集グループ
      * @return \Illuminate\View\View
     */
-    public function edit( Request $request, \App\Models\Question $question )
+    public function edit( Request $request, Question $question )
     {
         # 問題集の取得
-        $question_group = \App\Models\QuestionGroup::find($question->question_group_id);
+        $question_group = QuestionGroup::find($question->question_group_id);
         return view('MakeQuestion.edit', compact( 'question_group', 'question' ) );
     }
 
@@ -215,7 +131,7 @@ class MakeQuestionController extends Controller
 
 
         # 問題選択肢データの加工
-        $question_options = \App\Models\Question::find($request->question_id)->question_options;
+        $question_options = Question::find($request->question_id)->question_options;
         foreach ($question_options as $n => $question_option)
         {
             $options[] = [
@@ -241,167 +157,30 @@ class MakeQuestionController extends Controller
     /**
      * 編集問題の保存(update)
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Question $question //問題集グループ
+     * @param Question $question //問題集グループ
      * @return \Illuminate\View\View
     */
-    public function update( Request $request, \App\Models\Question $question )
+    public function update( Request $request, Question $question )
     {
-        # 入力情報のデコード処理
-            // dd( $request->all() );
-
-            $request->text = urldecode($request->text);
-            $request->commentary_text = urldecode($request->commentary_text);
-            $answer_texts = $request->answer_texts;
-            for ($i=0; $i < count( $answer_texts ); $i++) {
-                $answer_texts[$i] = urldecode( $answer_texts[$i] );
-            }
-            $request->answer_texts = $answer_texts;
-
-
         # 問題集データ
         $question_group = $question->question_group;
 
-
-        # 画像のアップロード
-
-            /* 基本設定 */
-            $dir = 'upload/user/question/image/'; //保存先ディレクトリ
-            $input_file_name = 'image';             //インプットファイルのname
-            $old_image_path = $question->image;
-            $image_path = null;
-            $delete = $request->image_dalete;
-
-            /* 画像削除の時 */
-            if( isset($delete) )
-            {
-                $delete_path = $old_image_path;
-                if( Storage::exists( $delete_path ) ){ storage::delete( $delete_path ); }
-                $image_path = null;
-            }
-            /* アップロードする画像があるとき、画像のアップロード*/
-            elseif( $request_file = $request->file( $input_file_name ) )
-            {
-                // ファイルのアップロード
-                $image_path =  $request->file( $input_file_name )->store($dir);
-
-                // 更新前のアップロードファイルを削除
-                $delete_path = $old_image_path;
-                if( Storage::exists( $delete_path ) ){ storage::delete( $delete_path ); }
-
-            }else{
-                $image_path = $old_image_path;
-            }
-
-
-        //end 画像のアップロード
-
-
-        # テキストのストレージ保存
-        $dir = 'upload/user/question/text/';
-        $request->text = Method::uploadStorageText( $dir, $new_text=$request->text, $old_text=$question->text );
-
-
-        # 解説画像のアップロード
-
-            /* 基本設定 */
-            $dir = 'upload/user/question/commentary_image/'; //保存先ディレクトリ
-            $input_file_name = 'commentary_image';             //インプットファイルのname
-            $old_commentary_image_path = $question->commentary_image;
-            $commentary_image_path = null;
-            $delete = $request->commentary_image_dalete;
-
-            /* 画像削除の時 (解説画像削除 or 解説文==null)*/
-            if( isset($delete) || empty($request->commentary_text)   )
-            {
-                $delete_path = $old_commentary_image_path;
-                if( Storage::exists( $delete_path ) ){ storage::delete( $delete_path ); }
-                $commentary_image_path = null;
-            }
-            /* アップロードする画像があるとき、画像のアップロード*/
-            elseif( $request_file = $request->file( $input_file_name ) )
-            {
-                // ファイルのアップロード
-                $commentary_image_path =  $request->file( $input_file_name )->store($dir);
-
-                // 更新前のアップロードファイルを削除
-                $delete_path = $old_commentary_image_path;
-                if( Storage::exists( $delete_path ) ){ storage::delete( $delete_path ); }
-
-            }else{
-                $commentary_image_path = $old_commentary_image_path;
-            }
-
-        //end 画像のアップロード
-
-
-
-        # テキストのストレージ保存
-        $dir = 'upload/user/question/commentary_text/';
-        $request->commentary_text = Method::uploadStorageText( $dir, $new_text=$request->commentary_text, $old_text=$question->commentary_text );
-
-
         # 問題順の入替え
-
-            // 順番変更の方向 [+]後ろに移動、[-]:前に移動
-            $up_down = $request->order - $question->order; //[ 変更後順位 ]-[ 変更前順位 ]
-
-            // 最初の順番変更箇所
-            $first_change_order = $up_down > 0 ? $question->order +1 : $request->order;
-            // 最後の順番変更箇所
-            $last_change_order  = $up_down > 0 ? $request->order     : $question->order -1;
-
-            // dd($up_down);
-            $order_questions = \App\Models\Question::where('question_group_id',$question_group->id)
-            ->where( 'order', '>=', $first_change_order )
-            ->where( 'order', '<=', $last_change_order )
-            ->orderBy('order','asc')->get();
-
-            // dd( $questions );
-            // dd( $first_change_order +1 );
-
-            /* 順位が上がる */
-            if( $up_down > 0 )
-            {
-                $order = $first_change_order - 1;
-                foreach ($order_questions as $order_question) {
-                    $order_question->update(['order'=>$order]);
-                    $order ++;
-                }
-            }
-            /* 順位が下がる */
-            if( $up_down < 0)
-            {
-                $order = $first_change_order + 1;
-                foreach ($order_questions as $order_question) {
-                    $order_question->update(['order'=>$order]);
-                    $order ++;
-                }
-
-            }
-
-        //end 問題順の入替え
+        MakeQuestionInput::ChangeOrder( $request,$question_group, $question );
 
 
         # 問題情報の保存
-        $question->update([
-            'question_group_id' => $question_group->id,
-            'answer_type' => $request->answer_type,
-            'order' => $request->order,
-            'image' => $image_path,
-            'text'  => $request->text,
-            'commentary_image' => $commentary_image_path,
-            'commentary_text' => $request->commentary_text,
-
-        ]);
+        $inputs = MakeQuestionInput::Index( $request, $question_group, $question );
+        $question->update($inputs);
         $question->save();
 
 
         # 解答選択肢の更新
 
             /* 0.基本情報 */
-            $option_ids      = $request->option_ids     ; //更新する選択肢IDを順に保存する配列（新規作成はnull）
-            $answer_booleans = $request->answer_booleans; //「正解」の選択肢のkey番号を保存
-            $answer_texts    = $request->answer_texts   ; //選択肢のテキストを順に保存する配列
+            $option_ids      = $inputs['option_ids'];      //更新する選択肢IDを順に保存する配列（新規作成はnull）
+            $answer_booleans = $inputs['answer_booleans']; //「正解」の選択肢のkey番号を保存
+            $answer_texts    = $inputs['answer_texts'];    //選択肢のテキストを順に保存する配列
 
 
             /* 1.DBデータの削除指示 => DBデータの削除 */
@@ -433,7 +212,7 @@ class MakeQuestionController extends Controller
                 {
                     if( $answer_texts[ $key ] ){
 
-                        $question_option = new \App\Models\QuestionOption( $data );
+                        $question_option = new QuestionOption( $data );
                         $question_option->save();
 
                     }else{ /* DBデータ無し、テキストの入力なし => 処理なし*/ }
@@ -442,14 +221,14 @@ class MakeQuestionController extends Controller
                 /* 3.DBデータあり、テキストの入力あり => DBデータの更新 */
                 else if( $answer_texts[ $key ] )
                 {
-                    $question_option = \App\Models\QuestionOption::find( $option_ids[ $key ] );
+                    $question_option = QuestionOption::find( $option_ids[ $key ] );
                     $question_option->update( $data );
 
                 }
                 /* 4.DBデータあり、テキストの入力無し => DBデータの削除 */
                 else
                 {
-                    $question_option = \App\Models\QuestionOption::find( $option_ids[ $key ] );
+                    $question_option = QuestionOption::find( $option_ids[ $key ] );
                     $question_option->delete();
 
                 }
@@ -463,6 +242,7 @@ class MakeQuestionController extends Controller
         $question_group->updated_at = \Carbon\Carbon::now()->format('Y-m-d H:i:s');
         $question_group->save();
 
+        $request->session()->regenerateToken(); //二重投稿防止
 
         # 問題集の編集ヶ所選択ページへリダイレクト
         $param = ['question_group'=> $question_group->id, 'tab_menu'=>'tab02',];
@@ -476,10 +256,10 @@ class MakeQuestionController extends Controller
     /**
      * 問題の削除(destroy)
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Question $question //問題集グループ
+     * @param Question $question //問題集グループ
      * @return \Illuminate\View\View
     */
-    public function destroy( Request $request, \App\Models\Question $question )
+    public function destroy( Request $request, Question $question )
     {
         # 問題集データ
         $question_group = $question->question_group;
@@ -505,7 +285,7 @@ class MakeQuestionController extends Controller
         # 問題順の入替え
 
             // 指定番号($question->order)以上の問題をすべて取得
-            $order_questions = \App\Models\Question::where('question_group_id',$question_group->id)
+            $order_questions = Question::where('question_group_id',$question_group->id)
             ->where( 'order', '>', $question->order )
             ->orderBy('order','asc')->get();
 
@@ -543,5 +323,42 @@ class MakeQuestionController extends Controller
 
 
 
+
+    /**
+     * 問題のコピー(copy)
+     * @param \Illuminate\Http\Request $request
+     * @param Question $question //問題集グループ
+     * @return \Illuminate\View\View
+    */
+    public function copy( Request $request, Question $question )
+    {
+        # 問題集の取得
+        $question_group = QuestionGroup::find($question->question_group_id);
+
+        # ユーザー情報
+        $user = Auth::user();
+
+        # ユーザーの問題集情報の取得
+        $question_groups = \App\Models\QuestionGroup::where('user_id',$user->id)
+        ->orderBy('created_at','desc')
+        ->get();
+
+        return view('MakeQuestion.copy', compact( 'question_group','question_groups', 'question' ) );
+    }
+
+
+
+
+    /**
+     * 問題のコピーの処理(copy_post)
+     * @param \Illuminate\Http\Request $request
+     * @param Question $question //問題集グループ
+     * @return \Illuminate\View\View
+    */
+    public function copy_post( Request $request, Question $question )
+    {
+        $question_group = QuestionGroup::find($request->question_group_id);
+        dd($question_group->toArray());
+    }
 
 }

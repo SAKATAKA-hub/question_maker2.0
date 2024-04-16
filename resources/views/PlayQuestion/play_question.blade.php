@@ -39,19 +39,31 @@
         <header>
             @include('_parts.header')
         </header>
-        <main>
+        <main >
+
+            <!-- 背景 -->
+            <div class="position-fixed top-0 start-0 h-100 w-100"
+            style="
+            background: no-repeat center center / cover;
+            background-image: url({{ asset('storage/site/image/top.png') }});
+            opacity: .3; z-index:-1;
+            "></div>
 
             <!-- contents -->
             <section class="">
-                <div class="container-1200 py-2 mt-md-5 bg-light border-start border-5 border-success">
+                {{-- <div class="container-900 py-2 mt-md-5 bg-light border-start border-5 border-success"> --}}
+                <div class="container-900">
+                    <div class="p-2 px-3 border-start border-5 border-success"
+                    style="background:rgb(20, 207, 160, .1); border-radius:0 1.6rem 1.6rem 0;">
 
                     <h2 class="mb-0 fs-6 d-md-none">{{$question_group->title}}</h2>
                     <h2 class="mb-0 d-none d-md-block">{{$question_group->title}}</h2>
 
+                    </div>
                 </div>
             </section>
             <section>
-                <div class="container-600 my-md-5">
+                <div class="container-900 my-md-">
 
 
                     <play-question-component></play-question-component>

@@ -25,7 +25,7 @@
             @include('_parts.header')
 
             <!-- 見出しタイトル -->
-            <section class="border-bottom border-1 bg-white">
+            <section class="border- bg-white">
                 <div class="container-1200 pb-0">
 
                     <h2 class="text-secondary fw-bold fs-5">@yield('title')</h2>

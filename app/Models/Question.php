@@ -182,6 +182,7 @@ class Question extends Model
         */
         public function getAnswerAttribute(){
 
+
             switch ( $this->answer_type ) {
                 /* 解答選択肢が複数の時 */
                 case 2:
@@ -202,6 +203,7 @@ class Question extends Model
                     QuestionOption::where('question_id', $this->id)->where('answer_boolean', 1 )->first();
 
                     $answer = $question_option->answer_text;
+                    // dd($answer);
                     break;
                 //
             }

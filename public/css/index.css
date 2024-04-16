@@ -98,6 +98,12 @@ main{
         background-color: #14cfa0;
         border-color: #14cfa0;
     }
+
+    /* タブ */
+    .nav-pills .nav-link.active {
+        background-color: #14CFA0 !important ;
+    }
+
 /*
 * ---------------------------
 * コンテナー

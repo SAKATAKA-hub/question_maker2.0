@@ -72,14 +72,14 @@
             </div>
 
             <!-- [ ページトップ ] -->
-            <section class="top">
+            <section class="top position-relative">
                 <!-- 背景 -->
-                <div class="top_bg_container">
-                    <div class="top_bg" style="
-                        background:url({{ asset('storage/site/image/22636100.jpg') }});
-                        background-repeat  : repeat;
-                    "></div>
-                </div>
+                <div class="position-absolute top-0 start-0 h-100 w-100"
+                style="
+                background: no-repeat center center / cover;
+                background-image: url({{ asset('storage/site/image/top.png') }});
+                opacity: .3; z-index:-1;
+                "></div>
 
 
                 <div class="container-1200">
@@ -262,9 +262,10 @@
             <section>
                 <div class="container-1200 my-5">
 
-                    <div class="row mx-3">
+                    <div class="row mx-">
                         <div class="col-md-6" >
-                            <img src="{{ asset('storage/site/image/23020196.jpg') }}" class="d-block w-100 anm_scale_01" alt="人気の問題集">
+                            <img src="{{ asset('storage/site/image/top.png') }}"
+                            class="d-block w-100 anm_scale_01" alt="人気の問題集">
                         </div>
                         <div class="col-md-6 d-flex align-items-center">
                             <div class="  anm_right_01">
@@ -302,9 +303,9 @@
                 <div class="container-1200 my-5">
 
 
-                    <div class="row mx-3">
+                    <div class="row mx-">
                         <div class="col-md-6 order-md-2" >
-                            <img src="{{ asset('storage/site/image/22901978.jpg') }}" class="d-block w-100  anm_scale_01" alt="人気の問題集">
+                            <img src="{{ asset('storage/site/image/sub01.png') }}" class="d-block w-100  anm_scale_01" alt="人気の問題集">
                         </div>
                         <div class="col-md-6 d-flex align-items-center">
                             <div class="  anm_left_01">
@@ -342,13 +343,13 @@
 
 
             <!-- [ 広告リンク ] -->
-            <section>
+            {{-- <section>
                 <div class="container-1200 my-5">
 
                     @include('_parts.advertisement')
 
                 </div>
-            </section>
+            </section> --}}
 
 
         </main>

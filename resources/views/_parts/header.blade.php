@@ -75,21 +75,22 @@
 
 
 <!-- 検索ボックス　offcanpas -->
-<div class="offcanvas offcanvas-top" tabindex="-1" style="height: 12rem;"
+<div class="offcanvas offcanvas-top" tabindex="-1" style="height:10rem;"
 id="seachOffcanvas" aria-labelledby="seachOffcanvasLabel">
     <form action="{{ route('questions_search_list') }}">
 
 
         <div class="offcanvas-body">
             <!--title-->
-            <div class="mx-auto mb-3  position-relative" style="max-width:1200px;">
-                <h5 class="offcanvas-title">問題集検索</h5>
-                <div class="p-3 position-absolute top-0 end-0">
+            <div class="mx-auto mb-3" style="max-width:1200px;">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="offcanvas-title">問題集検索</h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
             </div>
+
             <!--body-->
-            <div class="mx-auto mb-3" style="max-width:1200px;">
+            <div class="mx-auto" style="max-width:1200px;">
 
                 <!-- 順序入れ替え -->
                 @php  $order = isset($order) ? $order : 'published_at,desc'; @endphp

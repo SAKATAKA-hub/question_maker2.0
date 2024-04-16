@@ -33,7 +33,7 @@
             @include('_parts.header')
 
             <!-- 見出しタイトル -->
-            <section class="border-bottom border-1 bg-white">
+            <section class="border- bg-white">
                 <div class="container-1200 pb-0">
 
                     <h2 class="text-secondary fw-bold fs-5">@yield('title')</h2>
@@ -52,6 +52,38 @@
 
         </header>
         <main>
+            <div  class="row mx-auto g-5 pt-3" style="max-width:1200px;">
+
+
+                <!--flex-c1  サイドコンテンツ -->
+                <!--PC-->
+                <aside class="d-none d-md-block col-auto pe-3" style="min-width:300px; width:300px;">
+                    <div class="position-sticky ps-2" style="top: 2rem; ">
+                        @include('_parts.creater_info')
+                    </div>
+                </aside>
+                <!--movile-->
+                <div class="d-md-none mb-5 col-12">
+                    @include('_parts.creater_info')
+                </div>
+
+                <!--flex-c2-->
+                <div class="col bg-white">
+
+                    <div style="min-height:90vh;">
+                        @yield('contents')
+                    </div>
+
+                </div>
+
+
+            </div>
+            <!-- フェードインアラート -->
+            @include('_parts.alert')
+
+        </main>
+
+        {{-- <main>
 
 
             <!-- contents -->
@@ -84,7 +116,7 @@
             @include('_parts.alert')
 
 
-        </main>
+        </main> --}}
         <footer>
             @include('_parts.footer')
         </footer>

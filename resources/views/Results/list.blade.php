@@ -63,7 +63,7 @@
             @php $question_group = $answer_group->question_group; @endphp
             @php $param = [ 'answer_group'=>$answer_group, 'key'=>$answer_group->user->key ]; @endphp
             <a href="{{route('results.detail', $param )}}"
-            class="card card-body border-0 shadow-sm mb-3 text-dark text-decoration-none list-group-item-action">
+            class="card card-body border-0 shadow- mb-3 text-dark text-decoration-none list-group-item-action">
 
                 <div class="row align-items-center">
                     <!-- サムネイルmobile -->
