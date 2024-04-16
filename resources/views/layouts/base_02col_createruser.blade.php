@@ -57,7 +57,7 @@
 
                 <!--flex-c1  サイドコンテンツ -->
                 <!--PC-->
-                <aside class="d-none d-md-block col-auto pe-3" style="min-width:300px; width:300px;">
+                <aside class="d-none d-md-block col-auto px-3" style="min-width:300px; width:300px;">
                     <div class="position-sticky ps-2" style="top: 2rem; ">
                         @include('_parts.creater_info')
                     </div>

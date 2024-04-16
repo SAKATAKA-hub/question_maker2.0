@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use \Illuminate\Support\Str;
+use App\Models\QuestionGroup;
+use App\Models\Question;
+use App\Models\QuestionOption;
 /*
 | =================================
 |  問題集を作る　処理
@@ -23,7 +27,7 @@ class MakeQuestionGroupController extends Controller
         $user = Auth::user();
 
         # ユーザーの問題集情報の取得
-        $question_groups = \App\Models\QuestionGroup::where('user_id',$user->id)
+        $question_groups = QuestionGroup::where('user_id',$user->id)
         ->orderBy('created_at','desc')
         ->paginate(10);
 
@@ -36,10 +40,10 @@ class MakeQuestionGroupController extends Controller
 
     /**
      * 問題集の詳細表示(detail)
-     * @param \App\Models\QuestionGroup $question_group //選択した問題集グループ
+     * @param QuestionGroup $question_group //選択した問題集グループ
      * @return \Illuminate\View\View
     */
-    public function detail(\App\Models\QuestionGroup $question_group)
+    public function detail(QuestionGroup $question_group)
     {
         return 'detail';
     }
@@ -64,43 +68,12 @@ class MakeQuestionGroupController extends Controller
     */
     public function store(Request $request)
     {
-        // dd($request->all());
-        # ユーザー情報
-        $user = Auth::user();
-
-
-        # 画像のアップロード
-
-            /* 基本設定 */
-            $dir = 'upload/user/question_group/image/'; //保存先ディレクトリ
-            $input_file_name = 'image';             //インプットファイルのname
-            $image_path = null;
-
-            /* アップロードする画像があるとき、画像のアップロード*/
-            if( $request_file = $request->file( $input_file_name ) )
-            {
-                $image_path =  $request->file( $input_file_name )->store($dir);
-            }//end if
-
-        //end 画像のアップロード
-
-
-        # テキストのストレージ保存
-        $dir = 'upload/user/question_group/resume/';
-        $request->resume = Method::uploadStorageText( $dir, $request->resume );
-
-
-        # 問題集基本情報の保存
-        $question_group = new \App\Models\QuestionGroup([
-            'user_id'    => $user->id,
-            'title'      => $request->title,
-            'resume'     => $request->resume,
-            'time_limit' => implode(':',$request->time_limit),
-            'image'      => $image_path,
-            'tags'       => str_replace(' ','　',$request->tags),//タグの空文字を大文字に統一
-            'key'      =>\Illuminate\Support\Str::random(40),
-        ]);
+        # 新規登録
+        $inputs = MakeQuestionGroupInput::index( $request, $question_group=null );
+        $question_group = new QuestionGroup($inputs);
         $question_group->save();
+
+        $request->session()->regenerateToken(); //二重投稿防止
 
 
         # 問題集の編集ヶ所選択ページへリダイレクト
@@ -114,16 +87,11 @@ class MakeQuestionGroupController extends Controller
 
     /**
      * 問題集の編集ヶ所選択ページの表示(select_edit)
-     * @param \App\Models\QuestionGroup $question_group //選択した問題集グループ
+     * @param QuestionGroup $question_group //選択した問題集グループ
      * @return \Illuminate\View\View
     */
-    public function select_edit(\App\Models\QuestionGroup $question_group, $tab_menu='tab01')
+    public function select_edit(QuestionGroup $question_group, $tab_menu='tab01')
     {
-
-        // dd($question_group->questions[0]->text_text);
-
-
-
         return view('MakeQuestionGroup.select_edit', compact(
             'question_group','tab_menu'
         ) );
@@ -134,10 +102,10 @@ class MakeQuestionGroupController extends Controller
 
     /**
      * 問題集の編集表示(edit)
-     * @param \App\Models\QuestionGroup $question_group //選択した問題集グループ
+     * @param QuestionGroup $question_group //選択した問題集グループ
      * @return \Illuminate\View\View
     */
-    public function edit(\App\Models\QuestionGroup $question_group)
+    public function edit(QuestionGroup $question_group)
     {
         return view('MakeQuestionGroup.edit', compact('question_group') );
     }
@@ -148,75 +116,15 @@ class MakeQuestionGroupController extends Controller
     /**
      * 編集問題集の更新(update)
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\QuestionGroup $question_group //選択した問題集グループ
+     * @param QuestionGroup $question_group //選択した問題集グループ
      * @return \Illuminate\View\View
     */
-    public function update(Request $request, \App\Models\QuestionGroup $question_group )
+    public function update(Request $request, QuestionGroup $question_group )
     {
-        // dd('update');
-        // dd($request->all());
-
-        # 入力内容の加工
-        $input = $request->all();
-        $input['tags'] = str_replace(' ','　',$request->tags);//タグの空文字を大文字に統一
-        unset($input['_token'], $input['_method']);
-
-
-        # 公開日の登録
-        $input['published_at'] =  $question_group->published_at;
-        if( $request->is_public && empty(  $question_group->published_at ) ){
-            $input['published_at'] = \Carbon\Carbon::parse('now')->format('Y-m-d H:i:s');
-        }
-
-
-        # 制限時間の登録
-        $input['time_limit'] = implode(':',$request->time_limit);
-
-
-        # 画像のアップロード
-
-            /* 基本設定 */
-            $dir = 'upload/user/question_group/image/'; //保存先ディレクトリ
-            $input_file_name = 'image';             //インプットファイルのname
-            $old_image_path = $question_group->image;
-            $image_path = null;
-            $delete = $request->image_dalete;
-
-            /* 画像削除の時 */
-            if( isset($delete) )
-            {
-                $delete_path = $old_image_path;
-                if( Storage::exists( $delete_path ) ){ storage::delete( $delete_path ); }
-                $image_path = null;
-            }
-            /* アップロードする画像があるとき、画像のアップロード*/
-            elseif( $request_file = $request->file( $input_file_name ) )
-            {
-                // ファイルのアップロード
-                $image_path =  $request->file( $input_file_name )->store($dir);
-
-                // 更新前のアップロードファイルを削除
-                $delete_path = $old_image_path;
-                if( Storage::exists( $delete_path ) ){ storage::delete( $delete_path ); }
-
-            }else{
-                $image_path = $old_image_path;
-            }
-
-            /* 画像パスを入力内容に追加*/
-            $input['image'] = $image_path;
-
-        //end 画像のアップロード
-
-
-        # テキストのストレージ保存
-        $dir = 'upload/user/question_group/resume/';
-        $input['resume'] =
-        Method::uploadStorageText( $dir, $new_text=$input['resume'] , $old_text=$question_group->resume);
-
-
         # 入力内容をDBへ保存
-        $question_group->update( $input );
+        $inputs = MakeQuestionGroupInput::index( $request, $question_group );
+        $question_group->update( $inputs );
+        $request->session()->regenerateToken(); //二重投稿防止
 
 
         # 問題集の編集ヶ所選択ページへリダイレクト
@@ -228,10 +136,10 @@ class MakeQuestionGroupController extends Controller
     /**
      * 問題集の削除(destroy)
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\QuestionGroup $question_group //選択した問題集グループ
+     * @param QuestionGroup $question_group //選択した問題集グループ
      * @return \Illuminate\View\View
     */
-    public function destroy(Request $request, \App\Models\QuestionGroup $question_group)
+    public function destroy(Request $request, QuestionGroup $question_group)
     {
 
         # ストレージ保存ファイルの削除
@@ -263,18 +171,76 @@ class MakeQuestionGroupController extends Controller
 
         # 問題集の編集ヶ所選択ページへリダイレクト
         return redirect()->route('make_question_group.list')
-        ->with('alert-danger','問題集の基本情報を削除しました。');
+        ->with('alert-danger','問題集を１件削除しました。');
     }
+
+
+
+    /**
+     * 問題のコピーの処理(copy)
+     * @param \Illuminate\Http\Request $request
+     * @param QuestionGroup $question_group //選択した問題集グループ
+     * @param QuestionGroup $question_group //選択した問題集グループ
+     * @return \Illuminate\View\View
+    */
+    public function copy( Request $request, QuestionGroup $question_group )
+    {
+        # ユーザー情報
+        $user = Auth::user();
+
+        $inputs = [
+            'user_id'    => $user->id,
+            'title'      => 'コピー：'.$question_group->title,//
+            'resume'     => $question_group->resume,//
+            'image'      => $question_group->image,//
+            'time_limit' => $question_group->time_limit,
+            'tags'       => $question_group->tags,//タグの空文字を大文字に統一
+            'key'        => Str::random(40),
+        ];
+
+        # 画像ファイルの複製
+        $dir = 'upload/user/question_group/image/'; //保存先ディレクトリ
+        $path = $question_group->image;
+        $inputs['image'] = Method::copyStorageFile( $dir, $path );
+
+
+        # テキストの複製
+        $dir = 'upload/user/question_group/resume/';
+        $path = $question_group->resume;
+        $inputs['resume'] = Method::copyStorageFile( $dir, $path );
+
+
+
+        # 問題の新規登録
+        $new_question_group = new QuestionGroup($inputs);
+        $new_question_group->save();
+
+
+
+        # 問題のコピー
+        $questions = $question_group->questions;
+        foreach ( $questions as $question )
+        {
+            $new_question = MakeQuestionController::CopyMethod( $question, $new_question_group->id );
+        }
+
+
+        # 問題集の編集ヶ所選択ページへリダイレクト
+        return redirect()->route('make_question_group.list')
+        ->with('alert-warning','問題集のコピーを作成しました。');
+    }
+
+
 
 
 
     /**
      * 公開設定の更新(update_published)
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\QuestionGroup $question_group //選択した問題集グループ
+     * @param QuestionGroup $question_group //選択した問題集グループ
      * @return \Illuminate\View\View
     */
-    public function update_published(Request $request, \App\Models\QuestionGroup $question_group)
+    public function update_published(Request $request, QuestionGroup $question_group)
     {
 
         # 公開日の登録
@@ -429,7 +395,7 @@ class MakeQuestionGroupController extends Controller
 
 
             //[1]問題集基本情報の保存
-            $question_group = new \App\Models\QuestionGroup($input_question_group);
+            $question_group = new QuestionGroup($input_question_group);
             $question_group->save();
 
 

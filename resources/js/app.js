@@ -55,6 +55,10 @@ Vue.component('encodedーtextarea-component',  require('./components/Items/Encod
 /* エスケープインプットテキスト*/
 Vue.component('encodedーinputtext-component',  require('./components/Items/EncodedInputtextComponent.vue').default);
 
+/* disabled(ノーマルform用) ボタン */
+Vue.component('disabled-button',
+require('./components/Items/DisabledButton.vue').default);
+
 
 /* 認証 */
 Vue.component('reset-pass-component', require('./components/UserAuth/ResetPassComponent.vue').default);

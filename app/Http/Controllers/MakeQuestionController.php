@@ -313,6 +313,7 @@ class MakeQuestionController extends Controller
         $question_group->updated_at = \Carbon\Carbon::now()->format('Y-m-d H:i:s');
         $question_group->save();
 
+        $request->session()->regenerateToken(); //二重投稿防止
 
         # 問題集の編集ヶ所選択ページへリダイレクト
         $param = ['question_group'=> $question_group->id, 'tab_menu'=>'tab02',];
@@ -357,8 +358,82 @@ class MakeQuestionController extends Controller
     */
     public function copy_post( Request $request, Question $question )
     {
-        $question_group = QuestionGroup::find($request->question_group_id);
-        dd($question_group->toArray());
+        # コピー
+        $question_group_id = $request->question_group_id;
+        $new_question = self::CopyMethod( $question, $question_group_id );
+        $request->session()->regenerateToken(); //二重投稿防止
+
+
+        # 問題集の編集ヶ所選択ページへリダイレクト
+        $param = ['question_group'=> $question_group_id, 'tab_menu'=>'tab02',];
+        return redirect()->route('make_question_group.select_edit', $param)
+        ->with('alert-warning','問題を1件コピーしました。');
+
     }
 
+
+
+
+    /**
+     * コピーメソッド
+     * @param  Question $question //問題集グループ
+     * @param  Integer  $question_group_id
+     * @return Question $new_question
+    */
+    public static function CopyMethod( $question, $question_group_id )
+    {
+        $question_group = QuestionGroup::find($question_group_id);
+
+        $inputs = [
+            'question_group_id' => $question_group_id,
+            'image'             => '', //問題画像
+            'text'              => '', //問題文
+            'commentary_image'  => '', //説明画像
+            'commentary_text'   => '', //説明文
+            'random'            => $question->random, // ランダム設定
+            'answer_type'       => $question->answer_type,
+
+            'order'             => $question_group->questions->count()+1,//並び順
+        ];
+
+        # 画像ファイルの複製
+        $dir = 'upload/user/question/image/';//保存先ディレクトリ
+        $path = $question->image;
+        $inputs['image'] = Method::copyStorageFile( $dir, $path );
+
+        # テキストファイルの複製
+        $dir = 'upload/user/question/text/';//保存先ディレクトリ
+        $path = $question->text;
+        $inputs['text'] = Method::copyStorageFile( $dir, $path );
+
+        # 解説画像ファイルの複製
+        $dir = 'upload/user/question/commentary_image/';//保存先ディレクトリ
+        $path = $question->commentary_image;
+        $inputs['commentary_image'] = Method::copyStorageFile( $dir, $path );
+
+        # 解説テキストファイルの複製
+        $dir = 'upload/user/question/commentary_text/';//保存先ディレクトリ
+        $path = $question->commentary_text;
+        $inputs['commentary_text'] = Method::copyStorageFile( $dir, $path );
+
+        # 問題の新規登録
+        $new_question = new Question($inputs);
+        $new_question->save();
+
+
+        # 解答選択肢の登録
+        $question_options = $question->question_options;
+        foreach ($question_options as $question_option)
+        {
+            $question_option = new QuestionOption([
+                'question_id'    => $new_question->id,
+                'answer_text'    => $question_option->answer_text,
+                'answer_boolean' => $question_option->answer_boolean,
+            ]);
+            $question_option->save();
+        }
+
+
+        return Question::find($new_question->id);
+    }
 }

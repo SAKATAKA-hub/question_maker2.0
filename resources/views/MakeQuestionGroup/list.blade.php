@@ -48,9 +48,9 @@
 
             <!--メニューボタン-->
             <div class="position-absolute top-0 end-0" style="z-index:10;">
-                <botton class="btn bg-white px-2 py-1 rounded-pill border"
+                <button class="btn bg-white px-2 py-1 rounded-pill border"
                 data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight{{ $i }}" aria-controls="offcanvasRight{{ $i }}"
-                ><i class="bi bi-three-dots-vertical"></i></botton>
+                ><i class="bi bi-three-dots-vertical"></i></button>
             </div>
 
             <a href="{{ route('make_question_group.select_edit', $question_group ) }}"
@@ -218,68 +218,15 @@
                     </div>
                 </div> --}}
 
-                <!-- menu -->
-                <div class="list-group mx-3 mb-5">
+                <!-- menu01 -->
+                <div class="list-group mx-3 mb-3">
                     @php $param = ['question_group'=>$question_group->id,'key'=>$question_group->key,]; @endphp
                     <a href="{{ route('play_question', $param ) }}"
                     class="list-group-item list-group-item-action">
-                        <div class="d-flex justify-content-between">
-                            <p class="mb-0">
-                                <i class="bi bi-play-circle-fill"></i>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="mb-0 d-flex align-items-center">
+                                <i class="bi bi-play-circle-fill fs-1"></i>
                                 <span class="ms-3">受検する</span>
-                            </p>
-                            <i class="bi bi-chevron-right"></i>
-                        </div>
-                    </a>
-                    <a href="{{ route('make_question_group.select_edit', $question_group ) }}"
-                    class="list-group-item list-group-item-action">
-                        <div class="d-flex justify-content-between">
-                            <p class="mb-0">
-                                <i class="bi bi-card-heading"></i>
-                                <span class="ms-3">詳細情報</span>
-                            </p>
-                            <i class="bi bi-chevron-right"></i>
-                        </div>
-                    </a>
-                    <a href="{{route('make_question_group.edit',$question_group)}}"
-                    class="list-group-item list-group-item-action">
-                        <div class="d-flex justify-content-between">
-                            <p class="mb-0">
-                                <i class="bi bi-pencil-fill"></i>
-                                <span class="ms-3">基本情報の編集</span>
-                            </p>
-                            <i class="bi bi-chevron-right"></i>
-                        </div>
-                    </a>
-                    @php $param = ['question_group'=>$question_group->id,'tab_menu'=>'tab02',]; @endphp
-                    <a href="{{ route('make_question_group.select_edit', $param ) }}"
-                    class="list-group-item list-group-item-action">
-                        <div class="d-flex justify-content-between">
-                            <p class="mb-0">
-                                <i class="bi bi-pencil"></i>
-                                <span class="ms-3">問題の編集</span>
-                            </p>
-                            <i class="bi bi-chevron-right"></i>
-                        </div>
-                    </a>
-                    @php $param = ['question_group'=>$question_group->id,'tab_menu'=>'tab03',]; @endphp
-                    <a href="{{ route('make_question_group.select_edit', $param ) }}"
-                    class="list-group-item list-group-item-action">
-                        <div class="d-flex justify-content-between">
-                            <p class="mb-0">
-                                <i class="bi bi-eye"></i>
-                                <span class="ms-3">公開設定</span>
-                            </p>
-                            <i class="bi bi-chevron-right"></i>
-                        </div>
-                    </a>
-                    @php $param = ['question_group'=>$question_group->id,'tab_menu'=>'tab04',]; @endphp
-                    <a href="{{ route('make_question_group.select_edit', $param ) }}"
-                    class="list-group-item list-group-item-action">
-                        <div class="d-flex justify-content-between">
-                            <p class="mb-0">
-                                <i class="bi bi-chat-square-text"></i>
-                                <span class="ms-3">コメント</span>
                             </p>
                             <i class="bi bi-chevron-right"></i>
                         </div>
@@ -287,10 +234,77 @@
                     @php $param = ['question_group'=>$question_group->id,'tab_menu'=>'tab05',]; @endphp
                     <a href="{{ route('make_question_group.select_edit', $param ) }}"
                     class="list-group-item list-group-item-action">
-                        <div class="d-flex justify-content-between">
-                            <p class="mb-0">
-                                <i class="bi bi-people"></i>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="mb-0 d-flex align-items-center">
+                                <i class="bi bi-people fs-1"></i>
                                 <span class="ms-3">受検ユーザー</span>
+                            </p>
+                            <i class="bi bi-chevron-right"></i>
+                        </div>
+                    </a>
+                    @php $param = ['question_group'=>$question_group->id,'tab_menu'=>'tab04',]; @endphp
+                    <a href="{{ route('make_question_group.select_edit', $param ) }}"
+                    class="list-group-item list-group-item-action">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="mb-0 d-flex align-items-center">
+                                <i class="bi bi-chat-square-text fs-1"></i>
+                                <span class="ms-3">コメント</span>
+                            </p>
+                            <i class="bi bi-chevron-right"></i>
+                        </div>
+                    </a>
+                </div>
+                <!-- menu02 -->
+                <div class="list-group mx-3 mb-3">
+                    <a href="{{ route('make_question_group.select_edit', $question_group ) }}"
+                    class="list-group-item list-group-item-action">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="mb-0 d-flex align-items-center">
+                                <i class="bi bi-card-heading fs-1"></i>
+                                <span class="ms-3">詳細情報</span>
+                            </p>
+                            <i class="bi bi-chevron-right"></i>
+                        </div>
+                    </a>
+                    {{-- <a href="{{route('make_question_group.edit',$question_group)}}"
+                    class="list-group-item list-group-item-action">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="mb-0 d-flex align-items-center">
+                                <i class="bi bi-pencil-fill fs-1"></i>
+                                <span class="ms-3">基本情報の編集</span>
+                            </p>
+                            <i class="bi bi-chevron-right"></i>
+                        </div>
+                    </a> --}}
+                    @php $param = ['question_group'=>$question_group->id,'tab_menu'=>'tab02',]; @endphp
+                    <a href="{{ route('make_question_group.select_edit', $param ) }}"
+                    class="list-group-item list-group-item-action">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="mb-0 d-flex align-items-center">
+                                <i class="bi bi-pencil fs-1"></i>
+                                <span class="ms-3">問題を編集する</span>
+                            </p>
+                            <i class="bi bi-chevron-right"></i>
+                        </div>
+                    </a>
+                    @php $param = ['question_group'=>$question_group->id,'tab_menu'=>'tab03',]; @endphp
+                    <a href="{{ route('make_question_group.select_edit', $param ) }}"
+                    class="list-group-item list-group-item-action">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="mb-0 d-flex align-items-center">
+                                <i class="bi bi-eye fs-1"></i>
+                                <span class="ms-3">公開設定</span>
+                            </p>
+                            <i class="bi bi-chevron-right"></i>
+                        </div>
+                    </a>
+                    <a href="#"
+                    data-bs-toggle="modal" data-bs-target="#copyQuestionGroupModal{{$i}}"
+                    class="list-group-item list-group-item-action">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="mb-0 d-flex align-items-center">
+                                <i class="bi bi-files fs-1"></i>
+                                <span class="ms-3">コピーを作る</span>
                             </p>
                             <i class="bi bi-chevron-right"></i>
                         </div>
@@ -298,10 +312,10 @@
                     <a href="#"
                     data-bs-toggle="modal" data-bs-target="#deleteQuestionGroupModal{{$i}}"
                     class="list-group-item list-group-item-action">
-                        <div class="d-flex justify-content-between">
-                            <p class="mb-0">
-                                <i class="bi bi-trash"></i>
-                                <span class="ms-3">削除</span>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="mb-0 d-flex align-items-center">
+                                <i class="bi bi-trash fs-1"></i>
+                                <span class="ms-3">削除する</span>
                             </p>
                             <i class="bi bi-chevron-right"></i>
                         </div>
@@ -311,27 +325,64 @@
 
         </div>
 
+
+
+        <!-- copy Modal -->
+        <div class="modal fade" id="copyQuestionGroupModal{{$i}}" tabindex="-1" aria-labelledby="copyQuestionGroupModal{{$i}}Label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body fw-bold text-center">
+
+                        "{{ $question_group->title }}"のコピーを作成します。<br>よろしいですか？
+
+
+                    </div>
+                    <div class="modal-footer border-0">
+                        <div class="col">
+                            <button type="button" style="text-decoration:none;"
+                            class="btn btn-light border fw-bold w-100" data-bs-dismiss="modal"
+                            >閉じる</button>
+                        </div>
+
+                        <form action="{{route('make_question_group.copy',$question_group)}}" method="post" class="col">
+                            @csrf
+
+                            <disabled-button
+                            style_class="btn btn-warning fw-bold w-100"
+                            btn_text="コピーする"></disabled-button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <!-- delete Modal -->
         <div class="modal fade" id="deleteQuestionGroupModal{{$i}}" tabindex="-1" aria-labelledby="deleteQuestionGroupModal{{$i}}Label" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-danger" id="deleteQuestionGroupModal{{$i}}Label">問題集の削除</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
+                <div class="modal-body fw-bold text-center">
+
                     "{{ $question_group->title }}"を削除します。<br>よろしいですか？
+
+
                 </div>
-                <div class="modal-footer">
-                    <button type="button" style="text-decoration:none;" class="btn btn-link text-secondary fw-bold" data-bs-dismiss="modal"
-                    >閉じる</button>
+                <div class="modal-footer border-0">
+                    <div class="col">
+                        <button type="button" style="text-decoration:none;"
+                        class="btn btn-light border fw-bold w-100" data-bs-dismiss="modal"
+                        >閉じる</button>
+                    </div>
 
-
-                    <form action="{{route('make_question_group.destroy',$question_group)}}" method="post">
+                    <form action="{{route('make_question_group.destroy',$question_group)}}" method="post" class="col">
                         @csrf
                         @method('delete')
-                        <button type="submit" style="text-decoration:none;" class="btn btn-link text-danger fw-bold"
-                        >削除</button>
+                        <disabled-button
+                        style_class="btn btn-danger fw-bold w-100"
+                        btn_text="削除する"></disabled-button>
+
+                        {{-- <button type="submit" style="text-decoration:none;" class="btn btn-danger fw-bold w-100"
+                        >削除する</button> --}}
                     </form>
                 </div>
             </div>

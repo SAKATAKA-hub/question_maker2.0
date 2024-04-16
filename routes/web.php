@@ -7,6 +7,11 @@ use \App\Http\Controllers;
 Route::get('/', [Controllers\PlayQuestionController::class, 'list'])
 ->name('home');
 
+
+# 月額サービス
+Route::get('/premium', function(){ return view('premium.index');})
+->name('premium');
+
 /*
 |--------------------------------------------------------------------------
 | 問題集を解く　処理　PlayJobQuestionController
@@ -96,6 +101,16 @@ Route::get('/', [Controllers\PlayQuestionController::class, 'list'])
         [Controllers\MakeQuestionGroupController::class, 'destroy'])
         ->middleware(['question_group_auth'])
         ->name('make_question_group.destroy');
+
+        # 問題のコピー処理(copy)
+        Route::post('/make_question_group/copy/{question_group}',
+        [Controllers\MakeQuestionGroupController::class, 'copy'])
+        ->middleware(['question_group_auth'])
+        ->name('make_question_group.copy');
+
+
+
+
 
         # 公開設定の更新(update_published)
         Route::patch('/make_question_group/update_published/{question_group}',

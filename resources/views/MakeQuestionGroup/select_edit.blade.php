@@ -87,7 +87,7 @@
         <div class="my-3 mt-5">
 
             <!-- tabmenu button -->
-            <div id="question-group-tabmenu" style="font-size:11px;">
+            {{-- <div id="question-group-tabmenu" style="font-size:11px;">
                 <ul class="nav nav-pills flex-row gap-1" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link rounded-pill border border-success
@@ -138,6 +138,51 @@
                         >
                             <span class="tab-menu">受検ユーザー一覧</span>
                         </button>
+                    </li>
+
+                </ul>
+            </div> --}}
+            <div id="question-group-tabmenu" style="font-size:11px;">
+                <ul class="nav nav-pills flex-row gap-1" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a href="{{ route('make_question_group.select_edit', ['question_group'=>$question_group->id,'tab_menu'=>'tab01',] ) }}"
+                        class="nav-link rounded-pill border border-success
+                        @if( $tab_menu === 'tab01' )  active @endif"
+                        >
+                            <span class="tab-menu">基本情報</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a href="{{ route('make_question_group.select_edit', ['question_group'=>$question_group->id,'tab_menu'=>'tab02',] ) }}"
+                        class="nav-link rounded-pill border border-success
+                        @if( $tab_menu === 'tab02' )  active @endif"
+                        >
+                            <span class="tab-menu">出題問題</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a href="{{ route('make_question_group.select_edit', ['question_group'=>$question_group->id,'tab_menu'=>'tab03',] ) }}"
+                        class="nav-link rounded-pill border border-success
+                        @if( $tab_menu === 'tab03' )  active @endif"
+                        >
+                            <span class="tab-menu">公開設定</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a href="{{ route('make_question_group.select_edit', ['question_group'=>$question_group->id,'tab_menu'=>'tab04',] ) }}"
+                        class="nav-link rounded-pill border border-success
+                        @if( $tab_menu === 'tab04' )  active @endif"
+                        >
+                            <span class="tab-menu">コメント</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a href="{{ route('make_question_group.select_edit', ['question_group'=>$question_group->id,'tab_menu'=>'tab05',] ) }}"
+                        class="nav-link rounded-pill border border-success
+                        @if( $tab_menu === 'tab05' )  active @endif"
+                        >
+                            <span class="tab-menu">受検ユーザー一覧</span>
+                        </a>
                     </li>
 
                 </ul>
@@ -280,10 +325,13 @@
                         </div>
 
 
-                        <!-- [ シェアボタン ] -->
-                        <div class="d-grid gap-2 col-md-6 mx-auto">
+                        <hr>
 
-                            <div class="mb-1">この問題に挑戦しますか？</div>
+
+                        <!-- [ シェアボタン ] -->
+                        <div class="d-grid gap-2 col-md-6 mx-auto mt-5">
+
+                            <div class="mb-1 text-center">この問題に挑戦しますか？</div>
 
 
                             <div class="row g-0">
@@ -335,29 +383,35 @@
 
                             <!-- delete Modal -->
                             <div class="modal fade" id="deleteQuestionModal{{$key}}" tabindex="-1" aria-labelledby="deleteQuestionModal{{$key}}Label" aria-hidden="true">
-                                <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title text-danger" id="deleteQuestionModal{{$key}}Label">問題の削除</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <strong>問題 {{sprintf('%02d', $question->order )}}</strong>を削除します。<br>
-                                        <strong>本当に、削除してもよろしいですか？</strong><br>
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        {{-- <div class="modal-header">
+                                            <h5 class="modal-title text-danger" id="deleteQuestionModal{{$key}}Label">問題の削除</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div> --}}
+                                        <div class="modal-body fw-bold text-center">
 
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" style="text-decoration:none;" class="btn btn-link text-secondary fw-bold" data-bs-dismiss="modal"
-                                        >閉じる</button>
+                                            <strong>問題 {{sprintf('%02d', $question->order )}}</strong>を削除します。<br>
+                                            <strong>本当に、削除してもよろしいですか？</strong><br>
 
-                                        <form action="{{route('make_question.destroy',$question)}}" method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" style="text-decoration:none;" class="btn btn-link text-danger fw-bold"
-                                            >削除</button>
-                                        </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="col">
+                                                <button type="button" style="text-decoration:none;"
+                                                class="btn btn-light border fw-bold w-100" data-bs-dismiss="modal"
+                                                >閉じる</button>
+                                            </div>
+
+                                            <form action="{{route('make_question.destroy',$question)}}" method="post" class="col">
+                                                @csrf
+                                                @method('delete')
+
+                                                <disabled-button
+                                                style_class="btn btn-danger fw-bold w-100"
+                                                btn_text="削除する"></disabled-button>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
                                 </div>
                             </div>
                         @empty

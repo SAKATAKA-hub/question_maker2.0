@@ -84,7 +84,7 @@ class MakeQuestionInput extends Controller
         $inputs['commentary_image']= Method::uploadStorageImage( $dir, $request_file, $old_image_path, $image_dalete );
 
 
-        # テキストのストレージ保存
+        # 解説テキストのストレージ保存
         $dir = 'upload/user/question/commentary_text/';
         $new_text = $inputs['commentary_text'];
         $old_text = $question ?  $question['commentary_text'] : null;

@@ -68,8 +68,9 @@
             <div class="my-5">
                 <div class="d-grid gap-2 col-md-4 mx-auto">
 
-                    <!-- 登録・更新 -->
-                    <button class="btn btn-warning btn-lg rounded-pill fs-5 w-100" type="submit">コピー</button>
+                    <disabled-button
+                    style_class="btn btn-warning btn-lg rounded-pill fs-5 w-100"
+                    btn_text="コピーする"></disabled-button>
 
                     <!-- 詳細一覧へ戻る -->
                     <a href="{{ route('make_question_group.select_edit', $question_group ) }}"
