@@ -104,6 +104,10 @@ main{
         background-color: #14CFA0 !important ;
     }
 
+
+    .rounded-5{
+        border-radius: .5rem;
+    }
 /*
 * ---------------------------
 * コンテナー

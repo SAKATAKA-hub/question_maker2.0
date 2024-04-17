@@ -2,12 +2,12 @@
 
 
 <!----- title ----->
-@section('title','プレミアムサービス')
+@section('title','プレミアムサービスのご案内')
 
 <!----- breadcrumb ----->
 @section('breadcrumb')
 <li class="breadcrumb-item" aria-current="page">
-    {{ 'プレミアムサービス' }}
+    {{ 'プレミアムサービスのご案内' }}
 </li>
 @endsection
 

@@ -85,7 +85,8 @@
     </div><!--end id:app-->
 
     <!-- JavaScript -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
+    @include('_parts.appjs')
     <script src="{{ asset('avant-ui/js/avantui.js') }}" defer></script>
 
 

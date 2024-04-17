@@ -2,7 +2,7 @@
 
 
 <!----- title ----->
-@section('title','コピー')
+@section('title','問題のコピー')
 
 <!----- breadcrumb ----->
 @section('breadcrumb')

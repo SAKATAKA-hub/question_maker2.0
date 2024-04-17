@@ -1,6 +1,6 @@
 <div class="">
 
-    <div class="question_group_card card p-1 overflow-hidden list-group-item-action border-0 shadoww mb-3 " style="cursor:pointer;"
+    <div class="question_group_card card p-1 overflow-hidden list-group-item-action border-0 shadow mb-3 " style="cursor:pointer;"
     data-bs-toggle="modal" data-bs-target="#questionModal{{ $question_group->id +1 }}"
     >
         <div class="d-flex gap-3">

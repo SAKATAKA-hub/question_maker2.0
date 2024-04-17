@@ -360,8 +360,9 @@
     </div><!--end id:app-->
 
     <!-- JavaScript -->
+    @include('_parts.appjs')
     <script src="{{ asset('js/animation.js') }}" defer></script>
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
 
 </body>
 </html>

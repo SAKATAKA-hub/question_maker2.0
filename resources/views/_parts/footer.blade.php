@@ -58,6 +58,14 @@
 
 
         <li class="text-lg-center py-2" style="list-style:none;">
+            <a href="{{route('footer_menu.tradelaw')}}" class="text-dark text-decoration-none">
+            特定商取引法に基づく表記
+            </a>
+        </li>
+        <li class="d-none d-lg-block text-dark ms-3 me-3 py-2">|</li>
+
+
+        <li class="text-lg-center py-2" style="list-style:none;">
             <a href="{{route('footer_menu.news')}}" class="text-dark text-decoration-none">
             お知らせ
             </a>

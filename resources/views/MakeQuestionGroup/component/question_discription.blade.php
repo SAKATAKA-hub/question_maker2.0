@@ -5,11 +5,14 @@
         <div class="my-3">
             <span class="text-success fw-bold">問題画像</span>
             <div class="w-100  mb-3">
-                <div class="ratio ratio-16x9 border" style="
-                    background: no-repeat center center / cover;
-                    background-image:url({{asset('storage/'.$question->image_puth)}});
-                    border-radius: .5rem;
-                "></div>
+
+                <image-full-screen
+                src="{{asset('storage/'.$question->image_puth)}}"
+                style_class="ratio ratio-16x9 border border-light overflow-hidden rounded-5"
+                target_key="ImageModal{{$question->id}}"
+                alt="問題画像"  type="bg"
+                ></image-full-screen>
+
             </div>
         </div>
     </div>
@@ -82,11 +85,15 @@
             <div class="my-3">
                 <span class="text-warning fw-bold">解説画像</span>
                 <div class="w-100  mb-3">
-                    <div class="ratio ratio-16x9 border" style="
-                        background: no-repeat center center / cover;
-                        background-image:url({{asset('storage/'.$question->commentary_image_puth)}});
-                        border-radius: .5rem;
-                    "></div>
+
+                    <image-full-screen
+                    src="{{asset('storage/'.$question->commentary_image_puth)}}"
+                    style_class="ratio ratio-16x9 border border-light overflow-hidden rounded-5"
+                    target_key="commentaryImageModal{{$question->id}}"
+                    alt="解説画像"  type="bg"
+                    ></image-full-screen>
+
+
                 </div>
             </div>
         </div>

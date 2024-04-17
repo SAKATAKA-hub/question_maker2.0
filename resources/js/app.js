@@ -59,6 +59,10 @@ Vue.component('encodedーinputtext-component',  require('./components/Items/Enco
 Vue.component('disabled-button',
 require('./components/Items/DisabledButton.vue').default);
 
+/* 画像をモーダルで拡大表示 */
+Vue.component('image-full-screen',
+require('./components/Items/ImageFullScreen.vue').default);
+
 
 /* 認証 */
 Vue.component('reset-pass-component', require('./components/UserAuth/ResetPassComponent.vue').default);

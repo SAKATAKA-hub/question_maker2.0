@@ -42,15 +42,16 @@
 
     <!-- 受検結果 -->
     <section class="bg-">
-        <div class="container-1200 py-3">
+        <div class="container-1200">
 
-            <div class="py-5 mb-3">
+            <div class="py- mb-3">
+
 
                 <div class="text-center">
-                    <div class="fs-5">
+                    <div class="fs-6">
                         {{\Carbon\Carbon::parse($answer_group->created_at)->format('Y年m月d日')}}
                     </div>
-                    <h5>
+                    <h5 class="fs-6">
                         <a href="{{route('creater',$answer_group->user->id)}}" class="text-success fw-bold fs-3 text-decoration-none">
                             {{$answer_group->user->name}}
                         </a>さんの受検結果
@@ -59,7 +60,7 @@
 
 
                 <!-- 成績円グラフ -->
-                <div class="d-flex justify-content-center my-3">
+                <div class="d-flex justify-content-center my-3" style="min-height: 150px;">
                     <pie-chart-component percent_value="{{$answer_group->score}}"></pie-chart-component>
                 </div>
                 <div class="text-center">
@@ -119,13 +120,21 @@
                                         <div class="col-md-4 order-md-2">
                                             <div class="my-3">
                                                 <span class="text-success fw-bold">問題画像</span>
-                                                <div class="w-100 mb-3">
+                                                {{-- <div class="w-100 mb-3">
                                                     <div class="ratio ratio-16x9 border border-light" style="
                                                         background: no-repeat center center / cover;
                                                         background-image:url({{asset('storage/'. $answer->question->image_puth)}});
                                                         border-radius: .5rem;
                                                     "></div>
-                                                </div>
+                                                </div> --}}
+
+                                                <image-full-screen
+                                                src="{{asset('storage/'. $answer->question->image_puth)}}"
+                                                style_class="ratio ratio-16x9 border border-light overflow-hidden rounded-5"
+                                                target_key="ImageModal{{$num}}"
+                                                alt="問題画像" type="bg"
+                                                ></image-full-screen>
+
                                             </div>
                                         </div>
                                         @endif
@@ -200,13 +209,23 @@
                                             <div class="col-md-4 order-md-2">
                                                 <div class="my-3">
                                                     <span class="text-warning fw-bold">解説画像</span>
-                                                    <div class="w-100  mb-3">
+                                                    {{-- <div class="w-100  mb-3">
                                                         <div class="ratio ratio-16x9 border border-light" style="
                                                             background: no-repeat center center / cover;
                                                             background-image:url({{asset('storage/'.$answer->question->commentary_image_puth)}});
                                                             border-radius: .5rem;
                                                         "></div>
-                                                    </div>
+                                                    </div> --}}
+
+
+                                                    <image-full-screen
+                                                    src="{{asset('storage/'.$answer->question->commentary_image_puth)}}"
+                                                    style_class="ratio ratio-16x9 border border-light overflow-hidden rounded-5"
+                                                    target_key="commentaryImageModal{{$num}}"
+                                                    alt="解説画像"  type="bg"
+                                                    ></image-full-screen>
+
+
                                                 </div>
                                             </div>
                                             @endif
@@ -218,8 +237,6 @@
                                                     <div class="p-2 bg-light">
 
                                                         <replace-text-component text="{{ $answer->question->commentary_storage_text }}"></replace-text-component>
-
-                                                        {{-- {!! nl2br( e( $answer->question->commentary_storage_text ) ) !!} --}}
 
                                                     </div>
                                                 </div>
@@ -295,7 +312,7 @@
 
 
             <!-- [ 問題集の情報 ] -->
-            <div class="cardd card-body mb-3">
+            <div class="cardd card-body px-0 mb-3">
 
 
                 <!-- タイトル -->
@@ -304,7 +321,7 @@
                 <!-- タグ -->
                 <div class="mb-3">
                     @if ($question_group->tags)
-                    <div class="d-flex gap-1 align-items-center">
+                    <div class="d-flex gap-1 flex-wrap align-items-center">
                         @foreach ( explode('　',$question_group->tags) as $tag )
                         <form action="{{ route('questions_search_list') }}">
                             <input type="hidden" name="seach_keywords" value="{{$tag}}">

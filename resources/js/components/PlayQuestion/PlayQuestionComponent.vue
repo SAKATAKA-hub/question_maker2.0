@@ -51,24 +51,27 @@
                             <div class="card-body">
 
                                 <h5 class="fw-bold">問題{{q_num+1}}</h5>
-                                <!-- <p class="bg-light p-3" v-html="question.text.replace(/\r?\n/g, '<br>')"></p> -->
+
                                 <p class="bg-light p-3">
                                     <replace-text-component :text="question.text" replace_url="0"></replace-text-component>
                                 </p>
 
                                 <!-- 問題画像 -->
                                 <div v-if="question.image" class="mx-auto my-5" style="max-width: 400px;">
-                                    <div class="overflow-hidden w-100 mb-3" style="border-radius:.5rem;">
+                                    <!-- <div class="overflow-hidden w-100 mb-3" style="border-radius:.5rem;">
                                         <img :src="question.image" class="w-100" alt="問題画像"/>
-                                    </div>
-                                </div>
+                                    </div> -->
 
-                                <!-- <div v-if="question.image" class="ratio ratio-4x3 mx-auto my-5"
-                                :style="`background-image: url(${question.image});`"
-                                style="
-                                max-width: 400px; border-radius: 1rem;
-                                background: no-repeat center center / cover;
-                                "></div> -->
+
+                                    <image-full-screen
+                                    :src="question.image"
+                                    style_class="p-0 overflow-hidden rounded-5"
+                                    :target_key="'ImageModal'+q_num"
+                                    alt="問題画像"
+                                    />
+
+
+                                </div>
 
 
                                 <!-- 解答選択・入力 -->

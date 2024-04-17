@@ -38,7 +38,8 @@
         overflow: auto;
     }
     #question-group-tabmenu > ul{
-        width:540px;
+        /* width:540px; */
+        width:360px;
     }
 }
 
@@ -59,7 +60,7 @@
 @section('contents')
     <section>
 
-        <!-- タイトル -->
+        {{-- <!-- タイトル -->
         <div class="border-bottom border-2 border-success">
             <!-- 更新日 -->
             <div>
@@ -80,11 +81,11 @@
             <div class="text-success fw-bold" style="font-size:.6rem">問題集のタイトル：</div>
             <h3 class="w-100 text-break">{{ $question_group->title }}</h3>
 
-        </div>
+        </div> --}}
 
 
         <!-- tabmenu -->
-        <div class="my-3 mt-5">
+        <div class="mb-3 mt-">
 
             <!-- tabmenu button -->
             {{-- <div id="question-group-tabmenu" style="font-size:11px;">
@@ -136,7 +137,7 @@
                         aria-controls="tab-tab05" aria-selected="{{ $tab_menu === 'tab05' ? 'true' : 'false' }}"
                         type="button" role="tab" data-bs-toggle="pill"
                         >
-                            <span class="tab-menu">受検ユーザー一覧</span>
+                            <span class="tab-menu">受検者一覧</span>
                         </button>
                     </li>
 
@@ -146,7 +147,7 @@
                 <ul class="nav nav-pills flex-row gap-1" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <a href="{{ route('make_question_group.select_edit', ['question_group'=>$question_group->id,'tab_menu'=>'tab01',] ) }}"
-                        class="nav-link rounded-pill border border-success
+                        class="nav-link rounded-pill border border-success py-1 px-2 px-md-4
                         @if( $tab_menu === 'tab01' )  active @endif"
                         >
                             <span class="tab-menu">基本情報</span>
@@ -154,7 +155,7 @@
                     </li>
                     <li class="nav-item" role="presentation">
                         <a href="{{ route('make_question_group.select_edit', ['question_group'=>$question_group->id,'tab_menu'=>'tab02',] ) }}"
-                        class="nav-link rounded-pill border border-success
+                        class="nav-link rounded-pill border border-success py-1 px-2 px-md-4
                         @if( $tab_menu === 'tab02' )  active @endif"
                         >
                             <span class="tab-menu">出題問題</span>
@@ -162,7 +163,7 @@
                     </li>
                     <li class="nav-item" role="presentation">
                         <a href="{{ route('make_question_group.select_edit', ['question_group'=>$question_group->id,'tab_menu'=>'tab03',] ) }}"
-                        class="nav-link rounded-pill border border-success
+                        class="nav-link rounded-pill border border-success py-1 px-2 px-md-4
                         @if( $tab_menu === 'tab03' )  active @endif"
                         >
                             <span class="tab-menu">公開設定</span>
@@ -170,7 +171,7 @@
                     </li>
                     <li class="nav-item" role="presentation">
                         <a href="{{ route('make_question_group.select_edit', ['question_group'=>$question_group->id,'tab_menu'=>'tab04',] ) }}"
-                        class="nav-link rounded-pill border border-success
+                        class="nav-link rounded-pill border border-success py-1 px-2 px-md-4
                         @if( $tab_menu === 'tab04' )  active @endif"
                         >
                             <span class="tab-menu">コメント</span>
@@ -178,10 +179,10 @@
                     </li>
                     <li class="nav-item" role="presentation">
                         <a href="{{ route('make_question_group.select_edit', ['question_group'=>$question_group->id,'tab_menu'=>'tab05',] ) }}"
-                        class="nav-link rounded-pill border border-success
+                        class="nav-link rounded-pill border border-success py-1 px-2 px-md-4
                         @if( $tab_menu === 'tab05' )  active @endif"
                         >
-                            <span class="tab-menu">受検ユーザー一覧</span>
+                            <span class="tab-menu">受検者一覧</span>
                         </a>
                     </li>
 
@@ -198,8 +199,59 @@
 
 
                     <div class="mt-3">
+
+                        <!-- タイトル -->
+                        <div class="border-bottom border-2 border-success">
+                            <!-- 更新日 -->
+                            <div>
+                                <!-- 公開設定 -->
+                                @if ( $question_group->published_at )
+                                <span class="badge badge-primary"  style="border-radius:.8rem; transform: translateY(-0.1rem);"
+                                >公開中</span>
+                                @else
+                                <span class="badge badge-secondary" style="border-radius:.8rem; transform: translateY(-0.1rem);"
+                                >非公開</span>
+                                @endif
+
+                                <!-- 更新日 -->
+                                {{-- <span>更新日{{ \Carbon\Carbon::parse($question_group->updated_at)->format('Y-m-d') }}</span> --}}
+                            </div>
+
+                            <!-- タイトル -->
+                            <div class="text-success fw-bold" style="font-size:.6rem">問題集のタイトル：</div>
+                            <h3 class="w-100 text-break">{{ $question_group->title }}</h3>
+
+                        </div>
+
+
+                        <!-- 公開日等 -->
+                        <div class="my-3 cardd py-">
+                            @if ($question_group->published_at)
+                                <div class="d-flex">
+                                    <div class="col-auto ps-">公開</div>
+                                    <div class="col ps-3">{{
+                                    $question_group->published_at ?
+                                    \Carbon\Carbon::parse( $question_group->published_at )->format('Y年m月d日 H時i分') :
+                                    '非公開'}}</div>
+                                </div>
+                            @endif
+                            <div class="d-flex">
+                                <div class="col-auto ps-">作成</div>
+                                <div class="col ps-3">
+                                    {{\Carbon\Carbon::parse($question_group->created_at)->format('Y年m月d日 H時i分')}}
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="col-auto ps-">更新</div>
+                                <div class="col ps-3">
+                                    {{\Carbon\Carbon::parse($question_group->updated_at)->format('Y年m月d日 H時i分')}}
+                                </div>
+                            </div>
+                        </div>
+
+
                         <!-- [ シェアボタン ] -->
-                        <div class="card card-body my-3">
+                        <div class="cardd card-bodyy my-3">
                             @include('_parts.share_group')
 
                             <div class="d-flex align-items-top mt-2" style="font-size:11px;">
@@ -210,31 +262,6 @@
                             </div>
                         </div>
 
-
-                        <!-- 公開日等 -->
-                        <div class="mb-3 card py-2">
-                            @if ($question_group->published_at)
-                                <div class="d-flex">
-                                    <div class="col-auto ps-3">公開</div>
-                                    <div class="col ps-3">{{
-                                    $question_group->published_at ?
-                                    \Carbon\Carbon::parse( $question_group->published_at )->format('Y年m月d日 H時i分') :
-                                    '非公開'}}</div>
-                                </div>
-                            @endif
-                            <div class="d-flex">
-                                <div class="col-auto ps-3">作成</div>
-                                <div class="col ps-3">
-                                    {{\Carbon\Carbon::parse($question_group->created_at)->format('Y年m月d日 H時i分')}}
-                                </div>
-                            </div>
-                            <div class="d-flex">
-                                <div class="col-auto ps-3">更新</div>
-                                <div class="col ps-3">
-                                    {{\Carbon\Carbon::parse($question_group->updated_at)->format('Y年m月d日 H時i分')}}
-                                </div>
-                            </div>
-                        </div>
 
                         <!-- その他情報 -->
                         <div class="">

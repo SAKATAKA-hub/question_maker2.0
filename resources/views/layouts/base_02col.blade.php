@@ -34,9 +34,9 @@
 
             <!-- 見出しタイトル -->
             <section class="border- bg-white">
-                <div class="container-1200 pb-0">
+                <div class="container-1200 py-0">
 
-                    <h2 class="text-secondary fw-bold fs-5">@yield('title')</h2>
+                    {{-- <h2 class="text-secondary fw-bold fs-5">@yield('title')</h2> --}}
 
                     <!-- breadcrumb -->
                     <nav class="mb-0" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
@@ -47,6 +47,9 @@
                             @yield('breadcrumb')
                         </ol>
                     </nav>
+
+                    <h2 class="text-secondary fw-bold fs-5">@yield('title')</h2>
+
                 </div>
             </section>
 
@@ -122,8 +125,9 @@
     </div><!--end id:app-->
 
     <!-- bootstrap JavaScript -->
+    @include('_parts.appjs')
     @yield('script')
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
 
 </body>
 </html>

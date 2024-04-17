@@ -47,8 +47,8 @@
         <div class="position-relative ">
 
             <!--メニューボタン-->
-            <div class="position-absolute top-0 end-0" style="z-index:10;">
-                <button class="btn bg-white px-2 py-1 rounded-pill border"
+            <div class="position-absolute top-0 end-0" style="z-index:5;">
+                <button class="btn bg-white px-2 py-1 rounded-3 border"
                 data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight{{ $i }}" aria-controls="offcanvasRight{{ $i }}"
                 ><i class="bi bi-three-dots-vertical"></i></button>
             </div>
@@ -225,7 +225,7 @@
                     class="list-group-item list-group-item-action">
                         <div class="d-flex justify-content-between align-items-center">
                             <p class="mb-0 d-flex align-items-center">
-                                <i class="bi bi-play-circle-fill fs-1"></i>
+                                <i class="bi bi-play-circle-fill fs-3 text-success"></i>
                                 <span class="ms-3">受検する</span>
                             </p>
                             <i class="bi bi-chevron-right"></i>
@@ -236,8 +236,8 @@
                     class="list-group-item list-group-item-action">
                         <div class="d-flex justify-content-between align-items-center">
                             <p class="mb-0 d-flex align-items-center">
-                                <i class="bi bi-people fs-1"></i>
-                                <span class="ms-3">受検ユーザー</span>
+                                <i class="bi bi-people fs-3 text-primary"></i>
+                                <span class="ms-3">受検者一覧</span>
                             </p>
                             <i class="bi bi-chevron-right"></i>
                         </div>
@@ -247,7 +247,7 @@
                     class="list-group-item list-group-item-action">
                         <div class="d-flex justify-content-between align-items-center">
                             <p class="mb-0 d-flex align-items-center">
-                                <i class="bi bi-chat-square-text fs-1"></i>
+                                <i class="bi bi-chat-square-text fs-3 text-warning"></i>
                                 <span class="ms-3">コメント</span>
                             </p>
                             <i class="bi bi-chevron-right"></i>
@@ -260,7 +260,7 @@
                     class="list-group-item list-group-item-action">
                         <div class="d-flex justify-content-between align-items-center">
                             <p class="mb-0 d-flex align-items-center">
-                                <i class="bi bi-card-heading fs-1"></i>
+                                <i class="bi bi-card-heading fs-3 text-success"></i>
                                 <span class="ms-3">詳細情報</span>
                             </p>
                             <i class="bi bi-chevron-right"></i>
@@ -270,7 +270,7 @@
                     class="list-group-item list-group-item-action">
                         <div class="d-flex justify-content-between align-items-center">
                             <p class="mb-0 d-flex align-items-center">
-                                <i class="bi bi-pencil-fill fs-1"></i>
+                                <i class="bi bi-pencil-fill fs-3"></i>
                                 <span class="ms-3">基本情報の編集</span>
                             </p>
                             <i class="bi bi-chevron-right"></i>
@@ -281,7 +281,7 @@
                     class="list-group-item list-group-item-action">
                         <div class="d-flex justify-content-between align-items-center">
                             <p class="mb-0 d-flex align-items-center">
-                                <i class="bi bi-pencil fs-1"></i>
+                                <i class="bi bi-pencil fs-3 text-info"></i>
                                 <span class="ms-3">問題を編集する</span>
                             </p>
                             <i class="bi bi-chevron-right"></i>
@@ -292,7 +292,7 @@
                     class="list-group-item list-group-item-action">
                         <div class="d-flex justify-content-between align-items-center">
                             <p class="mb-0 d-flex align-items-center">
-                                <i class="bi bi-eye fs-1"></i>
+                                <i class="bi bi-eye fs-3 text-primary"></i>
                                 <span class="ms-3">公開設定</span>
                             </p>
                             <i class="bi bi-chevron-right"></i>
@@ -303,7 +303,7 @@
                     class="list-group-item list-group-item-action">
                         <div class="d-flex justify-content-between align-items-center">
                             <p class="mb-0 d-flex align-items-center">
-                                <i class="bi bi-files fs-1"></i>
+                                <i class="bi bi-files fs-3 text-warning"></i>
                                 <span class="ms-3">コピーを作る</span>
                             </p>
                             <i class="bi bi-chevron-right"></i>
@@ -314,7 +314,7 @@
                     class="list-group-item list-group-item-action">
                         <div class="d-flex justify-content-between align-items-center">
                             <p class="mb-0 d-flex align-items-center">
-                                <i class="bi bi-trash fs-1"></i>
+                                <i class="bi bi-trash fs-3 text-danger"></i>
                                 <span class="ms-3">削除する</span>
                             </p>
                             <i class="bi bi-chevron-right"></i>
@@ -488,7 +488,7 @@
 
     <!-- 問題追加ボタン -->
     <a id="addQuestion" href="{{route('make_question_group.create')}}" class="d-block text-decoration-none">
-        <div class="icon text-white bg-success shadow">
+        <div class="icon text-white bg-success shadow rounded-3">
             <i class="bi bi-plus"></i>
         </div>
         <div class="text-secondary text-center w-100">新規作成</div>

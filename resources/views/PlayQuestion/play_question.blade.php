@@ -87,7 +87,8 @@
     <!-- フォームのページ離脱防止アラート -->
     <script src="{{asset('js/page_exit_prevention_alert.js')}}"></script>
     <!-- bootstrap JavaScript -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    @include('_parts.appjs')
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
 
 </body>
 </html>

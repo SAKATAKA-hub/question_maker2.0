@@ -41,7 +41,8 @@
 
 
     <!-- bootstrap JavaScript -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
+    @include('_parts.appjs')
     @yield('script')
 
 </body>
